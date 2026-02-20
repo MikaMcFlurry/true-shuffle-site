@@ -34,6 +34,27 @@
       --max: 1120px;
       --ring: 0 0 0 6px rgba(214,214,214,.12);
     }
+    
+    /* Light mode overrides (activated via body.light) */
+body.light{
+  --bg: #f6f6f6;
+  --panel: rgba(0,0,0,.05);
+  --panel2: rgba(0,0,0,.08);
+  --stroke: rgba(0,0,0,.14);
+  --text: rgba(0,0,0,.90);
+  --muted: rgba(0,0,0,.70);
+  --muted2: rgba(0,0,0,.55);
+  --accent: #1a1a1a;
+  --white: #000000;
+  --shadow: 0 20px 60px rgba(0,0,0,.15);
+  --ring: 0 0 0 6px rgba(0,0,0,.10);
+}
+
+/* Optional: make header background fit light mode a bit better */
+body.light header{
+  background: linear-gradient(to bottom, rgba(246,246,246,.88), rgba(246,246,246,.62));
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
 
     *{ box-sizing: border-box; }
     html, body{ height: 100%; }
@@ -525,6 +546,10 @@
           </nav>
 
           <div class="navcta">
+            <button class="btn" id="themeToggle" type="button" aria-label="Toggle light mode">
+  <span id="themeIcon" aria-hidden="true">☾</span>
+  <span id="themeLabel">Light</span>
+</button>
             <button class="btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">
               Menü
               <span aria-hidden="true">☰</span>
@@ -896,6 +921,44 @@
 
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Theme toggle (dark default, optional persistence)
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const themeLabel = document.getElementById('themeLabel');
+
+function applyTheme(mode){
+  const isLight = mode === "light";
+  document.body.classList.toggle("light", isLight);
+
+  // Button text/icon
+  if (isLight) {
+    themeIcon.textContent = "☀";
+    themeLabel.textContent = "Dark";
+    themeToggle.setAttribute("aria-label", "Switch to dark mode");
+  } else {
+    themeIcon.textContent = "☾";
+    themeLabel.textContent = "Light";
+    themeToggle.setAttribute("aria-label", "Switch to light mode");
+  }
+}
+
+(function initTheme(){
+  // If user has chosen before, use it. Otherwise default to dark.
+  const saved = localStorage.getItem("true_shuffel_theme");
+  if (saved === "light" || saved === "dark") {
+    applyTheme(saved);
+  } else {
+    applyTheme("dark");
+  }
+})();
+
+themeToggle.addEventListener("click", () => {
+  const isCurrentlyLight = document.body.classList.contains("light");
+  const next = isCurrentlyLight ? "dark" : "light";
+  applyTheme(next);
+  localStorage.setItem("true_shuffel_theme", next);
+});
 
     // CTA buttons
 // Beta signup
