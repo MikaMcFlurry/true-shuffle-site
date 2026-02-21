@@ -190,7 +190,20 @@
     body.light .hero-media{
       box-shadow: 0 14px 38px rgba(0,0,0,.12);
     }
-    @media (max-width: 520px){
+    
+    .phone-preview{ margin: 10px 0 18px; display:flex; justify-content:center; }
+    .phone-preview-img{
+      width: min(520px, 100%);
+      border-radius: 28px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.22);
+      border: 1px solid rgba(120,120,120,.18);
+      background: rgba(255,255,255,.02);
+    }
+    body.light .phone-preview-img{
+      box-shadow: 0 12px 40px rgba(0,0,0,.10);
+      background: rgba(255,255,255,.6);
+    }
+@media (max-width: 520px){
       .hero-media{ max-height: 320px; }
     }
 
@@ -577,7 +590,7 @@
         </div>
 
         <aside class="panel" aria-label="Preview">
-          <img id="heroMedia" class="hero-media" src="assets/hero_phone_dark.png" alt="true-shuffle preview" />
+          <img id="heroMedia" class="hero-media" src="assets/brand_logo_loop.gif" alt="true-shuffle demo loop" />
 
           <div class="two-col">
             <div class="mock">
@@ -623,6 +636,10 @@
             <h2>Impressions</h2>
             <p>Promo images & app impressions (real demos coming soon). Swipe on mobile, arrows on desktop.</p>
           </div>
+        </div>
+
+        <div class="phone-preview" aria-label="Phone preview">
+          <img id="phonePreview" class="phone-preview-img" src="assets/hero_phone_dark.png" alt="true-shuffle phone preview" loading="lazy" />
         </div>
 
         <div class="slider" aria-label="Image slider">
@@ -887,8 +904,10 @@
   const PRIVACY_VERSION = "2026-02-21";
   const LOGO_DARK = "assets/logo_dark.png";
   const LOGO_LIGHT = "assets/logo_light.png";
-  const HERO_MEDIA_DARK = "assets/hero_phone_dark.png";
-  const HERO_MEDIA_LIGHT = "assets/hero_phone_light.png";
+  const HERO_MEDIA_DARK = "assets/brand_logo_loop.gif";
+  const HERO_MEDIA_LIGHT = "assets/brand_logo_loop_light.gif";
+  const PHONE_MEDIA_DARK = "assets/hero_phone_dark.png";
+  const PHONE_MEDIA_LIGHT = "assets/hero_phone_light.png";
   const PRODUCT_IMAGES = ["assets/product_01_one-tap.PNG", "assets/product_02_features-card.PNG", "assets/product_03_comparison.PNG", "assets/product_04_10000-tracks.PNG"];
 
   const $ = (id) => document.getElementById(id);
@@ -914,6 +933,8 @@
     $("brandLogo").src = isLight ? LOGO_LIGHT : LOGO_DARK;
     $("footerLogo").src = isLight ? LOGO_LIGHT : LOGO_DARK;
     $("heroMedia").src = isLight ? HERO_MEDIA_LIGHT : HERO_MEDIA_DARK;
+    const pp = $("phonePreview");
+    if (pp) pp.src = isLight ? PHONE_MEDIA_LIGHT : PHONE_MEDIA_DARK;
     $("themeIcon").textContent = isLight ? "☀" : "☾";
     $("themeLabel").textContent = isLight ? "Dark" : "Light";
   }
