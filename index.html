@@ -3,15 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
   <title>true-shuffel — True Shuffle für Streaming-Playlists (Beta)</title>
   <meta name="description" content="Echter Shuffle für große Streaming-Playlists: jeder Song genau einmal pro Durchlauf – keine Wiederholungen, keine ausgelassenen Tracks. Jetzt für den Beta-Test anmelden." />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#24252a" />
-
-  <!-- Canonical: set to your final domain when ready -->
   <link rel="canonical" href="https://true-shuffel.com/" />
 
-  <!-- Open Graph / Social -->
+  <!-- Social -->
   <meta property="og:title" content="true-shuffel — True Shuffle für Streaming-Playlists (Beta)" />
   <meta property="og:description" content="Jeder Song. Genau einmal. Kein Repeat, kein Skip. Beta-Test jetzt offen." />
   <meta property="og:type" content="website" />
@@ -28,7 +27,7 @@
   <link rel="icon" type="image/png" href="assets/logo_dark.png" />
   <link rel="apple-touch-icon" href="assets/logo_dark.png" />
 
-  <!-- Structured data -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -61,25 +60,24 @@
 
   <style>
     :root{
-      /* Dark (Logo-Farbton) */
-      --bg: #24252a;     /* <- aus deinem Picker */
+      --bg: #24252a;       /* logo tone */
       --bg2:#17181c;
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.09);
       --stroke: rgba(255,255,255,.12);
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.55);
-      --accent: rgba(255,255,255,.90);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.56);
+      --accent: rgba(255,255,255,.92);
       --shadow: 0 18px 55px rgba(0,0,0,.55);
-      --radius: 20px;
-      --radius2: 28px;
+      --radius: 18px;
+      --radius2: 26px;
       --max: 1120px;
       --ring: 0 0 0 6px rgba(255,255,255,.10);
+      --btnh: 44px;
     }
-
     body.light{
-      --bg: #f6f6f6;
+      --bg: #f7f7f7;
       --bg2:#ffffff;
       --panel: rgba(0,0,0,.05);
       --panel2: rgba(0,0,0,.08);
@@ -96,7 +94,7 @@
     html, body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--text);
       background:
         radial-gradient(900px 380px at 18% -5%, rgba(255,255,255,.06), transparent 65%),
@@ -105,7 +103,6 @@
         linear-gradient(180deg, var(--bg), var(--bg2));
       overflow-x:hidden;
     }
-
     body.light{
       background:
         radial-gradient(900px 380px at 18% -5%, rgba(0,0,0,.06), transparent 65%),
@@ -127,11 +124,11 @@
       top:0;
       z-index:50;
       backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(36,37,42,.86), rgba(36,37,42,.58));
+      background: linear-gradient(to bottom, rgba(36,37,42,.88), rgba(36,37,42,.62));
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     body.light header{
-      background: linear-gradient(to bottom, rgba(246,246,246,.92), rgba(246,246,246,.70));
+      background: linear-gradient(to bottom, rgba(247,247,247,.94), rgba(247,247,247,.72));
       border-bottom: 1px solid rgba(0,0,0,.08);
     }
 
@@ -141,6 +138,7 @@
       justify-content:space-between;
       padding: 14px 0;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     .brand{
@@ -152,7 +150,7 @@
     }
     .brand img{
       width:40px; height:40px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
       flex: 0 0 auto;
@@ -161,14 +159,11 @@
       border-color: rgba(0,0,0,.10);
       background: rgba(0,0,0,.03);
     }
-    .brand .title{
-      min-width:0;
-    }
     .brand strong{
       display:block;
       font-weight: 900;
       letter-spacing: .01em;
-      white-space: nowrap;   /* verhindert "true-" Umbruch */
+      white-space: nowrap;
       line-height: 1.1;
     }
     .brand span{
@@ -180,13 +175,13 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 44vw;
+      max-width: 52vw;
     }
 
     .navlinks{
       display:flex;
       align-items:center;
-      gap: 18px;
+      gap: 10px;
       color: var(--muted);
       font-size: 14px;
       flex: 0 0 auto;
@@ -206,9 +201,9 @@
       display:flex;
       align-items:center;
       gap: 10px;
-      flex: 0 0 auto;
+      flex: 1 1 100%;
+      justify-content:flex-start;
       flex-wrap: wrap;
-      justify-content:flex-end;
     }
 
     .btn{
@@ -216,7 +211,8 @@
       align-items:center;
       justify-content:center;
       gap: 10px;
-      padding: 10px 14px;
+      height: var(--btnh);
+      padding: 0 14px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
@@ -249,40 +245,33 @@
       font-weight: 900;
     }
 
-    /* Mobile header fixes */
     .menu-btn{ display:none; }
-    .drawer{ display:none; padding: 10px 0 16px; }
+    .drawer{ display:none; padding: 10px 0 16px; width:100%; }
     .drawer.open{ display:block; }
     .drawer a{
       display:block;
-      padding: 12px 10px;
+      padding: 12px 12px;
       border-radius: 14px;
       color: var(--muted);
-      border: 1px solid rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
       margin-top: 10px;
     }
     body.light .drawer a{
-      border-color: rgba(0,0,0,.08);
+      border-color: rgba(0,0,0,.10);
       background: rgba(0,0,0,.02);
     }
-    .drawer a:hover{ color: var(--text); background: rgba(255,255,255,.06); }
-    body.light .drawer a:hover{ background: rgba(0,0,0,.05); }
 
     @media (max-width: 980px){
       .navlinks{ display:none; }
       .menu-btn{ display:inline-flex; }
     }
-
     @media (max-width: 520px){
       .container{ width: calc(100% - 28px); }
-      .brand span{ display:none; } /* Subtitle weg -> keine Umbrüche */
-      .nav{ flex-wrap: wrap; }
-      .navcta{ width:100%; justify-content:flex-start; }
+      .brand span{ display:none; }
     }
 
-    /* Main */
-    main{ padding: 44px 0 70px; }
+    main{ padding: 34px 0 70px; }
 
     .pill{
       display:inline-flex;
@@ -309,72 +298,59 @@
 
     .hero{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 28px;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
       align-items:start;
-      margin-top: 22px;
+      margin-top: 18px;
     }
     @media (max-width: 980px){ .hero{ grid-template-columns: 1fr; } }
 
     h1{
-      font-size: clamp(34px, 3.4vw, 54px);
-      line-height: 1.05;
-      margin: 14px 0 12px;
+      font-size: clamp(30px, 3.4vw, 52px);
+      line-height: 1.06;
+      margin: 14px 0 10px;
       letter-spacing: -0.02em;
     }
     .lead{
       color: var(--muted);
-      font-size: 17px;
-      line-height: 1.6;
-      margin: 0 0 18px;
-      max-width: 65ch;
-    }
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 12px;
-      margin-top: 18px;
-      align-items:center;
+      font-size: 16.5px;
+      line-height: 1.65;
+      margin: 0 0 14px;
+      max-width: 68ch;
     }
     .subnote{
       color: var(--muted2);
       font-size: 13px;
-      margin-top: 10px;
       line-height: 1.55;
+      margin-top: 10px;
+    }
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+      margin-top: 10px;
     }
 
-    .card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-    body.light .card{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
-
-    .hero-card{
+    .panel{
       border-radius: var(--radius2);
       border: 1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      padding: 18px;
       box-shadow: var(--shadow);
       overflow:hidden;
+      padding: 16px;
     }
-    body.light .hero-card{
+    body.light .panel{
       border-color: rgba(0,0,0,.12);
-      background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
+      background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02));
     }
 
     .hero-logo{
       display:block;
-      margin: 2px auto 14px;
+      margin: 2px auto 12px;
       width: 100%;
       max-height: 92px;
       object-fit: contain;
-      object-position: center;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.02);
@@ -387,8 +363,8 @@
     .mock{
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.30);
-      padding: 16px;
+      background: rgba(0,0,0,.28);
+      padding: 14px;
     }
     body.light .mock{
       border-color: rgba(0,0,0,.12);
@@ -399,7 +375,7 @@
       align-items:center;
       justify-content:space-between;
       gap: 12px;
-      padding: 10px 10px;
+      padding: 10px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.05);
@@ -410,13 +386,12 @@
       background: rgba(0,0,0,.03);
     }
     .mock-row:last-child{ margin-bottom:0; }
-    .mock-title{ display:flex; align-items:center; gap:10px; font-weight:800; }
+    .mock-title{ display:flex; align-items:center; gap:10px; font-weight:900; }
     .mini{
       width: 28px; height: 28px; border-radius: 10px;
       display:grid; place-items:center;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      color: var(--accent);
       font-weight: 900;
       flex: 0 0 auto;
     }
@@ -426,44 +401,25 @@
     }
     .mock-meta{ color: var(--muted2); font-size: 13px; text-align:right; }
 
-    .metric-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .metric{
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      padding: 12px;
-    }
-    body.light .metric{
-      border-color: rgba(0,0,0,.10);
-      background: rgba(0,0,0,.03);
-    }
-    .metric b{ display:block; font-size: 18px; }
-    .metric span{ color: var(--muted2); font-size: 13px; }
-
-    section{ padding: 70px 0; }
+    section{ padding: 58px 0; }
 
     .section-title{
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
-      gap: 16px;
-      margin-bottom: 22px;
+      gap: 12px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
     }
     .section-title h2{
       margin:0;
-      font-size: 26px;
+      font-size: 24px;
       letter-spacing: -0.01em;
     }
     .section-title p{
       margin:0;
       color: var(--muted);
-      max-width: 70ch;
+      max-width: 76ch;
       line-height: 1.55;
     }
 
@@ -474,69 +430,172 @@
     }
     @media (max-width: 980px){ .grid3{ grid-template-columns: 1fr; } }
 
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 16px;
+    }
+    body.light .card{
+      border-color: rgba(0,0,0,.12);
+      background: rgba(0,0,0,.03);
+    }
     .icon{
       width: 44px; height: 44px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
       display:grid; place-items:center;
-      color: var(--accent);
       font-weight: 900;
     }
     body.light .icon{
       border-color: rgba(0,0,0,.14);
       background: rgba(0,0,0,.04);
     }
+    .card h3{ margin: 10px 0 6px; }
+    .card p{ margin:0; color: var(--muted); line-height:1.55; }
 
-    /* Media placeholders */
-    .media-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    @media (max-width: 980px){ .media-grid{ grid-template-columns: 1fr; } }
-
-    .media{
-      border-radius: var(--radius);
+    /* Slider */
+    .slider{
+      position: relative;
+      border-radius: var(--radius2);
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      padding: 14px;
-      overflow:hidden;
+      background: rgba(255,255,255,.04);
+      overflow: hidden;
+      box-shadow: var(--shadow);
     }
-    body.light .media{
+    body.light .slider{
+      border-color: rgba(0,0,0,.12);
+      background: rgba(0,0,0,.02);
+    }
+    .slider-track{
+      display:flex;
+      transition: transform .35s ease;
+      will-change: transform;
+    }
+    .slide{
+      min-width: 100%;
+      padding: 14px;
+      display:flex;
+      justify-content:center;
+    }
+    .slide img{
+      width:100%;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+    body.light .slide img{
       border-color: rgba(0,0,0,.12);
       background: rgba(0,0,0,.03);
     }
-    .media .ph{
+    .slider-nav{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+    .slider-btn{
+      pointer-events:auto;
+      position:absolute;
+      top:50%;
+      transform: translateY(-50%);
+      height: 40px;
+      padding: 0 12px;
+      border-radius: 999px;
+    }
+    .slider-btn.prev{ left: 12px; }
+    .slider-btn.next{ right: 12px; }
+    .slider-dots{
+      display:flex;
+      gap: 8px;
+      justify-content:center;
+      padding: 12px 0 0;
+    }
+    .slider-dot{
+      width: 9px; height: 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      cursor:pointer;
+    }
+    body.light .slider-dot{
+      border-color: rgba(0,0,0,.18);
+      background: rgba(0,0,0,.08);
+    }
+    .slider-dot.active{
+      background: rgba(255,255,255,.55);
+      border-color: rgba(255,255,255,.55);
+    }
+    body.light .slider-dot.active{
+      background: rgba(0,0,0,.35);
+      border-color: rgba(0,0,0,.35);
+    }
+
+    /* Video */
+    .video-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 980px){ .video-grid{ grid-template-columns: 1fr; } }
+
+    .video-card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      overflow:hidden;
+      cursor:pointer;
+    }
+    body.light .video-card{
+      border-color: rgba(0,0,0,.12);
+      background: rgba(0,0,0,.03);
+    }
+    .video-thumb{
       width:100%;
-      border-radius: 16px;
-      border: 1px dashed rgba(255,255,255,.18);
-      background: rgba(255,255,255,.04);
       aspect-ratio: 16 / 9;
+      background: rgba(0,0,0,.22);
+      border-bottom: 1px solid rgba(255,255,255,.10);
       display:grid;
       place-items:center;
       color: var(--muted2);
-      text-align:center;
-      padding: 14px;
+      position: relative;
+      overflow:hidden;
     }
-    body.light .media .ph{
+    body.light .video-thumb{
+      background: rgba(0,0,0,.04);
+      border-bottom: 1px solid rgba(0,0,0,.10);
+    }
+    .video-play{
+      width: 54px; height: 54px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      display:grid;
+      place-items:center;
+      font-weight: 900;
+      position:absolute;
+    }
+    body.light .video-play{
       border-color: rgba(0,0,0,.18);
-      background: rgba(0,0,0,.02);
+      background: rgba(0,0,0,.08);
     }
-    .media h3{ margin: 12px 0 6px; }
-    .media p{ margin:0; color: var(--muted); line-height:1.55; }
+    .video-meta{ padding: 12px 14px; }
+    .video-meta b{ display:block; margin-bottom: 6px; }
+    .video-meta span{ color: var(--muted); line-height:1.45; font-size: 13px; }
 
-    /* CTA / Beta form */
+    /* CTA / Forms */
     .cta{
       border-radius: 34px;
       border: 1px solid rgba(255,255,255,.12);
       background:
         radial-gradient(700px 250px at 20% 0%, rgba(255,255,255,.10), transparent 55%),
         linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
-      padding: 22px;
+      padding: 20px;
       box-shadow: var(--shadow);
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.15fr .85fr;
       gap: 14px;
       align-items:center;
     }
@@ -551,11 +610,12 @@
     .cta h3{ margin:0 0 8px; font-size: 22px; }
     .cta p{ margin:0; color: var(--muted); line-height:1.55; }
 
-    .cta-form{
+    .form{
       display:flex;
       gap: 10px;
       flex-wrap:wrap;
       justify-content:flex-end;
+      align-items:flex-start;
     }
     .input{
       flex: 1 1 220px;
@@ -563,7 +623,7 @@
       padding: 11px 12px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.26);
+      background: rgba(0,0,0,.24);
       color: var(--text);
       outline:none;
       transition: box-shadow .12s ease, border-color .12s ease;
@@ -587,36 +647,12 @@
     .consent input{ margin-top: 3px; }
 
     /* Reviews */
-    .reviews-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-    .rating-badge{
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    body.light .rating-badge{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
     .reviews-grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
     }
     @media (max-width: 980px){ .reviews-grid{ grid-template-columns: 1fr; } }
-
     .review{
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,.12);
@@ -628,43 +664,9 @@
       background: rgba(0,0,0,.03);
     }
     .review .name{ font-weight: 900; }
-    .review .stars{ color: rgba(255,255,255,.88); letter-spacing: .06em; }
-    body.light .review .stars{ color: rgba(0,0,0,.85); }
-    .review .text{ color: var(--muted); margin-top: 8px; line-height: 1.55; }
+    .review .stars{ letter-spacing: .06em; opacity:.92; }
+    .review .text{ color: var(--muted); margin-top: 8px; line-height:1.55; }
     .review .meta{ color: var(--muted2); font-size: 12px; margin-top: 8px; }
-
-    .review-form{
-      margin-top: 14px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      padding: 14px;
-    }
-    body.light .review-form{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.02);
-    }
-    .row{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items:center;
-    }
-    .select{
-      padding: 11px 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.26);
-      color: var(--text);
-      outline:none;
-      min-width: 140px;
-    }
-    body.light .select{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-      color: var(--text);
-    }
-    textarea.input{ min-height: 92px; resize: vertical; }
 
     /* FAQ */
     details{
@@ -705,7 +707,6 @@
     details[open] .chev{ transform: rotate(180deg); }
     details p{ margin: 10px 0 0; color: var(--muted); line-height: 1.6; }
 
-    /* Footer */
     footer{
       border-top: 1px solid rgba(255,255,255,.10);
       padding: 26px 0 40px;
@@ -728,16 +729,16 @@
     .foot a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
     body.light .foot a:hover{ background: rgba(0,0,0,.05); }
 
-    /* Modal (legal) */
-    #modal{
+    /* Modals */
+    .modal{
       display:none;
       position:fixed;
       inset:0;
       background:rgba(0,0,0,.72);
-      z-index:100;
+      z-index:200;
       padding:16px;
     }
-    #modalPanel{
+    .modal-panel{
       max-width: 920px;
       margin: 60px auto;
       border-radius: 24px;
@@ -749,11 +750,11 @@
       flex-direction:column;
       max-height: 85vh;
     }
-    body.light #modalPanel{
-      background: rgba(246,246,246,.96);
+    body.light .modal-panel{
+      background: rgba(247,247,247,.96);
       border-color: rgba(0,0,0,.12);
     }
-    #modalHeader{
+    .modal-header{
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -761,8 +762,8 @@
       border-bottom:1px solid rgba(255,255,255,.10);
       flex: 0 0 auto;
     }
-    body.light #modalHeader{ border-bottom:1px solid rgba(0,0,0,.10); }
-    #modalContent{
+    body.light .modal-header{ border-bottom:1px solid rgba(0,0,0,.10); }
+    .modal-content{
       padding:16px;
       color: var(--muted);
       line-height:1.65;
@@ -777,7 +778,7 @@
       left: 16px;
       right: 16px;
       bottom: 16px;
-      z-index: 200;
+      z-index: 210;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(10,10,10,.86);
@@ -788,7 +789,7 @@
     }
     body.light #cookieBanner{
       border-color: rgba(0,0,0,.12);
-      background: rgba(246,246,246,.92);
+      background: rgba(247,247,247,.92);
     }
     .cookie-row{
       display:flex;
@@ -808,193 +809,6 @@
       gap: 10px;
       flex: 0 0 auto;
     }
-
-    @media (prefers-reduced-motion: no-preference){
-      .fade-in{
-        opacity: 0;
-        transform: translateY(8px);
-        animation: in .55s ease forwards;
-      }
-      .d2{ animation-delay: .08s; }
-      .d3{ animation-delay: .16s; }
-      .d4{ animation-delay: .24s; }
-      @keyframes in{ to{ opacity: 1; transform: translateY(0); } }
-    }
-    /* ===== Slider (Carousel) ===== */
-.slider{
-  position: relative;
-  border-radius: var(--radius2);
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.04);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-body.light .slider{
-  border-color: rgba(0,0,0,.12);
-  background: rgba(0,0,0,.02);
-}
-
-.slider-track{
-  display: flex;
-  transition: transform .35s ease;
-  will-change: transform;
-}
-
-.slide{
-  min-width: 100%;
-  padding: 14px;
-  display: flex;
-  justify-content: center;
-}
-
-.slide img{
-  width: 100%;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(0,0,0,.20);
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-body.light .slide img{
-  border-color: rgba(0,0,0,.12);
-  background: rgba(0,0,0,.03);
-}
-
-.slider-nav{
-  position:absolute;
-  inset: 0;
-  pointer-events:none;
-}
-.slider-btn{
-  pointer-events:auto;
-  position:absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 10px 12px;
-}
-.slider-btn.prev{ left: 12px; }
-.slider-btn.next{ right: 12px; }
-
-.slider-dots{
-  display:flex;
-  gap: 8px;
-  justify-content:center;
-  padding: 12px 0 0;
-}
-.slider-dot{
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.10);
-  cursor:pointer;
-}
-body.light .slider-dot{
-  border-color: rgba(0,0,0,.18);
-  background: rgba(0,0,0,.08);
-}
-.slider-dot.active{
-  background: rgba(255,255,255,.55);
-  border-color: rgba(255,255,255,.55);
-}
-body.light .slider-dot.active{
-  background: rgba(0,0,0,.35);
-  border-color: rgba(0,0,0,.35);
-}
-
-/* ===== Video Gallery ===== */
-.video-grid{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-@media (max-width: 980px){
-  .video-grid{ grid-template-columns: 1fr; }
-}
-
-.video-card{
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.05);
-  overflow:hidden;
-}
-body.light .video-card{
-  border-color: rgba(0,0,0,.12);
-  background: rgba(0,0,0,.03);
-}
-
-.video-thumb{
-  width:100%;
-  aspect-ratio: 16 / 9;
-  background: rgba(0,0,0,.22);
-  border-bottom: 1px solid rgba(255,255,255,.10);
-  display:grid;
-  place-items:center;
-  color: var(--muted2);
-}
-body.light .video-thumb{
-  background: rgba(0,0,0,.04);
-  border-bottom: 1px solid rgba(0,0,0,.10);
-}
-.video-meta{
-  padding: 12px;
-}
-.video-meta b{ display:block; margin-bottom: 6px; }
-.video-meta span{ color: var(--muted); line-height:1.45; font-size: 13px; }
-.video-play{
-  width: 52px; height: 52px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.10);
-  display:grid;
-  place-items:center;
-  font-weight: 900;
-}
-
-/* ===== Video Modal ===== */
-#videoModal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,.78);
-  z-index: 220;
-  padding: 16px;
-}
-#videoModalPanel{
-  max-width: 980px;
-  margin: 60px auto;
-  border-radius: 24px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(10,10,10,.92);
-  box-shadow: var(--shadow);
-  overflow:hidden;
-}
-body.light #videoModalPanel{
-  background: rgba(246,246,246,.96);
-  border-color: rgba(0,0,0,.12);
-}
-#videoModalHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding: 14px 16px;
-  border-bottom: 1px solid rgba(255,255,255,.10);
-}
-body.light #videoModalHeader{
-  border-bottom: 1px solid rgba(0,0,0,.10);
-}
-#videoFrameWrap{
-  padding: 12px 16px 16px;
-}
-#videoFrameWrap video,
-#videoFrameWrap iframe{
-  width:100%;
-  aspect-ratio: 16 / 9;
-  border: 0;
-  border-radius: 16px;
-  background: #000;
-}
-    
   </style>
 </head>
 
@@ -1005,7 +819,7 @@ body.light #videoModalHeader{
         <div class="nav">
           <a class="brand" href="#top" aria-label="true-shuffel Start">
             <img id="brandLogo" src="assets/logo_dark.png" alt="true-shuffel Logo" />
-            <div class="title">
+            <div>
               <strong>true-shuffel</strong>
               <span>echtes Shuffle für Streaming</span>
             </div>
@@ -1013,13 +827,13 @@ body.light #videoModalHeader{
 
           <nav class="navlinks" aria-label="Hauptnavigation">
             <a href="#product">Produkt</a>
-            <a href="#impressions">Impressionen</a>
+            <a href="#videos">Videos</a>
             <a href="#reviews">Bewertungen</a>
             <a href="#faq">FAQ</a>
           </nav>
 
           <div class="navcta">
-            <button class="btn" id="themeToggle" type="button" aria-label="Toggle theme">
+            <button class="btn" id="themeToggle" type="button" aria-label="Theme umschalten">
               <span id="themeIcon" aria-hidden="true">☾</span>
               <span id="themeLabel">Light</span>
             </button>
@@ -1028,17 +842,17 @@ body.light #videoModalHeader{
               Menü <span aria-hidden="true">≡</span>
             </button>
 
-            <a class="btn" href="#product">Mehr erfahren</a>
+            <button class="btn" id="accountBtn" type="button">Account</button>
             <a class="btn btn-primary" href="#cta">Zum Beta-Test</a>
           </div>
-        </div>
 
-        <div class="drawer" id="drawer">
-          <a href="#product">Produkt</a>
-          <a href="#impressions">Impressionen</a>
-          <a href="#reviews">Bewertungen</a>
-          <a href="#faq">FAQ</a>
-          <a href="#cta">Zum Beta-Test</a>
+          <div class="drawer" id="drawer">
+            <a href="#product">Produkt</a>
+            <a href="#videos">Videos</a>
+            <a href="#reviews">Bewertungen</a>
+            <a href="#faq">FAQ</a>
+            <a href="#cta">Zum Beta-Test</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1047,33 +861,33 @@ body.light #videoModalHeader{
   <main id="top">
     <div class="wrap">
       <div class="container">
-        <div class="pill fade-in">
+        <div class="pill">
           <span class="dot" aria-hidden="true"></span>
-          <span><b>Problem:</b> Streaming-“Shuffle” spielt oft nur einen Teil deiner Playlist.</span>
+          <span><b>Problem:</b> Shuffle wiederholt sich oft oder lässt Songs aus.</span>
         </div>
 
         <div class="hero">
-          <div class="fade-in d2">
+          <div>
             <h1>True Shuffle für Streaming-Playlists.<br/>Jeder Song. Genau einmal.</h1>
             <p class="lead">
-              Streaming-Shuffle wiederholt sich oft oder lässt Tracks aus – besonders bei großen Playlists.
-              true-shuffel erstellt eine echte Zufallsreihenfolge und spielt <b>alle Songs genau einmal pro Durchlauf</b>.
+              true-shuffel sorgt dafür, dass deine Playlist wirklich komplett läuft:
+              <b>keine Wiederholungen</b>, <b>keine ausgelassenen Titel</b> – besonders bei großen Playlists.
             </p>
 
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#cta"><span aria-hidden="true">▶</span> Zum Beta-Test</a>
-              <a class="btn" href="#product"><span aria-hidden="true">✦</span> Produkt ansehen</a>
+              <a class="btn btn-primary" href="#cta">▶ Beta-Test</a>
+              <a class="btn" href="#product">Produkt ansehen</a>
             </div>
 
             <div class="subnote">
-              Unterstützt (Beta/Planned): Spotify, Apple Music, YouTube Music, Tidal, Deezer u. v. m. (über APIs)
+              Unterstützt (Beta/Planned): Spotify, Apple Music, YouTube Music, Tidal, Deezer u. v. m.
             </div>
           </div>
 
-          <aside class="hero-card fade-in d3" aria-label="Produktvorschau">
+          <aside class="panel" aria-label="Vorschau">
             <img id="heroLogo" class="hero-logo" src="assets/logo_dark.png" alt="true-shuffel Logo" />
 
-            <div class="mock" role="img" aria-label="Mock UI: Playlist Shuffle ohne Wiederholung">
+            <div class="mock" aria-label="Feature Vorschau">
               <div class="mock-row">
                 <div class="mock-title"><div class="mini">✓</div>Vollständige Playlist</div>
                 <div class="mock-meta">100–10.000+ Songs</div>
@@ -1086,197 +900,91 @@ body.light #videoModalHeader{
                 <div class="mock-title"><div class="mini">⟲</div>Echter Zufall</div>
                 <div class="mock-meta">keine Muster</div>
               </div>
-
-              <div class="metric-grid">
-                <div class="metric"><b>0</b><span>ausgelassene Songs</span></div>
-                <div class="metric"><b>1×</b><span>pro Song (pro Durchlauf)</span></div>
-              </div>
             </div>
 
-            <div class="subnote">Hinweis: true-shuffel ist in der Beta. Melde dich unten für den Beta-Test an.</div>
+            <div class="subnote">Kinderleicht: Playlist wählen → Shuffle drücken → fertig.</div>
           </aside>
         </div>
       </div>
     </div>
 
-    <!-- PRODUCT -->
     <section id="product">
-  <div class="wrap">
-    <div class="container">
-      <div class="section-title">
-        <div>
-          <h2>Produkt</h2>
-          <p>Produktbilder als Slider + Video-Galerie. Dateien kannst du später einfach in <code>/assets</code> ablegen.</p>
-        </div>
-      </div>
-
-      <!-- Image Slider -->
-      <div class="slider" id="imageSlider" aria-label="Produktbilder Slider">
-        <div class="slider-track" id="sliderTrack"></div>
-
-        <div class="slider-nav" aria-hidden="false">
-          <button class="btn slider-btn prev" type="button" id="prevSlide">‹</button>
-          <button class="btn slider-btn next" type="button" id="nextSlide">›</button>
-        </div>
-      </div>
-      <div class="slider-dots" id="sliderDots" aria-label="Slider Navigation"></div>
-
-      <div class="subnote" style="margin-top:10px">
-        Tipp: Lege Bilder z.B. als <code>assets/product_01.jpg</code>, <code>assets/product_02.jpg</code> ab und trage sie unten im JS in <b>PRODUCT_IMAGES</b> ein.
-      </div>
-
-      <div style="height:24px"></div>
-
-      <!-- Video Gallery -->
-      <div class="section-title" style="margin-bottom:14px">
-        <div>
-          <h2>Videos</h2>
-          <p>Video-Kacheln öffnen ein Popup. Unterstützt MP4 aus <code>/assets</code> oder YouTube.</p>
-        </div>
-      </div>
-
-      <div class="video-grid" id="videoGrid"></div>
-
-      <div class="subnote" style="margin-top:10px">
-        Tipp: MP4 in <code>assets/demo.mp4</code> ablegen und unten im JS in <b>VIDEO_ITEMS</b> eintragen. Für YouTube nur die Video-ID.
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Video Modal -->
-<div id="videoModal" role="dialog" aria-label="Video Player">
-  <div id="videoModalPanel">
-    <div id="videoModalHeader">
-      <b id="videoModalTitle">Video</b>
-      <button class="btn" type="button" id="closeVideo">Schließen</button>
-    </div>
-    <div id="videoFrameWrap"></div>
-  </div>
-</div>
-
-    <!-- IMPRESSIONS -->
-    <section id="impressions">
       <div class="wrap">
         <div class="container">
           <div class="section-title">
             <div>
-              <h2>Impressionen</h2>
-              <p>Platzhalter für Social Proof: Presse, Social Posts, Nutzer-Impressionen, Screenshots, etc.</p>
+              <h2>Produktbilder</h2>
+              <p>Swipe auf dem Handy, Pfeile am Desktop. Du kannst später Bilder in <code>/assets</code> ablegen.</p>
             </div>
           </div>
 
-          <div class="grid3">
-            <div class="card">
-              <div class="icon">📰</div>
-              <h3 style="margin:10px 0 8px;">Presse/Blog</h3>
-              <p style="margin:0; color:var(--muted); line-height:1.55;">
-                Platzhalter: hier später Zitate/Logos/Links einfügen.
-              </p>
+          <div class="slider" id="imageSlider" aria-label="Produktbilder Slider">
+            <div class="slider-track" id="sliderTrack"></div>
+            <div class="slider-nav">
+              <button class="btn slider-btn prev" type="button" id="prevSlide">‹</button>
+              <button class="btn slider-btn next" type="button" id="nextSlide">›</button>
             </div>
+          </div>
+          <div class="slider-dots" id="sliderDots" aria-label="Slider Navigation"></div>
 
-            <div class="card">
-              <div class="icon">💬</div>
-              <h3 style="margin:10px 0 8px;">Community</h3>
-              <p style="margin:0; color:var(--muted); line-height:1.55;">
-                Platzhalter: Discord/Reddit/Kommentare, Screenshots.
-              </p>
-            </div>
-
-            <div class="card">
-              <div class="icon">⭐</div>
-              <h3 style="margin:10px 0 8px;">Social Proof</h3>
-              <p style="margin:0; color:var(--muted); line-height:1.55;">
-                Platzhalter: Highlights, Use-Cases, Vorher/Nachher.
-              </p>
-            </div>
+          <div class="subnote">
+            Tipp: Trage deine Bilder unten im JS in <b>PRODUCT_IMAGES</b> ein.
           </div>
         </div>
       </div>
     </section>
 
-    <!-- REVIEWS -->
-    <section id="reviews">
+    <section id="videos">
       <div class="wrap">
         <div class="container">
           <div class="section-title">
             <div>
-              <h2>Bewertungen</h2>
-              <p>Nutzer können direkt auf der Website eine Bewertung abgeben. Diese wird lokal gespeichert und angezeigt (localStorage).</p>
+              <h2>Videos</h2>
+              <p>Video-Kacheln öffnen einen Player. Unterstützt MP4 aus <code>/assets</code> oder YouTube.</p>
             </div>
           </div>
 
-          <div class="reviews-top">
-            <div class="rating-badge" id="ratingBadge">⭐ 0.0 / 5 (0 Bewertungen)</div>
-            <button class="btn" type="button" id="resetReviewsBtn">Bewertungen zurücksetzen</button>
-          </div>
+          <div class="video-grid" id="videoGrid"></div>
 
-          <div class="reviews-grid" id="reviewsList">
-            <!-- Reviews render here -->
-          </div>
-
-          <div class="review-form">
-            <h3 style="margin:0 0 10px;">Bewertung schreiben</h3>
-            <div class="row">
-              <input class="input" id="reviewName" type="text" placeholder="Name (optional)" />
-              <select class="select" id="reviewRating" aria-label="Rating">
-                <option value="5">★★★★★ (5)</option>
-                <option value="4">★★★★☆ (4)</option>
-                <option value="3">★★★☆☆ (3)</option>
-                <option value="2">★★☆☆☆ (2)</option>
-                <option value="1">★☆☆☆☆ (1)</option>
-              </select>
-            </div>
-            <div style="height:10px"></div>
-            <textarea class="input" id="reviewText" placeholder="Deine Bewertung…" maxlength="400"></textarea>
-            <div class="row" style="margin-top:10px; justify-content:flex-end;">
-              <button class="btn btn-primary" type="button" id="submitReviewBtn">Bewertung speichern</button>
-            </div>
-            <div class="subnote" id="reviewMsg" aria-live="polite"></div>
+          <div class="subnote">
+            Tipp: Trage deine Videos unten im JS in <b>VIDEO_ITEMS</b> ein.
           </div>
         </div>
       </div>
     </section>
 
-    <!-- BETA CTA -->
     <section id="cta">
       <div class="wrap">
         <div class="container">
-          <div class="cta fade-in">
+          <div class="cta">
             <div>
               <h3>Beta-Test: sichere dir einen Platz</h3>
               <p>
-                true-shuffel ist aktuell in der <b>Beta</b>. Melde dich für den Beta-Test an und bekomme als Erste:r Zugriff,
-                sobald dein Streamingdienst freigeschaltet ist.
+                Melde dich an und wir informieren dich, sobald dein Streamingdienst freigeschaltet ist.
               </p>
               <div class="subnote">
-                Kein Spam. Du bekommst nur Updates zum Betastart und deinem Zugang.
-                <br/>Details findest du in <a href="#" onclick="openModal('privacy'); return false;" style="text-decoration:underline;">Datenschutz</a>.
+                Kein Spam. Nur Updates zum Beta-Start. Details in <a href="#" onclick="openLegal('privacy');return false;" style="text-decoration:underline;">Datenschutz</a>.
               </div>
             </div>
 
-            <!-- Stable form submit (no redirect visible) -->
-            <form class="cta-form" id="betaForm"
+            <form class="form" id="betaForm"
                   action="https://script.google.com/macros/s/AKfycby3YzfoHaTvwOFfjgeAMP4e1H2627TN-dy_Hb3aRIDgts14psMeqAH6SemCskOw6Ycw/exec"
                   method="POST"
                   target="beta_iframe"
                   autocomplete="on">
+              <input class="input" type="hidden" name="action" value="beta" />
               <input class="input" type="text" id="betaName" name="name" placeholder="Name" required />
-              <input class="input" type="email" id="betaEmail" name="email" placeholder="E-Mail für Beta-Test" required />
-
+              <input class="input" type="email" id="betaEmail" name="email" placeholder="E-Mail" required />
               <input type="hidden" name="source" value="true-shuffel-site" />
               <input type="hidden" id="betaUA" name="userAgent" value="" />
-
-              <button class="btn btn-primary" type="submit">Für Beta-Test anmelden</button>
+              <button class="btn btn-primary" type="submit">Anmelden</button>
 
               <div class="consent">
                 <input type="checkbox" id="betaConsent" required />
                 <label for="betaConsent">
-                  Ich willige ein, dass meine Angaben (Name, E-Mail) zum Zweck der Beta-Test-Organisation verarbeitet werden.
-                  Die Einwilligung kann ich jederzeit widerrufen. (<a href="#" onclick="openModal('privacy'); return false;" style="text-decoration:underline;">Datenschutz</a>)
+                  Ich willige ein, dass meine Angaben zur Beta-Test-Organisation verarbeitet werden. (<a href="#" onclick="openLegal('privacy');return false;" style="text-decoration:underline;">Datenschutz</a>)
                 </label>
               </div>
-
               <div class="subnote" id="betaMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
             </form>
 
@@ -1286,30 +994,68 @@ body.light #videoModalHeader{
       </div>
     </section>
 
-    <!-- FAQ -->
+    <section id="reviews">
+      <div class="wrap">
+        <div class="container">
+          <div class="section-title">
+            <div>
+              <h2>Bewertungen</h2>
+              <p>Bewertungen werden im Google Sheet verwaltet. Neue Bewertungen erscheinen nach Freigabe (Spalte „approved“).</p>
+            </div>
+            <div class="pill" id="ratingBadge"><span class="dot"></span><span>⭐ 0.0 / 5 (0)</span></div>
+          </div>
+
+          <div class="reviews-grid" id="reviewsList"></div>
+
+          <div class="panel" style="margin-top:14px;">
+            <h3 style="margin:0 0 10px;">Bewertung schreiben</h3>
+            <form class="form" id="reviewForm"
+                  action="https://script.google.com/macros/s/AKfycby3YzfoHaTvwOFfjgeAMP4e1H2627TN-dy_Hb3aRIDgts14psMeqAH6SemCskOw6Ycw/exec"
+                  method="POST"
+                  target="review_iframe">
+              <input type="hidden" name="action" value="review" />
+              <input class="input" type="text" id="reviewName" name="name" placeholder="Name (optional)" />
+              <select class="input" id="reviewRating" name="rating" aria-label="Sterne" style="flex:0 0 180px;">
+                <option value="5">★★★★★ (5)</option>
+                <option value="4">★★★★☆ (4)</option>
+                <option value="3">★★★☆☆ (3)</option>
+                <option value="2">★★☆☆☆ (2)</option>
+                <option value="1">★☆☆☆☆ (1)</option>
+              </select>
+              <textarea class="input" id="reviewText" name="text" placeholder="Deine Bewertung…" maxlength="400" style="flex:1 1 100%; min-height:92px;"></textarea>
+              <button class="btn btn-primary" type="submit">Bewertung senden</button>
+              <div class="subnote" id="reviewMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
+            </form>
+            <iframe id="review_iframe" name="review_iframe" style="display:none;"></iframe>
+            <div class="subnote">Hinweis: Um Spam zu vermeiden, werden Bewertungen erst nach Freigabe angezeigt.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="faq">
       <div class="wrap">
         <div class="container">
           <div class="section-title">
             <div>
               <h2>FAQ</h2>
-              <p>Die häufigsten Fragen – kurz und klar.</p>
+              <p>Kurz & verständlich.</p>
             </div>
           </div>
 
-          <details class="fade-in">
-            <summary>Warum ist Shuffle bei Streamingdiensten oft “schlecht”? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <p>Viele Dienste nutzen Smart-Shuffle-Heuristiken. Dadurch werden große Playlists nicht vollständig durchlaufen oder Reihenfolgen wiederholen sich.</p>
+          <details>
+            <summary>Warum ist Shuffle oft nicht wirklich zufällig? <span class="chev">⌄</span></summary>
+            <p>Viele Dienste optimieren Shuffle über Heuristiken (z. B. “Smart Shuffle”). Dadurch werden große Playlists nicht vollständig gespielt oder es wiederholen sich Muster.</p>
           </details>
 
-          <details class="fade-in d2">
-            <summary>Was macht true-shuffel anders? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <p>true-shuffel erzeugt eine echte Zufallsreihenfolge ohne Wiederholungen und stellt sicher, dass jeder Titel genau einmal pro Durchlauf abgespielt wird.</p>
+          <details>
+            <summary>Was macht true-shuffel anders? <span class="chev">⌄</span></summary>
+            <p>true-shuffel erzeugt eine Zufallsreihenfolge ohne Wiederholung und spielt jeden Titel genau einmal pro Durchlauf.</p>
           </details>
 
-          <details class="fade-in d3">
-            <summary>Wo werden Beta-Test Daten gespeichert? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <p>Für den Beta-Test speichern wir Name und E-Mail in einem Google Sheet (Google Apps Script), um dich zu kontaktieren. Details im Datenschutz.</p>
+          <details>
+            <summary>Brauche ich einen Account? <span class="chev">⌄</span></summary>
+            <p>Nein. Ein Account ist optional (z. B. um Namen für Bewertungen zu speichern). Der echte Streaming-Login kommt später in der App.</p>
           </details>
         </div>
       </div>
@@ -1321,18 +1067,17 @@ body.light #videoModalHeader{
       <div class="container">
         <div class="foot">
           <div style="display:flex; align-items:center; gap:10px;">
-            <img id="footerLogo" src="assets/logo_dark.png" alt="" style="width:20px; height:20px; border-radius:6px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02);" />
+            <img id="footerLogo" src="assets/logo_dark.png" alt="" style="width:20px; height:20px; border-radius:8px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02);" />
             <span>© <span id="year"></span> true-shuffel.com</span>
           </div>
           <div style="display:flex; gap: 4px; flex-wrap:wrap;">
             <a href="#top">Start</a>
             <a href="#product">Produkt</a>
-            <a href="#impressions">Impressionen</a>
             <a href="#reviews">Bewertungen</a>
-            <a href="#faq">FAQ</a>
-            <a href="#" onclick="openModal('impressum'); return false;">Impressum</a>
-            <a href="#" onclick="openModal('privacy'); return false;">Datenschutz</a>
-            <a href="#" onclick="openModal('cookies'); return false;">Cookies</a>
+            <a href="#cta">Beta-Test</a>
+            <a href="#" onclick="openLegal('impressum');return false;">Impressum</a>
+            <a href="#" onclick="openLegal('privacy');return false;">Datenschutz</a>
+            <a href="#" onclick="openLegal('cookies');return false;">Cookies</a>
             <a href="#" id="cookieResetLink">Cookie-Hinweis zurücksetzen</a>
           </div>
         </div>
@@ -1340,82 +1085,182 @@ body.light #videoModalHeader{
     </div>
   </footer>
 
-  <!-- Legal modal -->
-  <div id="modal">
-    <div id="modalPanel">
-      <div id="modalHeader">
-        <b id="modalTitle">Hinweis</b>
-        <button class="btn" onclick="closeModal()">Schließen</button>
+  <!-- Legal Modal -->
+  <div class="modal" id="legalModal">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <b id="legalTitle">Info</b>
+        <button class="btn" type="button" onclick="closeLegal()">Schließen</button>
       </div>
-      <div id="modalContent">
-        <div id="modalBody"></div>
+      <div class="modal-content">
+        <div id="legalBody"></div>
       </div>
     </div>
   </div>
 
-  <!-- Cookie banner -->
+  <!-- Video Modal -->
+  <div class="modal" id="videoModal">
+    <div class="modal-panel" style="max-width:980px;">
+      <div class="modal-header">
+        <b id="videoModalTitle">Video</b>
+        <button class="btn" type="button" id="closeVideoBtn">Schließen</button>
+      </div>
+      <div class="modal-content" style="padding:12px 16px 16px;">
+        <div id="videoFrameWrap"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Account Modal -->
+  <div class="modal" id="accountModal">
+    <div class="modal-panel" style="max-width:720px;">
+      <div class="modal-header">
+        <b id="accountTitle">Account</b>
+        <button class="btn" type="button" onclick="closeAccount()">Schließen</button>
+      </div>
+      <div class="modal-content">
+        <div id="accountState" class="pill" style="margin-bottom:12px;">
+          <span class="dot"></span><span id="accountStateText">Nicht angemeldet</span>
+        </div>
+
+        <div class="grid3" style="grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="card">
+            <h3 style="margin:0 0 10px;">Registrieren</h3>
+            <div class="subnote" style="margin-top:0">Lokaler Account (nur auf diesem Gerät).</div>
+            <div style="height:10px"></div>
+            <input class="input" id="suName" placeholder="Name" />
+            <div style="height:10px"></div>
+            <input class="input" id="suEmail" placeholder="E-Mail" type="email" />
+            <div style="height:10px"></div>
+            <input class="input" id="suPass" placeholder="Passwort" type="password" />
+            <div style="height:10px"></div>
+            <button class="btn btn-primary" id="signupBtn" type="button">Registrieren</button>
+            <div class="subnote" id="suMsg" aria-live="polite"></div>
+          </div>
+
+          <div class="card">
+            <h3 style="margin:0 0 10px;">Anmelden</h3>
+            <div class="subnote" style="margin-top:0">Zum Speichern deines Namens für Bewertungen.</div>
+            <div style="height:10px"></div>
+            <input class="input" id="liEmail" placeholder="E-Mail" type="email" />
+            <div style="height:10px"></div>
+            <input class="input" id="liPass" placeholder="Passwort" type="password" />
+            <div style="height:10px"></div>
+            <button class="btn btn-primary" id="loginBtn" type="button">Anmelden</button>
+            <button class="btn" id="logoutBtn" type="button" style="margin-top:10px; display:none;">Abmelden</button>
+            <div class="subnote" id="liMsg" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="subnote" style="margin-top:14px;">
+          Hinweis: Für “echte” Accounts (geräteübergreifend) würde man später ein Backend (z. B. Firebase) nutzen.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie Banner -->
   <div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie Hinweis">
     <div class="cookie-row">
       <div class="cookie-text">
         Wir verwenden keine Tracking-Cookies. Nur technisch notwendige Speicherung (z. B. Theme via localStorage).
-        Mehr dazu unter <a href="#" onclick="openModal('cookies'); return false;" style="text-decoration:underline;">Cookies</a>.
+        Mehr dazu unter <a href="#" onclick="openLegal('cookies');return false;" style="text-decoration:underline;">Cookies</a>.
       </div>
       <div class="cookie-actions">
-        <button class="btn" type="button" onclick="openModal('cookies')">Details</button>
+        <button class="btn" type="button" onclick="openLegal('cookies')">Details</button>
         <button class="btn btn-primary" type="button" id="cookieAcceptBtn">OK</button>
       </div>
     </div>
   </div>
 
   <script>
-    // Assets
-    const LOGO_DARK  = "assets/logo_dark.png";
-    const LOGO_LIGHT = "assets/logo_light.png";
+    // ====== CONFIG ======
+    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycby3YzfoHaTvwOFfjgeAMP4e1H2627TN-dy_Hb3aRIDgts14psMeqAH6SemCskOw6Ycw/exec";
 
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Product Images (add later)
+    const PRODUCT_IMAGES = [
+      // "assets/product_01.jpg",
+      // "assets/product_02.jpg",
+      // "assets/product_03.jpg"
+    ];
 
-    // Mobile nav
-    const menuBtn = document.getElementById('menuBtn');
-    const drawer = document.getElementById('drawer');
+    // Videos (add later)
+    const VIDEO_ITEMS = [
+      // { type:"mp4", title:"Demo", desc:"Kurzer Überblick", src:"assets/demo.mp4", poster:"assets/product_01.jpg" },
+      // { type:"youtube", title:"Walkthrough", desc:"Feature Tour", id:"dQw4w9WgXcQ", poster:"assets/product_02.jpg" }
+    ];
+
+    // ====== Helpers ======
+    const $ = (id) => document.getElementById(id);
+    const escapeHtml = (s) => String(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m]));
+
+    function placeholderSvg(text){
+      const isLight = document.body.classList.contains("light");
+      const bg = isLight ? "#f2f2f2" : "#2b2c32";
+      const fg = isLight ? "#1b1b1b" : "#ffffff";
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">
+          <rect width="100%" height="100%" fill="${bg}"/>
+          <text x="50%" y="50%" font-family="system-ui, -apple-system, Segoe UI, Roboto" font-size="44"
+                fill="${fg}" text-anchor="middle" dominant-baseline="middle" opacity="0.65">
+            ${text}
+          </text>
+        </svg>`;
+      return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.trim());
+    }
+
+    // ====== Basic Init ======
+    $("year").textContent = new Date().getFullYear();
+
+    // Mobile menu
+    const menuBtn = $("menuBtn");
+    const drawer = $("drawer");
     if (menuBtn) {
-      menuBtn.addEventListener('click', () => {
-        const isOpen = drawer.classList.toggle('open');
-        menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.addEventListener("click", () => {
+        const isOpen = drawer.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
       });
     }
 
-    // Theme toggle (device default if no saved setting)
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeLabel = document.getElementById('themeLabel');
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if (!href || href === "#") return;
+        const el = document.querySelector(href);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (drawer.classList.contains("open")) {
+          drawer.classList.remove("open");
+          menuBtn?.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
 
-    const brandLogo  = document.getElementById('brandLogo');
-    const heroLogo   = document.getElementById('heroLogo');
-    const footerLogo = document.getElementById('footerLogo');
+    // Theme (device default if none saved)
+    const LOGO_DARK = "assets/logo_dark.png";
+    const LOGO_LIGHT = "assets/logo_light.png";
 
     function setLogos(isLight){
       const src = isLight ? LOGO_LIGHT : LOGO_DARK;
-      brandLogo.src = src;
-      heroLogo.src = src;
-      footerLogo.src = src;
+      $("brandLogo").src = src;
+      $("heroLogo").src = src;
+      $("footerLogo").src = src;
     }
 
     function applyTheme(mode){
       const isLight = mode === "light";
       document.body.classList.toggle("light", isLight);
       setLogos(isLight);
+      $("themeIcon").textContent = isLight ? "☀" : "☾";
+      $("themeLabel").textContent = isLight ? "Dark" : "Light";
 
-      if (isLight) {
-        themeIcon.textContent = "☀";
-        themeLabel.textContent = "Dark";
-        themeToggle.setAttribute("aria-label", "Switch to dark mode");
-      } else {
-        themeIcon.textContent = "☾";
-        themeLabel.textContent = "Light";
-        themeToggle.setAttribute("aria-label", "Switch to light mode");
-      }
+      // rebuild placeholders to match theme background
+      buildSlides();
+      buildVideoGallery();
     }
+    window.applyTheme = applyTheme;
 
     (function initTheme(){
       const saved = localStorage.getItem("true_shuffel_theme");
@@ -1427,74 +1272,307 @@ body.light #videoModalHeader{
       applyTheme(prefersLight ? "light" : "dark");
     })();
 
-    themeToggle.addEventListener("click", () => {
+    $("themeToggle").addEventListener("click", () => {
       const isLight = document.body.classList.contains("light");
       const next = isLight ? "dark" : "light";
       applyTheme(next);
       localStorage.setItem("true_shuffel_theme", next);
     });
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const href = a.getAttribute('href');
-        if (!href || href === "#") return;
-        const el = document.querySelector(href);
-        if (!el) return;
-        e.preventDefault();
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        if (drawer.classList.contains('open')) {
-          drawer.classList.remove('open');
-          menuBtn?.setAttribute('aria-expanded', "false");
-        }
-      });
+    // Cookie banner (reliable localStorage)
+    const cookieBanner = $("cookieBanner");
+    const cookieAcceptBtn = $("cookieAcceptBtn");
+    const cookieResetLink = $("cookieResetLink");
+
+    function showCookieBannerIfNeeded(){
+      const ack = localStorage.getItem("ts_cookie_ack_v2");
+      if (ack !== "1") cookieBanner.style.display = "block";
+    }
+    cookieAcceptBtn.addEventListener("click", () => {
+      localStorage.setItem("ts_cookie_ack_v2", "1");
+      cookieBanner.style.display = "none";
     });
+    cookieResetLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem("ts_cookie_ack_v2");
+      cookieBanner.style.display = "block";
+    });
+    window.addEventListener("load", showCookieBannerIfNeeded);
 
-    // Beta form (iframe)
-    const betaForm = document.getElementById('betaForm');
-    const betaName = document.getElementById('betaName');
-    const betaEmail = document.getElementById('betaEmail');
-    const betaConsent = document.getElementById('betaConsent');
-    const betaMsg = document.getElementById('betaMsg');
-    const betaUA = document.getElementById('betaUA');
-    const betaIframe = document.getElementById('beta_iframe');
-
+    // ====== Beta signup (iframe) ======
+    const betaForm = $("betaForm");
+    const betaConsent = $("betaConsent");
+    const betaMsg = $("betaMsg");
+    const betaUA = $("betaUA");
+    const betaIframe = $("beta_iframe");
     let betaSubmitting = false;
 
-    betaForm.addEventListener('submit', (e) => {
-      const name = (betaName.value || "").trim();
-      const email = (betaEmail.value || "").trim();
-
-      if (!name) { e.preventDefault(); betaMsg.textContent = "Bitte Name eingeben."; return; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { e.preventDefault(); betaMsg.textContent = "Bitte eine gültige E-Mail eingeben."; return; }
-      if (!betaConsent.checked) { e.preventDefault(); betaMsg.textContent = "Bitte Einwilligung bestätigen."; return; }
-
+    betaForm.addEventListener("submit", (e) => {
+      if (!betaConsent.checked) {
+        e.preventDefault();
+        betaMsg.textContent = "Bitte Einwilligung bestätigen.";
+        return;
+      }
       betaUA.value = navigator.userAgent || "";
       betaSubmitting = true;
       betaMsg.textContent = "Wird gespeichert…";
     });
 
-    betaIframe.addEventListener('load', () => {
+    betaIframe.addEventListener("load", () => {
       if (!betaSubmitting) return;
       betaSubmitting = false;
       betaMsg.textContent = "Danke! Du bist für den Beta-Test registriert.";
-      betaName.value = "";
-      betaEmail.value = "";
+      $("betaName").value = "";
+      $("betaEmail").value = "";
       betaConsent.checked = false;
     });
 
-    // Legal modal
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalBody = document.getElementById('modalBody');
+    // ====== Slider ======
+    const sliderTrack = $("sliderTrack");
+    const sliderDots  = $("sliderDots");
+    const prevSlideBtn = $("prevSlide");
+    const nextSlideBtn = $("nextSlide");
+    let sliderIndex = 0;
+    let slidesCount = 0;
 
-    function openModal(type){
-      modal.style.display = "block";
+    function buildSlides(){
+      if (!sliderTrack || !sliderDots) return;
+      sliderTrack.innerHTML = "";
+      sliderDots.innerHTML = "";
+
+      const images = (PRODUCT_IMAGES && PRODUCT_IMAGES.length)
+        ? PRODUCT_IMAGES
+        : [placeholderSvg("Produktbild 1"), placeholderSvg("Produktbild 2"), placeholderSvg("Produktbild 3")];
+
+      slidesCount = images.length;
+      sliderIndex = 0;
+
+      images.forEach((src, i) => {
+        const slide = document.createElement("div");
+        slide.className = "slide";
+        slide.innerHTML = `<img src="${src}" alt="Produktbild ${i+1}" loading="lazy">`;
+        sliderTrack.appendChild(slide);
+
+        const dot = document.createElement("button");
+        dot.className = "slider-dot" + (i === 0 ? " active" : "");
+        dot.type = "button";
+        dot.addEventListener("click", () => goToSlide(i));
+        sliderDots.appendChild(dot);
+      });
+
+      updateSlider();
+    }
+
+    function updateSlider(){
+      const x = -sliderIndex * 100;
+      sliderTrack.style.transform = `translateX(${x}%)`;
+      [...sliderDots.children].forEach((d, idx) => d.classList.toggle("active", idx === sliderIndex));
+    }
+
+    function goToSlide(i){
+      sliderIndex = (i + slidesCount) % slidesCount;
+      updateSlider();
+    }
+
+    prevSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex - 1));
+    nextSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex + 1));
+
+    let startX = null;
+    sliderTrack.addEventListener("pointerdown", (e) => {
+      startX = e.clientX;
+      sliderTrack.setPointerCapture(e.pointerId);
+    });
+    sliderTrack.addEventListener("pointerup", (e) => {
+      if (startX === null) return;
+      const dx = e.clientX - startX;
+      startX = null;
+      if (Math.abs(dx) < 40) return;
+      if (dx < 0) goToSlide(sliderIndex + 1);
+      else goToSlide(sliderIndex - 1);
+    });
+
+    // ====== Video Gallery + Modal ======
+    const videoGrid = $("videoGrid");
+    const videoModal = $("videoModal");
+    const videoModalTitle = $("videoModalTitle");
+    const videoFrameWrap = $("videoFrameWrap");
+    const closeVideoBtn = $("closeVideoBtn");
+
+    function buildVideoGallery(){
+      if (!videoGrid) return;
+      videoGrid.innerHTML = "";
+
+      const items = (VIDEO_ITEMS && VIDEO_ITEMS.length) ? VIDEO_ITEMS : [
+        { type:"placeholder", title:"Demo Video", desc:"Füge später ein MP4 oder YouTube Video hinzu" },
+        { type:"placeholder", title:"Feature Walkthrough", desc:"Platzhalter" },
+        { type:"placeholder", title:"Kurzclip", desc:"Platzhalter" }
+      ];
+
+      items.forEach((it) => {
+        const card = document.createElement("div");
+        card.className = "video-card";
+
+        const poster = it.poster || placeholderSvg("Video");
+        card.innerHTML = `
+          <div class="video-thumb" style="background-image:url('${poster}'); background-size:cover; background-position:center;">
+            <div class="video-play">▶</div>
+          </div>
+          <div class="video-meta">
+            <b>${escapeHtml(it.title || "Video")}</b>
+            <span>${escapeHtml(it.desc || "")}</span>
+          </div>
+        `;
+
+        card.addEventListener("click", () => {
+          if (it.type === "placeholder") return;
+          openVideo(it);
+        });
+
+        videoGrid.appendChild(card);
+      });
+    }
+
+    function openVideo(it){
+      videoFrameWrap.innerHTML = "";
+      videoModalTitle.textContent = it.title || "Video";
+
+      if (it.type === "mp4") {
+        const v = document.createElement("video");
+        v.controls = true;
+        v.src = it.src;
+        if (it.poster) v.poster = it.poster;
+        v.playsInline = true;
+        v.autoplay = true;
+        v.style.width = "100%";
+        v.style.aspectRatio = "16/9";
+        v.style.borderRadius = "16px";
+        v.style.background = "#000";
+        videoFrameWrap.appendChild(v);
+      } else if (it.type === "youtube") {
+        const iframe = document.createElement("iframe");
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        iframe.src = `https://www.youtube.com/embed/${it.id}?autoplay=1&rel=0`;
+        iframe.style.width = "100%";
+        iframe.style.aspectRatio = "16/9";
+        iframe.style.border = "0";
+        iframe.style.borderRadius = "16px";
+        iframe.style.background = "#000";
+        videoFrameWrap.appendChild(iframe);
+      }
+
+      videoModal.style.display = "block";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeVideo(){
+      videoModal.style.display = "none";
+      document.body.style.overflow = "";
+      videoFrameWrap.innerHTML = "";
+    }
+    closeVideoBtn.addEventListener("click", closeVideo);
+    videoModal.addEventListener("click", (e) => { if (e.target === videoModal) closeVideo(); });
+
+    // ====== Reviews: load from sheet (JSONP) + submit to sheet (iframe) ======
+    const reviewsList = $("reviewsList");
+    const ratingBadge = $("ratingBadge");
+    const reviewForm = $("reviewForm");
+    const reviewIframe = $("review_iframe");
+    const reviewMsg = $("reviewMsg");
+
+    // JSONP callback used by Apps Script doGet
+    window.tsReviewsCb = function(payload){
+      const items = Array.isArray(payload?.reviews) ? payload.reviews : [];
+      renderReviews(items);
+    };
+
+    function loadReviews(){
+      // JSONP script load (avoids CORS)
+      const s = document.createElement("script");
+      s.src = `${WEBAPP_URL}?action=reviews&callback=tsReviewsCb&t=${Date.now()}`;
+      s.async = true;
+      s.onerror = () => renderReviews([]);
+      document.body.appendChild(s);
+      // cleanup later
+      setTimeout(() => { try { s.remove(); } catch {} }, 8000);
+    }
+
+    function stars(n){
+      n = Math.max(1, Math.min(5, Number(n || 5)));
+      return "★★★★★".slice(0,n) + "☆☆☆☆☆".slice(0, 5-n);
+    }
+
+    function renderReviews(items){
+      reviewsList.innerHTML = "";
+
+      if (!items.length) {
+        // Friendly placeholder (kid-friendly tone)
+        const ph = document.createElement("div");
+        ph.className = "review";
+        ph.innerHTML = `
+          <div class="name">Noch keine Bewertungen</div>
+          <div class="stars">☆☆☆☆☆</div>
+          <div class="text">Sei die erste Person, die eine Bewertung schreibt.</div>
+          <div class="meta">💡 Tipp: Bewertungen erscheinen nach kurzer Freigabe.</div>
+        `;
+        reviewsList.appendChild(ph);
+        ratingBadge.innerHTML = `<span class="dot"></span><span>⭐ 0.0 / 5 (0)</span>`;
+        return;
+      }
+
+      // Compute avg
+      const avg = items.reduce((a,b)=>a+(Number(b.rating)||0),0) / items.length;
+      ratingBadge.innerHTML = `<span class="dot"></span><span>⭐ ${avg.toFixed(1)} / 5 (${items.length})</span>`;
+
+      // Render latest first
+      items.slice().reverse().forEach(r => {
+        const el = document.createElement("div");
+        el.className = "review";
+        const nm = (r.name && r.name.trim()) ? r.name.trim() : "Anonym";
+        const dt = r.timestamp ? new Date(r.timestamp) : new Date();
+        el.innerHTML = `
+          <div class="name">${escapeHtml(nm)}</div>
+          <div class="stars">${stars(r.rating)}</div>
+          <div class="text">${escapeHtml(r.text || "")}</div>
+          <div class="meta">${dt.toLocaleDateString("de-DE")}</div>
+        `;
+        reviewsList.appendChild(el);
+      });
+    }
+
+    let reviewSubmitting = false;
+    reviewForm.addEventListener("submit", (e) => {
+      const txt = ($("reviewText").value || "").trim();
+      if (txt.length < 5) {
+        e.preventDefault();
+        reviewMsg.textContent = "Bitte schreibe mindestens 5 Zeichen.";
+        return;
+      }
+      reviewMsg.textContent = "Wird gesendet…";
+      reviewSubmitting = true;
+    });
+
+    reviewIframe.addEventListener("load", () => {
+      if (!reviewSubmitting) return;
+      reviewSubmitting = false;
+      reviewMsg.textContent = "Danke! Deine Bewertung wurde gesendet und erscheint nach Freigabe.";
+      $("reviewText").value = "";
+      // reload list after a moment (in case it was auto-approved)
+      setTimeout(loadReviews, 1200);
+    });
+
+    // ====== Legal modal ======
+    const legalModal = $("legalModal");
+    const legalTitle = $("legalTitle");
+    const legalBody = $("legalBody");
+
+    function openLegal(type){
+      legalModal.style.display = "block";
       document.body.style.overflow = "hidden";
 
-      if(type === "impressum"){
-        modalTitle.textContent = "Impressum";
-        modalBody.innerHTML = `
+      if (type === "impressum") {
+        legalTitle.textContent = "Impressum";
+        legalBody.innerHTML = `
           <p><b>Angaben gemäß § 5 TMG</b></p>
           <p>
             <b>true-shuffel</b><br/>
@@ -1509,392 +1587,356 @@ body.light #videoModalHeader{
             Mika Hertler & Moritz Hertler<br/>
             Am Schwarzen Steg 5a, 95448 Bayreuth
           </p>
-          <p><b>Haftung für Inhalte</b><br/>
-            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
-            Wir übernehmen jedoch keine Gewähr für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte.
-          </p>
-          <p><b>Haftung für Links</b><br/>
-            Unsere Website enthält ggf. Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
-            Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
-          </p>
-          <p><b>Urheberrecht</b><br/>
-            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf dieser Website unterliegen dem deutschen Urheberrecht.
-          </p>
         `;
       } else if (type === "cookies") {
-        modalTitle.textContent = "Cookies & lokale Speicherung";
-        modalBody.innerHTML = `
-          <p>Diese Website setzt aktuell <b>keine Tracking- oder Marketing-Cookies</b> ein.</p>
+        legalTitle.textContent = "Cookies & lokale Speicherung";
+        legalBody.innerHTML = `
+          <p>Wir verwenden keine Tracking-Cookies.</p>
           <p><b>Technisch notwendige Speicherung</b><br/>
-            Für die Funktion „Dark/Light Mode“ speichern wir deine Auswahl lokal (localStorage).
+            Wir speichern z. B. die Theme-Auswahl (Dark/Light) und den Cookie-Hinweis lokal im Browser (localStorage).
           </p>
-          <p>
-            Ein Einwilligungsbanner ist i. d. R. erst erforderlich, wenn du nicht-notwendige Cookies/Tracker verwendest
-            (z. B. Analytics, Ads). Wenn du später Tracking aktivierst, müssen Cookie-Hinweise und Einwilligungen erweitert werden.
-          </p>
+          <p>Wenn später Analytics/Tracking genutzt wird, ist ein echtes Opt-In Banner erforderlich.</p>
         `;
       } else {
-        modalTitle.textContent = "Datenschutz";
-        modalBody.innerHTML = `
-          <p>
-            Wir nehmen den Schutz deiner personenbezogenen Daten ernst. Personenbezogene Daten werden auf dieser Website nur verarbeitet,
-            soweit dies zur Bereitstellung der Funktionen erforderlich ist oder du eingewilligt hast.
-          </p>
-
+        legalTitle.textContent = "Datenschutz";
+        legalBody.innerHTML = `
           <p><b>1. Verantwortliche</b><br/>
             Mika Hertler & Moritz Hertler, Am Schwarzen Steg 5a, 95448 Bayreuth, Deutschland<br/>
             Kontakt: hello@true-shuffel.com
           </p>
-
-          <p><b>2. Beta-Test-Anmeldung (Name & E-Mail)</b><br/>
-            Wenn du dich für den Beta-Test anmeldest, verarbeiten wir deinen Namen und deine E-Mail-Adresse, um den Beta-Test zu organisieren,
-            dich zu kontaktieren und dir ggf. Zugriff/Updates zu senden.
+          <p><b>2. Beta-Test-Anmeldung</b><br/>
+            Wir verarbeiten Name und E-Mail, um den Beta-Test zu organisieren und dich zu kontaktieren.
+            Rechtsgrundlage: Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).
           </p>
-
-          <p><b>Rechtsgrundlage</b><br/>
-            Die Verarbeitung erfolgt auf Grundlage deiner <b>Einwilligung</b> (Art. 6 Abs. 1 lit. a DSGVO).
-            Du kannst die Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen (per E-Mail an hello@true-shuffel.com).
+          <p><b>3. Bewertungen</b><br/>
+            Bewertungen werden im Google Sheet gespeichert. Um Spam zu vermeiden, erscheinen sie erst nach Freigabe.
           </p>
-
-          <p><b>3. Speicherung in Google Sheets / Google Apps Script</b><br/>
-            Zur Speicherung der Beta-Test-Anmeldungen nutzen wir Google Sheets und Google Apps Script, bereitgestellt von
-            <b>Google Ireland Limited</b>, Gordon House, Barrow Street, Dublin 4, Irland.
-          </p>
-
-          <p><b>4. Speicherdauer</b><br/>
-            Wir speichern die Beta-Test-Daten, solange dies für die Durchführung des Beta-Tests erforderlich ist oder bis du die Löschung verlangst
-            bzw. deine Einwilligung widerrufst.
-          </p>
-
-          <p><b>5. Deine Rechte</b><br/>
-            Du hast insbesondere das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie das Recht,
-            dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.
+          <p><b>4. Widerruf/Löschung</b><br/>
+            Du kannst jederzeit die Löschung deiner Daten anfordern: hello@true-shuffel.com
           </p>
         `;
       }
     }
-
-    function closeModal(){
-      modal.style.display = "none";
+    function closeLegal(){
+      legalModal.style.display = "none";
       document.body.style.overflow = "";
     }
-    window.openModal = openModal;
-    window.closeModal = closeModal;
+    window.openLegal = openLegal;
+    window.closeLegal = closeLegal;
 
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
+    legalModal.addEventListener("click", (e) => { if (e.target === legalModal) closeLegal(); });
 
-    // Cookie banner (FIX: reliable display via localStorage)
-    const cookieBanner = document.getElementById("cookieBanner");
-    const cookieAcceptBtn = document.getElementById("cookieAcceptBtn");
-    const cookieResetLink = document.getElementById("cookieResetLink");
+    // ====== Account system (local, hashed) ======
+    const accountModal = $("accountModal");
+    const accountBtn = $("accountBtn");
+    const logoutBtn = $("logoutBtn");
+    const accountStateText = $("accountStateText");
 
-    function showCookieBannerIfNeeded(){
-      const ack = localStorage.getItem("ts_cookie_ack");
-      if (ack !== "1") cookieBanner.style.display = "block";
+    const USERS_KEY = "ts_users_v1";
+    const SESSION_KEY = "ts_session_v1";
+
+    function b64(arr){
+      return btoa(String.fromCharCode(...new Uint8Array(arr)));
+    }
+    function unb64(s){
+      const bin = atob(s);
+      const bytes = new Uint8Array(bin.length);
+      for (let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+      return bytes;
+    }
+    async function pbkdf2Hash(password, saltBytes){
+      const enc = new TextEncoder();
+      const keyMaterial = await crypto.subtle.importKey(
+        "raw", enc.encode(password), {name:"PBKDF2"}, false, ["deriveBits"]
+      );
+      const bits = await crypto.subtle.deriveBits(
+        {name:"PBKDF2", salt: saltBytes, iterations: 120000, hash:"SHA-256"},
+        keyMaterial,
+        256
+      );
+      return new Uint8Array(bits);
     }
 
-    cookieAcceptBtn.addEventListener("click", () => {
-      localStorage.setItem("ts_cookie_ack", "1");
-      cookieBanner.style.display = "none";
-    });
-
-    cookieResetLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      localStorage.removeItem("ts_cookie_ack");
-      cookieBanner.style.display = "block";
-    });
-
-    // show after DOM is ready (fixes "never shows" cases)
-    window.addEventListener("load", showCookieBannerIfNeeded);
-
-    // Reviews (localStorage)
-    const REVIEWS_KEY = "ts_reviews_v1";
-    const reviewsList = document.getElementById("reviewsList");
-    const ratingBadge = document.getElementById("ratingBadge");
-    const reviewName = document.getElementById("reviewName");
-    const reviewRating = document.getElementById("reviewRating");
-    const reviewText = document.getElementById("reviewText");
-    const submitReviewBtn = document.getElementById("submitReviewBtn");
-    const reviewMsg = document.getElementById("reviewMsg");
-    const resetReviewsBtn = document.getElementById("resetReviewsBtn");
-
-    function loadReviews(){
-      try{
-        return JSON.parse(localStorage.getItem(REVIEWS_KEY) || "[]");
-      }catch{
-        return [];
-      }
+    function loadUsers(){
+      try { return JSON.parse(localStorage.getItem(USERS_KEY) || "{}"); }
+      catch { return {}; }
+    }
+    function saveUsers(obj){
+      localStorage.setItem(USERS_KEY, JSON.stringify(obj));
+    }
+    function setSession(user){
+      localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+      updateAccountUI();
+    }
+    function getSession(){
+      try { return JSON.parse(localStorage.getItem(SESSION_KEY) || "null"); }
+      catch { return null; }
+    }
+    function clearSession(){
+      localStorage.removeItem(SESSION_KEY);
+      updateAccountUI();
     }
 
-    function saveReviews(items){
-      localStorage.setItem(REVIEWS_KEY, JSON.stringify(items));
-    }
-
-    function stars(n){
-      const full = "★★★★★".slice(0, n);
-      const empty = "☆☆☆☆☆".slice(0, 5-n);
-      return full + empty;
-    }
-
-    function renderReviews(){
-      const items = loadReviews();
-      reviewsList.innerHTML = "";
-
-      // placeholders if empty
-      const list = items.length ? items : [
-        { name: "Platzhalter", rating: 5, text: "Hier erscheint später eine echte Bewertung.", ts: Date.now() },
-        { name: "Platzhalter", rating: 4, text: "Bewertungen können direkt auf der Website erstellt werden.", ts: Date.now()-1000 }
-      ];
-
-      list.slice().reverse().forEach(r => {
-        const el = document.createElement("div");
-        el.className = "review";
-        const nm = (r.name && r.name.trim()) ? r.name.trim() : "Anonym";
-        const dt = new Date(r.ts || Date.now());
-        el.innerHTML = `
-          <div class="name">${escapeHtml(nm)}</div>
-          <div class="stars">${stars(Number(r.rating || 5))}</div>
-          <div class="text">${escapeHtml(r.text || "")}</div>
-          <div class="meta">${dt.toLocaleDateString("de-DE")} • ${dt.toLocaleTimeString("de-DE", {hour:"2-digit", minute:"2-digit"})}</div>
-        `;
-        reviewsList.appendChild(el);
-      });
-
-      // rating badge based on real stored reviews only
-      if (items.length === 0) {
-        ratingBadge.textContent = "⭐ 0.0 / 5 (0 Bewertungen)";
+    function updateAccountUI(){
+      const sess = getSession();
+      if (sess?.email) {
+        accountStateText.textContent = `Angemeldet: ${sess.name || sess.email}`;
+        logoutBtn.style.display = "inline-flex";
+        // prefill review name if empty
+        const rn = $("reviewName");
+        if (rn && !rn.value) rn.value = sess.name || "";
       } else {
-        const avg = items.reduce((a,b)=>a+(Number(b.rating)||0),0) / items.length;
-        ratingBadge.textContent = `⭐ ${avg.toFixed(1)} / 5 (${items.length} Bewertungen)`;
+        accountStateText.textContent = "Nicht angemeldet";
+        logoutBtn.style.display = "none";
       }
     }
 
-    function escapeHtml(s){
-      return String(s).replace(/[&<>"']/g, m => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
-      }[m]));
+    async function signup(){
+      const name = ($("suName").value || "").trim();
+      const email = ($("suEmail").value || "").trim().toLowerCase();
+      const pass = ($("suPass").value || "").trim();
+      const msg = $("suMsg");
+
+      if (!email || !pass) { msg.textContent = "Bitte E-Mail und Passwort eingeben."; return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = "Bitte gültige E-Mail eingeben."; return; }
+      if (pass.length < 6) { msg.textContent = "Passwort min. 6 Zeichen."; return; }
+
+      const users = loadUsers();
+      if (users[email]) { msg.textContent = "Diese E-Mail ist bereits registriert."; return; }
+
+      msg.textContent = "Registriere…";
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      const hash = await pbkdf2Hash(pass, salt);
+
+      users[email] = { name, email, salt: b64(salt), hash: b64(hash), createdAt: Date.now() };
+      saveUsers(users);
+      setSession({ name, email });
+      msg.textContent = "Registriert & angemeldet.";
+      $("suPass").value = "";
     }
 
-    submitReviewBtn.addEventListener("click", () => {
-      const name = (reviewName.value || "").trim();
-      const rating = Number(reviewRating.value || 5);
-      const text = (reviewText.value || "").trim();
+    async function login(){
+      const email = ($("liEmail").value || "").trim().toLowerCase();
+      const pass = ($("liPass").value || "").trim();
+      const msg = $("liMsg");
 
-      if (!text || text.length < 5) {
-        reviewMsg.textContent = "Bitte schreibe mindestens 5 Zeichen.";
+      if (!email || !pass) { msg.textContent = "Bitte E-Mail und Passwort eingeben."; return; }
+      const users = loadUsers();
+      const u = users[email];
+      if (!u) { msg.textContent = "Account nicht gefunden."; return; }
+
+      msg.textContent = "Prüfe…";
+      const salt = unb64(u.salt);
+      const hash = await pbkdf2Hash(pass, salt);
+
+      if (b64(hash) !== u.hash) {
+        msg.textContent = "Passwort stimmt nicht.";
         return;
       }
 
-      const items = loadReviews();
-      items.push({ name, rating, text, ts: Date.now() });
-      saveReviews(items);
+      setSession({ name: u.name || "", email: u.email });
+      msg.textContent = "Angemeldet.";
+      $("liPass").value = "";
+    }
 
-      reviewName.value = "";
-      reviewRating.value = "5";
-      reviewText.value = "";
-      reviewMsg.textContent = "Danke! Deine Bewertung wurde gespeichert.";
-      renderReviews();
+    function openAccount(){
+      accountModal.style.display = "block";
+      document.body.style.overflow = "hidden";
+      updateAccountUI();
+    }
+    function closeAccount(){
+      accountModal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+    window.closeAccount = closeAccount;
+
+    accountBtn.addEventListener("click", openAccount);
+    accountModal.addEventListener("click", (e) => { if (e.target === accountModal) closeAccount(); });
+    $("signupBtn").addEventListener("click", signup);
+    $("loginBtn").addEventListener("click", login);
+    logoutBtn.addEventListener("click", () => {
+      clearSession();
+      $("liMsg").textContent = "Abgemeldet.";
     });
 
-    resetReviewsBtn.addEventListener("click", () => {
-      localStorage.removeItem(REVIEWS_KEY);
-      reviewMsg.textContent = "Bewertungen zurückgesetzt.";
-      renderReviews();
-    });
-
-    renderReviews();
-    /* =======================
-   Slider + Video Gallery
-   ======================= */
-
-// 1) HIER pflegst du später deine Produktbilder ein:
-const PRODUCT_IMAGES = [
-  // Beispiele (lege die Dateien in /assets ab):
-  // "assets/product_01.jpg",
-  // "assets/product_02.jpg",
-  // "assets/product_03.jpg"
-];
-
-// 2) HIER pflegst du später deine Videos ein:
-const VIDEO_ITEMS = [
-  // MP4 Beispiel:
-  // { type: "mp4", title: "Demo", desc: "Kurzer Überblick", src: "assets/demo.mp4", poster: "assets/product_01.jpg" },
-
-  // YouTube Beispiel (nur ID!):
-  // { type: "youtube", title: "YouTube Demo", desc: "Feature Walkthrough", id: "dQw4w9WgXcQ" }
-];
-
-function placeholderSvgData(text){
-  const bg = document.body.classList.contains("light") ? "#f2f2f2" : "#2b2c32";
-  const fg = document.body.classList.contains("light") ? "#1b1b1b" : "#ffffff";
-  const svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">
-    <rect width="100%" height="100%" fill="${bg}"/>
-    <text x="50%" y="50%" font-family="system-ui, -apple-system, Segoe UI, Roboto" font-size="44"
-          fill="${fg}" text-anchor="middle" dominant-baseline="middle" opacity="0.65">
-      ${text}
-    </text>
-  </svg>`;
-  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.trim());
-}
-
-/* ---------- Slider ---------- */
-const sliderTrack = document.getElementById("sliderTrack");
-const sliderDots  = document.getElementById("sliderDots");
-const prevSlideBtn = document.getElementById("prevSlide");
-const nextSlideBtn = document.getElementById("nextSlide");
-let sliderIndex = 0;
-let slidesCount = 0;
-
-function buildSlides(){
-  sliderTrack.innerHTML = "";
-  sliderDots.innerHTML = "";
-
-  const images = (PRODUCT_IMAGES && PRODUCT_IMAGES.length)
-    ? PRODUCT_IMAGES
-    : [placeholderSvgData("Produktbild 1"), placeholderSvgData("Produktbild 2"), placeholderSvgData("Produktbild 3")];
-
-  slidesCount = images.length;
-
-  images.forEach((src, i) => {
-    const slide = document.createElement("div");
-    slide.className = "slide";
-    slide.innerHTML = `<img src="${src}" alt="Produktbild ${i+1}" loading="lazy">`;
-    sliderTrack.appendChild(slide);
-
-    const dot = document.createElement("button");
-    dot.className = "slider-dot" + (i === 0 ? " active" : "");
-    dot.type = "button";
-    dot.setAttribute("aria-label", `Gehe zu Slide ${i+1}`);
-    dot.addEventListener("click", () => goToSlide(i));
-    sliderDots.appendChild(dot);
-  });
-
-  sliderIndex = 0;
-  updateSlider();
-}
-
-function updateSlider(){
-  const x = -sliderIndex * 100;
-  sliderTrack.style.transform = `translateX(${x}%)`;
-  [...sliderDots.children].forEach((d, idx) => d.classList.toggle("active", idx === sliderIndex));
-}
-
-function goToSlide(i){
-  sliderIndex = (i + slidesCount) % slidesCount;
-  updateSlider();
-}
-
-prevSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex - 1));
-nextSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex + 1));
-
-/* Swipe support */
-let startX = null;
-sliderTrack.addEventListener("pointerdown", (e) => {
-  startX = e.clientX;
-  sliderTrack.setPointerCapture(e.pointerId);
-});
-sliderTrack.addEventListener("pointerup", (e) => {
-  if (startX === null) return;
-  const dx = e.clientX - startX;
-  startX = null;
-  if (Math.abs(dx) < 40) return;
-  if (dx < 0) goToSlide(sliderIndex + 1);
-  else goToSlide(sliderIndex - 1);
-});
-
-/* ---------- Video Gallery ---------- */
-const videoGrid = document.getElementById("videoGrid");
-const videoModal = document.getElementById("videoModal");
-const videoModalTitle = document.getElementById("videoModalTitle");
-const videoFrameWrap = document.getElementById("videoFrameWrap");
-const closeVideoBtn = document.getElementById("closeVideo");
-
-function buildVideoGallery(){
-  videoGrid.innerHTML = "";
-
-  const items = (VIDEO_ITEMS && VIDEO_ITEMS.length)
-    ? VIDEO_ITEMS
-    : [
-        { type:"placeholder", title:"Demo Video", desc:"Füge später ein MP4 oder YouTube Video hinzu" },
-        { type:"placeholder", title:"Feature Walkthrough", desc:"Platzhalter" },
-        { type:"placeholder", title:"Short Clip", desc:"Platzhalter" }
-      ];
-
-  items.forEach((it) => {
-    const card = document.createElement("div");
-    card.className = "video-card";
-
-    const thumbLabel = it.type === "youtube" ? "YouTube" : (it.type === "mp4" ? "MP4" : "Video");
-    const poster = it.poster || placeholderSvgData(`${thumbLabel} Thumbnail`);
-
-    card.innerHTML = `
-      <div class="video-thumb" style="background-image:url('${poster}'); background-size:cover; background-position:center;">
-        <div class="video-play">▶</div>
-      </div>
-      <div class="video-meta">
-        <b>${it.title || "Video"}</b>
-        <span>${it.desc || ""}</span>
-      </div>
-    `;
-
-    card.addEventListener("click", () => {
-      if (it.type === "placeholder") return;
-      openVideo(it);
-    });
-
-    videoGrid.appendChild(card);
-  });
-}
-
-function openVideo(it){
-  videoFrameWrap.innerHTML = "";
-  videoModalTitle.textContent = it.title || "Video";
-
-  if (it.type === "mp4") {
-    const v = document.createElement("video");
-    v.controls = true;
-    v.src = it.src;
-    if (it.poster) v.poster = it.poster;
-    v.playsInline = true;
-    v.autoplay = true;
-    videoFrameWrap.appendChild(v);
-  } else if (it.type === "youtube") {
-    const iframe = document.createElement("iframe");
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-    iframe.allowFullscreen = true;
-    iframe.src = `https://www.youtube.com/embed/${it.id}?autoplay=1&rel=0`;
-    videoFrameWrap.appendChild(iframe);
-  }
-
-  videoModal.style.display = "block";
-  document.body.style.overflow = "hidden";
-}
-
-function closeVideo(){
-  videoModal.style.display = "none";
-  document.body.style.overflow = "";
-  videoFrameWrap.innerHTML = "";
-}
-
-closeVideoBtn?.addEventListener("click", closeVideo);
-videoModal?.addEventListener("click", (e) => { if (e.target === videoModal) closeVideo(); });
-
-/* Init */
-buildSlides();
-buildVideoGallery();
-
-/* If you toggle theme, rebuild placeholders so they match background */
-const _origApplyTheme = window.applyTheme;
-if (typeof _origApplyTheme === "function") {
-  window.applyTheme = function(mode){
-    _origApplyTheme(mode);
+    // ====== Init content ======
     buildSlides();
     buildVideoGallery();
-  };
-}
+    updateAccountUI();
+    loadReviews();
+  </script>
+
+  <script>
+    // These functions are referenced above but declared later
+    function buildSlides(){}
+    function buildVideoGallery(){}
+  </script>
+
+  <script>
+    // Provide implementations after initial script defines placeholders
+    (function(){
+      const sliderTrack = document.getElementById("sliderTrack");
+      const sliderDots  = document.getElementById("sliderDots");
+      const prevSlideBtn = document.getElementById("prevSlide");
+      const nextSlideBtn = document.getElementById("nextSlide");
+
+      let sliderIndex = 0;
+      let slidesCount = 0;
+
+      function placeholderSvg(text){
+        const isLight = document.body.classList.contains("light");
+        const bg = isLight ? "#f2f2f2" : "#2b2c32";
+        const fg = isLight ? "#1b1b1b" : "#ffffff";
+        const svg = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">
+            <rect width="100%" height="100%" fill="${bg}"/>
+            <text x="50%" y="50%" font-family="system-ui, -apple-system, Segoe UI, Roboto" font-size="44"
+                  fill="${fg}" text-anchor="middle" dominant-baseline="middle" opacity="0.65">
+              ${text}
+            </text>
+          </svg>`;
+        return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.trim());
+      }
+
+      function updateSlider(){
+        const x = -sliderIndex * 100;
+        sliderTrack.style.transform = `translateX(${x}%)`;
+        [...sliderDots.children].forEach((d, idx) => d.classList.toggle("active", idx === sliderIndex));
+      }
+
+      function goToSlide(i){
+        sliderIndex = (i + slidesCount) % slidesCount;
+        updateSlider();
+      }
+
+      window.buildSlides = function(){
+        if (!sliderTrack || !sliderDots) return;
+        sliderTrack.innerHTML = "";
+        sliderDots.innerHTML = "";
+
+        const images = (window.PRODUCT_IMAGES && window.PRODUCT_IMAGES.length)
+          ? window.PRODUCT_IMAGES
+          : [placeholderSvg("Produktbild 1"), placeholderSvg("Produktbild 2"), placeholderSvg("Produktbild 3")];
+
+        slidesCount = images.length;
+        sliderIndex = 0;
+
+        images.forEach((src, i) => {
+          const slide = document.createElement("div");
+          slide.className = "slide";
+          slide.innerHTML = `<img src="${src}" alt="Produktbild ${i+1}" loading="lazy">`;
+          sliderTrack.appendChild(slide);
+
+          const dot = document.createElement("button");
+          dot.className = "slider-dot" + (i === 0 ? " active" : "");
+          dot.type = "button";
+          dot.addEventListener("click", () => goToSlide(i));
+          sliderDots.appendChild(dot);
+        });
+
+        updateSlider();
+      };
+
+      prevSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex - 1));
+      nextSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex + 1));
+
+      let startX = null;
+      sliderTrack?.addEventListener("pointerdown", (e) => {
+        startX = e.clientX;
+        sliderTrack.setPointerCapture(e.pointerId);
+      });
+      sliderTrack?.addEventListener("pointerup", (e) => {
+        if (startX === null) return;
+        const dx = e.clientX - startX;
+        startX = null;
+        if (Math.abs(dx) < 40) return;
+        if (dx < 0) goToSlide(sliderIndex + 1);
+        else goToSlide(sliderIndex - 1);
+      });
+
+      // Video
+      const videoGrid = document.getElementById("videoGrid");
+      const videoModal = document.getElementById("videoModal");
+      const videoModalTitle = document.getElementById("videoModalTitle");
+      const videoFrameWrap = document.getElementById("videoFrameWrap");
+      const closeVideoBtn = document.getElementById("closeVideoBtn");
+
+      window.buildVideoGallery = function(){
+        if (!videoGrid) return;
+        videoGrid.innerHTML = "";
+
+        const items = (window.VIDEO_ITEMS && window.VIDEO_ITEMS.length) ? window.VIDEO_ITEMS : [
+          { type:"placeholder", title:"Demo Video", desc:"Füge später ein MP4 oder YouTube Video hinzu" },
+          { type:"placeholder", title:"Feature Walkthrough", desc:"Platzhalter" },
+          { type:"placeholder", title:"Kurzclip", desc:"Platzhalter" }
+        ];
+
+        items.forEach((it) => {
+          const card = document.createElement("div");
+          card.className = "video-card";
+
+          const poster = it.poster || placeholderSvg("Video");
+          card.innerHTML = `
+            <div class="video-thumb" style="background-image:url('${poster}'); background-size:cover; background-position:center;">
+              <div class="video-play">▶</div>
+            </div>
+            <div class="video-meta">
+              <b>${(it.title||"Video").replace(/</g,"&lt;")}</b>
+              <span>${(it.desc||"").replace(/</g,"&lt;")}</span>
+            </div>
+          `;
+
+          card.addEventListener("click", () => {
+            if (it.type === "placeholder") return;
+
+            videoFrameWrap.innerHTML = "";
+            videoModalTitle.textContent = it.title || "Video";
+
+            if (it.type === "mp4") {
+              const v = document.createElement("video");
+              v.controls = true;
+              v.src = it.src;
+              if (it.poster) v.poster = it.poster;
+              v.playsInline = true;
+              v.autoplay = true;
+              v.style.width = "100%";
+              v.style.aspectRatio = "16/9";
+              v.style.borderRadius = "16px";
+              v.style.background = "#000";
+              videoFrameWrap.appendChild(v);
+            } else if (it.type === "youtube") {
+              const iframe = document.createElement("iframe");
+              iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+              iframe.allowFullscreen = true;
+              iframe.src = `https://www.youtube.com/embed/${it.id}?autoplay=1&rel=0`;
+              iframe.style.width = "100%";
+              iframe.style.aspectRatio = "16/9";
+              iframe.style.border = "0";
+              iframe.style.borderRadius = "16px";
+              iframe.style.background = "#000";
+              videoFrameWrap.appendChild(iframe);
+            }
+
+            videoModal.style.display = "block";
+            document.body.style.overflow = "hidden";
+          });
+
+          videoGrid.appendChild(card);
+        });
+      };
+
+      function closeVideo(){
+        videoModal.style.display = "none";
+        document.body.style.overflow = "";
+        videoFrameWrap.innerHTML = "";
+      }
+      closeVideoBtn?.addEventListener("click", closeVideo);
+      videoModal?.addEventListener("click", (e) => { if (e.target === videoModal) closeVideo(); });
+
+      // First render
+      window.buildSlides();
+      window.buildVideoGallery();
+    })();
   </script>
 </body>
 </html>
