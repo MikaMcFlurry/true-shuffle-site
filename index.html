@@ -8,59 +8,18 @@
   <meta name="description" content="Echter Shuffle für große Streaming-Playlists: jeder Song genau einmal pro Durchlauf – keine Wiederholungen, keine ausgelassenen Tracks. Jetzt für den Beta-Test anmelden." />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#24252a" />
-  <link rel="canonical" href="https://true-shuffel.com/" />
 
-  <!-- Social -->
-  <meta property="og:title" content="true-shuffel — True Shuffle für Streaming-Playlists (Beta)" />
+  <meta property="og:title" content="true-shuffel — True Shuffle für Streaming-Playlists" />
   <meta property="og:description" content="Jeder Song. Genau einmal. Kein Repeat, kein Skip. Beta-Test jetzt offen." />
   <meta property="og:type" content="website" />
-  <meta property="og:locale" content="de_DE" />
-  <meta property="og:site_name" content="true-shuffel" />
   <meta property="og:image" content="assets/logo_dark.png" />
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="true-shuffel — True Shuffle für Streaming-Playlists" />
-  <meta name="twitter:description" content="Jeder Song. Genau einmal. Kein Repeat, kein Skip. Beta-Test jetzt offen." />
-  <meta name="twitter:image" content="assets/logo_dark.png" />
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/logo_dark.png" />
   <link rel="apple-touch-icon" href="assets/logo_dark.png" />
 
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@graph":[
-      {
-        "@type":"Organization",
-        "name":"true-shuffel",
-        "url":"https://true-shuffel.com/",
-        "email":"hello@true-shuffel.com",
-        "address":{
-          "@type":"PostalAddress",
-          "streetAddress":"Am Schwarzen Steg 5a",
-          "postalCode":"95448",
-          "addressLocality":"Bayreuth",
-          "addressCountry":"DE"
-        },
-        "founder":[
-          {"@type":"Person","name":"Mika Hertler"},
-          {"@type":"Person","name":"Moritz Hertler"}
-        ]
-      },
-      {
-        "@type":"WebSite",
-        "name":"true-shuffel",
-        "url":"https://true-shuffel.com/"
-      }
-    ]
-  }
-  </script>
-
   <style>
     :root{
-      --bg: #24252a;       /* logo tone */
+      --bg: #24252a;
       --bg2:#17181c;
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.09);
@@ -68,7 +27,6 @@
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
       --muted2: rgba(255,255,255,.56);
-      --accent: rgba(255,255,255,.92);
       --shadow: 0 18px 55px rgba(0,0,0,.55);
       --radius: 18px;
       --radius2: 26px;
@@ -77,7 +35,7 @@
       --btnh: 44px;
     }
     body.light{
-      --bg: #f7f7f7;
+      --bg:#f7f7f7;
       --bg2:#ffffff;
       --panel: rgba(0,0,0,.05);
       --panel2: rgba(0,0,0,.08);
@@ -85,13 +43,12 @@
       --text: rgba(0,0,0,.90);
       --muted: rgba(0,0,0,.70);
       --muted2: rgba(0,0,0,.55);
-      --accent: rgba(0,0,0,.88);
       --shadow: 0 18px 55px rgba(0,0,0,.14);
       --ring: 0 0 0 6px rgba(0,0,0,.10);
     }
 
     *{ box-sizing:border-box; }
-    html, body{ height:100%; }
+    html,body{ height:100%; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
@@ -110,19 +67,15 @@
         radial-gradient(700px 300px at 60% 85%, rgba(0,0,0,.03), transparent 60%),
         linear-gradient(180deg, var(--bg), var(--bg2));
     }
-
     a{ color:inherit; text-decoration:none; }
-    button, input, textarea, select{ font: inherit; }
+    button,input,textarea,select{ font:inherit; }
     img{ max-width:100%; height:auto; }
 
     .wrap{ width:100%; display:flex; justify-content:center; }
     .container{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
 
-    /* Header */
     header{
-      position: sticky;
-      top:0;
-      z-index:50;
+      position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
       background: linear-gradient(to bottom, rgba(36,37,42,.88), rgba(36,37,42,.62));
       border-bottom: 1px solid rgba(255,255,255,.08);
@@ -133,109 +86,40 @@
     }
 
     .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 14px 0;
-      gap: 12px;
-      flex-wrap: wrap;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0; gap:12px; flex-wrap:wrap;
     }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap: 12px;
-      min-width: 0;
-      flex: 1 1 auto;
-    }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:0; flex:1 1 auto; }
     .brand img{
-      width:40px; height:40px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
+      width:40px; height:40px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
-      flex: 0 0 auto;
+      flex:0 0 auto;
     }
-    body.light .brand img{
-      border-color: rgba(0,0,0,.10);
-      background: rgba(0,0,0,.03);
-    }
-    .brand strong{
-      display:block;
-      font-weight: 900;
-      letter-spacing: .01em;
-      white-space: nowrap;
-      line-height: 1.1;
-    }
-    .brand span{
-      display:block;
-      font-size: 12px;
-      color: var(--muted2);
-      letter-spacing: .03em;
-      margin-top: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 52vw;
-    }
+    body.light .brand img{ border-color: rgba(0,0,0,.10); background: rgba(0,0,0,.03); }
+    .brand strong{ display:block; font-weight:900; white-space:nowrap; line-height:1.1; }
+    .brand span{ display:block; font-size:12px; color:var(--muted2); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:52vw; }
 
-    .navlinks{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      flex: 0 0 auto;
-    }
-    .navlinks a{
-      padding: 8px 10px;
-      border-radius: 12px;
-      transition: background .15s ease, color .15s ease;
-    }
-    .navlinks a:hover{
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-    }
+    .navlinks{ display:flex; align-items:center; gap:10px; color:var(--muted); font-size:14px; }
+    .navlinks a{ padding:8px 10px; border-radius:12px; }
+    .navlinks a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
     body.light .navlinks a:hover{ background: rgba(0,0,0,.05); }
 
-    .navcta{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      flex: 1 1 100%;
-      justify-content:flex-start;
-      flex-wrap: wrap;
-    }
-
+    .navcta{ display:flex; align-items:center; gap:10px; flex:1 1 100%; justify-content:flex-start; flex-wrap:wrap; }
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      height: var(--btnh);
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      height: var(--btnh); padding:0 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       color: var(--text);
-      cursor:pointer;
-      user-select:none;
-      white-space:nowrap;
+      cursor:pointer; user-select:none; white-space:nowrap;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    body.light .btn{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.04);
-    }
-    .btn:hover{
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.18);
-      transform: translateY(-1px);
-    }
-    body.light .btn:hover{
-      background: rgba(0,0,0,.07);
-      border-color: rgba(0,0,0,.14);
-    }
-    .btn:active{ transform: translateY(0px); }
+    body.light .btn{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.04); }
+    .btn:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.18); transform: translateY(-1px); }
+    body.light .btn:hover{ background: rgba(0,0,0,.07); border-color: rgba(0,0,0,.14); }
+    .btn:active{ transform: translateY(0); }
 
     .btn-primary{
       background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
@@ -246,21 +130,15 @@
     }
 
     .menu-btn{ display:none; }
-    .drawer{ display:none; padding: 10px 0 16px; width:100%; }
+    .drawer{ display:none; padding:10px 0 16px; width:100%; }
     .drawer.open{ display:block; }
     .drawer a{
-      display:block;
-      padding: 12px 12px;
-      border-radius: 14px;
+      display:block; padding:12px 12px; border-radius:14px; margin-top:10px;
       color: var(--muted);
-      border: 1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
-      margin-top: 10px;
     }
-    body.light .drawer a{
-      border-color: rgba(0,0,0,.10);
-      background: rgba(0,0,0,.02);
-    }
+    body.light .drawer a{ border-color: rgba(0,0,0,.10); background: rgba(0,0,0,.02); }
 
     @media (max-width: 980px){
       .navlinks{ display:none; }
@@ -271,205 +149,103 @@
       .brand span{ display:none; }
     }
 
-    main{ padding: 34px 0 70px; }
+    main{ padding:34px 0 70px; }
 
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
       color: var(--muted);
-      font-size: 13px;
+      font-size:13px;
     }
-    body.light .pill{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
-    .dot{
-      width:8px; height:8px;
-      border-radius:999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(255,255,255,.10);
-    }
+    body.light .pill{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+    .dot{ width:8px; height:8px; border-radius:999px; background: rgba(255,255,255,.92); box-shadow: 0 0 0 4px rgba(255,255,255,.10); }
     body.light .dot{ box-shadow: 0 0 0 4px rgba(0,0,0,.10); }
 
-    .hero{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 18px;
-      align-items:start;
-      margin-top: 18px;
-    }
+    .hero{ display:grid; grid-template-columns: 1.1fr .9fr; gap:18px; align-items:start; margin-top:18px; }
     @media (max-width: 980px){ .hero{ grid-template-columns: 1fr; } }
 
-    h1{
-      font-size: clamp(30px, 3.4vw, 52px);
-      line-height: 1.06;
-      margin: 14px 0 10px;
-      letter-spacing: -0.02em;
-    }
-    .lead{
-      color: var(--muted);
-      font-size: 16.5px;
-      line-height: 1.65;
-      margin: 0 0 14px;
-      max-width: 68ch;
-    }
-    .subnote{
-      color: var(--muted2);
-      font-size: 13px;
-      line-height: 1.55;
-      margin-top: 10px;
-    }
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      align-items:center;
-      margin-top: 10px;
-    }
+    h1{ font-size: clamp(30px, 3.4vw, 52px); line-height:1.06; margin:14px 0 10px; letter-spacing:-0.02em; }
+    .lead{ color: var(--muted); font-size:16.5px; line-height:1.65; margin:0 0 14px; max-width:68ch; }
+    .subnote{ color: var(--muted2); font-size:13px; line-height:1.55; margin-top:10px; }
+    .hero-actions{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:10px; }
 
     .panel{
       border-radius: var(--radius2);
-      border: 1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
       box-shadow: var(--shadow);
+      padding:16px;
       overflow:hidden;
-      padding: 16px;
     }
-    body.light .panel{
-      border-color: rgba(0,0,0,.12);
-      background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02));
-    }
+    body.light .panel{ border-color: rgba(0,0,0,.12); background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02)); }
 
-    .hero-logo{
+    /* Hero media: dark GIF, light static */
+    .hero-media{
       display:block;
-      margin: 2px auto 12px;
-      width: 100%;
-      max-height: 92px;
+      width:100%;
+      max-height: 240px;
       object-fit: contain;
+      margin: 2px auto 12px;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.02);
     }
-    body.light .hero-logo{
-      border-color: rgba(0,0,0,.10);
-      background: rgba(0,0,0,.02);
-    }
-    
-    .brand-loop{
-  display:block;
-  width: 100%;
-  max-height: 240px;
-  object-fit: contain;
-  margin: 2px auto 12px;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.02);
-}
-
-body.light .brand-loop{
-  border-color: rgba(0,0,0,.10);
-  background: rgba(0,0,0,.02);
-}
+    body.light .hero-media{ border-color: rgba(0,0,0,.10); background: rgba(0,0,0,.02); }
 
     .mock{
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.28);
-      padding: 14px;
+      padding:14px;
     }
-    body.light .mock{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
+    body.light .mock{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+
     .mock-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      padding: 10px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:10px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.05);
-      margin-bottom: 10px;
+      margin-bottom:10px;
     }
-    body.light .mock-row{
-      border-color: rgba(0,0,0,.10);
-      background: rgba(0,0,0,.03);
-    }
+    body.light .mock-row{ border-color: rgba(0,0,0,.10); background: rgba(0,0,0,.03); }
     .mock-row:last-child{ margin-bottom:0; }
     .mock-title{ display:flex; align-items:center; gap:10px; font-weight:900; }
     .mini{
-      width: 28px; height: 28px; border-radius: 10px;
+      width:28px; height:28px; border-radius:10px;
       display:grid; place-items:center;
-      border: 1px solid rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      font-weight: 900;
-      flex: 0 0 auto;
+      font-weight:900;
+      flex:0 0 auto;
     }
-    body.light .mini{
-      border-color: rgba(0,0,0,.14);
-      background: rgba(0,0,0,.04);
-    }
-    .mock-meta{ color: var(--muted2); font-size: 13px; text-align:right; }
+    body.light .mini{ border-color: rgba(0,0,0,.14); background: rgba(0,0,0,.04); }
+    .mock-meta{ color: var(--muted2); font-size:13px; text-align:right; }
 
-    section{ padding: 58px 0; }
-
-    .section-title{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap: 12px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-    .section-title h2{
-      margin:0;
-      font-size: 24px;
-      letter-spacing: -0.01em;
-    }
-    .section-title p{
-      margin:0;
-      color: var(--muted);
-      max-width: 76ch;
-      line-height: 1.55;
-    }
-
-    .grid3{
+    .two-col{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
     }
-    @media (max-width: 980px){ .grid3{ grid-template-columns: 1fr; } }
+    @media (max-width:520px){ .two-col{ grid-template-columns: 1fr; } }
 
-    .card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      padding: 16px;
+    .badges{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .badge{
+      padding: 7px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 13px;
     }
-    body.light .card{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
-    .icon{
-      width: 44px; height: 44px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      display:grid; place-items:center;
-      font-weight: 900;
-    }
-    body.light .icon{
-      border-color: rgba(0,0,0,.14);
-      background: rgba(0,0,0,.04);
-    }
-    .card h3{ margin: 10px 0 6px; }
-    .card p{ margin:0; color: var(--muted); line-height:1.55; }
+    body.light .badge{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+
+    section{ padding: 52px 0; }
+    .section-title{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom: 16px; flex-wrap:wrap; }
+    .section-title h2{ margin:0; font-size:24px; letter-spacing:-0.01em; }
+    .section-title p{ margin:0; color: var(--muted); max-width: 76ch; line-height:1.55; }
 
     /* Slider */
     .slider{
@@ -477,131 +253,43 @@ body.light .brand-loop{
       border-radius: var(--radius2);
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
-      overflow: hidden;
+      overflow:hidden;
       box-shadow: var(--shadow);
     }
-    body.light .slider{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.02);
-    }
-    .slider-track{
-      display:flex;
-      transition: transform .35s ease;
-      will-change: transform;
-    }
-    .slide{
-      min-width: 100%;
-      padding: 14px;
-      display:flex;
-      justify-content:center;
-    }
+    body.light .slider{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.02); }
+    .slider-track{ display:flex; transition: transform .35s ease; will-change: transform; }
+    .slide{ min-width:100%; padding:14px; display:flex; justify-content:center; }
     .slide img{
       width:100%;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.20);
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 16/9;
       object-fit: cover;
     }
-    body.light .slide img{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
-    .slider-nav{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-    }
+    body.light .slide img{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+    .slider-nav{ position:absolute; inset:0; pointer-events:none; }
     .slider-btn{
       pointer-events:auto;
-      position:absolute;
-      top:50%;
-      transform: translateY(-50%);
-      height: 40px;
-      padding: 0 12px;
-      border-radius: 999px;
+      position:absolute; top:50%; transform: translateY(-50%);
+      height:40px; padding:0 12px;
+      border-radius:999px;
     }
     .slider-btn.prev{ left: 12px; }
     .slider-btn.next{ right: 12px; }
-    .slider-dots{
-      display:flex;
-      gap: 8px;
-      justify-content:center;
-      padding: 12px 0 0;
-    }
+    .slider-dots{ display:flex; gap:8px; justify-content:center; padding: 12px 0 0; }
     .slider-dot{
-      width: 9px; height: 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.18);
+      width:9px; height:9px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
       background: rgba(255,255,255,.10);
       cursor:pointer;
     }
-    body.light .slider-dot{
-      border-color: rgba(0,0,0,.18);
-      background: rgba(0,0,0,.08);
-    }
-    .slider-dot.active{
-      background: rgba(255,255,255,.55);
-      border-color: rgba(255,255,255,.55);
-    }
-    body.light .slider-dot.active{
-      background: rgba(0,0,0,.35);
-      border-color: rgba(0,0,0,.35);
-    }
+    body.light .slider-dot{ border-color: rgba(0,0,0,.18); background: rgba(0,0,0,.08); }
+    .slider-dot.active{ background: rgba(255,255,255,.55); border-color: rgba(255,255,255,.55); }
+    body.light .slider-dot.active{ background: rgba(0,0,0,.35); border-color: rgba(0,0,0,.35); }
 
-    /* Video */
-    .video-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    @media (max-width: 980px){ .video-grid{ grid-template-columns: 1fr; } }
-
-    .video-card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      overflow:hidden;
-      cursor:pointer;
-    }
-    body.light .video-card{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
-    .video-thumb{
-      width:100%;
-      aspect-ratio: 16 / 9;
-      background: rgba(0,0,0,.22);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      display:grid;
-      place-items:center;
-      color: var(--muted2);
-      position: relative;
-      overflow:hidden;
-    }
-    body.light .video-thumb{
-      background: rgba(0,0,0,.04);
-      border-bottom: 1px solid rgba(0,0,0,.10);
-    }
-    .video-play{
-      width: 54px; height: 54px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.10);
-      display:grid;
-      place-items:center;
-      font-weight: 900;
-      position:absolute;
-    }
-    body.light .video-play{
-      border-color: rgba(0,0,0,.18);
-      background: rgba(0,0,0,.08);
-    }
-    .video-meta{ padding: 12px 14px; }
-    .video-meta b{ display:block; margin-bottom: 6px; }
-    .video-meta span{ color: var(--muted); line-height:1.45; font-size: 13px; }
-
-    /* CTA / Forms */
+    /* Forms */
     .cta{
       border-radius: 34px;
       border: 1px solid rgba(255,255,255,.12);
@@ -612,7 +300,7 @@ body.light .brand-loop{
       box-shadow: var(--shadow);
       display:grid;
       grid-template-columns: 1.15fr .85fr;
-      gap: 14px;
+      gap:14px;
       align-items:center;
     }
     body.light .cta{
@@ -621,107 +309,74 @@ body.light .brand-loop{
         radial-gradient(700px 250px at 20% 0%, rgba(0,0,0,.06), transparent 55%),
         linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02));
     }
-    @media (max-width: 980px){ .cta{ grid-template-columns: 1fr; } }
+    @media (max-width:980px){ .cta{ grid-template-columns: 1fr; } }
 
-    .cta h3{ margin:0 0 8px; font-size: 22px; }
-    .cta p{ margin:0; color: var(--muted); line-height:1.55; }
-
-    .form{
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      align-items:flex-start;
-    }
+    .form{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:flex-start; }
     .input{
-      flex: 1 1 220px;
-      min-width: 0;
-      padding: 11px 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.12);
+      flex:1 1 220px; min-width:0;
+      padding:11px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.24);
       color: var(--text);
       outline:none;
-      transition: box-shadow .12s ease, border-color .12s ease;
     }
-    body.light .input{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
+    body.light .input{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
     .input:focus{ border-color: rgba(255,255,255,.26); box-shadow: var(--ring); }
 
     .consent{
-      width: 100%;
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
-      justify-content:flex-end;
-      color: var(--muted2);
-      font-size: 13px;
-      line-height: 1.45;
+      width:100%;
+      display:flex; gap:10px; align-items:flex-start; justify-content:flex-end;
+      color: var(--muted2); font-size:13px; line-height:1.45;
     }
-    .consent input{ margin-top: 3px; }
+    .consent input{ margin-top:3px; }
 
     /* Reviews */
     .reviews-grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap:14px;
     }
-    @media (max-width: 980px){ .reviews-grid{ grid-template-columns: 1fr; } }
+    @media (max-width:980px){ .reviews-grid{ grid-template-columns:1fr; } }
     .review{
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
-      padding: 14px;
+      padding:14px;
     }
-    body.light .review{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
+    body.light .review{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
     .review .name{ font-weight: 900; }
-    .review .stars{ letter-spacing: .06em; opacity:.92; }
+    .review .stars{ letter-spacing:.06em; opacity:.92; }
     .review .text{ color: var(--muted); margin-top: 8px; line-height:1.55; }
     .review .meta{ color: var(--muted2); font-size: 12px; margin-top: 8px; }
 
-    /* FAQ */
     details{
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
-      padding: 14px 14px;
+      padding:14px;
     }
-    body.light details{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
+    body.light details{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
     details + details{ margin-top: 10px; }
     summary{
       cursor:pointer;
       list-style:none;
-      font-weight: 900;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 14px;
+      font-weight:900;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
     }
     summary::-webkit-details-marker{ display:none; }
     .chev{
-      width: 28px; height: 28px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12);
+      width:28px; height:28px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
       display:grid; place-items:center;
       color: var(--muted);
       transition: transform .15s ease;
-      flex: 0 0 auto;
     }
-    body.light .chev{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
+    body.light .chev{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
     details[open] .chev{ transform: rotate(180deg); }
-    details p{ margin: 10px 0 0; color: var(--muted); line-height: 1.6; }
+    details p{ margin:10px 0 0; color: var(--muted); line-height:1.6; }
 
     footer{
       border-top: 1px solid rgba(255,255,255,.10);
@@ -730,101 +385,44 @@ body.light .brand-loop{
       font-size: 13px;
     }
     body.light footer{ border-top: 1px solid rgba(0,0,0,.10); }
-    .foot{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      flex-wrap:wrap;
-    }
-    .foot a{
-      color: var(--muted);
-      padding: 8px 10px;
-      border-radius: 12px;
-    }
+    .foot{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .foot a{ color: var(--muted); padding:8px 10px; border-radius:12px; }
     .foot a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
     body.light .foot a:hover{ background: rgba(0,0,0,.05); }
 
-    /* Modals */
-    .modal{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.72);
-      z-index:200;
-      padding:16px;
-    }
+    /* Legal modal */
+    .modal{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:200; padding:16px; }
     .modal-panel{
-      max-width: 920px;
-      margin: 60px auto;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,.12);
+      max-width: 920px; margin:60px auto;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(10,10,10,.92);
       box-shadow: var(--shadow);
       overflow:hidden;
-      display:flex;
-      flex-direction:column;
+      display:flex; flex-direction:column;
       max-height: 85vh;
     }
-    body.light .modal-panel{
-      background: rgba(247,247,247,.96);
-      border-color: rgba(0,0,0,.12);
-    }
-    .modal-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:14px 16px;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      flex: 0 0 auto;
-    }
+    body.light .modal-panel{ background: rgba(247,247,247,.96); border-color: rgba(0,0,0,.12); }
+    .modal-header{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.10); }
     body.light .modal-header{ border-bottom:1px solid rgba(0,0,0,.10); }
-    .modal-content{
-      padding:16px;
-      color: var(--muted);
-      line-height:1.65;
-      overflow:auto;
-      -webkit-overflow-scrolling: touch;
-      flex: 1 1 auto;
-    }
+    .modal-content{ padding:16px; color: var(--muted); line-height:1.65; overflow:auto; -webkit-overflow-scrolling:touch; }
 
-    /* Cookie banner */
+    /* Cookie */
     #cookieBanner{
-      position: fixed;
-      left: 16px;
-      right: 16px;
-      bottom: 16px;
-      z-index: 210;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
+      position:fixed; left:16px; right:16px; bottom:16px;
+      z-index:210;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(10,10,10,.86);
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
-      padding: 14px;
-      display: none;
+      padding:14px;
+      display:none;
     }
-    body.light #cookieBanner{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(247,247,247,.92);
-    }
-    .cookie-row{
-      display:flex;
-      gap: 12px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .cookie-text{
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-      flex: 1 1 320px;
-    }
-    .cookie-actions{
-      display:flex;
-      gap: 10px;
-      flex: 0 0 auto;
-    }
+    body.light #cookieBanner{ border-color: rgba(0,0,0,.12); background: rgba(247,247,247,.92); }
+    .cookie-row{ display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    .cookie-text{ color: var(--muted); font-size:13px; line-height:1.45; flex:1 1 320px; }
+    .cookie-actions{ display:flex; gap:10px; flex:0 0 auto; }
   </style>
 </head>
 
@@ -841,9 +439,9 @@ body.light .brand-loop{
             </div>
           </a>
 
-          <nav class="navlinks" aria-label="Hauptnavigation">
+          <nav class="navlinks">
             <a href="#product">Produkt</a>
-            <a href="#videos">Videos</a>
+            <a href="#cta">Beta</a>
             <a href="#reviews">Bewertungen</a>
             <a href="#faq">FAQ</a>
           </nav>
@@ -858,16 +456,14 @@ body.light .brand-loop{
               Menü <span aria-hidden="true">≡</span>
             </button>
 
-            <button class="btn" id="accountBtn" type="button">Account</button>
             <a class="btn btn-primary" href="#cta">Zum Beta-Test</a>
           </div>
 
           <div class="drawer" id="drawer">
             <a href="#product">Produkt</a>
-            <a href="#videos">Videos</a>
+            <a href="#cta">Beta</a>
             <a href="#reviews">Bewertungen</a>
             <a href="#faq">FAQ</a>
-            <a href="#cta">Zum Beta-Test</a>
           </div>
         </div>
       </div>
@@ -892,38 +488,44 @@ body.light .brand-loop{
 
             <div class="hero-actions">
               <a class="btn btn-primary" href="#cta">▶ Beta-Test</a>
-              <a class="btn" href="#product">Produkt ansehen</a>
+              <a class="btn" href="#product">Produktbilder</a>
             </div>
 
-            <div class="subnote">
-              Unterstützt (Beta/Planned): Spotify, Apple Music, YouTube Music, Tidal, Deezer u. v. m.
-            </div>
+            <div class="subnote">Einfach & kinderleicht: Playlist wählen → Shuffle drücken → fertig.</div>
           </div>
 
           <aside class="panel" aria-label="Vorschau">
-            <img
-  id="brandLoop"
-  class="brand-loop"
-  src="assets/assets:brand_logo_loop.gif"
-  alt="true-shuffel Logo Animation (Loop)"
-/>
+            <img id="heroMedia" class="hero-media" src="assets/brand_logo_loop.gif" alt="true-shuffel Animation" />
 
-            <div class="mock" aria-label="Feature Vorschau">
-              <div class="mock-row">
-                <div class="mock-title"><div class="mini">✓</div>Vollständige Playlist</div>
-                <div class="mock-meta">100–10.000+ Songs</div>
+            <div class="two-col">
+              <div class="mock">
+                <div class="mock-row">
+                  <div class="mock-title"><div class="mini">✓</div>Vollständig</div>
+                  <div class="mock-meta">100–10.000+</div>
+                </div>
+                <div class="mock-row">
+                  <div class="mock-title"><div class="mini">∞</div>Keine Repeats</div>
+                  <div class="mock-meta">bis alles lief</div>
+                </div>
+                <div class="mock-row">
+                  <div class="mock-title"><div class="mini">⟲</div>Zufällig</div>
+                  <div class="mock-meta">keine Muster</div>
+                </div>
               </div>
-              <div class="mock-row">
-                <div class="mock-title"><div class="mini">∞</div>Keine Wiederholung</div>
-                <div class="mock-meta">bis alles lief</div>
-              </div>
-              <div class="mock-row">
-                <div class="mock-title"><div class="mini">⟲</div>Echter Zufall</div>
-                <div class="mock-meta">keine Muster</div>
+
+              <div class="mock" aria-label="Streamingdienste">
+                <div style="font-weight:900; margin-bottom:8px;">Alle Streamingdienste</div>
+                <div class="badges">
+                  <span class="badge">Spotify</span>
+                  <span class="badge">Apple Music</span>
+                  <span class="badge">YouTube Music</span>
+                  <span class="badge">Tidal</span>
+                  <span class="badge">Deezer</span>
+                  <span class="badge">…</span>
+                </div>
+                <div class="subnote" style="margin-top:10px">Login/Playback kommen in der App – Landingpage ist Beta-Info & Signup.</div>
               </div>
             </div>
-
-            <div class="subnote">Kinderleicht: Playlist wählen → Shuffle drücken → fertig.</div>
           </aside>
         </div>
       </div>
@@ -935,7 +537,7 @@ body.light .brand-loop{
           <div class="section-title">
             <div>
               <h2>Produktbilder</h2>
-              <p>Swipe auf dem Handy, Pfeile am Desktop. Du kannst später Bilder in <code>/assets</code> ablegen.</p>
+              <p>Swipe auf dem Handy, Pfeile am Desktop.</p>
             </div>
           </div>
 
@@ -948,28 +550,7 @@ body.light .brand-loop{
           </div>
           <div class="slider-dots" id="sliderDots" aria-label="Slider Navigation"></div>
 
-          <div class="subnote">
-            Tipp: Trage deine Bilder unten im JS in <b>PRODUCT_IMAGES</b> ein.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="videos">
-      <div class="wrap">
-        <div class="container">
-          <div class="section-title">
-            <div>
-              <h2>Videos</h2>
-              <p>Video-Kacheln öffnen einen Player. Unterstützt MP4 aus <code>/assets</code> oder YouTube.</p>
-            </div>
-          </div>
-
-          <div class="video-grid" id="videoGrid"></div>
-
-          <div class="subnote">
-            Tipp: Trage deine Videos unten im JS in <b>VIDEO_ITEMS</b> ein.
-          </div>
+          <div class="subnote" id="sliderNote"></div>
         </div>
       </div>
     </section>
@@ -979,8 +560,8 @@ body.light .brand-loop{
         <div class="container">
           <div class="cta">
             <div>
-              <h3>Beta-Test: sichere dir einen Platz</h3>
-              <p>
+              <h2 style="margin:0 0 8px; font-size:24px;">Beta-Test: sichere dir einen Platz</h2>
+              <p style="margin:0; color:var(--muted); line-height:1.55;">
                 Melde dich an und wir informieren dich, sobald dein Streamingdienst freigeschaltet ist.
               </p>
               <div class="subnote">
@@ -988,17 +569,13 @@ body.light .brand-loop{
               </div>
             </div>
 
-            <form class="form" id="betaForm"
-                  action="https://script.google.com/macros/s/AKfycbz6YNaWP-8nd2GODDv9ngn_3uP35EIG9gCxrPQjeuLuJqWXFkK6EN_ExwwUHyQxYKHt/exec"
-                  method="POST"
-                  target="beta_iframe"
-                  autocomplete="on">
-              <input class="input" type="hidden" name="action" value="beta" />
+            <form class="form" id="betaForm" method="POST" target="beta_iframe" autocomplete="on">
+              <input type="hidden" name="action" value="beta" />
               <input class="input" type="text" id="betaName" name="name" placeholder="Name" required />
               <input class="input" type="email" id="betaEmail" name="email" placeholder="E-Mail" required />
-              <input type="hidden" name="source" value="true-shuffel-site" />
+              <input type="hidden" name="source" value="website" />
               <input type="hidden" id="betaUA" name="userAgent" value="" />
-              <button class="btn btn-primary" type="submit">Anmelden</button>
+              <button class="btn btn-primary" id="betaSubmit" type="submit">Anmelden</button>
 
               <div class="consent">
                 <input type="checkbox" id="betaConsent" required />
@@ -1021,19 +598,18 @@ body.light .brand-loop{
           <div class="section-title">
             <div>
               <h2>Bewertungen</h2>
-              <p>Bewertungen werden im Google Sheet verwaltet. Neue Bewertungen erscheinen nach Freigabe (Spalte „approved“).</p>
+              <p>Freigegebene Bewertungen (Spalte <b>approved</b> = TRUE) werden hier angezeigt.</p>
             </div>
-            <div class="pill" id="ratingBadge"><span class="dot"></span><span>⭐ 0.0 / 5 (0)</span></div>
+            <div class="pill" id="ratingBadge"><span class="dot"></span><span>⭐ Lädt…</span></div>
           </div>
 
+          <div class="subnote" id="reviewsStatus" style="margin-top:0; margin-bottom:12px;"></div>
           <div class="reviews-grid" id="reviewsList"></div>
 
           <div class="panel" style="margin-top:14px;">
             <h3 style="margin:0 0 10px;">Bewertung schreiben</h3>
-            <form class="form" id="reviewForm"
-                  action="https://script.google.com/macros/s/AKfycbz6YNaWP-8nd2GODDv9ngn_3uP35EIG9gCxrPQjeuLuJqWXFkK6EN_ExwwUHyQxYKHt/exec"
-                  method="POST"
-                  target="review_iframe">
+
+            <form class="form" id="reviewForm" method="POST" target="review_iframe">
               <input type="hidden" name="action" value="review" />
               <input class="input" type="text" id="reviewName" name="name" placeholder="Name (optional)" />
               <select class="input" id="reviewRating" name="rating" aria-label="Sterne" style="flex:0 0 180px;">
@@ -1044,11 +620,15 @@ body.light .brand-loop{
                 <option value="1">★☆☆☆☆ (1)</option>
               </select>
               <textarea class="input" id="reviewText" name="text" placeholder="Deine Bewertung…" maxlength="400" style="flex:1 1 100%; min-height:92px;"></textarea>
-              <button class="btn btn-primary" type="submit">Bewertung senden</button>
+              <input type="hidden" name="source" value="website" />
+              <input type="hidden" id="reviewUA" name="userAgent" value="" />
+              <button class="btn btn-primary" id="reviewSubmit" type="submit">Bewertung senden</button>
               <div class="subnote" id="reviewMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
             </form>
+
             <iframe id="review_iframe" name="review_iframe" style="display:none;"></iframe>
-            <div class="subnote">Hinweis: Um Spam zu vermeiden, werden Bewertungen erst nach Freigabe angezeigt.</div>
+
+            <div class="subnote">Hinweis: Um Spam zu vermeiden, erscheinen Bewertungen erst nach Freigabe.</div>
           </div>
         </div>
       </div>
@@ -1058,25 +638,22 @@ body.light .brand-loop{
       <div class="wrap">
         <div class="container">
           <div class="section-title">
-            <div>
-              <h2>FAQ</h2>
-              <p>Kurz & verständlich.</p>
-            </div>
+            <div><h2>FAQ</h2><p>Kurz & verständlich.</p></div>
           </div>
 
           <details>
             <summary>Warum ist Shuffle oft nicht wirklich zufällig? <span class="chev">⌄</span></summary>
-            <p>Viele Dienste optimieren Shuffle über Heuristiken (z. B. “Smart Shuffle”). Dadurch werden große Playlists nicht vollständig gespielt oder es wiederholen sich Muster.</p>
+            <p>Viele Dienste nutzen Smart-Shuffle-Heuristiken. Dadurch wiederholen sich Muster oder große Playlists laufen nicht komplett durch.</p>
           </details>
 
           <details>
             <summary>Was macht true-shuffel anders? <span class="chev">⌄</span></summary>
-            <p>true-shuffel erzeugt eine Zufallsreihenfolge ohne Wiederholung und spielt jeden Titel genau einmal pro Durchlauf.</p>
+            <p>true-shuffel erstellt eine echte Zufallsreihenfolge ohne Wiederholung und spielt jeden Titel genau einmal pro Durchlauf.</p>
           </details>
 
           <details>
-            <summary>Brauche ich einen Account? <span class="chev">⌄</span></summary>
-            <p>Nein. Ein Account ist optional (z. B. um Namen für Bewertungen zu speichern). Der echte Streaming-Login kommt später in der App.</p>
+            <summary>Wo werden meine Daten gespeichert? <span class="chev">⌄</span></summary>
+            <p>Beta-Test und Bewertungen werden in einem Google Sheet gespeichert. Details findest du in der Datenschutzerklärung.</p>
           </details>
         </div>
       </div>
@@ -1091,11 +668,11 @@ body.light .brand-loop{
             <img id="footerLogo" src="assets/logo_dark.png" alt="" style="width:20px; height:20px; border-radius:8px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02);" />
             <span>© <span id="year"></span> true-shuffel.com</span>
           </div>
-          <div style="display:flex; gap: 4px; flex-wrap:wrap;">
+          <div style="display:flex; gap:4px; flex-wrap:wrap;">
             <a href="#top">Start</a>
             <a href="#product">Produkt</a>
+            <a href="#cta">Beta</a>
             <a href="#reviews">Bewertungen</a>
-            <a href="#cta">Beta-Test</a>
             <a href="#" onclick="openLegal('impressum');return false;">Impressum</a>
             <a href="#" onclick="openLegal('privacy');return false;">Datenschutz</a>
             <a href="#" onclick="openLegal('cookies');return false;">Cookies</a>
@@ -1119,67 +696,6 @@ body.light .brand-loop{
     </div>
   </div>
 
-  <!-- Video Modal -->
-  <div class="modal" id="videoModal">
-    <div class="modal-panel" style="max-width:980px;">
-      <div class="modal-header">
-        <b id="videoModalTitle">Video</b>
-        <button class="btn" type="button" id="closeVideoBtn">Schließen</button>
-      </div>
-      <div class="modal-content" style="padding:12px 16px 16px;">
-        <div id="videoFrameWrap"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Account Modal -->
-  <div class="modal" id="accountModal">
-    <div class="modal-panel" style="max-width:720px;">
-      <div class="modal-header">
-        <b id="accountTitle">Account</b>
-        <button class="btn" type="button" onclick="closeAccount()">Schließen</button>
-      </div>
-      <div class="modal-content">
-        <div id="accountState" class="pill" style="margin-bottom:12px;">
-          <span class="dot"></span><span id="accountStateText">Nicht angemeldet</span>
-        </div>
-
-        <div class="grid3" style="grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div class="card">
-            <h3 style="margin:0 0 10px;">Registrieren</h3>
-            <div class="subnote" style="margin-top:0">Lokaler Account (nur auf diesem Gerät).</div>
-            <div style="height:10px"></div>
-            <input class="input" id="suName" placeholder="Name" />
-            <div style="height:10px"></div>
-            <input class="input" id="suEmail" placeholder="E-Mail" type="email" />
-            <div style="height:10px"></div>
-            <input class="input" id="suPass" placeholder="Passwort" type="password" />
-            <div style="height:10px"></div>
-            <button class="btn btn-primary" id="signupBtn" type="button">Registrieren</button>
-            <div class="subnote" id="suMsg" aria-live="polite"></div>
-          </div>
-
-          <div class="card">
-            <h3 style="margin:0 0 10px;">Anmelden</h3>
-            <div class="subnote" style="margin-top:0">Zum Speichern deines Namens für Bewertungen.</div>
-            <div style="height:10px"></div>
-            <input class="input" id="liEmail" placeholder="E-Mail" type="email" />
-            <div style="height:10px"></div>
-            <input class="input" id="liPass" placeholder="Passwort" type="password" />
-            <div style="height:10px"></div>
-            <button class="btn btn-primary" id="loginBtn" type="button">Anmelden</button>
-            <button class="btn" id="logoutBtn" type="button" style="margin-top:10px; display:none;">Abmelden</button>
-            <div class="subnote" id="liMsg" aria-live="polite"></div>
-          </div>
-        </div>
-
-        <div class="subnote" style="margin-top:14px;">
-          Hinweis: Für “echte” Accounts (geräteübergreifend) würde man später ein Backend (z. B. Firebase) nutzen.
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Cookie Banner -->
   <div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie Hinweis">
     <div class="cookie-row">
@@ -1195,62 +711,33 @@ body.light .brand-loop{
   </div>
 
   <script>
-    // ====== CONFIG ======
+    // ===== CONFIG =====
     const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz6YNaWP-8nd2GODDv9ngn_3uP35EIG9gCxrPQjeuLuJqWXFkK6EN_ExwwUHyQxYKHt/exec";
 
-    // Product Images (add later)
+    // Default images (rename to .png if your files are png)
     const PRODUCT_IMAGES = [
-  "assets/assets:product_01_one-tap.png",
-  "assets/assets:product_02_features-card.png",
-  "assets/assets:product_03_comparison.png",
-  "assets/assets:product_04_10000-tracks.png"
-];
+      "assets/product_01_one-tap.jpg",
+      "assets/product_02_features-card.jpg",
+      "assets/product_03_comparison.jpg",
+      "assets/product_04_10000-tracks.jpg"
+    ];
 
-    // Videos (add later)
-    const VIDEO_ITEMS = [
-  {
-    type: "gif",
-    title: "Logo Loop",
-    desc: "Kurzer Brand-Clip (Loop)",
-    src: "assets/assets:brand_logo_loop.gif"
-  },
-
-  // Platzhalter bis App-Videos fertig sind
-  { type: "placeholder", title: "App Demo (coming soon)", desc: "Bedienung & Features folgen" },
-  { type: "placeholder", title: "Playlist Walkthrough (coming soon)", desc: "Kurze Erklärung folgt" }
-];
-
-    // ====== Helpers ======
     const $ = (id) => document.getElementById(id);
-    const escapeHtml = (s) => String(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m]));
 
-    function placeholderSvg(text){
-      const isLight = document.body.classList.contains("light");
-      const bg = isLight ? "#f2f2f2" : "#2b2c32";
-      const fg = isLight ? "#1b1b1b" : "#ffffff";
-      const svg = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">
-          <rect width="100%" height="100%" fill="${bg}"/>
-          <text x="50%" y="50%" font-family="system-ui, -apple-system, Segoe UI, Roboto" font-size="44"
-                fill="${fg}" text-anchor="middle" dominant-baseline="middle" opacity="0.65">
-            ${text}
-          </text>
-        </svg>`;
-      return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.trim());
-    }
-
-    // ====== Basic Init ======
+    // ===== Init =====
     $("year").textContent = new Date().getFullYear();
+
+    // Set form actions dynamically (only 1 place to update URL)
+    $("betaForm").action = WEBAPP_URL;
+    $("reviewForm").action = WEBAPP_URL;
 
     // Mobile menu
     const menuBtn = $("menuBtn");
     const drawer = $("drawer");
-    if (menuBtn) {
-      menuBtn.addEventListener("click", () => {
-        const isOpen = drawer.classList.toggle("open");
-        menuBtn.setAttribute("aria-expanded", String(isOpen));
-      });
-    }
+    menuBtn?.addEventListener("click", () => {
+      const isOpen = drawer.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+    });
 
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -1261,39 +748,29 @@ body.light .brand-loop{
         if (!el) return;
         e.preventDefault();
         el.scrollIntoView({ behavior: "smooth", block: "start" });
-        if (drawer.classList.contains("open")) {
-          drawer.classList.remove("open");
-          menuBtn?.setAttribute("aria-expanded", "false");
-        }
+        if (drawer.classList.contains("open")) drawer.classList.remove("open");
       });
     });
 
-    // Theme (device default if none saved)
+    // ===== Theme =====
     const LOGO_DARK = "assets/logo_dark.png";
     const LOGO_LIGHT = "assets/logo_light.png";
-
-    function setLogos(isLight){
-  const src = isLight ? LOGO_LIGHT : LOGO_DARK;
-
-  brandLogo.src = src;
-  footerLogo.src = src;
-
-  // Hero: dark = GIF, light = PNG
-  heroLogo.src = isLight ? "assets/logo_light.png" : "assets/assets:brand_logo_loop.gif";
-}
+    const HERO_GIF_DARK = "assets/brand_logo_loop.gif";
 
     function applyTheme(mode){
       const isLight = mode === "light";
       document.body.classList.toggle("light", isLight);
-      setLogos(isLight);
+
+      // header/footer logos
+      $("brandLogo").src = isLight ? LOGO_LIGHT : LOGO_DARK;
+      $("footerLogo").src = isLight ? LOGO_LIGHT : LOGO_DARK;
+
+      // hero: light static logo, dark gif
+      $("heroMedia").src = isLight ? LOGO_LIGHT : HERO_GIF_DARK;
+
       $("themeIcon").textContent = isLight ? "☀" : "☾";
       $("themeLabel").textContent = isLight ? "Dark" : "Light";
-
-      // rebuild placeholders to match theme background
-      buildSlides();
-      buildVideoGallery();
     }
-    window.applyTheme = applyTheme;
 
     (function initTheme(){
       const saved = localStorage.getItem("true_shuffel_theme");
@@ -1306,84 +783,73 @@ body.light .brand-loop{
     })();
 
     $("themeToggle").addEventListener("click", () => {
-      const isLight = document.body.classList.contains("light");
-      const next = isLight ? "dark" : "light";
+      const next = document.body.classList.contains("light") ? "dark" : "light";
       applyTheme(next);
       localStorage.setItem("true_shuffel_theme", next);
     });
 
-    // Cookie banner (reliable localStorage)
+    // ===== Cookie banner =====
     const cookieBanner = $("cookieBanner");
-    const cookieAcceptBtn = $("cookieAcceptBtn");
-    const cookieResetLink = $("cookieResetLink");
-
-    function showCookieBannerIfNeeded(){
-      const ack = localStorage.getItem("ts_cookie_ack_v2");
-      if (ack !== "1") cookieBanner.style.display = "block";
-    }
-    cookieAcceptBtn.addEventListener("click", () => {
-      localStorage.setItem("ts_cookie_ack_v2", "1");
+    $("cookieAcceptBtn").addEventListener("click", () => {
+      localStorage.setItem("ts_cookie_ack_v3", "1");
       cookieBanner.style.display = "none";
     });
-    cookieResetLink.addEventListener("click", (e) => {
+    $("cookieResetLink").addEventListener("click", (e) => {
       e.preventDefault();
-      localStorage.removeItem("ts_cookie_ack_v2");
+      localStorage.removeItem("ts_cookie_ack_v3");
       cookieBanner.style.display = "block";
     });
-    window.addEventListener("load", showCookieBannerIfNeeded);
-
-    // ====== Beta signup (iframe) ======
-    const betaForm = $("betaForm");
-    const betaConsent = $("betaConsent");
-    const betaMsg = $("betaMsg");
-    const betaUA = $("betaUA");
-    const betaIframe = $("beta_iframe");
-    let betaSubmitting = false;
-
-    betaForm.addEventListener("submit", (e) => {
-      if (!betaConsent.checked) {
-        e.preventDefault();
-        betaMsg.textContent = "Bitte Einwilligung bestätigen.";
-        return;
-      }
-      betaUA.value = navigator.userAgent || "";
-      betaSubmitting = true;
-      betaMsg.textContent = "Wird gespeichert…";
+    window.addEventListener("load", () => {
+      if (localStorage.getItem("ts_cookie_ack_v3") !== "1") cookieBanner.style.display = "block";
     });
 
-    betaIframe.addEventListener("load", () => {
-      if (!betaSubmitting) return;
-      betaSubmitting = false;
-      betaMsg.textContent = "Danke! Du bist für den Beta-Test registriert.";
-      $("betaName").value = "";
-      $("betaEmail").value = "";
-      betaConsent.checked = false;
-    });
-
-    // ====== Slider ======
+    // ===== Slider =====
     const sliderTrack = $("sliderTrack");
-    const sliderDots  = $("sliderDots");
-    const prevSlideBtn = $("prevSlide");
-    const nextSlideBtn = $("nextSlide");
+    const sliderDots = $("sliderDots");
+    const sliderNote = $("sliderNote");
     let sliderIndex = 0;
     let slidesCount = 0;
 
+    function updateSlider(){
+      sliderTrack.style.transform = `translateX(${-sliderIndex*100}%)`;
+      [...sliderDots.children].forEach((d, i) => d.classList.toggle("active", i === sliderIndex));
+    }
+    function goToSlide(i){
+      sliderIndex = (i + slidesCount) % slidesCount;
+      updateSlider();
+    }
+
     function buildSlides(){
-      if (!sliderTrack || !sliderDots) return;
       sliderTrack.innerHTML = "";
       sliderDots.innerHTML = "";
+      sliderNote.textContent = "";
 
-      const images = (PRODUCT_IMAGES && PRODUCT_IMAGES.length)
-        ? PRODUCT_IMAGES
-        : [placeholderSvg("Produktbild 1"), placeholderSvg("Produktbild 2"), placeholderSvg("Produktbild 3")];
+      // Use provided images, but filter ones that are obviously missing by preloading
+      const imgs = PRODUCT_IMAGES.slice();
+      slidesCount = imgs.length;
 
-      slidesCount = images.length;
-      sliderIndex = 0;
+      if (slidesCount === 0) {
+        sliderNote.textContent = "Produktbilder folgen bald.";
+        return;
+      }
 
-      images.forEach((src, i) => {
+      imgs.forEach((src, i) => {
         const slide = document.createElement("div");
         slide.className = "slide";
-        slide.innerHTML = `<img src="${src}" alt="Produktbild ${i+1}" loading="lazy">`;
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = `Produktbild ${i+1}`;
+        img.loading = "lazy";
+        img.onerror = () => {
+          // If file not found, show a friendly fallback and hint
+          img.style.objectFit = "contain";
+          img.style.background = "rgba(0,0,0,.15)";
+          img.alt = "Bild nicht gefunden";
+          sliderNote.textContent = "Hinweis: Ein oder mehrere Bilder wurden nicht gefunden. Prüfe Dateinamen/Endung (.jpg/.png) im assets-Ordner.";
+        };
+
+        slide.appendChild(img);
         sliderTrack.appendChild(slide);
 
         const dot = document.createElement("button");
@@ -1393,23 +859,14 @@ body.light .brand-loop{
         sliderDots.appendChild(dot);
       });
 
+      sliderIndex = 0;
       updateSlider();
     }
 
-    function updateSlider(){
-      const x = -sliderIndex * 100;
-      sliderTrack.style.transform = `translateX(${x}%)`;
-      [...sliderDots.children].forEach((d, idx) => d.classList.toggle("active", idx === sliderIndex));
-    }
+    $("prevSlide").addEventListener("click", () => goToSlide(sliderIndex - 1));
+    $("nextSlide").addEventListener("click", () => goToSlide(sliderIndex + 1));
 
-    function goToSlide(i){
-      sliderIndex = (i + slidesCount) % slidesCount;
-      updateSlider();
-    }
-
-    prevSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex - 1));
-    nextSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex + 1));
-
+    // swipe
     let startX = null;
     sliderTrack.addEventListener("pointerdown", (e) => {
       startX = e.clientX;
@@ -1424,131 +881,70 @@ body.light .brand-loop{
       else goToSlide(sliderIndex - 1);
     });
 
-    // ====== Video Gallery + Modal ======
-    const videoGrid = $("videoGrid");
-    const videoModal = $("videoModal");
-    const videoModalTitle = $("videoModalTitle");
-    const videoFrameWrap = $("videoFrameWrap");
-    const closeVideoBtn = $("closeVideoBtn");
+    buildSlides();
 
-    function buildVideoGallery(){
-  if (!videoGrid) return;
-  videoGrid.innerHTML = "";
+    // ===== Forms: Beta + Review feedback/reset =====
+    const betaMsg = $("betaMsg");
+    const betaSubmit = $("betaSubmit");
+    const betaIframe = $("beta_iframe");
+    let betaSubmitting = false;
 
-  const items = (VIDEO_ITEMS && VIDEO_ITEMS.length) ? VIDEO_ITEMS : [
-    { type:"placeholder", title:"Demo Video", desc:"Füge später ein MP4 oder YouTube Video hinzu" },
-    { type:"placeholder", title:"Feature Walkthrough", desc:"Platzhalter" },
-    { type:"placeholder", title:"Kurzclip", desc:"Platzhalter" }
-  ];
-
-  items.forEach((it) => {
-    const card = document.createElement("div");
-    card.className = "video-card";
-
-    // GIF: direkt als animiertes Thumbnail anzeigen (loop ist automatisch bei GIF)
-    if (it.type === "gif") {
-      card.innerHTML = `
-        <div class="video-thumb" style="padding:0; background:transparent; border-bottom:1px solid rgba(255,255,255,.10);">
-          <img src="${it.src}" alt="${escapeHtml(it.title || "GIF")}"
-               style="width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:16/9;" />
-        </div>
-        <div class="video-meta">
-          <b>${escapeHtml(it.title || "Logo Loop")}</b>
-          <span>${escapeHtml(it.desc || "")}</span>
-        </div>
-      `;
-      // Kein Modal nötig
-      videoGrid.appendChild(card);
-      return;
-    }
-
-    // Placeholder / MP4 / YouTube normal
-    const thumbLabel = it.type === "youtube" ? "YouTube" : (it.type === "mp4" ? "MP4" : "Video");
-    const poster = it.poster || placeholderSvgData(`${thumbLabel} Thumbnail`);
-
-    card.innerHTML = `
-      <div class="video-thumb" style="background-image:url('${poster}'); background-size:cover; background-position:center;">
-        <div class="video-play">▶</div>
-      </div>
-      <div class="video-meta">
-        <b>${escapeHtml(it.title || "Video")}</b>
-        <span>${escapeHtml(it.desc || "")}</span>
-      </div>
-    `;
-
-    card.addEventListener("click", () => {
-      if (it.type === "placeholder") return;
-      openVideo(it);
+    $("betaForm").addEventListener("submit", (e) => {
+      if (!$("betaConsent").checked) {
+        e.preventDefault();
+        betaMsg.textContent = "Bitte Einwilligung bestätigen.";
+        return;
+      }
+      $("betaUA").value = navigator.userAgent || "";
+      betaSubmitting = true;
+      betaSubmit.disabled = true;
+      betaMsg.textContent = "Wird gesendet…";
     });
 
-    videoGrid.appendChild(card);
-  });
-}
+    betaIframe.addEventListener("load", () => {
+      if (!betaSubmitting) return;
+      betaSubmitting = false;
+      betaSubmit.disabled = false;
+      betaMsg.textContent = "Danke! Du bist für den Beta-Test registriert.";
+      $("betaName").value = "";
+      $("betaEmail").value = "";
+      $("betaConsent").checked = false;
+    });
 
-    function openVideo(it){
-      videoFrameWrap.innerHTML = "";
-      videoModalTitle.textContent = it.title || "Video";
+    const reviewMsg = $("reviewMsg");
+    const reviewSubmit = $("reviewSubmit");
+    const reviewIframe = $("review_iframe");
+    let reviewSubmitting = false;
 
-      if (it.type === "mp4") {
-        const v = document.createElement("video");
-        v.controls = true;
-        v.src = it.src;
-        if (it.poster) v.poster = it.poster;
-        v.playsInline = true;
-        v.autoplay = true;
-        v.style.width = "100%";
-        v.style.aspectRatio = "16/9";
-        v.style.borderRadius = "16px";
-        v.style.background = "#000";
-        videoFrameWrap.appendChild(v);
-      } else if (it.type === "youtube") {
-        const iframe = document.createElement("iframe");
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-        iframe.allowFullscreen = true;
-        iframe.src = `https://www.youtube.com/embed/${it.id}?autoplay=1&rel=0`;
-        iframe.style.width = "100%";
-        iframe.style.aspectRatio = "16/9";
-        iframe.style.border = "0";
-        iframe.style.borderRadius = "16px";
-        iframe.style.background = "#000";
-        videoFrameWrap.appendChild(iframe);
+    $("reviewForm").addEventListener("submit", (e) => {
+      const txt = ($("reviewText").value || "").trim();
+      if (txt.length < 5) {
+        e.preventDefault();
+        reviewMsg.textContent = "Bitte mindestens 5 Zeichen schreiben.";
+        return;
       }
+      $("reviewUA").value = navigator.userAgent || "";
+      reviewSubmitting = true;
+      reviewSubmit.disabled = true;
+      reviewMsg.textContent = "Wird gesendet…";
+    });
 
-      videoModal.style.display = "block";
-      document.body.style.overflow = "hidden";
-    }
+    reviewIframe.addEventListener("load", () => {
+      if (!reviewSubmitting) return;
+      reviewSubmitting = false;
+      reviewSubmit.disabled = false;
+      reviewMsg.textContent = "Danke! Deine Bewertung wurde gesendet (erscheint nach Freigabe).";
+      $("reviewName").value = "";
+      $("reviewRating").value = "5";
+      $("reviewText").value = "";
+      // refresh list (in case it was approved quickly)
+      setTimeout(loadReviews, 800);
+    });
 
-    function closeVideo(){
-      videoModal.style.display = "none";
-      document.body.style.overflow = "";
-      videoFrameWrap.innerHTML = "";
-    }
-    closeVideoBtn.addEventListener("click", closeVideo);
-    videoModal.addEventListener("click", (e) => { if (e.target === videoModal) closeVideo(); });
-
-    // ====== Reviews: load from sheet (JSONP) + submit to sheet (iframe) ======
+    // ===== Reviews load (JSONP) =====
     const reviewsList = $("reviewsList");
     const ratingBadge = $("ratingBadge");
-    const reviewForm = $("reviewForm");
-    const reviewIframe = $("review_iframe");
-    const reviewMsg = $("reviewMsg");
-
-    // JSONP callback used by Apps Script doGet
-    window.tsReviewsCb = function(payload){
-      const items = Array.isArray(payload?.reviews) ? payload.reviews : [];
-      renderReviews(items);
-    };
-
-    function loadReviews(){
-      // JSONP script load (avoids CORS)
-      const s = document.createElement("script");
-      s.src = `${WEBAPP_URL}?action=reviews&callback=tsReviewsCb&t=${Date.now()}`;
-      s.async = true;
-      s.onerror = () => renderReviews([]);
-      document.body.appendChild(s);
-      // cleanup later
-      setTimeout(() => { try { s.remove(); } catch {} }, 8000);
-    }
+    const reviewsStatus = $("reviewsStatus");
 
     function stars(n){
       n = Math.max(1, Math.min(5, Number(n || 5)));
@@ -1559,62 +955,71 @@ body.light .brand-loop{
       reviewsList.innerHTML = "";
 
       if (!items.length) {
-        // Friendly placeholder (kid-friendly tone)
-        const ph = document.createElement("div");
-        ph.className = "review";
-        ph.innerHTML = `
-          <div class="name">Noch keine Bewertungen</div>
-          <div class="stars">☆☆☆☆☆</div>
-          <div class="text">Sei die erste Person, die eine Bewertung schreibt.</div>
-          <div class="meta">💡 Tipp: Bewertungen erscheinen nach kurzer Freigabe.</div>
+        reviewsList.innerHTML = `
+          <div class="review">
+            <div class="name">Noch keine freigegebenen Bewertungen</div>
+            <div class="stars">☆☆☆☆☆</div>
+            <div class="text">Schreibe die erste Bewertung — sie erscheint nach Freigabe.</div>
+            <div class="meta">Tipp: approved muss TRUE sein.</div>
+          </div>
         `;
-        reviewsList.appendChild(ph);
         ratingBadge.innerHTML = `<span class="dot"></span><span>⭐ 0.0 / 5 (0)</span>`;
         return;
       }
 
-      // Compute avg
       const avg = items.reduce((a,b)=>a+(Number(b.rating)||0),0) / items.length;
       ratingBadge.innerHTML = `<span class="dot"></span><span>⭐ ${avg.toFixed(1)} / 5 (${items.length})</span>`;
 
-      // Render latest first
       items.slice().reverse().forEach(r => {
+        const dt = r.timestamp ? new Date(r.timestamp) : new Date();
+        const name = (r.name && String(r.name).trim()) ? String(r.name).trim() : "Anonym";
         const el = document.createElement("div");
         el.className = "review";
-        const nm = (r.name && r.name.trim()) ? r.name.trim() : "Anonym";
-        const dt = r.timestamp ? new Date(r.timestamp) : new Date();
         el.innerHTML = `
-          <div class="name">${escapeHtml(nm)}</div>
+          <div class="name">${name}</div>
           <div class="stars">${stars(r.rating)}</div>
-          <div class="text">${escapeHtml(r.text || "")}</div>
-          <div class="meta">${dt.toLocaleDateString("de-DE")}</div>
+          <div class="text">${String(r.text || "")}</div>
+          <div class="meta">${isNaN(dt.getTime()) ? "" : dt.toLocaleDateString("de-DE")}</div>
         `;
         reviewsList.appendChild(el);
       });
     }
 
-    let reviewSubmitting = false;
-    reviewForm.addEventListener("submit", (e) => {
-      const txt = ($("reviewText").value || "").trim();
-      if (txt.length < 5) {
-        e.preventDefault();
-        reviewMsg.textContent = "Bitte schreibe mindestens 5 Zeichen.";
-        return;
-      }
-      reviewMsg.textContent = "Wird gesendet…";
-      reviewSubmitting = true;
-    });
+    // global callback for JSONP
+    window.tsReviewsCb = function(payload){
+      reviewsStatus.textContent = "";
+      const items = Array.isArray(payload?.reviews) ? payload.reviews : [];
+      renderReviews(items);
+      window.__reviewsLoaded = true;
+    };
 
-    reviewIframe.addEventListener("load", () => {
-      if (!reviewSubmitting) return;
-      reviewSubmitting = false;
-      reviewMsg.textContent = "Danke! Deine Bewertung wurde gesendet und erscheint nach Freigabe.";
-      $("reviewText").value = "";
-      // reload list after a moment (in case it was auto-approved)
-      setTimeout(loadReviews, 1200);
-    });
+    function loadReviews(){
+      window.__reviewsLoaded = false;
+      reviewsStatus.textContent = "Bewertungen werden geladen…";
 
-    // ====== Legal modal ======
+      // timeout hint
+      setTimeout(() => {
+        if (!window.__reviewsLoaded) {
+          reviewsStatus.textContent = "Bewertungen konnten nicht geladen werden. Prüfe, ob die Web App auf „Anyone“ gestellt ist und ob der Link stimmt.";
+        }
+      }, 2500);
+
+      const s = document.createElement("script");
+      s.src = `${WEBAPP_URL}?action=reviews&callback=tsReviewsCb&t=${Date.now()}`;
+      s.async = true;
+      s.onerror = () => {
+        reviewsStatus.textContent = "Fehler beim Laden der Bewertungen.";
+        renderReviews([]);
+      };
+      document.body.appendChild(s);
+
+      // cleanup
+      setTimeout(() => { try { s.remove(); } catch {} }, 8000);
+    }
+
+    loadReviews();
+
+    // ===== Legal modal =====
     const legalModal = $("legalModal");
     const legalTitle = $("legalTitle");
     const legalBody = $("legalBody");
@@ -1627,46 +1032,32 @@ body.light .brand-loop{
         legalTitle.textContent = "Impressum";
         legalBody.innerHTML = `
           <p><b>Angaben gemäß § 5 TMG</b></p>
-          <p>
-            <b>true-shuffel</b><br/>
-            Inhaber: Mika Hertler & Moritz Hertler<br/>
-            Am Schwarzen Steg 5a<br/>
-            95448 Bayreuth<br/>
-            Deutschland
-          </p>
+          <p><b>true-shuffel</b><br/>
+          Inhaber: Mika Hertler & Moritz Hertler<br/>
+          Am Schwarzen Steg 5a<br/>
+          95448 Bayreuth<br/>
+          Deutschland</p>
           <p><b>Kontakt</b><br/>E-Mail: hello@true-shuffel.com</p>
-          <p>
-            <b>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</b><br/>
-            Mika Hertler & Moritz Hertler<br/>
-            Am Schwarzen Steg 5a, 95448 Bayreuth
-          </p>
+          <p><b>Verantwortlich nach § 18 Abs. 2 MStV</b><br/>
+          Mika Hertler & Moritz Hertler<br/>Am Schwarzen Steg 5a, 95448 Bayreuth</p>
         `;
       } else if (type === "cookies") {
         legalTitle.textContent = "Cookies & lokale Speicherung";
         legalBody.innerHTML = `
           <p>Wir verwenden keine Tracking-Cookies.</p>
           <p><b>Technisch notwendige Speicherung</b><br/>
-            Wir speichern z. B. die Theme-Auswahl (Dark/Light) und den Cookie-Hinweis lokal im Browser (localStorage).
-          </p>
-          <p>Wenn später Analytics/Tracking genutzt wird, ist ein echtes Opt-In Banner erforderlich.</p>
+          Wir speichern z. B. Theme-Auswahl und den Cookie-Hinweis lokal im Browser (localStorage).</p>
         `;
       } else {
         legalTitle.textContent = "Datenschutz";
         legalBody.innerHTML = `
           <p><b>1. Verantwortliche</b><br/>
-            Mika Hertler & Moritz Hertler, Am Schwarzen Steg 5a, 95448 Bayreuth, Deutschland<br/>
-            Kontakt: hello@true-shuffel.com
-          </p>
-          <p><b>2. Beta-Test-Anmeldung</b><br/>
-            Wir verarbeiten Name und E-Mail, um den Beta-Test zu organisieren und dich zu kontaktieren.
-            Rechtsgrundlage: Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).
-          </p>
+          Mika Hertler & Moritz Hertler, Am Schwarzen Steg 5a, 95448 Bayreuth, Deutschland<br/>
+          Kontakt: hello@true-shuffel.com</p>
+          <p><b>2. Beta-Test</b><br/>
+          Wir verarbeiten Name und E-Mail zur Organisation des Beta-Tests. Rechtsgrundlage: Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).</p>
           <p><b>3. Bewertungen</b><br/>
-            Bewertungen werden im Google Sheet gespeichert. Um Spam zu vermeiden, erscheinen sie erst nach Freigabe.
-          </p>
-          <p><b>4. Widerruf/Löschung</b><br/>
-            Du kannst jederzeit die Löschung deiner Daten anfordern: hello@true-shuffel.com
-          </p>
+          Bewertungen werden im Google Sheet gespeichert und erscheinen nach Freigabe (approved = TRUE).</p>
         `;
       }
     }
@@ -1678,322 +1069,6 @@ body.light .brand-loop{
     window.closeLegal = closeLegal;
 
     legalModal.addEventListener("click", (e) => { if (e.target === legalModal) closeLegal(); });
-
-    // ====== Account system (local, hashed) ======
-    const accountModal = $("accountModal");
-    const accountBtn = $("accountBtn");
-    const logoutBtn = $("logoutBtn");
-    const accountStateText = $("accountStateText");
-
-    const USERS_KEY = "ts_users_v1";
-    const SESSION_KEY = "ts_session_v1";
-
-    function b64(arr){
-      return btoa(String.fromCharCode(...new Uint8Array(arr)));
-    }
-    function unb64(s){
-      const bin = atob(s);
-      const bytes = new Uint8Array(bin.length);
-      for (let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
-      return bytes;
-    }
-    async function pbkdf2Hash(password, saltBytes){
-      const enc = new TextEncoder();
-      const keyMaterial = await crypto.subtle.importKey(
-        "raw", enc.encode(password), {name:"PBKDF2"}, false, ["deriveBits"]
-      );
-      const bits = await crypto.subtle.deriveBits(
-        {name:"PBKDF2", salt: saltBytes, iterations: 120000, hash:"SHA-256"},
-        keyMaterial,
-        256
-      );
-      return new Uint8Array(bits);
-    }
-
-    function loadUsers(){
-      try { return JSON.parse(localStorage.getItem(USERS_KEY) || "{}"); }
-      catch { return {}; }
-    }
-    function saveUsers(obj){
-      localStorage.setItem(USERS_KEY, JSON.stringify(obj));
-    }
-    function setSession(user){
-      localStorage.setItem(SESSION_KEY, JSON.stringify(user));
-      updateAccountUI();
-    }
-    function getSession(){
-      try { return JSON.parse(localStorage.getItem(SESSION_KEY) || "null"); }
-      catch { return null; }
-    }
-    function clearSession(){
-      localStorage.removeItem(SESSION_KEY);
-      updateAccountUI();
-    }
-
-    function updateAccountUI(){
-      const sess = getSession();
-      if (sess?.email) {
-        accountStateText.textContent = `Angemeldet: ${sess.name || sess.email}`;
-        logoutBtn.style.display = "inline-flex";
-        // prefill review name if empty
-        const rn = $("reviewName");
-        if (rn && !rn.value) rn.value = sess.name || "";
-      } else {
-        accountStateText.textContent = "Nicht angemeldet";
-        logoutBtn.style.display = "none";
-      }
-    }
-
-    async function signup(){
-      const name = ($("suName").value || "").trim();
-      const email = ($("suEmail").value || "").trim().toLowerCase();
-      const pass = ($("suPass").value || "").trim();
-      const msg = $("suMsg");
-
-      if (!email || !pass) { msg.textContent = "Bitte E-Mail und Passwort eingeben."; return; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = "Bitte gültige E-Mail eingeben."; return; }
-      if (pass.length < 6) { msg.textContent = "Passwort min. 6 Zeichen."; return; }
-
-      const users = loadUsers();
-      if (users[email]) { msg.textContent = "Diese E-Mail ist bereits registriert."; return; }
-
-      msg.textContent = "Registriere…";
-      const salt = crypto.getRandomValues(new Uint8Array(16));
-      const hash = await pbkdf2Hash(pass, salt);
-
-      users[email] = { name, email, salt: b64(salt), hash: b64(hash), createdAt: Date.now() };
-      saveUsers(users);
-      setSession({ name, email });
-      msg.textContent = "Registriert & angemeldet.";
-      $("suPass").value = "";
-    }
-
-    async function login(){
-      const email = ($("liEmail").value || "").trim().toLowerCase();
-      const pass = ($("liPass").value || "").trim();
-      const msg = $("liMsg");
-
-      if (!email || !pass) { msg.textContent = "Bitte E-Mail und Passwort eingeben."; return; }
-      const users = loadUsers();
-      const u = users[email];
-      if (!u) { msg.textContent = "Account nicht gefunden."; return; }
-
-      msg.textContent = "Prüfe…";
-      const salt = unb64(u.salt);
-      const hash = await pbkdf2Hash(pass, salt);
-
-      if (b64(hash) !== u.hash) {
-        msg.textContent = "Passwort stimmt nicht.";
-        return;
-      }
-
-      setSession({ name: u.name || "", email: u.email });
-      msg.textContent = "Angemeldet.";
-      $("liPass").value = "";
-    }
-
-    function openAccount(){
-      accountModal.style.display = "block";
-      document.body.style.overflow = "hidden";
-      updateAccountUI();
-    }
-    function closeAccount(){
-      accountModal.style.display = "none";
-      document.body.style.overflow = "";
-    }
-    window.closeAccount = closeAccount;
-
-    accountBtn.addEventListener("click", openAccount);
-    accountModal.addEventListener("click", (e) => { if (e.target === accountModal) closeAccount(); });
-    $("signupBtn").addEventListener("click", signup);
-    $("loginBtn").addEventListener("click", login);
-    logoutBtn.addEventListener("click", () => {
-      clearSession();
-      $("liMsg").textContent = "Abgemeldet.";
-    });
-
-    // ====== Init content ======
-    buildSlides();
-    buildVideoGallery();
-    updateAccountUI();
-    loadReviews();
-  </script>
-
-  <script>
-    // These functions are referenced above but declared later
-    function buildSlides(){}
-    function buildVideoGallery(){}
-  </script>
-
-  <script>
-    // Provide implementations after initial script defines placeholders
-    (function(){
-      const sliderTrack = document.getElementById("sliderTrack");
-      const sliderDots  = document.getElementById("sliderDots");
-      const prevSlideBtn = document.getElementById("prevSlide");
-      const nextSlideBtn = document.getElementById("nextSlide");
-
-      let sliderIndex = 0;
-      let slidesCount = 0;
-      
-      function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m]));
-}
-
-      function placeholderSvg(text){
-        const isLight = document.body.classList.contains("light");
-        const bg = isLight ? "#f2f2f2" : "#2b2c32";
-        const fg = isLight ? "#1b1b1b" : "#ffffff";
-        const svg = `
-          <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">
-            <rect width="100%" height="100%" fill="${bg}"/>
-            <text x="50%" y="50%" font-family="system-ui, -apple-system, Segoe UI, Roboto" font-size="44"
-                  fill="${fg}" text-anchor="middle" dominant-baseline="middle" opacity="0.65">
-              ${text}
-            </text>
-          </svg>`;
-        return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.trim());
-      }
-
-      function updateSlider(){
-        const x = -sliderIndex * 100;
-        sliderTrack.style.transform = `translateX(${x}%)`;
-        [...sliderDots.children].forEach((d, idx) => d.classList.toggle("active", idx === sliderIndex));
-      }
-
-      function goToSlide(i){
-        sliderIndex = (i + slidesCount) % slidesCount;
-        updateSlider();
-      }
-
-      window.buildSlides = function(){
-        if (!sliderTrack || !sliderDots) return;
-        sliderTrack.innerHTML = "";
-        sliderDots.innerHTML = "";
-
-        const images = (window.PRODUCT_IMAGES && window.PRODUCT_IMAGES.length)
-          ? window.PRODUCT_IMAGES
-          : [placeholderSvg("Produktbild 1"), placeholderSvg("Produktbild 2"), placeholderSvg("Produktbild 3")];
-
-        slidesCount = images.length;
-        sliderIndex = 0;
-
-        images.forEach((src, i) => {
-          const slide = document.createElement("div");
-          slide.className = "slide";
-          slide.innerHTML = `<img src="${src}" alt="Produktbild ${i+1}" loading="lazy">`;
-          sliderTrack.appendChild(slide);
-
-          const dot = document.createElement("button");
-          dot.className = "slider-dot" + (i === 0 ? " active" : "");
-          dot.type = "button";
-          dot.addEventListener("click", () => goToSlide(i));
-          sliderDots.appendChild(dot);
-        });
-
-        updateSlider();
-      };
-
-      prevSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex - 1));
-      nextSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex + 1));
-
-      let startX = null;
-      sliderTrack?.addEventListener("pointerdown", (e) => {
-        startX = e.clientX;
-        sliderTrack.setPointerCapture(e.pointerId);
-      });
-      sliderTrack?.addEventListener("pointerup", (e) => {
-        if (startX === null) return;
-        const dx = e.clientX - startX;
-        startX = null;
-        if (Math.abs(dx) < 40) return;
-        if (dx < 0) goToSlide(sliderIndex + 1);
-        else goToSlide(sliderIndex - 1);
-      });
-
-      // Video
-      const videoGrid = document.getElementById("videoGrid");
-      const videoModal = document.getElementById("videoModal");
-      const videoModalTitle = document.getElementById("videoModalTitle");
-      const videoFrameWrap = document.getElementById("videoFrameWrap");
-      const closeVideoBtn = document.getElementById("closeVideoBtn");
-
-      window.buildVideoGallery = function(){
-        if (!videoGrid) return;
-        videoGrid.innerHTML = "";
-
-        const items = (window.VIDEO_ITEMS && window.VIDEO_ITEMS.length) ? window.VIDEO_ITEMS : [
-          { type:"placeholder", title:"Demo Video", desc:"Füge später ein MP4 oder YouTube Video hinzu" },
-          { type:"placeholder", title:"Feature Walkthrough", desc:"Platzhalter" },
-          { type:"placeholder", title:"Kurzclip", desc:"Platzhalter" }
-        ];
-
-        items.forEach((it) => {
-          const card = document.createElement("div");
-          card.className = "video-card";
-
-          const poster = it.poster || placeholderSvg("Video");
-          card.innerHTML = `
-            <div class="video-thumb" style="background-image:url('${poster}'); background-size:cover; background-position:center;">
-              <div class="video-play">▶</div>
-            </div>
-            <div class="video-meta">
-              <b>${(it.title||"Video").replace(/</g,"&lt;")}</b>
-              <span>${(it.desc||"").replace(/</g,"&lt;")}</span>
-            </div>
-          `;
-
-          card.addEventListener("click", () => {
-            if (it.type === "placeholder") return;
-
-            videoFrameWrap.innerHTML = "";
-            videoModalTitle.textContent = it.title || "Video";
-
-            if (it.type === "mp4") {
-              const v = document.createElement("video");
-              v.controls = true;
-              v.src = it.src;
-              if (it.poster) v.poster = it.poster;
-              v.playsInline = true;
-              v.autoplay = true;
-              v.style.width = "100%";
-              v.style.aspectRatio = "16/9";
-              v.style.borderRadius = "16px";
-              v.style.background = "#000";
-              videoFrameWrap.appendChild(v);
-            } else if (it.type === "youtube") {
-              const iframe = document.createElement("iframe");
-              iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-              iframe.allowFullscreen = true;
-              iframe.src = `https://www.youtube.com/embed/${it.id}?autoplay=1&rel=0`;
-              iframe.style.width = "100%";
-              iframe.style.aspectRatio = "16/9";
-              iframe.style.border = "0";
-              iframe.style.borderRadius = "16px";
-              iframe.style.background = "#000";
-              videoFrameWrap.appendChild(iframe);
-            }
-
-            videoModal.style.display = "block";
-            document.body.style.overflow = "hidden";
-          });
-
-          videoGrid.appendChild(card);
-        });
-      };
-
-      function closeVideo(){
-        videoModal.style.display = "none";
-        document.body.style.overflow = "";
-        videoFrameWrap.innerHTML = "";
-      }
-      closeVideoBtn?.addEventListener("click", closeVideo);
-      videoModal?.addEventListener("click", (e) => { if (e.target === videoModal) closeVideo(); });
-
-      // First render
-      window.buildSlides();
-      window.buildVideoGallery();
-    })();
   </script>
 </body>
 </html>
