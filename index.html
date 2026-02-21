@@ -472,6 +472,44 @@
     .cookie-row{ display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
     .cookie-text{ color: var(--muted); font-size:13px; line-height:1.45; flex:1 1 320px; }
     .cookie-actions{ display:flex; gap:10px; flex:0 0 auto; }
+  
+    /* --- UI polish patch (header + slider arrows + mock meta) --- */
+    header{
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.10);
+    }
+    body.light header{
+      background: rgba(255,255,255,.78) !important;
+    }
+
+    .mock-meta{ white-space: nowrap; }
+    .mock-meta .unit{ opacity:.75; }
+    @media (max-width: 420px){
+      .mock-meta{ white-space: normal; }
+      .mock-meta .unit{ display:block; }
+    }
+
+    /* Slider arrows: consistent in dark/light */
+    .slider-btn{
+      width:44px; height:44px;
+      padding:0 !important;
+      border-radius:12px !important;
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid rgba(120,120,120,.25) !important;
+      background: rgba(255,255,255,.72) !important;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      font-size:0 !important; /* hide text arrows */
+      line-height:0 !important;
+    }
+    body:not(.light) .slider-btn{
+      border:1px solid rgba(255,255,255,.14) !important;
+      background: rgba(10,10,10,.55) !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .slider-btn svg{ width:18px; height:18px; }
+    body.light .slider-btn svg path{ fill:#111; }
+    body:not(.light) .slider-btn svg path{ fill:#fff; }
+    
   </style>
 </head>
 <body>
@@ -545,7 +583,7 @@
             <div class="mock">
               <div class="mock-row">
                 <div class="mock-title"><div class="mini">✓</div>Vollständig</div>
-                <div class="mock-meta">10–1.000.000+<br/>Songs</div>
+                <div class="mock-meta">10–1.000.000+ <span class="unit">Songs</span></div>
               </div>
               <div class="mock-row">
                 <div class="mock-title"><div class="mini">∞</div>Keine Repeats</div>
@@ -590,8 +628,8 @@
         <div class="slider" aria-label="Image slider">
           <div class="slider-track" id="sliderTrack"></div>
           <div class="slider-nav">
-            <button class="btn slider-btn prev" type="button" id="prevSlide">‹</button>
-            <button class="btn slider-btn next" type="button" id="nextSlide">›</button>
+            <button class="btn slider-btn prev" type="button" id="prevSlide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19 8.5 12l7-7 1.5 1.5L11.5 12l5.5 5.5z"/></svg></button>
+            <button class="btn slider-btn next" type="button" id="nextSlide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5 15.5 12l-7 7-1.5-1.5L12.5 12 7 6.5z"/></svg></button>
           </div>
         </div>
         <div class="slider-dots" id="sliderDots"></div>
@@ -618,8 +656,32 @@
             <div style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
               <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
             </div>
-            <input class="input" type="text" id="betaName" name="name" placeholder="Name" required />
+            <input class="input" type="text" id="betaName" name="name" placeholder="Name (optional)" />
             <input class="input" type="email" id="betaEmail" name="email" placeholder="E-Mail" required />
+
+            <select class="input" id="betaService" name="service" required>
+              <option value="" disabled selected>Streamingdienst wählen</option>
+              <option value="spotify">Spotify</option>
+              <option value="apple_music">Apple Music</option>
+              <option value="youtube_music">YouTube Music</option>
+              <option value="amazon_music">Amazon Music</option>
+              <option value="deezer">Deezer</option>
+              <option value="tidal">Tidal</option>
+              <option value="soundcloud">SoundCloud</option>
+              <option value="qobuz">Qobuz</option>
+              <option value="other">Andere</option>
+            </select>
+
+            <select class="input" id="betaPlaylistSize" name="playlistSize">
+              <option value="" selected>Playlistgröße (optional)</option>
+              <option value="lt100">&lt; 100 Songs</option>
+              <option value="100-500">100–500 Songs</option>
+              <option value="500-1000">500–1.000 Songs</option>
+              <option value="1000-5000">1.000–5.000 Songs</option>
+              <option value="5000-10000">5.000–10.000 Songs</option>
+              <option value="10000plus">10.000+ Songs</option>
+            </select>
+
             <input type="hidden" name="source" value="website" />
             <input type="hidden" id="betaUA" name="userAgent" value="" />
             <button class="btn btn-primary" id="betaSubmit" type="submit">Anmelden</button>
@@ -820,7 +882,7 @@
 </div>
 
 <script>
-  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycby0A5QTpD_Dbt3BcFf6KypO9zhdNhATQBX2BwUqrlt2KjOjO5_aIEoMNQxuxvZ_PjDN/exec"; 
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbw6-_EHQDMmdCADWm2ig-ZcV8tFY4X-wNoTEp61mkALTNZIDUVHS3SaotLOqQqCfl_Z/exec";
   const PRIVACY_VERSION = "2026-02-21";
   const LOGO_DARK = "assets/logo_dark.png";
   const LOGO_LIGHT = "assets/logo_light.png";
@@ -1248,7 +1310,7 @@ window.addEventListener("message", (ev) => {
 
       <p><b>2. Zwecke &amp; Rechtsgrundlagen</b></p>
       <ul>
-        <li><b>Beta-Warteliste (Double-Opt-In):</b> Verarbeitung von Name (optional) und E-Mail zur Verwaltung der Warteliste, Versand einer Bestätigungs-E-Mail und Bestätigung deiner Anmeldung. <i>Rechtsgrundlage:</i> Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).</li>
+        <li><b>Beta-Warteliste (Double-Opt-In):</b> Verarbeitung von Name (optional) und E-Mail zur Verwaltung der Warteliste, Versand einer Bestätigungs-E-Mail und Bestätigung deiner Anmeldung. Optional: Streamingdienst &amp; Playlistgröße (nur für Produktplanung/Priorisierung). <i>Rechtsgrundlage:</i> Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).</li>
         <li><b>Bewertungen:</b> Verarbeitung von Bewertungs-Text, Sternebewertung und ggf. Name (nur wenn „Name anzeigen“ aktiviert). Bewertungen erscheinen erst nach Prüfung. <i>Rechtsgrundlage:</i> Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).</li>
         <li><b>Kontaktformular:</b> Bearbeitung deiner Anfrage (Name optional, E-Mail, Nachricht). <i>Rechtsgrundlage:</i> Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Kommunikation) bzw. lit. f DSGVO (berechtigtes Interesse an der Beantwortung).</li>
         <li><b>Hosting/Logs:</b> Technische Bereitstellung, Stabilität und Sicherheit der Website. <i>Rechtsgrundlage:</i> Art. 6 Abs. 1 lit. f DSGVO.</li>
