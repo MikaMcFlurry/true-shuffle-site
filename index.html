@@ -3,283 +3,1027 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>true-shuffel — True Shuffle für Streaming</title>
-  <meta name="description" content="True Shuffle für Streaming: jeder Song genau einmal pro Durchlauf – keine Wiederholungen, keine ausgelassenen Tracks. Jetzt für den Beta-Test anmelden." />
-  <meta name="theme-color" content="#0b0d12" />
+
+  <title>true-shuffel — True Shuffle für Streaming-Playlists (Beta)</title>
+  <meta name="description" content="Echter Shuffle für große Streaming-Playlists: jeder Song genau einmal pro Durchlauf – keine Wiederholungen, keine ausgelassenen Tracks. Jetzt für den Beta-Test anmelden." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#24252a" />
+
+  <meta property="og:title" content="true-shuffel — True Shuffle für Streaming-Playlists" />
+  <meta property="og:description" content="Jeder Song. Genau einmal. Kein Repeat, kein Skip. Beta-Test jetzt offen." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/logo_dark.png" />
+
   <link rel="icon" type="image/png" href="assets/logo_dark.png" />
+  <link rel="apple-touch-icon" href="assets/logo_dark.png" />
 
   <style>
     :root{
-      --bg:#0b0d12;
-      --card:#121722;
-      --stroke: rgba(255,255,255,.10);
+      --bg:#24252a; --bg2:#17181c;
+      --panel: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.12);
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.55);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.56);
       --shadow: 0 18px 55px rgba(0,0,0,.55);
-      --r: 18px;
-      --max: 1080px;
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+      --ring: 0 0 0 6px rgba(255,255,255,.10);
+      --btnh: 44px;
     }
     body.light{
-      --bg:#f7f7f8;
-      --card:#ffffff;
-      --stroke: rgba(0,0,0,.10);
+      --bg:#f7f7f7; --bg2:#ffffff;
+      --panel: rgba(0,0,0,.05);
+      --stroke: rgba(0,0,0,.12);
       --text: rgba(0,0,0,.90);
       --muted: rgba(0,0,0,.70);
       --muted2: rgba(0,0,0,.55);
       --shadow: 0 18px 55px rgba(0,0,0,.14);
+      --ring: 0 0 0 6px rgba(0,0,0,.10);
     }
 
     *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background: radial-gradient(900px 420px at 30% -10%, rgba(255,255,255,.07), transparent 60%),
-                  radial-gradient(900px 420px at 80% 0%, rgba(255,255,255,.05), transparent 65%),
-                  var(--bg);
       color: var(--text);
+      background:
+        radial-gradient(900px 380px at 18% -5%, rgba(255,255,255,.06), transparent 65%),
+        radial-gradient(900px 380px at 85% 10%, rgba(255,255,255,.04), transparent 60%),
+        radial-gradient(700px 300px at 60% 85%, rgba(255,255,255,.03), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
       overflow-x:hidden;
     }
     body.light{
-      background: radial-gradient(900px 420px at 30% -10%, rgba(0,0,0,.06), transparent 60%),
-                  radial-gradient(900px 420px at 80% 0%, rgba(0,0,0,.04), transparent 65%),
-                  var(--bg);
+      background:
+        radial-gradient(900px 380px at 18% -5%, rgba(0,0,0,.06), transparent 65%),
+        radial-gradient(900px 380px at 85% 10%, rgba(0,0,0,.04), transparent 60%),
+        radial-gradient(700px 300px at 60% 85%, rgba(0,0,0,.03), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
     }
 
-    a{ color:inherit; }
-    .container{ width:min(var(--max), calc(100% - 28px)); margin:0 auto; }
+    a{ color:inherit; text-decoration:none; }
+    button,input,textarea,select{ font:inherit; }
+    img{ max-width:100%; height:auto; }
+
+    .wrap{ width:100%; display:flex; justify-content:center; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
+
     header{
-      position: sticky; top:0; z-index:10;
+      position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--stroke);
-      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      background: linear-gradient(to bottom, rgba(36,37,42,.88), rgba(36,37,42,.62));
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
-    .topbar{
+    body.light header{
+      background: linear-gradient(to bottom, rgba(247,247,247,.94), rgba(247,247,247,.72));
+      border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+
+    .nav{
       display:flex; align-items:center; justify-content:space-between;
-      padding: 12px 0;
-      gap:12px;
+      padding:14px 0; gap:12px; flex-wrap:wrap;
     }
-    .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
-    .brand img{ width:38px; height:38px; border-radius:12px; border:1px solid var(--stroke); background: rgba(255,255,255,.03); }
-    body.light .brand img{ background: rgba(0,0,0,.02); }
-    .brand b{ font-size: 18px; letter-spacing:.01em; }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:0; flex:1 1 auto; }
+    .brand img{
+      width:40px; height:40px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      flex:0 0 auto;
+    }
+    body.light .brand img{ border-color: rgba(0,0,0,.10); background: rgba(0,0,0,.03); }
+    .brand strong{ display:block; font-weight:900; white-space:nowrap; line-height:1.1; }
+    .brand span{ display:block; font-size:12px; color:var(--muted2); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:52vw; }
+
+    .navlinks{ display:flex; align-items:center; gap:10px; color:var(--muted); font-size:14px; }
+    .navlinks a{ padding:8px 10px; border-radius:12px; }
+    .navlinks a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
+    body.light .navlinks a:hover{ background: rgba(0,0,0,.05); }
+
+    .navcta{ display:flex; align-items:center; gap:10px; flex:1 1 100%; justify-content:flex-start; flex-wrap:wrap; }
     .btn{
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.04);
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      height: var(--btnh); padding:0 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
       color: var(--text);
-      padding: 10px 14px;
-      border-radius: 999px;
-      cursor:pointer;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      white-space:nowrap;
+      cursor:pointer; user-select:none; white-space:nowrap;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    body.light .btn{ background: rgba(0,0,0,.03); }
-    .btn.primary{
-      background: #ffffff;
-      color:#0b0d12;
-      border-color: rgba(255,255,255,.30);
-      font-weight: 800;
-    }
-    body.light .btn.primary{
-      background:#0b0d12;
-      color:#ffffff;
-      border-color: rgba(0,0,0,.25);
-    }
-
-    .hero{
-      padding: 28px 0 18px;
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 16px;
-      align-items: start;
-    }
-    @media (max-width: 980px){ .hero{ grid-template-columns: 1fr; } }
-
-    h1{ margin: 8px 0 10px; font-size: clamp(30px, 3.6vw, 54px); line-height:1.05; }
-    .lead{ color: var(--muted); line-height:1.65; margin:0; font-size: 16.5px; }
-
-    .card{
-      background: var(--card);
-      border:1px solid var(--stroke);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      padding: 16px;
-    }
-
-    .steps{ display:grid; gap:10px; margin-top: 14px; }
-    .step{ display:flex; gap:10px; align-items:flex-start; }
-    .bubble{
-      width:32px; height:32px; border-radius: 12px;
-      display:grid; place-items:center;
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.04);
+    body.light .btn{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.04); }
+    .btn:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.18); transform: translateY(-1px); }
+    body.light .btn:hover{ background: rgba(0,0,0,.07); border-color: rgba(0,0,0,.14); }
+    .btn:active{ transform: translateY(0); }
+    .btn-primary{
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+      color: #24252a;
+      border-color: rgba(255,255,255,.25);
+      box-shadow: 0 10px 30px rgba(255,255,255,.08);
       font-weight: 900;
     }
-    body.light .bubble{ background: rgba(0,0,0,.03); }
 
-    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
-    @media (max-width: 980px){ .grid2{ grid-template-columns: 1fr; } }
-
-    .input{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border:1px solid var(--stroke);
+    .menu-btn{ display:none; }
+    .drawer{ display:none; padding:10px 0 16px; width:100%; }
+    .drawer.open{ display:block; }
+    .drawer a{
+      display:block; padding:12px 12px; border-radius:14px; margin-top:10px;
+      color: var(--muted);
+      border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
+    }
+    body.light .drawer a{ border-color: rgba(0,0,0,.10); background: rgba(0,0,0,.02); }
+
+    @media (max-width: 980px){
+      .navlinks{ display:none; }
+      .menu-btn{ display:inline-flex; }
+    }
+    @media (max-width: 520px){
+      .container{ width: calc(100% - 28px); }
+      .brand span{ display:none; }
+    }
+
+    main{ padding:34px 0 70px; }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size:13px;
+    }
+    body.light .pill{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+    .dot{ width:8px; height:8px; border-radius:999px; background: rgba(255,255,255,.92); box-shadow: 0 0 0 4px rgba(255,255,255,.10); }
+    body.light .dot{ box-shadow: 0 0 0 4px rgba(0,0,0,.10); }
+
+    .hero{ display:grid; grid-template-columns: 1.1fr .9fr; gap:18px; align-items:start; margin-top:18px; }
+    @media (max-width: 980px){ .hero{ grid-template-columns: 1fr; } }
+
+    h1{ font-size: clamp(30px, 3.4vw, 52px); line-height:1.06; margin:14px 0 10px; letter-spacing:-0.02em; }
+    .lead{ color: var(--muted); font-size:16.5px; line-height:1.65; margin:0 0 14px; max-width:68ch; }
+    .subnote{ color: var(--muted2); font-size:13px; line-height:1.55; margin-top:10px; }
+    .hero-actions{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:10px; }
+
+    .panel{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      box-shadow: var(--shadow);
+      padding:16px;
+      overflow:hidden;
+    }
+    body.light .panel{ border-color: rgba(0,0,0,.12); background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02)); }
+
+    /* Hero media: dark GIF, light static logo (no background stripe in light) */
+    .hero-media{
+      display:block;
+      width:100%;
+      max-height: 240px;
+      object-fit: contain;
+      margin: 2px auto 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+    }
+    body.light .hero-media{
+      border-color: rgba(0,0,0,.10);
+      background: transparent; /* removes the “stripe” feeling */
+    }
+
+    .mock{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.28);
+      padding:14px;
+    }
+    body.light .mock{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+
+    .mock-row{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:10px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      margin-bottom:10px;
+    }
+    body.light .mock-row{ border-color: rgba(0,0,0,.10); background: rgba(0,0,0,.03); }
+    .mock-row:last-child{ margin-bottom:0; }
+    .mock-title{ display:flex; align-items:center; gap:10px; font-weight:900; }
+    .mini{
+      width:28px; height:28px; border-radius:10px;
+      display:grid; place-items:center;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight:900;
+      flex:0 0 auto;
+    }
+    body.light .mini{ border-color: rgba(0,0,0,.14); background: rgba(0,0,0,.04); }
+    .mock-meta{ color: var(--muted2); font-size:13px; text-align:right; }
+
+    .two-col{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:12px; }
+    @media (max-width:520px){ .two-col{ grid-template-columns: 1fr; } }
+
+    .badges{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .badge{
+      padding: 7px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    body.light .badge{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+
+    section{ padding: 52px 0; }
+    .section-title{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom: 16px; flex-wrap:wrap; }
+    .section-title h2{ margin:0; font-size:24px; letter-spacing:-0.01em; }
+    .section-title p{ margin:0; color: var(--muted); max-width: 76ch; line-height:1.55; }
+
+    /* Slider */
+    .slider{
+      position: relative;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+    }
+    body.light .slider{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.02); }
+    .slider-track{ display:flex; transition: transform .35s ease; will-change: transform; }
+    .slide{ min-width:100%; padding:14px; display:flex; justify-content:center; }
+    .slide img{
+      width:100%;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    body.light .slide img{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+    .slider-nav{ position:absolute; inset:0; pointer-events:none; }
+    .slider-btn{
+      pointer-events:auto;
+      position:absolute; top:50%; transform: translateY(-50%);
+      height:40px; padding:0 12px;
+      border-radius:999px;
+      opacity:.95;
+    }
+    .slider-btn.prev{ left: 12px; }
+    .slider-btn.next{ right: 12px; }
+    .slider-dots{ display:flex; gap:8px; justify-content:center; padding: 12px 0 0; }
+    .slider-dot{
+      width:9px; height:9px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      cursor:pointer;
+    }
+    body.light .slider-dot{ border-color: rgba(0,0,0,.18); background: rgba(0,0,0,.08); }
+    .slider-dot.active{ background: rgba(255,255,255,.55); border-color: rgba(255,255,255,.55); }
+    body.light .slider-dot.active{ background: rgba(0,0,0,.35); border-color: rgba(0,0,0,.35); }
+
+    /* Forms */
+    .cta{
+      border-radius: 34px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(700px 250px at 20% 0%, rgba(255,255,255,.10), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+      align-items:center;
+    }
+    body.light .cta{
+      border-color: rgba(0,0,0,.12);
+      background:
+        radial-gradient(700px 250px at 20% 0%, rgba(0,0,0,.06), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02));
+    }
+    @media (max-width:980px){ .cta{ grid-template-columns: 1fr; } }
+
+    .form{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:flex-start; }
+    .input{
+      flex:1 1 220px; min-width:0;
+      padding:11px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.24);
       color: var(--text);
       outline:none;
     }
-    body.light .input{ background: rgba(0,0,0,.02); }
-    .input:focus{ box-shadow: 0 0 0 6px color-mix(in srgb, var(--text) 12%, transparent); }
+    body.light .input{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+    .input:focus{ border-color: rgba(255,255,255,.26); box-shadow: var(--ring); }
 
-    footer{ padding: 22px 0 40px; color: var(--muted2); }
-    .footlinks{ display:flex; gap:8px; flex-wrap:wrap; }
-    .pill{ display:inline-flex; gap:10px; align-items:center; padding: 8px 12px; border:1px solid var(--stroke); border-radius:999px; background: rgba(255,255,255,.03); color: var(--muted); font-size: 13px; }
-    body.light .pill{ background: rgba(0,0,0,.02); }
+    .consent{
+      width:100%;
+      display:flex; gap:10px; align-items:flex-start; justify-content:flex-end;
+      color: var(--muted2); font-size:13px; line-height:1.45;
+    }
+    .consent input{ margin-top:3px; }
+
+    /* Reviews */
+    .reviews-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+    @media (max-width:980px){ .reviews-grid{ grid-template-columns:1fr; } }
+    .review{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding:14px;
+    }
+    body.light .review{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+    .review .name{ font-weight: 900; }
+    .review .stars{ letter-spacing:.06em; opacity:.92; }
+    .review .text{ color: var(--muted); margin-top: 8px; line-height:1.55; }
+    .review .meta{ color: var(--muted2); font-size: 12px; margin-top: 8px; }
+
+    /* FAQ chevron (clean) */
+    details{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      padding:14px;
+    }
+    body.light details{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+    details + details{ margin-top: 10px; }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:900;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .chev{
+      width:28px; height:28px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      display:grid; place-items:center;
+      position: relative;
+      flex:0 0 auto;
+    }
+    body.light .chev{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+    .chev::before{
+      content:"";
+      width: 8px; height: 8px;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      transform: rotate(45deg);
+      display:block;
+      margin-top: -2px;
+    }
+    details[open] .chev::before{ transform: rotate(-135deg); margin-top: 2px; }
+    details p{ margin:10px 0 0; color: var(--muted); line-height:1.6; }
+
+    footer{
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding: 26px 0 40px;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    body.light footer{ border-top: 1px solid rgba(0,0,0,.10); }
+    .foot{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .foot a{ color: var(--muted); padding:8px 10px; border-radius:12px; }
+    .foot a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
+    body.light .foot a:hover{ background: rgba(0,0,0,.05); }
+
+    .modal{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:200; padding:16px; }
+    .modal-panel{
+      max-width: 920px; margin:60px auto;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(10,10,10,.92);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex; flex-direction:column;
+      max-height: 85vh;
+    }
+    body.light .modal-panel{ background: rgba(247,247,247,.96); border-color: rgba(0,0,0,.12); }
+    .modal-header{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.10); }
+    body.light .modal-header{ border-bottom:1px solid rgba(0,0,0,.10); }
+    .modal-content{ padding:16px; color: var(--muted); line-height:1.65; overflow:auto; -webkit-overflow-scrolling:touch; }
+
+    #cookieBanner{
+      position:fixed; left:16px; right:16px; bottom:16px;
+      z-index:210;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(10,10,10,.86);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      padding:14px;
+      display:none;
+    }
+    body.light #cookieBanner{ border-color: rgba(0,0,0,.12); background: rgba(247,247,247,.92); }
+    .cookie-row{ display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    .cookie-text{ color: var(--muted); font-size:13px; line-height:1.45; flex:1 1 320px; }
+    .cookie-actions{ display:flex; gap:10px; flex:0 0 auto; }
   </style>
 </head>
 
 <body>
 <header>
-  <div class="container">
-    <div class="topbar">
-      <a class="brand" href="#top">
-        <img id="logo" src="assets/logo_dark.png" alt="true-shuffel" />
-        <b>true-shuffel</b>
-      </a>
+  <div class="wrap">
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top">
+          <img id="brandLogo" src="assets/logo_dark.png" alt="true-shuffel Logo" />
+          <div>
+            <strong>true-shuffel</strong>
+            <span>echtes Shuffle für Streaming</span>
+          </div>
+        </a>
 
-      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
-        <button class="btn" id="themeBtn" type="button">☾ Theme</button>
-        <a class="btn primary" href="#beta">Beta-Test</a>
+        <nav class="navlinks">
+          <a href="#product">Produkt</a>
+          <a href="#cta">Beta</a>
+          <a href="#reviews">Bewertungen</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="navcta">
+          <button class="btn" id="themeToggle" type="button">
+            <span id="themeIcon" aria-hidden="true">☾</span>
+            <span id="themeLabel">Light</span>
+          </button>
+          <button class="btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">
+            Menü <span aria-hidden="true">≡</span>
+          </button>
+          <a class="btn btn-primary" href="#cta">Zum Beta-Test</a>
+        </div>
+
+        <div class="drawer" id="drawer">
+          <a href="#product">Produkt</a>
+          <a href="#cta">Beta</a>
+          <a href="#reviews">Bewertungen</a>
+          <a href="#faq">FAQ</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
 
 <main id="top">
-  <div class="container">
-    <div class="hero">
-      <div>
-        <h1>True Shuffle.<br/>Jeder Song genau einmal.</h1>
-        <p class="lead">
-          Schluss mit Shuffle, das sich wiederholt oder Songs überspringt. true-shuffel spielt deine Playlist komplett – besonders bei großen Playlists.
-        </p>
-
-        <div class="steps">
-          <div class="step"><div class="bubble">1</div><div><b>Anmelden</b><div style="color:var(--muted); line-height:1.5;">Später per Streaming-Login (App). Jetzt: Beta-Test.</div></div></div>
-          <div class="step"><div class="bubble">2</div><div><b>Playlist wählen</b><div style="color:var(--muted); line-height:1.5;">Du nutzt weiterhin deinen Streamingdienst.</div></div></div>
-          <div class="step"><div class="bubble">3</div><div><b>Shuffle drücken</b><div style="color:var(--muted); line-height:1.5;">Echte Zufallsreihenfolge ohne Wiederholung.</div></div></div>
-        </div>
-
-        <div class="grid2">
-          <div class="pill">✓ Vollständig</div>
-          <div class="pill">∞ Keine Repeats</div>
-          <div class="pill">⟲ Zufällig</div>
-          <div class="pill">10.000+ Songs</div>
-        </div>
-
-        <div class="grid2" style="margin-top:14px;">
-          <div class="card">
-            <b>Unterstützte Dienste</b>
-            <div style="color:var(--muted); margin-top:6px; line-height:1.55;">
-              Spotify • Apple Music • YouTube Music • Tidal • Deezer • …
-            </div>
-          </div>
-          <div class="card">
-            <b>Beta-Test</b>
-            <div style="color:var(--muted); margin-top:6px; line-height:1.55;">
-              Trage dich ein und wir schicken dir Updates zum Start.
-            </div>
-          </div>
-        </div>
+  <div class="wrap">
+    <div class="container">
+      <div class="pill">
+        <span class="dot"></span>
+        <span><b>Problem:</b> Shuffle wiederholt sich oft oder lässt Songs aus.</span>
       </div>
 
-      <div class="card" id="beta">
-        <b style="font-size:18px;">Beta-Test Anmeldung</b>
-        <div style="color:var(--muted); margin-top:6px; line-height:1.55;">
-          Kein Spam. Nur Updates zum Start.
+      <div class="hero">
+        <div>
+          <h1>True Shuffle für Streaming-Playlists.<br/>Jeder Song. Genau einmal.</h1>
+          <p class="lead">
+            true-shuffel spielt deine Playlist wirklich komplett – ohne Wiederholungen und ohne ausgelassene Titel.
+            Perfekt für große Playlists mit hunderten oder tausenden Songs.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#cta">▶ Beta-Test</a>
+            <a class="btn" href="#product">Produktbilder</a>
+          </div>
+          <div class="subnote">Einfach: Playlist wählen → Shuffle drücken → genießen.</div>
         </div>
 
-        <form id="betaForm2" method="POST" target="beta_iframe2" style="margin-top:12px;">
-          <input type="hidden" name="action" value="beta" />
-          <input class="input" name="name" placeholder="Name" required />
-          <div style="height:10px"></div>
-          <input class="input" name="email" placeholder="E-Mail" type="email" required />
-          <div style="height:10px"></div>
-          <label style="display:flex; gap:10px; color:var(--muted); font-size:13px; line-height:1.45;">
-            <input type="checkbox" id="c2" required />
-            <span>Ich willige ein, dass meine Angaben zur Beta-Test-Organisation verarbeitet werden.</span>
-          </label>
-          <div style="height:10px"></div>
-          <button class="btn primary" id="betaBtn2" type="submit" style="width:100%; justify-content:center;">Anmelden</button>
-          <div id="betaMsg2" style="color:var(--muted); font-size:13px; margin-top:10px; text-align:right;"></div>
-        </form>
-        <iframe name="beta_iframe2" id="beta_iframe2" style="display:none;"></iframe>
+        <aside class="panel">
+          <img id="heroMedia" class="hero-media" src="assets/brand_logo_loop.gif" alt="true-shuffel Animation" />
+
+          <div class="two-col">
+            <div class="mock">
+              <div class="mock-row"><div class="mock-title"><div class="mini">✓</div>Vollständig</div><div class="mock-meta">100–10.000+</div></div>
+              <div class="mock-row"><div class="mock-title"><div class="mini">∞</div>Keine Repeats</div><div class="mock-meta">bis alles lief</div></div>
+              <div class="mock-row"><div class="mock-title"><div class="mini">⟲</div>Zufällig</div><div class="mock-meta">keine Muster</div></div>
+            </div>
+
+            <div class="mock">
+              <div style="font-weight:900; margin-bottom:8px;">Alle Streamingdienste</div>
+              <div class="badges">
+                <span class="badge">Spotify</span>
+                <span class="badge">Apple Music</span>
+                <span class="badge">YouTube Music</span>
+                <span class="badge">Tidal</span>
+                <span class="badge">Deezer</span>
+                <span class="badge">…</span>
+              </div>
+              <div class="subnote" style="margin-top:10px;">
+                Du bleibst bei deinem Dienst. true-shuffel kümmert sich um echte Zufallsreihenfolge.
+              </div>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
-
-    <footer>
-      <div class="footlinks">
-        <a href="#top">Start</a>
-        <a href="#beta">Beta</a>
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-      </div>
-      <div style="margin-top:10px;">© <span id="y2"></span> true-shuffel.com</div>
-    </footer>
   </div>
+
+  <section id="product">
+    <div class="wrap">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Produktbilder</h2>
+            <p>Swipe auf dem Handy, Pfeile am Desktop.</p>
+          </div>
+        </div>
+
+        <div class="slider" aria-label="Produktbilder Slider">
+          <div class="slider-track" id="sliderTrack"></div>
+          <div class="slider-nav">
+            <button class="btn slider-btn prev" type="button" id="prevSlide">‹</button>
+            <button class="btn slider-btn next" type="button" id="nextSlide">›</button>
+          </div>
+        </div>
+        <div class="slider-dots" id="sliderDots"></div>
+        <div class="subnote" id="sliderNote"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta">
+    <div class="wrap">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2 style="margin:0 0 8px; font-size:24px;">Beta-Test: sichere dir einen Platz</h2>
+            <p style="margin:0; color:var(--muted); line-height:1.55;">
+              Melde dich an und wir informieren dich, sobald true-shuffel startklar ist.
+            </p>
+            <div class="subnote">
+              Kein Spam. Nur Updates zum Beta-Start. Details in <a href="#" onclick="openLegal('privacy');return false;" style="text-decoration:underline;">Datenschutz</a>.
+            </div>
+          </div>
+
+          <form class="form" id="betaForm" method="POST" target="beta_iframe" autocomplete="on">
+            <input type="hidden" name="action" value="beta" />
+            <input class="input" type="text" id="betaName" name="name" placeholder="Name" required />
+            <input class="input" type="email" id="betaEmail" name="email" placeholder="E-Mail" required />
+            <input type="hidden" name="source" value="website" />
+            <input type="hidden" id="betaUA" name="userAgent" value="" />
+            <button class="btn btn-primary" id="betaSubmit" type="submit">Anmelden</button>
+
+            <div class="consent">
+              <input type="checkbox" id="betaConsent" required />
+              <label for="betaConsent">
+                Ich willige ein, dass meine Angaben zur Beta-Test-Organisation verarbeitet werden. (<a href="#" onclick="openLegal('privacy');return false;" style="text-decoration:underline;">Datenschutz</a>)
+              </label>
+            </div>
+            <div class="subnote" id="betaMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
+          </form>
+
+          <iframe id="beta_iframe" name="beta_iframe" style="display:none;"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Bewertungen</h2>
+            <p>Hier siehst du freigegebene Bewertungen. Neue Bewertungen erscheinen nach kurzer Prüfung.</p>
+          </div>
+          <div class="pill" id="ratingBadge"><span class="dot"></span><span>⭐ Lädt…</span></div>
+        </div>
+
+        <div class="subnote" id="reviewsStatus" style="margin-top:0; margin-bottom:12px;"></div>
+        <div class="reviews-grid" id="reviewsList"></div>
+
+        <div class="panel" style="margin-top:14px;">
+          <h3 style="margin:0 0 10px;">Bewertung schreiben</h3>
+
+          <form class="form" id="reviewForm" method="POST" target="review_iframe">
+            <input type="hidden" name="action" value="review" />
+            <input class="input" type="text" id="reviewName" name="name" placeholder="Name (optional)" />
+            <select class="input" id="reviewRating" name="rating" style="flex:0 0 180px;">
+              <option value="5">★★★★★ (5)</option>
+              <option value="4">★★★★☆ (4)</option>
+              <option value="3">★★★☆☆ (3)</option>
+              <option value="2">★★☆☆☆ (2)</option>
+              <option value="1">★☆☆☆☆ (1)</option>
+            </select>
+            <textarea class="input" id="reviewText" name="text" placeholder="Deine Bewertung…" maxlength="400" style="flex:1 1 100%; min-height:92px;"></textarea>
+            <input type="hidden" name="source" value="website" />
+            <input type="hidden" id="reviewUA" name="userAgent" value="" />
+            <button class="btn btn-primary" id="reviewSubmit" type="submit">Bewertung senden</button>
+            <div class="subnote" id="reviewMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
+          </form>
+
+          <iframe id="review_iframe" name="review_iframe" style="display:none;"></iframe>
+
+          <div class="subnote">Hinweis: Bewertungen werden vor Anzeige kurz geprüft.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="container">
+        <div class="section-title">
+          <div><h2>FAQ</h2><p>Kurz & verständlich.</p></div>
+        </div>
+
+        <details>
+          <summary>Warum ist Shuffle oft nicht wirklich zufällig? <span class="chev"></span></summary>
+          <p>Viele Dienste nutzen Smart-Shuffle-Heuristiken. Dadurch wiederholen sich Muster oder große Playlists laufen nicht komplett durch.</p>
+        </details>
+
+        <details>
+          <summary>Was macht true-shuffel anders? <span class="chev"></span></summary>
+          <p>true-shuffel erstellt eine echte Zufallsreihenfolge ohne Wiederholung und spielt jeden Titel genau einmal pro Durchlauf.</p>
+        </details>
+
+        <details>
+          <summary>Funktioniert das auch bei sehr großen Playlists (10.000+)? <span class="chev"></span></summary>
+          <p>Ja – genau dafür ist true-shuffel gedacht. Entscheidend ist effizientes Laden (Paging) und ein Shuffle ohne Wiederholung.</p>
+        </details>
+
+        <details>
+          <summary>Muss ich meinen Streamingdienst verlassen? <span class="chev"></span></summary>
+          <p>Nein. Du nutzt deinen Dienst weiter. true-shuffel greift später per Login (App) auf deine Playlists zu.</p>
+        </details>
+
+        <details>
+          <summary>Kostet true-shuffel etwas? <span class="chev"></span></summary>
+          <p>Der Beta-Test ist kostenlos. Über zukünftige Modelle informieren wir transparent, sobald es soweit ist.</p>
+        </details>
+
+        <details>
+          <summary>Was passiert mit meinen Daten? <span class="chev"></span></summary>
+          <p>Für den Beta-Test speichern wir Name und E-Mail, um dich zu informieren. Bewertungen werden gespeichert und vor Anzeige geprüft. Details stehen in der Datenschutzerklärung.</p>
+        </details>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <div class="container">
+      <div class="foot">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <img id="footerLogo" src="assets/logo_dark.png" alt="" style="width:20px; height:20px; border-radius:8px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02);" />
+          <span>© <span id="year"></span> true-shuffel.com</span>
+        </div>
+        <div style="display:flex; gap:4px; flex-wrap:wrap;">
+          <a href="#top">Start</a>
+          <a href="#product">Produkt</a>
+          <a href="#cta">Beta</a>
+          <a href="#reviews">Bewertungen</a>
+          <a href="#" onclick="openLegal('impressum');return false;">Impressum</a>
+          <a href="#" onclick="openLegal('privacy');return false;">Datenschutz</a>
+          <a href="#" onclick="openLegal('cookies');return false;">Cookies</a>
+          <a href="#" id="cookieResetLink">Cookie-Hinweis zurücksetzen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="legalModal">
+  <div class="modal-panel">
+    <div class="modal-header">
+      <b id="legalTitle">Info</b>
+      <button class="btn" type="button" onclick="closeLegal()">Schließen</button>
+    </div>
+    <div class="modal-content">
+      <div id="legalBody"></div>
+    </div>
+  </div>
+</div>
+
+<div id="cookieBanner" role="dialog" aria-live="polite">
+  <div class="cookie-row">
+    <div class="cookie-text">
+      Wir verwenden keine Tracking-Cookies. Nur technisch notwendige Speicherung (z. B. Theme).
+      Mehr dazu unter <a href="#" onclick="openLegal('cookies');return false;" style="text-decoration:underline;">Cookies</a>.
+    </div>
+    <div class="cookie-actions">
+      <button class="btn" type="button" onclick="openLegal('cookies')">Details</button>
+      <button class="btn btn-primary" type="button" id="cookieAcceptBtn">OK</button>
+    </div>
+  </div>
+</div>
 
 <script>
   const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz6YNaWP-8nd2GODDv9ngn_3uP35EIG9gCxrPQjeuLuJqWXFkK6EN_ExwwUHyQxYKHt/exec";
-  document.getElementById("y2").textContent = new Date().getFullYear();
+
+  // assets
+  const LOGO_DARK = "assets/logo_dark.png";
+  const LOGO_LIGHT = "assets/logo_light.png";
+  const HERO_GIF_DARK = "assets/brand_logo_loop.gif";
+
+  // If your images are PNG, change .jpg -> .png
+  const PRODUCT_IMAGES = [
+  "assets/product_01_one-tap.png",
+  "assets/product_02_features-card.png",
+  "assets/product_03_comparison.png",
+  "assets/product_04_10000-tracks.png"
+];
+
+  const $ = (id) => document.getElementById(id);
+
+  $("year").textContent = new Date().getFullYear();
+  $("betaForm").action = WEBAPP_URL;
+  $("reviewForm").action = WEBAPP_URL;
+
+  // menu
+  const menuBtn = $("menuBtn");
+  const drawer = $("drawer");
+  menuBtn?.addEventListener("click", () => {
+    const isOpen = drawer.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(isOpen));
+  });
 
   // theme
-  function applyTheme2(mode){
+  function applyTheme(mode){
     const isLight = mode === "light";
     document.body.classList.toggle("light", isLight);
-    document.getElementById("logo").src = isLight ? "assets/logo_light.png" : "assets/logo_dark.png";
-    localStorage.setItem("ts_theme_v2", mode);
+
+    $("brandLogo").src = isLight ? LOGO_LIGHT : LOGO_DARK;
+    $("footerLogo").src = isLight ? LOGO_LIGHT : LOGO_DARK;
+    $("heroMedia").src = isLight ? LOGO_LIGHT : HERO_GIF_DARK;
+
+    $("themeIcon").textContent = isLight ? "☀" : "☾";
+    $("themeLabel").textContent = isLight ? "Dark" : "Light";
   }
-  (function(){
-    const saved = localStorage.getItem("ts_theme_v2");
-    if (saved) applyTheme2(saved);
+  (function initTheme(){
+    const saved = localStorage.getItem("true_shuffel_theme");
+    if (saved === "light" || saved === "dark") return applyTheme(saved);
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    applyTheme(prefersLight ? "light" : "dark");
   })();
-  document.getElementById("themeBtn").addEventListener("click", () => {
+  $("themeToggle").addEventListener("click", () => {
     const next = document.body.classList.contains("light") ? "dark" : "light";
-    applyTheme2(next);
+    applyTheme(next);
+    localStorage.setItem("true_shuffel_theme", next);
   });
 
-  // beta form
-  const f = document.getElementById("betaForm2");
-  const iframe = document.getElementById("beta_iframe2");
-  const msg = document.getElementById("betaMsg2");
-  const btn = document.getElementById("betaBtn2");
-  let submitting = false;
+  // cookie
+  const cookieBanner = $("cookieBanner");
+  $("cookieAcceptBtn").addEventListener("click", () => {
+    localStorage.setItem("ts_cookie_ack_public", "1");
+    cookieBanner.style.display = "none";
+  });
+  $("cookieResetLink").addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem("ts_cookie_ack_public");
+    cookieBanner.style.display = "block";
+  });
+  window.addEventListener("load", () => {
+    if (localStorage.getItem("ts_cookie_ack_public") !== "1") cookieBanner.style.display = "block";
+  });
 
-  f.action = WEBAPP_URL;
+  // slider
+  const sliderTrack = $("sliderTrack");
+  const sliderDots = $("sliderDots");
+  const sliderNote = $("sliderNote");
+  let sliderIndex = 0;
 
-  f.addEventListener("submit", (e) => {
-    if (!document.getElementById("c2").checked) {
-      e.preventDefault();
-      msg.textContent = "Bitte Einwilligung bestätigen.";
+  function updateSlider(){
+    sliderTrack.style.transform = `translateX(${-sliderIndex*100}%)`;
+    [...sliderDots.children].forEach((d, i) => d.classList.toggle("active", i === sliderIndex));
+  }
+  function goToSlide(i){
+    const n = PRODUCT_IMAGES.length || 1;
+    sliderIndex = (i + n) % n;
+    updateSlider();
+  }
+
+  function buildSlides(){
+    sliderTrack.innerHTML = "";
+    sliderDots.innerHTML = "";
+    sliderNote.textContent = "";
+
+    if (!PRODUCT_IMAGES.length) {
+      sliderNote.textContent = "Produktbilder folgen bald.";
       return;
     }
-    submitting = true;
-    btn.disabled = true;
-    msg.textContent = "Wird gesendet…";
+
+    PRODUCT_IMAGES.forEach((src, i) => {
+      const slide = document.createElement("div");
+      slide.className = "slide";
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = `Produktbild ${i+1}`;
+      img.loading = "lazy";
+      img.onerror = () => {
+        sliderNote.textContent = "Ein Bild wurde nicht gefunden. Prüfe Dateinamen und Endung (.jpg/.png) im assets-Ordner.";
+      };
+      slide.appendChild(img);
+      sliderTrack.appendChild(slide);
+
+      const dot = document.createElement("button");
+      dot.className = "slider-dot" + (i === 0 ? " active" : "");
+      dot.type = "button";
+      dot.addEventListener("click", () => goToSlide(i));
+      sliderDots.appendChild(dot);
+    });
+
+    sliderIndex = 0;
+    updateSlider();
+  }
+  $("prevSlide").addEventListener("click", () => goToSlide(sliderIndex - 1));
+  $("nextSlide").addEventListener("click", () => goToSlide(sliderIndex + 1));
+
+  // swipe
+  let startX = null;
+  sliderTrack.addEventListener("pointerdown", (e) => {
+    startX = e.clientX;
+    sliderTrack.setPointerCapture(e.pointerId);
+  });
+  sliderTrack.addEventListener("pointerup", (e) => {
+    if (startX === null) return;
+    const dx = e.clientX - startX;
+    startX = null;
+    if (Math.abs(dx) < 40) return;
+    if (dx < 0) goToSlide(sliderIndex + 1);
+    else goToSlide(sliderIndex - 1);
   });
 
-  iframe.addEventListener("load", () => {
-    if (!submitting) return;
-    submitting = false;
-    btn.disabled = false;
-    msg.textContent = "Danke! Du bist registriert.";
-    f.reset();
+  buildSlides();
+
+  // forms feedback
+  const betaMsg = $("betaMsg");
+  const betaSubmit = $("betaSubmit");
+  const betaIframe = $("beta_iframe");
+  let betaSubmitting = false;
+
+  $("betaForm").addEventListener("submit", (e) => {
+    if (!$("betaConsent").checked) {
+      e.preventDefault();
+      betaMsg.textContent = "Bitte Einwilligung bestätigen.";
+      return;
+    }
+    $("betaUA").value = navigator.userAgent || "";
+    betaSubmitting = true;
+    betaSubmit.disabled = true;
+    betaMsg.textContent = "Wird gesendet…";
   });
+  betaIframe.addEventListener("load", () => {
+    if (!betaSubmitting) return;
+    betaSubmitting = false;
+    betaSubmit.disabled = false;
+    betaMsg.textContent = "Danke! Du bist registriert.";
+    $("betaName").value = "";
+    $("betaEmail").value = "";
+    $("betaConsent").checked = false;
+  });
+
+  const reviewMsg = $("reviewMsg");
+  const reviewSubmit = $("reviewSubmit");
+  const reviewIframe = $("review_iframe");
+  let reviewSubmitting = false;
+
+  $("reviewForm").addEventListener("submit", (e) => {
+    const txt = ($("reviewText").value || "").trim();
+    if (txt.length < 5) {
+      e.preventDefault();
+      reviewMsg.textContent = "Bitte mindestens 5 Zeichen schreiben.";
+      return;
+    }
+    $("reviewUA").value = navigator.userAgent || "";
+    reviewSubmitting = true;
+    reviewSubmit.disabled = true;
+    reviewMsg.textContent = "Wird gesendet…";
+  });
+  reviewIframe.addEventListener("load", () => {
+    if (!reviewSubmitting) return;
+    reviewSubmitting = false;
+    reviewSubmit.disabled = false;
+    reviewMsg.textContent = "Danke! Bewertung ist eingegangen (erscheint nach Prüfung).";
+    $("reviewName").value = "";
+    $("reviewRating").value = "5";
+    $("reviewText").value = "";
+    setTimeout(loadReviews, 800);
+  });
+
+  // reviews JSONP
+  const reviewsList = $("reviewsList");
+  const ratingBadge = $("ratingBadge");
+  const reviewsStatus = $("reviewsStatus");
+
+  function stars(n){
+    n = Math.max(1, Math.min(5, Number(n || 5)));
+    return "★★★★★".slice(0,n) + "☆☆☆☆☆".slice(0, 5-n);
+  }
+
+  function renderReviews(items){
+    reviewsList.innerHTML = "";
+    if (!items.length) {
+      reviewsList.innerHTML = `
+        <div class="review">
+          <div class="name">Noch keine Bewertungen</div>
+          <div class="stars">☆☆☆☆☆</div>
+          <div class="text">Sei die erste Person, die eine Bewertung schreibt.</div>
+          <div class="meta">Bewertungen erscheinen nach kurzer Prüfung.</div>
+        </div>
+      `;
+      ratingBadge.innerHTML = `<span class="dot"></span><span>⭐ 0.0 / 5 (0)</span>`;
+      return;
+    }
+    const avg = items.reduce((a,b)=>a+(Number(b.rating)||0),0) / items.length;
+    ratingBadge.innerHTML = `<span class="dot"></span><span>⭐ ${avg.toFixed(1)} / 5 (${items.length})</span>`;
+    items.slice().reverse().forEach(r => {
+      const dt = r.timestamp ? new Date(r.timestamp) : new Date();
+      const name = (r.name && String(r.name).trim()) ? String(r.name).trim() : "Anonym";
+      const el = document.createElement("div");
+      el.className = "review";
+      el.innerHTML = `
+        <div class="name">${name}</div>
+        <div class="stars">${stars(r.rating)}</div>
+        <div class="text">${String(r.text || "")}</div>
+        <div class="meta">${isNaN(dt.getTime()) ? "" : dt.toLocaleDateString("de-DE")}</div>
+      `;
+      reviewsList.appendChild(el);
+    });
+  }
+
+  window.tsReviewsCb = function(payload){
+    reviewsStatus.textContent = "";
+    const items = Array.isArray(payload?.reviews) ? payload.reviews : [];
+    renderReviews(items);
+    window.__reviewsLoaded = true;
+  };
+
+  function loadReviews(){
+    window.__reviewsLoaded = false;
+    reviewsStatus.textContent = "Bewertungen werden geladen…";
+
+    setTimeout(() => {
+      if (!window.__reviewsLoaded) {
+        reviewsStatus.textContent = "Bewertungen konnten nicht geladen werden. Prüfe Web-App Zugriff („Anyone“) und den Link.";
+      }
+    }, 2500);
+
+    const s = document.createElement("script");
+    s.src = `${WEBAPP_URL}?action=reviews&callback=tsReviewsCb&t=${Date.now()}`;
+    s.async = true;
+    s.onerror = () => {
+      reviewsStatus.textContent = "Fehler beim Laden der Bewertungen.";
+      renderReviews([]);
+    };
+    document.body.appendChild(s);
+    setTimeout(() => { try { s.remove(); } catch {} }, 8000);
+  }
+
+  loadReviews();
+
+  // legal modal
+  const legalModal = $("legalModal");
+  const legalTitle = $("legalTitle");
+  const legalBody = $("legalBody");
+
+  function openLegal(type){
+    legalModal.style.display = "block";
+    document.body.style.overflow = "hidden";
+
+    if (type === "impressum") {
+      legalTitle.textContent = "Impressum";
+      legalBody.innerHTML = `
+        <p><b>Angaben gemäß § 5 TMG</b></p>
+        <p><b>true-shuffel</b><br/>
+        Inhaber: Mika Hertler & Moritz Hertler<br/>
+        Am Schwarzen Steg 5a<br/>
+        95448 Bayreuth<br/>
+        Deutschland</p>
+        <p><b>Kontakt</b><br/>E-Mail: hello@true-shuffel.com</p>
+        <p><b>Verantwortlich nach § 18 Abs. 2 MStV</b><br/>
+        Mika Hertler & Moritz Hertler<br/>Am Schwarzen Steg 5a, 95448 Bayreuth</p>
+      `;
+    } else if (type === "cookies") {
+      legalTitle.textContent = "Cookies & lokale Speicherung";
+      legalBody.innerHTML = `
+        <p>Wir verwenden keine Tracking-Cookies.</p>
+        <p><b>Technisch notwendige Speicherung</b><br/>
+        Wir speichern z. B. Theme-Auswahl und den Cookie-Hinweis lokal im Browser (localStorage).</p>
+      `;
+    } else {
+      legalTitle.textContent = "Datenschutz";
+      legalBody.innerHTML = `
+        <p><b>1. Verantwortliche</b><br/>
+        Mika Hertler & Moritz Hertler, Am Schwarzen Steg 5a, 95448 Bayreuth, Deutschland<br/>
+        Kontakt: hello@true-shuffel.com</p>
+        <p><b>2. Beta-Test</b><br/>
+        Wir verarbeiten Name und E-Mail zur Organisation des Beta-Tests. Rechtsgrundlage: Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).</p>
+        <p><b>3. Bewertungen</b><br/>
+        Bewertungen werden gespeichert und vor Anzeige kurz geprüft.</p>
+      `;
+    }
+  }
+
+  function closeLegal(){
+    legalModal.style.display = "none";
+    document.body.style.overflow = "";
+  }
+  window.openLegal = openLegal;
+  window.closeLegal = closeLegal;
+
+  legalModal.addEventListener("click", (e) => { if (e.target === legalModal) closeLegal(); });
 </script>
 </body>
 </html>
