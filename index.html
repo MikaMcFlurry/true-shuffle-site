@@ -192,6 +192,13 @@
       border-color: rgba(0,0,0,.10);
       background: transparent; /* removes the “stripe” feeling */
     }
+    
+    body.light .hero-media{
+  background: transparent;
+  object-fit: cover;          /* statt contain */
+  object-position: center;
+  aspect-ratio: 16 / 9;
+}
 
     .mock{
       border-radius: 18px;
@@ -719,10 +726,10 @@
 
   // If your images are PNG, change .jpg -> .png
   const PRODUCT_IMAGES = [
-  "assets/product_01_one-tap.png",
-  "assets/product_02_features-card.png",
-  "assets/product_03_comparison.png",
-  "assets/product_04_10000-tracks.png"
+  "assets/product_01_one-tap.PNG",
+  "assets/product_02_features-card.PNG",
+  "assets/product_03_comparison.PNG",
+  "assets/product_04_10000-tracks.PNG"
 ];
 
   const $ = (id) => document.getElementById(id);
