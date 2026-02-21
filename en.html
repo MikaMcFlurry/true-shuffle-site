@@ -5,21 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>true-shuffle — True Shuffle for every playlist</title>
   <meta name="description" content="True shuffle for every playlist: every song exactly once per run—no repeats, no skipped tracks. Join the beta waitlist." />
-  <meta name="theme-color" content="#24252a" />
+  
+  <meta name="robots" content="index,follow,max-image-preview:large" /><meta name="theme-color" content="#24252a" />
   <meta property="og:title" content="true-shuffle — true shuffle for every playlist" />
   <meta property="og:description" content="Every song exactly once—no repeats, no skipped tracks." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://mikamcflurry.github.io/true-shuffle-site/assets/og_true_shuffle_1200x630.png" />
+  
+  <meta property="og:site_name" content="true-shuffle" /><meta property="og:image" content="https://mikamcflurry.github.io/true-shuffle-site/assets/og_true_shuffle_1200x630.png" />
   <meta property="og:url" content="https://mikamcflurry.github.io/true-shuffle-site/en.html" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:image" content="https://mikamcflurry.github.io/true-shuffle-site/assets/og_true_shuffle_1200x630.png" />
-  <link rel="canonical" href="https://mikamcflurry.github.io/true-shuffle-site/en.html" />
+  
+  <meta name="twitter:title" content="true-shuffle — True shuffle for every playlist" />
+  <meta name="twitter:description" content="True shuffle for every playlist: every track exactly once per run — no repeats, no skipped tracks. Join the beta waitlist." />
+  <meta name="twitter:url" content="https://mikamcflurry.github.io/true-shuffle-site/en.html" /><link rel="canonical" href="https://mikamcflurry.github.io/true-shuffle-site/en.html" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="alternate" hreflang="de" href="index.html" />
   <link rel="alternate" hreflang="en" href="en.html" />
-  <style>
+  
+  <script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Organization", "name": "true-shuffle GmbH", "url": "https://mikamcflurry.github.io/true-shuffle-site/", "logo": "https://mikamcflurry.github.io/true-shuffle-site/assets/logo_dark.png"}
+  </script>
+  <script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "WebSite", "name": "true-shuffle", "url": "https://mikamcflurry.github.io/true-shuffle-site/", "inLanguage": "en"}
+  </script>
+
+<style>
     :root{
       --bg:#24252a; --bg2:#17181c;
       --panel: rgba(255,255,255,.06);
@@ -529,7 +542,6 @@
           <a href="#beta">Beta</a>
           <a href="#reviews">Reviews</a>
             <a href="#contact">Contact</a>
-            <a href="#contact">Contact</a>
           <a href="#faq">FAQ</a>
         </nav>
 
@@ -873,7 +885,7 @@
 
 <div id="cookieBanner" aria-live="polite">
   <div class="cookie-row">
-    <div class="cookie-text">We don’t use tracking cookies. Only necessary storage (e.g., theme). More under <a href="#" onclick="openLegal('cookies');return false;" style="text-decoration:underline;">Cookies</a>.</div>
+    <div class="cookie-text">We don’t use tracking cookies. We log minimal usage events (impressions, CTA clicks, form success) without cookies. If Do Not Track is enabled, we don’t send events. We also store necessary settings (e.g., theme). More under <a href="#" onclick="openLegal('cookies');return false;" style="text-decoration:underline;">Cookies</a>.</div>
     <div class="cookie-actions">
       <button class="btn" type="button" onclick="openLegal('cookies')">Details</button>
       <button class="btn btn-primary" type="button" id="cookieAcceptBtn">OK</button>
@@ -884,7 +896,34 @@
 <script>
   const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbw6-_EHQDMmdCADWm2ig-ZcV8tFY4X-wNoTEp61mkALTNZIDUVHS3SaotLOqQqCfl_Z/exec";
   const PRIVACY_VERSION = "2026-02-21";
-  const LOGO_DARK = "assets/logo_dark.png";
+  
+  // --- privacy-friendly event tracking (no cookies; respects Do Not Track) ---
+  const TS_DNT = (navigator.doNotTrack === "1" || window.doNotTrack === "1");
+  const TS_SESSION_ID = Math.random().toString(36).slice(2) + Date.now().toString(36);
+
+  function trackEvent(name, props) {
+    try {
+      if (TS_DNT) return;
+      const p = new URLSearchParams();
+      p.set("action", "event");
+      p.set("event", String(name || ""));
+      p.set("url", location.href);
+      p.set("path", location.pathname);
+      p.set("referrer", document.referrer || "");
+      p.set("locale", (navigator.language || "en").slice(0, 10));
+      p.set("sessionId", TS_SESSION_ID);
+      p.set("props", JSON.stringify(props || {}));
+
+      // Prefer sendBeacon (keeps working on navigation), fallback to fetch.
+      if (navigator.sendBeacon) {
+        const blob = new Blob([p.toString()], { type: "application/x-www-form-urlencoded" });
+        navigator.sendBeacon(WEBAPP_URL, blob);
+        return;
+      }
+      fetch(WEBAPP_URL, { method: "POST", body: p, keepalive: true, mode: "no-cors" }).catch(() => {});
+    } catch (e) {}
+  }
+const LOGO_DARK = "assets/logo_dark.png";
   const LOGO_LIGHT = "assets/logo_light.png";
   const HERO_MEDIA_DARK = "assets/brand_logo_loop.gif";
   const HERO_MEDIA_LIGHT = "assets/brand_logo_loop_light.gif";
@@ -893,7 +932,25 @@ const PRODUCT_IMAGES = ["assets/product_01_one-tap.PNG", "assets/product_02_feat
   const $ = (id) => document.getElementById(id);
   $("year").textContent = new Date().getFullYear();
 
-  // actions
+  
+
+  // Track CTA clicks to join beta
+  (function(){
+    const els = Array.from(document.querySelectorAll('a[href="#beta"], a[href="#beta"] *'));
+    document.querySelectorAll('a[href="#beta"]').forEach((a) => {
+      a.addEventListener("click", () => {
+        const where = a.closest("header") ? "header" : (a.closest("section")?.id || "page");
+        trackEvent("cta_join_beta_click", { where });
+      }, { passive: true });
+    });
+    const btn = document.getElementById("betaSubmit");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        trackEvent("cta_join_beta_click", { where: "beta_form" });
+      }, { passive: true });
+    }
+  })();
+// actions
   $("betaForm").action = WEBAPP_URL;
   $("reviewForm").action = WEBAPP_URL;
   $("contactForm").action = WEBAPP_URL;
@@ -1004,6 +1061,25 @@ $("themeIcon").textContent = isLight ? "☀" : "☾";
     else goToSlide(sliderIndex - 1);
   });
   buildSlides();
+
+  // Track impressions section view once
+  (function(){
+    const el = document.getElementById("impressions");
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    let fired = false;
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (fired) return;
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+          fired = true;
+          trackEvent("impressions_view", { section: "impressions" });
+          io.disconnect();
+        }
+      }
+    }, { threshold: [0.35] });
+    io.observe(el);
+  })();
+
 
   // forms feedback (uses postMessage from Apps Script response)
   const WEBAPP_ORIGIN = (function(){ try { return new URL(WEBAPP_URL).origin; } catch(e){ return ""; } })();
@@ -1118,6 +1194,7 @@ let betaFallbackTimer = null;
 // iframe fallback can fire before postMessage. Allow late postMessage to override this message.
     betaAllowLateMessage = true;
     setMsg(betaMsg, betaHumanMessage("pending"), false);
+    trackEvent("signup_success", { method: "iframe_fallback", code: "pending" });
     document.getElementById("betaName").value = "";
     document.getElementById("betaEmail").value = "";
     document.getElementById("betaConsent").checked = false;
@@ -1195,6 +1272,7 @@ const ok = !!d.ok;
       setMsg(betaMsg, betaHumanMessage(String(d.code || "")), !ok);
 
       if (ok) {
+        trackEvent("signup_success", { method: "postMessage", code: String(d.code || "") });
         $("betaName").value = "";
         $("betaEmail").value = "";
         $("betaConsent").checked = false;
@@ -1212,6 +1290,7 @@ const ok = !!d.ok;
       setMsg(reviewMsg, reviewHumanMessage(String(d.code || "")), !ok);
 
       if (ok) {
+        trackEvent("signup_success", { method: "postMessage", code: String(d.code || "") });
         $("reviewName").value = "";
         $("reviewRating").value = "5";
         $("reviewText").value = "";
@@ -1232,6 +1311,7 @@ const ok = !!d.ok;
       setMsg(contactMsg, contactHumanMessage(String(d.code || "")), !ok);
 
       if (ok) {
+        trackEvent("signup_success", { method: "postMessage", code: String(d.code || "") });
         $("contactName").value = "";
         $("contactEmail").value = "";
         $("contactMessage").value = "";
@@ -1355,7 +1435,8 @@ const ok = !!d.ok;
     if (type === "cookies") {
       legalTitle.textContent = "Cookies &amp; local storage";
       legalBody.innerHTML = `
-        <p>We use <b>no tracking</b> and do not set marketing/analytics cookies.</p>
+        <p>We use <b>no tracking cookies</b> and do not set marketing/analytics cookies.</p>
+        <p>To improve the product, we log <b>minimal usage events</b> (impressions, CTA clicks, form success) <b>without cookies</b>. If Do Not Track is enabled, we don’t send events.</p>
         <p><b>Technically necessary storage</b><br/>
         We store a few settings locally in your browser (localStorage), e.g. theme preference and whether you already dismissed the cookie notice.</p>
         <p>You can delete this storage using the “Reset cookie notice” link in the footer.</p>`;
@@ -1376,6 +1457,7 @@ const ok = !!d.ok;
         <li><b>Reviews:</b> processing review text, star rating, and optionally your name (only if “Show my name” is enabled). Reviews are shown after moderation. <i>Legal basis:</i> consent (Art. 6(1)(a) GDPR).</li>
         <li><b>Contact form:</b> handling your inquiry (name optional, email, message). <i>Legal basis:</i> Art. 6(1)(b) GDPR (pre-contract) or Art. 6(1)(f) GDPR (legitimate interest in responding).</li>
         <li><b>Hosting/logs:</b> technical delivery, stability and security. <i>Legal basis:</i> Art. 6(1)(f) GDPR.</li>
+        <li><b>Product analytics (cookie-less):</b> we log minimal usage events (impressions, CTA clicks, form success) without cookies. <i>Legal basis:</i> Art. 6(1)(f) GDPR (legitimate interest). If Do Not Track is enabled, no events are sent.</li>
       </ul>
 
       <p><b>3. Hosting &amp; recipients</b><br/>

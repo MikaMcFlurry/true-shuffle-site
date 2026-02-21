@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mikamcflurry.github.io/true-shuffle-site/sitemap.xml
