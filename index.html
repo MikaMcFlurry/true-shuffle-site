@@ -3,131 +3,75 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="true-shuffel spielt deine komplette Playlist wirklich zufällig – ohne Wiederholungen, ohne Auslassungen. Wie ein MP3-Player, nur mit deinem Streamingdienst." />
-  <meta name="theme-color" content="#121418" />
+  <title>true-shuffel — True Shuffle für Streaming-Playlists (Beta)</title>
+  <meta name="description" content="Echter Shuffle für große Streaming-Playlists: jeder Song genau einmal pro Durchlauf – keine Wiederholungen, keine ausgelassenen Tracks. Jetzt für den Beta-Test anmelden." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#24252a" />
 
-  <meta property="og:title" content="true-shuffel — True Shuffle für Streaming-Playlists (Beta)</title>
-<meta name="description" content="Echter Shuffle für große Streaming-Playlists: jeder Song genau einmal pro Durchlauf – keine Wiederholungen, keine ausgelassenen Tracks. Jetzt für den Beta-Test anmelden." />
+  <!-- Canonical: set to your final domain when ready -->
+  <link rel="canonical" href="https://true-shuffel.com/" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="true-shuffel — True Shuffle für Streaming-Playlists (Beta)" />
+  <meta property="og:description" content="Jeder Song. Genau einmal. Kein Repeat, kein Skip. Beta-Test jetzt offen." />
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="true-shuffel" />
   <meta property="og:image" content="assets/logo_dark.png" />
-<link rel="canonical" href="https://true-shuffel.com/" />
-<meta name="robots" content="index,follow" />
 
-<meta property="og:locale" content="de_DE" />
-<meta property="og:site_name" content="true-shuffel" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="true-shuffel — True Shuffle für Streaming-Playlists" />
+  <meta name="twitter:description" content="Jeder Song. Genau einmal. Kein Repeat, kein Skip. Beta-Test jetzt offen." />
+  <meta name="twitter:image" content="assets/logo_dark.png" />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="true-shuffel — True Shuffle für Streaming-Playlists" />
-<meta name="twitter:description" content="Jeder Song. Genau einmal. Kein Repeat, kein Skip. Beta-Test jetzt offen." />
-<meta name="twitter:image" content="assets/logo_dark.png" />
-  <title>true-shuffel.com — echtes Shuffle für Streaming</title>
-
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/logo_dark.png" />
   <link rel="apple-touch-icon" href="assets/logo_dark.png" />
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@graph":[
-    {
-      "@type":"Organization",
-      "name":"true-shuffel",
-      "url":"https://true-shuffel.com/",
-      "email":"hello@true-shuffel.com",
-      "address":{
-        "@type":"PostalAddress",
-        "streetAddress":"Am Schwarzen Steg 5a",
-        "postalCode":"95448",
-        "addressLocality":"Bayreuth",
-        "addressCountry":"DE"
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "name":"true-shuffel",
+        "url":"https://true-shuffel.com/",
+        "email":"hello@true-shuffel.com",
+        "address":{
+          "@type":"PostalAddress",
+          "streetAddress":"Am Schwarzen Steg 5a",
+          "postalCode":"95448",
+          "addressLocality":"Bayreuth",
+          "addressCountry":"DE"
+        },
+        "founder":[
+          {"@type":"Person","name":"Mika Hertler"},
+          {"@type":"Person","name":"Moritz Hertler"}
+        ]
       },
-      "founder":[
-        {"@type":"Person","name":"Mika Hertler"},
-        {"@type":"Person","name":"Moritz Hertler"}
-      ]
-    },
-    {
-      "@type":"WebSite",
-      "name":"true-shuffel",
-      "url":"https://true-shuffel.com/"
-    },
-    {
-      "@type":"FAQPage",
-      "mainEntity":[
-        {
-          "@type":"Question",
-          "name":"Warum ist Shuffle bei Streamingdiensten oft schlecht?",
-          "acceptedAnswer":{"@type":"Answer","text":"Viele Dienste nutzen Smart-Shuffle-Heuristiken. Dadurch werden große Playlists nicht vollständig durchlaufen oder Reihenfolgen wiederholen sich."}
-        },
-        {
-          "@type":"Question",
-          "name":"Was macht true-shuffel anders?",
-          "acceptedAnswer":{"@type":"Answer","text":"true-shuffel erzeugt eine echte Zufallsreihenfolge ohne Wiederholungen und stellt sicher, dass jeder Titel genau einmal pro Durchlauf abgespielt wird."}
-        },
-        {
-          "@type":"Question",
-          "name":"Was passiert mit meinen Daten beim Beta-Test?",
-          "acceptedAnswer":{"@type":"Answer","text":"Für die Beta-Test-Anmeldung speichern wir Name und E-Mail, um dich zu kontaktieren. Details findest du in der Datenschutzerklärung."}
-        }
-      ]
-    }
-  ]
-}
-</script>
+      {
+        "@type":"WebSite",
+        "name":"true-shuffel",
+        "url":"https://true-shuffel.com/"
+      }
+    ]
+  }
+  </script>
+
   <style>
-  /* Cookie banner */
-#cookieBanner{
-  position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  z-index: 200;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(10,10,10,.86);
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow);
-  padding: 14px;
-  display: none;
-}
-
-body.light #cookieBanner{
-  border-color: rgba(0,0,0,.12);
-  background: rgba(246,246,246,.92);
-}
-
-.cookie-row{
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.cookie-text{
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-  flex: 1 1 320px;
-}
-
-.cookie-actions{
-  display: flex;
-  gap: 10px;
-  flex: 0 0 auto;
-}
-
     :root{
-      /* Dark mode – an dein Dark-Logo angelehnt (charcoal statt hartes schwarz) */
-      --bg: #121418;
-      --bg2:#0b0d10;
+      /* Dark (Logo-Farbton) */
+      --bg: #24252a;     /* <- aus deinem Picker */
+      --bg2:#17181c;
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.09);
       --stroke: rgba(255,255,255,.12);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.70);
       --muted2: rgba(255,255,255,.55);
-      --accent: rgba(255,255,255,.86);
-      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --accent: rgba(255,255,255,.90);
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
       --radius: 20px;
       --radius2: 28px;
       --max: 1120px;
@@ -136,7 +80,7 @@ body.light #cookieBanner{
 
     body.light{
       --bg: #f6f6f6;
-      --bg2: #ffffff;
+      --bg2:#ffffff;
       --panel: rgba(0,0,0,.05);
       --panel2: rgba(0,0,0,.08);
       --stroke: rgba(0,0,0,.12);
@@ -144,20 +88,20 @@ body.light #cookieBanner{
       --muted: rgba(0,0,0,.70);
       --muted2: rgba(0,0,0,.55);
       --accent: rgba(0,0,0,.88);
-      --shadow: 0 20px 60px rgba(0,0,0,.14);
+      --shadow: 0 18px 55px rgba(0,0,0,.14);
       --ring: 0 0 0 6px rgba(0,0,0,.10);
     }
 
-    *{ box-sizing: border-box; }
-    html, body{ height: 100%; }
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
       background:
-        radial-gradient(900px 380px at 18% -5%, rgba(255,255,255,.07), transparent 65%),
-        radial-gradient(900px 380px at 85% 10%, rgba(255,255,255,.05), transparent 60%),
-        radial-gradient(700px 300px at 60% 85%, rgba(255,255,255,.04), transparent 60%),
+        radial-gradient(900px 380px at 18% -5%, rgba(255,255,255,.06), transparent 65%),
+        radial-gradient(900px 380px at 85% 10%, rgba(255,255,255,.04), transparent 60%),
+        radial-gradient(700px 300px at 60% 85%, rgba(255,255,255,.03), transparent 60%),
         linear-gradient(180deg, var(--bg), var(--bg2));
       overflow-x:hidden;
     }
@@ -170,18 +114,20 @@ body.light #cookieBanner{
         linear-gradient(180deg, var(--bg), var(--bg2));
     }
 
-    a{ color: inherit; text-decoration: none; }
-    button, input{ font: inherit; }
+    a{ color:inherit; text-decoration:none; }
+    button, input, textarea, select{ font: inherit; }
+    img{ max-width:100%; height:auto; }
 
-    .wrap{ width: 100%; display:flex; justify-content:center; }
-    .container{ width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .wrap{ width:100%; display:flex; justify-content:center; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
 
+    /* Header */
     header{
       position: sticky;
-      top: 0;
-      z-index: 50;
+      top:0;
+      z-index:50;
       backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(18,20,24,.82), rgba(18,20,24,.58));
+      background: linear-gradient(to bottom, rgba(36,37,42,.86), rgba(36,37,42,.58));
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     body.light header{
@@ -201,16 +147,40 @@ body.light #cookieBanner{
       display:flex;
       align-items:center;
       gap: 12px;
-      min-width: 220px;
+      min-width: 0;
+      flex: 1 1 auto;
     }
-    .brand img{ width: 40px; height: 40px; border-radius: 10px; }
-    .brand strong{ letter-spacing: .02em; font-weight: 800; }
+    .brand img{
+      width:40px; height:40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      flex: 0 0 auto;
+    }
+    body.light .brand img{
+      border-color: rgba(0,0,0,.10);
+      background: rgba(0,0,0,.03);
+    }
+    .brand .title{
+      min-width:0;
+    }
+    .brand strong{
+      display:block;
+      font-weight: 900;
+      letter-spacing: .01em;
+      white-space: nowrap;   /* verhindert "true-" Umbruch */
+      line-height: 1.1;
+    }
     .brand span{
       display:block;
       font-size: 12px;
       color: var(--muted2);
-      margin-top: 1px;
-      letter-spacing: .04em;
+      letter-spacing: .03em;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 44vw;
     }
 
     .navlinks{
@@ -219,6 +189,7 @@ body.light #cookieBanner{
       gap: 18px;
       color: var(--muted);
       font-size: 14px;
+      flex: 0 0 auto;
     }
     .navlinks a{
       padding: 8px 10px;
@@ -235,6 +206,9 @@ body.light #cookieBanner{
       display:flex;
       align-items:center;
       gap: 10px;
+      flex: 0 0 auto;
+      flex-wrap: wrap;
+      justify-content:flex-end;
     }
 
     .btn{
@@ -248,9 +222,9 @@ body.light #cookieBanner{
       background: rgba(255,255,255,.06);
       color: var(--text);
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
       user-select:none;
       white-space:nowrap;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
     body.light .btn{
       border-color: rgba(0,0,0,.12);
@@ -269,11 +243,46 @@ body.light #cookieBanner{
 
     .btn-primary{
       background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
-      color: #121418;
+      color: #24252a;
       border-color: rgba(255,255,255,.25);
       box-shadow: 0 10px 30px rgba(255,255,255,.08);
-      font-weight: 800;
+      font-weight: 900;
     }
+
+    /* Mobile header fixes */
+    .menu-btn{ display:none; }
+    .drawer{ display:none; padding: 10px 0 16px; }
+    .drawer.open{ display:block; }
+    .drawer a{
+      display:block;
+      padding: 12px 10px;
+      border-radius: 14px;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      margin-top: 10px;
+    }
+    body.light .drawer a{
+      border-color: rgba(0,0,0,.08);
+      background: rgba(0,0,0,.02);
+    }
+    .drawer a:hover{ color: var(--text); background: rgba(255,255,255,.06); }
+    body.light .drawer a:hover{ background: rgba(0,0,0,.05); }
+
+    @media (max-width: 980px){
+      .navlinks{ display:none; }
+      .menu-btn{ display:inline-flex; }
+    }
+
+    @media (max-width: 520px){
+      .container{ width: calc(100% - 28px); }
+      .brand span{ display:none; } /* Subtitle weg -> keine Umbrüche */
+      .nav{ flex-wrap: wrap; }
+      .navcta{ width:100%; justify-content:flex-start; }
+    }
+
+    /* Main */
+    main{ padding: 44px 0 70px; }
 
     .pill{
       display:inline-flex;
@@ -291,31 +300,25 @@ body.light #cookieBanner{
       background: rgba(0,0,0,.03);
     }
     .dot{
-      width: 8px; height: 8px;
-      border-radius: 999px;
+      width:8px; height:8px;
+      border-radius:999px;
       background: var(--accent);
       box-shadow: 0 0 0 4px rgba(255,255,255,.10);
     }
     body.light .dot{ box-shadow: 0 0 0 4px rgba(0,0,0,.10); }
 
-    main{ padding: 44px 0 70px; }
-
     .hero{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
       gap: 28px;
-      align-items: start;
+      align-items:start;
       margin-top: 22px;
     }
-    @media (max-width: 980px){
-      .hero{ grid-template-columns: 1fr; }
-      .brand{ min-width: unset; }
-      .navlinks{ display:none; }
-    }
+    @media (max-width: 980px){ .hero{ grid-template-columns: 1fr; } }
 
     h1{
       font-size: clamp(34px, 3.4vw, 54px);
-      line-height: 1.04;
+      line-height: 1.05;
       margin: 14px 0 12px;
       letter-spacing: -0.02em;
     }
@@ -324,7 +327,7 @@ body.light #cookieBanner{
       font-size: 17px;
       line-height: 1.6;
       margin: 0 0 18px;
-      max-width: 62ch;
+      max-width: 65ch;
     }
     .hero-actions{
       display:flex;
@@ -337,43 +340,65 @@ body.light #cookieBanner{
       color: var(--muted2);
       font-size: 13px;
       margin-top: 10px;
+      line-height: 1.55;
+    }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    body.light .card{
+      border-color: rgba(0,0,0,.12);
+      background: rgba(0,0,0,.03);
     }
 
     .hero-card{
       border-radius: var(--radius2);
       border: 1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      padding: 18px;
       box-shadow: var(--shadow);
       overflow:hidden;
-      position: relative;
     }
     body.light .hero-card{
       border-color: rgba(0,0,0,.12);
       background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
     }
-    .hero-card-inner{ position:relative; padding: 18px; }
 
     .hero-logo{
-      width: 100%;
-      max-height: 86px;
-      object-fit: contain;
       display:block;
-      margin: 2px 0 14px;
+      margin: 2px auto 14px;
+      width: 100%;
+      max-height: 92px;
+      object-fit: contain;
+      object-position: center;
       border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+    }
+    body.light .hero-logo{
+      border-color: rgba(0,0,0,.10);
+      background: rgba(0,0,0,.02);
     }
 
     .mock{
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.38);
+      background: rgba(0,0,0,.30);
       padding: 16px;
     }
     body.light .mock{
       border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.04);
+      background: rgba(0,0,0,.03);
     }
     .mock-row{
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
       padding: 10px 10px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.10);
@@ -385,7 +410,7 @@ body.light #cookieBanner{
       background: rgba(0,0,0,.03);
     }
     .mock-row:last-child{ margin-bottom:0; }
-    .mock-title{ display:flex; align-items:center; gap:10px; color: var(--text); font-weight: 700; }
+    .mock-title{ display:flex; align-items:center; gap:10px; font-weight:800; }
     .mini{
       width: 28px; height: 28px; border-radius: 10px;
       display:grid; place-items:center;
@@ -393,12 +418,13 @@ body.light #cookieBanner{
       background: rgba(255,255,255,.06);
       color: var(--accent);
       font-weight: 900;
+      flex: 0 0 auto;
     }
     body.light .mini{
       border-color: rgba(0,0,0,.14);
       background: rgba(0,0,0,.04);
     }
-    .mock-meta{ color: var(--muted2); font-size: 13px; }
+    .mock-meta{ color: var(--muted2); font-size: 13px; text-align:right; }
 
     .metric-grid{
       display:grid;
@@ -420,32 +446,34 @@ body.light #cookieBanner{
     .metric span{ color: var(--muted2); font-size: 13px; }
 
     section{ padding: 70px 0; }
-    .section-title{
-      display:flex; align-items:end; justify-content:space-between; gap: 16px;
-      margin-bottom: 22px;
-    }
-    .section-title h2{ margin:0; font-size: 26px; letter-spacing: -0.01em; }
-    .section-title p{ margin:0; color: var(--muted); max-width: 64ch; line-height: 1.5; }
 
-    .grid{
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 26px;
+      letter-spacing: -0.01em;
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted);
+      max-width: 70ch;
+      line-height: 1.55;
+    }
+
+    .grid3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-    @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } }
+    @media (max-width: 980px){ .grid3{ grid-template-columns: 1fr; } }
 
-    .card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      padding: 18px;
-    }
-    body.light .card{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
-    }
-    .card h3{ margin: 10px 0 8px; font-size: 18px; }
-    .card p{ margin:0; color: var(--muted); line-height: 1.55; }
     .icon{
       width: 44px; height: 44px;
       border-radius: 16px;
@@ -453,73 +481,52 @@ body.light #cookieBanner{
       background: rgba(255,255,255,.06);
       display:grid; place-items:center;
       color: var(--accent);
+      font-weight: 900;
     }
     body.light .icon{
       border-color: rgba(0,0,0,.14);
       background: rgba(0,0,0,.04);
     }
 
-    .how{
+    /* Media placeholders */
+    .media-grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-      align-items: start;
     }
-    @media (max-width: 980px){ .how{ grid-template-columns: 1fr; } }
+    @media (max-width: 980px){ .media-grid{ grid-template-columns: 1fr; } }
 
-    .steps{ display:grid; gap: 10px; }
-    .step{
-      display:flex; gap: 12px;
-      padding: 14px;
-      border-radius: 18px;
+    .media{
+      border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
+      padding: 14px;
+      overflow:hidden;
     }
-    body.light .step{
+    body.light .media{
       border-color: rgba(0,0,0,.12);
       background: rgba(0,0,0,.03);
     }
-    .num{
-      width: 34px; height: 34px; border-radius: 14px;
-      display:grid; place-items:center;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.18);
-      color: var(--accent);
-      font-weight: 900;
-      flex: 0 0 auto;
-    }
-    body.light .num{
-      background: rgba(0,0,0,.06);
-      border-color: rgba(0,0,0,.12);
-    }
-    .step b{ display:block; margin-bottom: 4px; }
-    .step span{ color: var(--muted); line-height: 1.5; }
-
-    .panel{
-      border-radius: var(--radius2);
-      border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
-      padding: 18px;
-    }
-    body.light .panel{
-      border-color: rgba(0,0,0,.12);
-      background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02));
-    }
-
-    .badges{ display:flex; flex-wrap:wrap; gap: 10px; margin-top: 12px; }
-    .badge{
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
+    .media .ph{
+      width:100%;
+      border-radius: 16px;
+      border: 1px dashed rgba(255,255,255,.18);
       background: rgba(255,255,255,.04);
-      color: var(--muted);
-      font-size: 13px;
+      aspect-ratio: 16 / 9;
+      display:grid;
+      place-items:center;
+      color: var(--muted2);
+      text-align:center;
+      padding: 14px;
     }
-    body.light .badge{
-      border-color: rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
+    body.light .media .ph{
+      border-color: rgba(0,0,0,.18);
+      background: rgba(0,0,0,.02);
     }
+    .media h3{ margin: 12px 0 6px; }
+    .media p{ margin:0; color: var(--muted); line-height:1.55; }
 
+    /* CTA / Beta form */
     .cta{
       border-radius: 34px;
       border: 1px solid rgba(255,255,255,.12);
@@ -556,7 +563,7 @@ body.light #cookieBanner{
       padding: 11px 12px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.28);
+      background: rgba(0,0,0,.26);
       color: var(--text);
       outline:none;
       transition: box-shadow .12s ease, border-color .12s ease;
@@ -579,6 +586,87 @@ body.light #cookieBanner{
     }
     .consent input{ margin-top: 3px; }
 
+    /* Reviews */
+    .reviews-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .rating-badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    body.light .rating-badge{
+      border-color: rgba(0,0,0,.12);
+      background: rgba(0,0,0,.03);
+    }
+    .reviews-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 980px){ .reviews-grid{ grid-template-columns: 1fr; } }
+
+    .review{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 14px;
+    }
+    body.light .review{
+      border-color: rgba(0,0,0,.12);
+      background: rgba(0,0,0,.03);
+    }
+    .review .name{ font-weight: 900; }
+    .review .stars{ color: rgba(255,255,255,.88); letter-spacing: .06em; }
+    body.light .review .stars{ color: rgba(0,0,0,.85); }
+    .review .text{ color: var(--muted); margin-top: 8px; line-height: 1.55; }
+    .review .meta{ color: var(--muted2); font-size: 12px; margin-top: 8px; }
+
+    .review-form{
+      margin-top: 14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      padding: 14px;
+    }
+    body.light .review-form{
+      border-color: rgba(0,0,0,.12);
+      background: rgba(0,0,0,.02);
+    }
+    .row{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .select{
+      padding: 11px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.26);
+      color: var(--text);
+      outline:none;
+      min-width: 140px;
+    }
+    body.light .select{
+      border-color: rgba(0,0,0,.12);
+      background: rgba(0,0,0,.03);
+      color: var(--text);
+    }
+    textarea.input{ min-height: 92px; resize: vertical; }
+
+    /* FAQ */
     details{
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.12);
@@ -593,7 +681,7 @@ body.light #cookieBanner{
     summary{
       cursor:pointer;
       list-style:none;
-      font-weight: 800;
+      font-weight: 900;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -617,6 +705,7 @@ body.light #cookieBanner{
     details[open] .chev{ transform: rotate(180deg); }
     details p{ margin: 10px 0 0; color: var(--muted); line-height: 1.6; }
 
+    /* Footer */
     footer{
       border-top: 1px solid rgba(255,255,255,.10);
       padding: 26px 0 40px;
@@ -631,47 +720,15 @@ body.light #cookieBanner{
       gap: 12px;
       flex-wrap:wrap;
     }
-    .foot a{ color: var(--muted); padding: 8px 10px; border-radius: 12px; }
+    .foot a{
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 12px;
+    }
     .foot a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
     body.light .foot a:hover{ background: rgba(0,0,0,.05); }
 
-    /* Mobile menu */
-    .menu-btn{ display:none; }
-    @media (max-width: 980px){
-      .menu-btn{ display:inline-flex; }
-      .drawer{ display:none; padding: 10px 0 16px; }
-      .drawer.open{ display:block; }
-      .drawer a{
-        display:block;
-        padding: 12px 10px;
-        border-radius: 14px;
-        color: var(--muted);
-        border: 1px solid rgba(255,255,255,.08);
-        background: rgba(255,255,255,.03);
-        margin-top: 10px;
-      }
-      body.light .drawer a{
-        border-color: rgba(0,0,0,.08);
-        background: rgba(0,0,0,.02);
-      }
-      .drawer a:hover{ color: var(--text); background: rgba(255,255,255,.06); }
-      body.light .drawer a:hover{ background: rgba(0,0,0,.05); }
-    }
-
-    /* FIX mobile width: wrap header and prevent horizontal overflow */
-    @media (max-width: 520px){
-      .nav{ flex-wrap: wrap; }
-      .brand{ flex: 1 1 100%; }
-      .navcta{
-        width: 100%;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 8px;
-      }
-      .btn{ padding: 10px 12px; }
-    }
-
-    /* Legal modal – FIX scroll */
+    /* Modal (legal) */
     #modal{
       display:none;
       position:fixed;
@@ -705,7 +762,6 @@ body.light #cookieBanner{
       flex: 0 0 auto;
     }
     body.light #modalHeader{ border-bottom:1px solid rgba(0,0,0,.10); }
-
     #modalContent{
       padding:16px;
       color: var(--muted);
@@ -713,6 +769,44 @@ body.light #cookieBanner{
       overflow:auto;
       -webkit-overflow-scrolling: touch;
       flex: 1 1 auto;
+    }
+
+    /* Cookie banner */
+    #cookieBanner{
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 200;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(10,10,10,.86);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      display: none;
+    }
+    body.light #cookieBanner{
+      border-color: rgba(0,0,0,.12);
+      background: rgba(246,246,246,.92);
+    }
+    .cookie-row{
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .cookie-text{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      flex: 1 1 320px;
+    }
+    .cookie-actions{
+      display:flex;
+      gap: 10px;
+      flex: 0 0 auto;
     }
 
     @media (prefers-reduced-motion: no-preference){
@@ -726,6 +820,181 @@ body.light #cookieBanner{
       .d4{ animation-delay: .24s; }
       @keyframes in{ to{ opacity: 1; transform: translateY(0); } }
     }
+    /* ===== Slider (Carousel) ===== */
+.slider{
+  position: relative;
+  border-radius: var(--radius2);
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+body.light .slider{
+  border-color: rgba(0,0,0,.12);
+  background: rgba(0,0,0,.02);
+}
+
+.slider-track{
+  display: flex;
+  transition: transform .35s ease;
+  will-change: transform;
+}
+
+.slide{
+  min-width: 100%;
+  padding: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.slide img{
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.20);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+body.light .slide img{
+  border-color: rgba(0,0,0,.12);
+  background: rgba(0,0,0,.03);
+}
+
+.slider-nav{
+  position:absolute;
+  inset: 0;
+  pointer-events:none;
+}
+.slider-btn{
+  pointer-events:auto;
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 12px;
+}
+.slider-btn.prev{ left: 12px; }
+.slider-btn.next{ right: 12px; }
+
+.slider-dots{
+  display:flex;
+  gap: 8px;
+  justify-content:center;
+  padding: 12px 0 0;
+}
+.slider-dot{
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.10);
+  cursor:pointer;
+}
+body.light .slider-dot{
+  border-color: rgba(0,0,0,.18);
+  background: rgba(0,0,0,.08);
+}
+.slider-dot.active{
+  background: rgba(255,255,255,.55);
+  border-color: rgba(255,255,255,.55);
+}
+body.light .slider-dot.active{
+  background: rgba(0,0,0,.35);
+  border-color: rgba(0,0,0,.35);
+}
+
+/* ===== Video Gallery ===== */
+.video-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 980px){
+  .video-grid{ grid-template-columns: 1fr; }
+}
+
+.video-card{
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  overflow:hidden;
+}
+body.light .video-card{
+  border-color: rgba(0,0,0,.12);
+  background: rgba(0,0,0,.03);
+}
+
+.video-thumb{
+  width:100%;
+  aspect-ratio: 16 / 9;
+  background: rgba(0,0,0,.22);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  display:grid;
+  place-items:center;
+  color: var(--muted2);
+}
+body.light .video-thumb{
+  background: rgba(0,0,0,.04);
+  border-bottom: 1px solid rgba(0,0,0,.10);
+}
+.video-meta{
+  padding: 12px;
+}
+.video-meta b{ display:block; margin-bottom: 6px; }
+.video-meta span{ color: var(--muted); line-height:1.45; font-size: 13px; }
+.video-play{
+  width: 52px; height: 52px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.10);
+  display:grid;
+  place-items:center;
+  font-weight: 900;
+}
+
+/* ===== Video Modal ===== */
+#videoModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.78);
+  z-index: 220;
+  padding: 16px;
+}
+#videoModalPanel{
+  max-width: 980px;
+  margin: 60px auto;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(10,10,10,.92);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+body.light #videoModalPanel{
+  background: rgba(246,246,246,.96);
+  border-color: rgba(0,0,0,.12);
+}
+#videoModalHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+body.light #videoModalHeader{
+  border-bottom: 1px solid rgba(0,0,0,.10);
+}
+#videoFrameWrap{
+  padding: 12px 16px 16px;
+}
+#videoFrameWrap video,
+#videoFrameWrap iframe{
+  width:100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 16px;
+  background: #000;
+}
+    
   </style>
 </head>
 
@@ -736,20 +1005,21 @@ body.light #cookieBanner{
         <div class="nav">
           <a class="brand" href="#top" aria-label="true-shuffel Start">
             <img id="brandLogo" src="assets/logo_dark.png" alt="true-shuffel Logo" />
-            <div>
+            <div class="title">
               <strong>true-shuffel</strong>
               <span>echtes Shuffle für Streaming</span>
             </div>
           </a>
 
           <nav class="navlinks" aria-label="Hauptnavigation">
-            <a href="#features">Features</a>
-            <a href="#how">So funktioniert’s</a>
+            <a href="#product">Produkt</a>
+            <a href="#impressions">Impressionen</a>
+            <a href="#reviews">Bewertungen</a>
             <a href="#faq">FAQ</a>
           </nav>
 
           <div class="navcta">
-            <button class="btn" id="themeToggle" type="button" aria-label="Toggle light mode">
+            <button class="btn" id="themeToggle" type="button" aria-label="Toggle theme">
               <span id="themeIcon" aria-hidden="true">☾</span>
               <span id="themeLabel">Light</span>
             </button>
@@ -758,14 +1028,15 @@ body.light #cookieBanner{
               Menü <span aria-hidden="true">≡</span>
             </button>
 
-            <a class="btn" href="#how">Mehr erfahren</a>
+            <a class="btn" href="#product">Mehr erfahren</a>
             <a class="btn btn-primary" href="#cta">Zum Beta-Test</a>
           </div>
         </div>
 
         <div class="drawer" id="drawer">
-          <a href="#features">Features</a>
-          <a href="#how">So funktioniert’s</a>
+          <a href="#product">Produkt</a>
+          <a href="#impressions">Impressionen</a>
+          <a href="#reviews">Bewertungen</a>
           <a href="#faq">FAQ</a>
           <a href="#cta">Zum Beta-Test</a>
         </div>
@@ -784,125 +1055,190 @@ body.light #cookieBanner{
         <div class="hero">
           <div class="fade-in d2">
             <h1>True Shuffle für Streaming-Playlists.<br/>Jeder Song. Genau einmal.</h1>
-           <p class="lead">
-  Streaming-Shuffle wiederholt sich oft oder lässt Tracks aus – besonders bei großen Playlists.
-  true-shuffel erstellt eine echte Zufallsreihenfolge und spielt <b>alle Songs</b> <b>genau einmal pro Durchlauf</b>.
-</p>
+            <p class="lead">
+              Streaming-Shuffle wiederholt sich oft oder lässt Tracks aus – besonders bei großen Playlists.
+              true-shuffel erstellt eine echte Zufallsreihenfolge und spielt <b>alle Songs genau einmal pro Durchlauf</b>.
+            </p>
 
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#cta" aria-label="Zum Beta-Test">
-                <span aria-hidden="true">▶</span> Zum Beta-Test
-              </a>
-              <a class="btn" href="#features" aria-label="Features ansehen">
-                <span aria-hidden="true">✦</span> Warum true-shuffel?
-              </a>
+              <a class="btn btn-primary" href="#cta"><span aria-hidden="true">▶</span> Zum Beta-Test</a>
+              <a class="btn" href="#product"><span aria-hidden="true">✦</span> Produkt ansehen</a>
             </div>
+
             <div class="subnote">
-              Unterstützt via Login: Spotify, Apple Music, YouTube Music, Tidal, Deezer u. v. m. (über APIs)
+              Unterstützt (Beta/Planned): Spotify, Apple Music, YouTube Music, Tidal, Deezer u. v. m. (über APIs)
             </div>
           </div>
 
           <aside class="hero-card fade-in d3" aria-label="Produktvorschau">
-            <div class="hero-card-inner">
-              <img id="heroLogo" class="hero-logo" src="assets/logo_dark.png" alt="true-shuffel Logo" />
+            <img id="heroLogo" class="hero-logo" src="assets/logo_dark.png" alt="true-shuffel Logo" />
 
-              <div class="mock" role="img" aria-label="Mock UI: Playlist Shuffle ohne Wiederholung">
-                <div class="mock-row">
-                  <div class="mock-title"><div class="mini">✓</div>Vollständige Playlist</div>
-                  <div class="mock-meta">100–10.000+ Songs</div>
-                </div>
-                <div class="mock-row">
-                  <div class="mock-title"><div class="mini">∞</div>Keine Wiederholung</div>
-                  <div class="mock-meta">bis alles lief</div>
-                </div>
-                <div class="mock-row">
-                  <div class="mock-title"><div class="mini">⟲</div>Echter Zufall</div>
-                  <div class="mock-meta">keine Muster</div>
-                </div>
-
-                <div class="metric-grid" aria-label="Kennzahlen">
-                  <div class="metric"><b>0</b><span>ausgelassene Songs</span></div>
-                  <div class="metric"><b>1×</b><span>pro Song (pro Durchlauf)</span></div>
-                </div>
+            <div class="mock" role="img" aria-label="Mock UI: Playlist Shuffle ohne Wiederholung">
+              <div class="mock-row">
+                <div class="mock-title"><div class="mini">✓</div>Vollständige Playlist</div>
+                <div class="mock-meta">100–10.000+ Songs</div>
+              </div>
+              <div class="mock-row">
+                <div class="mock-title"><div class="mini">∞</div>Keine Wiederholung</div>
+                <div class="mock-meta">bis alles lief</div>
+              </div>
+              <div class="mock-row">
+                <div class="mock-title"><div class="mini">⟲</div>Echter Zufall</div>
+                <div class="mock-meta">keine Muster</div>
               </div>
 
-              <div class="subnote" style="margin-top:12px">
-                Hinweis: true-shuffel befindet sich in der Beta. Du kannst dich unten für den Beta-Test anmelden.
+              <div class="metric-grid">
+                <div class="metric"><b>0</b><span>ausgelassene Songs</span></div>
+                <div class="metric"><b>1×</b><span>pro Song (pro Durchlauf)</span></div>
               </div>
             </div>
+
+            <div class="subnote">Hinweis: true-shuffel ist in der Beta. Melde dich unten für den Beta-Test an.</div>
           </aside>
         </div>
       </div>
     </div>
 
-    <section id="features">
+    <!-- PRODUCT -->
+    <section id="product">
+  <div class="wrap">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Produkt</h2>
+          <p>Produktbilder als Slider + Video-Galerie. Dateien kannst du später einfach in <code>/assets</code> ablegen.</p>
+        </div>
+      </div>
+
+      <!-- Image Slider -->
+      <div class="slider" id="imageSlider" aria-label="Produktbilder Slider">
+        <div class="slider-track" id="sliderTrack"></div>
+
+        <div class="slider-nav" aria-hidden="false">
+          <button class="btn slider-btn prev" type="button" id="prevSlide">‹</button>
+          <button class="btn slider-btn next" type="button" id="nextSlide">›</button>
+        </div>
+      </div>
+      <div class="slider-dots" id="sliderDots" aria-label="Slider Navigation"></div>
+
+      <div class="subnote" style="margin-top:10px">
+        Tipp: Lege Bilder z.B. als <code>assets/product_01.jpg</code>, <code>assets/product_02.jpg</code> ab und trage sie unten im JS in <b>PRODUCT_IMAGES</b> ein.
+      </div>
+
+      <div style="height:24px"></div>
+
+      <!-- Video Gallery -->
+      <div class="section-title" style="margin-bottom:14px">
+        <div>
+          <h2>Videos</h2>
+          <p>Video-Kacheln öffnen ein Popup. Unterstützt MP4 aus <code>/assets</code> oder YouTube.</p>
+        </div>
+      </div>
+
+      <div class="video-grid" id="videoGrid"></div>
+
+      <div class="subnote" style="margin-top:10px">
+        Tipp: MP4 in <code>assets/demo.mp4</code> ablegen und unten im JS in <b>VIDEO_ITEMS</b> eintragen. Für YouTube nur die Video-ID.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Modal -->
+<div id="videoModal" role="dialog" aria-label="Video Player">
+  <div id="videoModalPanel">
+    <div id="videoModalHeader">
+      <b id="videoModalTitle">Video</b>
+      <button class="btn" type="button" id="closeVideo">Schließen</button>
+    </div>
+    <div id="videoFrameWrap"></div>
+  </div>
+</div>
+
+    <!-- IMPRESSIONS -->
+    <section id="impressions">
       <div class="wrap">
         <div class="container">
           <div class="section-title">
             <div>
-              <h2>Warum true-shuffel?</h2>
-              <p>
-                Streaming-Dienste optimieren Shuffle oft auf “Vibes”, Wiedererkennung oder Engagement.
-                Ergebnis: du hörst häufig denselben Ausschnitt deiner großen Playlists.
+              <h2>Impressionen</h2>
+              <p>Platzhalter für Social Proof: Presse, Social Posts, Nutzer-Impressionen, Screenshots, etc.</p>
+            </div>
+          </div>
+
+          <div class="grid3">
+            <div class="card">
+              <div class="icon">📰</div>
+              <h3 style="margin:10px 0 8px;">Presse/Blog</h3>
+              <p style="margin:0; color:var(--muted); line-height:1.55;">
+                Platzhalter: hier später Zitate/Logos/Links einfügen.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="icon">💬</div>
+              <h3 style="margin:10px 0 8px;">Community</h3>
+              <p style="margin:0; color:var(--muted); line-height:1.55;">
+                Platzhalter: Discord/Reddit/Kommentare, Screenshots.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="icon">⭐</div>
+              <h3 style="margin:10px 0 8px;">Social Proof</h3>
+              <p style="margin:0; color:var(--muted); line-height:1.55;">
+                Platzhalter: Highlights, Use-Cases, Vorher/Nachher.
               </p>
             </div>
           </div>
-
-          <div class="grid">
-            <div class="card fade-in"><div class="icon" aria-hidden="true">✓</div><h3>Komplett abspielen</h3><p>true-shuffel spielt den <b>gesamten Inhalt</b> deiner Playlist – egal ob 100 Songs oder 10.000+.</p></div>
-            <div class="card fade-in d2"><div class="icon" aria-hidden="true">∞</div><h3>Ohne Wiederholungen</h3><p>Jeder Song kommt <b>genau einmal</b>, bis die ganze Playlist durchgelaufen ist.</p></div>
-            <div class="card fade-in d3"><div class="icon" aria-hidden="true">⟲</div><h3>Echter Zufall</h3><p>Keine regelmäßig wiederkehrenden Reihenfolgen. Shuffle, wie es sein sollte.</p></div>
-            <div class="card fade-in d2"><div class="icon" aria-hidden="true">⚡</div><h3>Du bleibst beim Dienst</h3><p>Login mit deinem Streaming-Account und Zugriff auf deine Playlists über APIs – ohne Plattformwechsel.</p></div>
-            <div class="card fade-in d3"><div class="icon" aria-hidden="true">🔒</div><h3>Datensparsam</h3><p>Wir nutzen deine Daten nur für Beta-Test & Updates. Details findest du in der Datenschutzerklärung.</p></div>
-            <div class="card fade-in d4"><div class="icon" aria-hidden="true">🎧</div><h3>MP3-Player Gefühl</h3><p>Eine Playlist, echtes Shuffle, keine Überraschungen außer der Musik.</p></div>
-          </div>
         </div>
       </div>
     </section>
 
-    <section id="how">
+    <!-- REVIEWS -->
+    <section id="reviews">
       <div class="wrap">
         <div class="container">
           <div class="section-title">
             <div>
-              <h2>So funktioniert’s</h2>
-              <p>In drei Schritten zu echtem Shuffle – ohne deinen Lieblingsdienst zu verlassen.</p>
+              <h2>Bewertungen</h2>
+              <p>Nutzer können direkt auf der Website eine Bewertung abgeben. Diese wird lokal gespeichert und angezeigt (localStorage).</p>
             </div>
           </div>
 
-          <div class="how">
-            <div class="steps">
-              <div class="step fade-in"><div class="num">1</div><div><b>Mit Streamingdienst anmelden</b><span>Wähle Spotify, Apple Music, YouTube Music, Tidal, Deezer usw. und logge dich ein.</span></div></div>
-              <div class="step fade-in d2"><div class="num">2</div><div><b>Playlist auswählen</b><span>Du erhältst direkten Zugriff auf deine Playlists (über die jeweilige API).</span></div></div>
-              <div class="step fade-in d3"><div class="num">3</div><div><b>Shuffle drücken & genießen</b><span>true-shuffel erstellt eine echte Zufallsreihenfolge – ohne Auslassungen und ohne Wiederholung.</span></div></div>
-            </div>
+          <div class="reviews-top">
+            <div class="rating-badge" id="ratingBadge">⭐ 0.0 / 5 (0 Bewertungen)</div>
+            <button class="btn" type="button" id="resetReviewsBtn">Bewertungen zurücksetzen</button>
+          </div>
 
-            <div class="panel fade-in d2">
-              <h3 style="margin:0 0 10px;">Unterstützte Dienste</h3>
-              <p style="margin:0; color: var(--muted); line-height:1.55;">Diese Liste wird in der Beta schrittweise erweitert.</p>
-              <div class="badges" aria-label="Streamingdienste">
-                <span class="badge">Spotify</span>
-                <span class="badge">Apple Music</span>
-                <span class="badge">YouTube Music</span>
-                <span class="badge">Tidal</span>
-                <span class="badge">Deezer</span>
-                <span class="badge">…</span>
-              </div>
+          <div class="reviews-grid" id="reviewsList">
+            <!-- Reviews render here -->
+          </div>
 
-              <div style="margin-top:14px; border-top:1px solid rgba(255,255,255,.10); padding-top:14px;">
-                <h3 style="margin:0 0 8px;">Technik kurz erklärt</h3>
-                <p style="margin:0; color: var(--muted); line-height:1.55;">
-                  true-shuffel nutzt eine Zufalls-Permutation ohne Wiederholung (z. B. Fisher–Yates) und sorgt dafür,
-                  dass jeder Titel genau einmal abgespielt wird, bevor ein neuer Durchlauf startet.
-                </p>
-              </div>
+          <div class="review-form">
+            <h3 style="margin:0 0 10px;">Bewertung schreiben</h3>
+            <div class="row">
+              <input class="input" id="reviewName" type="text" placeholder="Name (optional)" />
+              <select class="select" id="reviewRating" aria-label="Rating">
+                <option value="5">★★★★★ (5)</option>
+                <option value="4">★★★★☆ (4)</option>
+                <option value="3">★★★☆☆ (3)</option>
+                <option value="2">★★☆☆☆ (2)</option>
+                <option value="1">★☆☆☆☆ (1)</option>
+              </select>
             </div>
+            <div style="height:10px"></div>
+            <textarea class="input" id="reviewText" placeholder="Deine Bewertung…" maxlength="400"></textarea>
+            <div class="row" style="margin-top:10px; justify-content:flex-end;">
+              <button class="btn btn-primary" type="button" id="submitReviewBtn">Bewertung speichern</button>
+            </div>
+            <div class="subnote" id="reviewMsg" aria-live="polite"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA (iframe submit – no redirect / no CORS issues) -->
+    <!-- BETA CTA -->
     <section id="cta">
       <div class="wrap">
         <div class="container">
@@ -919,13 +1255,14 @@ body.light #cookieBanner{
               </div>
             </div>
 
+            <!-- Stable form submit (no redirect visible) -->
             <form class="cta-form" id="betaForm"
                   action="https://script.google.com/macros/s/AKfycby3YzfoHaTvwOFfjgeAMP4e1H2627TN-dy_Hb3aRIDgts14psMeqAH6SemCskOw6Ycw/exec"
                   method="POST"
                   target="beta_iframe"
                   autocomplete="on">
-              <input class="input" type="text" id="betaName" name="name" placeholder="Name" aria-label="Name" required />
-              <input class="input" type="email" id="betaEmail" name="email" placeholder="E-Mail für Beta-Test" aria-label="E-Mail für Beta-Test" required />
+              <input class="input" type="text" id="betaName" name="name" placeholder="Name" required />
+              <input class="input" type="email" id="betaEmail" name="email" placeholder="E-Mail für Beta-Test" required />
 
               <input type="hidden" name="source" value="true-shuffel-site" />
               <input type="hidden" id="betaUA" name="userAgent" value="" />
@@ -933,7 +1270,7 @@ body.light #cookieBanner{
               <button class="btn btn-primary" type="submit">Für Beta-Test anmelden</button>
 
               <div class="consent">
-                <input type="checkbox" id="betaConsent" required aria-label="Einwilligung Datenschutz" />
+                <input type="checkbox" id="betaConsent" required />
                 <label for="betaConsent">
                   Ich willige ein, dass meine Angaben (Name, E-Mail) zum Zweck der Beta-Test-Organisation verarbeitet werden.
                   Die Einwilligung kann ich jederzeit widerrufen. (<a href="#" onclick="openModal('privacy'); return false;" style="text-decoration:underline;">Datenschutz</a>)
@@ -949,26 +1286,30 @@ body.light #cookieBanner{
       </div>
     </section>
 
+    <!-- FAQ -->
     <section id="faq">
       <div class="wrap">
         <div class="container">
           <div class="section-title">
-            <div><h2>FAQ</h2><p>Die häufigsten Fragen – kurz und klar.</p></div>
+            <div>
+              <h2>FAQ</h2>
+              <p>Die häufigsten Fragen – kurz und klar.</p>
+            </div>
           </div>
 
           <details class="fade-in">
             <summary>Warum ist Shuffle bei Streamingdiensten oft “schlecht”? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <p>Viele Dienste nutzen Heuristiken oder “Smart Shuffle”-Logiken. Das kann dazu führen, dass große Playlists nicht vollständig durchlaufen oder sich Reihenfolgen wiederholen.</p>
+            <p>Viele Dienste nutzen Smart-Shuffle-Heuristiken. Dadurch werden große Playlists nicht vollständig durchlaufen oder Reihenfolgen wiederholen sich.</p>
           </details>
 
           <details class="fade-in d2">
             <summary>Was macht true-shuffel anders? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <p>true-shuffel erstellt eine echte Zufallsreihenfolge für alle Songs einer Playlist und stellt sicher, dass jeder Titel genau einmal gespielt wird, bevor ein neuer Durchlauf beginnt.</p>
+            <p>true-shuffel erzeugt eine echte Zufallsreihenfolge ohne Wiederholungen und stellt sicher, dass jeder Titel genau einmal pro Durchlauf abgespielt wird.</p>
           </details>
 
           <details class="fade-in d3">
-            <summary>Was passiert mit meinen Daten? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <p>Für die Beta-Test-Anmeldung speichern wir Name und E-Mail, um dich zum Beta-Test zu kontaktieren. Details findest du in der Datenschutzerklärung.</p>
+            <summary>Wo werden Beta-Test Daten gespeichert? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <p>Für den Beta-Test speichern wir Name und E-Mail in einem Google Sheet (Google Apps Script), um dich zu kontaktieren. Details im Datenschutz.</p>
           </details>
         </div>
       </div>
@@ -980,23 +1321,26 @@ body.light #cookieBanner{
       <div class="container">
         <div class="foot">
           <div style="display:flex; align-items:center; gap:10px;">
-            <img id="footerLogo" src="assets/logo_dark.png" alt="" style="width:20px; height:20px; opacity:.95; border-radius:6px;" />
+            <img id="footerLogo" src="assets/logo_dark.png" alt="" style="width:20px; height:20px; border-radius:6px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02);" />
             <span>© <span id="year"></span> true-shuffel.com</span>
           </div>
           <div style="display:flex; gap: 4px; flex-wrap:wrap;">
             <a href="#top">Start</a>
-            <a href="#features">Features</a>
-            <a href="#how">So funktioniert’s</a>
+            <a href="#product">Produkt</a>
+            <a href="#impressions">Impressionen</a>
+            <a href="#reviews">Bewertungen</a>
             <a href="#faq">FAQ</a>
             <a href="#" onclick="openModal('impressum'); return false;">Impressum</a>
             <a href="#" onclick="openModal('privacy'); return false;">Datenschutz</a>
             <a href="#" onclick="openModal('cookies'); return false;">Cookies</a>
+            <a href="#" id="cookieResetLink">Cookie-Hinweis zurücksetzen</a>
           </div>
         </div>
       </div>
     </div>
   </footer>
 
+  <!-- Legal modal -->
   <div id="modal">
     <div id="modalPanel">
       <div id="modalHeader">
@@ -1009,38 +1353,27 @@ body.light #cookieBanner{
     </div>
   </div>
 
+  <!-- Cookie banner -->
+  <div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie Hinweis">
+    <div class="cookie-row">
+      <div class="cookie-text">
+        Wir verwenden keine Tracking-Cookies. Nur technisch notwendige Speicherung (z. B. Theme via localStorage).
+        Mehr dazu unter <a href="#" onclick="openModal('cookies'); return false;" style="text-decoration:underline;">Cookies</a>.
+      </div>
+      <div class="cookie-actions">
+        <button class="btn" type="button" onclick="openModal('cookies')">Details</button>
+        <button class="btn btn-primary" type="button" id="cookieAcceptBtn">OK</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-  
-  // Cookie banner (informational, since no tracking cookies are used)
-function setCookie(name, value, days){
-  const maxAge = days ? `; max-age=${days*24*60*60}` : "";
-  const secure = location.protocol === "https:" ? "; Secure" : "";
-  document.cookie = `${name}=${encodeURIComponent(value)}${maxAge}; Path=/; SameSite=Lax${secure}`;
-}
-function getCookie(name){
-  return document.cookie.split("; ").reduce((acc, part) => {
-    const [k, ...v] = part.split("=");
-    if (k === name) acc = decodeURIComponent(v.join("="));
-    return acc;
-  }, "");
-}
-
-(function initCookieBanner(){
-  const banner = document.getElementById("cookieBanner");
-  const btn = document.getElementById("cookieAcceptBtn");
-  if (!banner || !btn) return;
-
-  const ack = getCookie("ts_cookie_ack");
-  if (!ack) banner.style.display = "block";
-
-  btn.addEventListener("click", () => {
-    setCookie("ts_cookie_ack", "1", 365);
-    banner.style.display = "none";
-  });
-})();
     // Assets
     const LOGO_DARK  = "assets/logo_dark.png";
     const LOGO_LIGHT = "assets/logo_light.png";
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
     // Mobile nav
     const menuBtn = document.getElementById('menuBtn');
@@ -1052,10 +1385,7 @@ function getCookie(name){
       });
     }
 
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Theme toggle + logo switch (device default when no saved)
+    // Theme toggle (device default if no saved setting)
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
@@ -1066,9 +1396,9 @@ function getCookie(name){
 
     function setLogos(isLight){
       const src = isLight ? LOGO_LIGHT : LOGO_DARK;
-      if (brandLogo)  brandLogo.src = src;
-      if (heroLogo)   heroLogo.src  = src;
-      if (footerLogo) footerLogo.src = src;
+      brandLogo.src = src;
+      heroLogo.src = src;
+      footerLogo.src = src;
     }
 
     function applyTheme(mode){
@@ -1098,13 +1428,29 @@ function getCookie(name){
     })();
 
     themeToggle.addEventListener("click", () => {
-      const isCurrentlyLight = document.body.classList.contains("light");
-      const next = isCurrentlyLight ? "dark" : "light";
+      const isLight = document.body.classList.contains("light");
+      const next = isLight ? "dark" : "light";
       applyTheme(next);
       localStorage.setItem("true_shuffel_theme", next);
     });
 
-    // Beta form submit (iframe) – success on iframe load
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if (!href || href === "#") return;
+        const el = document.querySelector(href);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (drawer.classList.contains('open')) {
+          drawer.classList.remove('open');
+          menuBtn?.setAttribute('aria-expanded', "false");
+        }
+      });
+    });
+
+    // Beta form (iframe)
     const betaForm = document.getElementById('betaForm');
     const betaName = document.getElementById('betaName');
     const betaEmail = document.getElementById('betaEmail');
@@ -1128,11 +1474,9 @@ function getCookie(name){
       betaMsg.textContent = "Wird gespeichert…";
     });
 
-    // iframe load fires when request finishes
     betaIframe.addEventListener('load', () => {
       if (!betaSubmitting) return;
       betaSubmitting = false;
-
       betaMsg.textContent = "Danke! Du bist für den Beta-Test registriert.";
       betaName.value = "";
       betaEmail.value = "";
@@ -1182,7 +1526,7 @@ function getCookie(name){
         modalBody.innerHTML = `
           <p>Diese Website setzt aktuell <b>keine Tracking- oder Marketing-Cookies</b> ein.</p>
           <p><b>Technisch notwendige Speicherung</b><br/>
-            Für die Funktion „Dark/Light Mode“ speichern wir deine Auswahl lokal in deinem Browser (localStorage).
+            Für die Funktion „Dark/Light Mode“ speichern wir deine Auswahl lokal (localStorage).
           </p>
           <p>
             Ein Einwilligungsbanner ist i. d. R. erst erforderlich, wenn du nicht-notwendige Cookies/Tracker verwendest
@@ -1196,32 +1540,35 @@ function getCookie(name){
             Wir nehmen den Schutz deiner personenbezogenen Daten ernst. Personenbezogene Daten werden auf dieser Website nur verarbeitet,
             soweit dies zur Bereitstellung der Funktionen erforderlich ist oder du eingewilligt hast.
           </p>
+
           <p><b>1. Verantwortliche</b><br/>
             Mika Hertler & Moritz Hertler, Am Schwarzen Steg 5a, 95448 Bayreuth, Deutschland<br/>
             Kontakt: hello@true-shuffel.com
           </p>
+
           <p><b>2. Beta-Test-Anmeldung (Name & E-Mail)</b><br/>
             Wenn du dich für den Beta-Test anmeldest, verarbeiten wir deinen Namen und deine E-Mail-Adresse, um den Beta-Test zu organisieren,
             dich zu kontaktieren und dir ggf. Zugriff/Updates zu senden.
           </p>
+
           <p><b>Rechtsgrundlage</b><br/>
             Die Verarbeitung erfolgt auf Grundlage deiner <b>Einwilligung</b> (Art. 6 Abs. 1 lit. a DSGVO).
             Du kannst die Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen (per E-Mail an hello@true-shuffel.com).
           </p>
+
           <p><b>3. Speicherung in Google Sheets / Google Apps Script</b><br/>
             Zur Speicherung der Beta-Test-Anmeldungen nutzen wir Google Sheets und Google Apps Script, bereitgestellt von
             <b>Google Ireland Limited</b>, Gordon House, Barrow Street, Dublin 4, Irland.
           </p>
+
           <p><b>4. Speicherdauer</b><br/>
             Wir speichern die Beta-Test-Daten, solange dies für die Durchführung des Beta-Tests erforderlich ist oder bis du die Löschung verlangst
             bzw. deine Einwilligung widerrufst.
           </p>
+
           <p><b>5. Deine Rechte</b><br/>
             Du hast insbesondere das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie das Recht,
             dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.
-          </p>
-          <p><b>6. Server-Logfiles</b><br/>
-            Beim Aufruf der Website können durch den Hosting-Provider technisch notwendige Logdaten verarbeitet werden, um Betrieb und Sicherheit zu gewährleisten.
           </p>
         `;
       }
@@ -1238,33 +1585,316 @@ function getCookie(name){
       if (e.target === modal) closeModal();
     });
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const href = a.getAttribute('href');
-        if (!href || href === "#") return;
-        const el = document.querySelector(href);
-        if (!el) return;
-        e.preventDefault();
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        if (drawer.classList.contains('open')) {
-          drawer.classList.remove('open');
-          menuBtn?.setAttribute('aria-expanded', "false");
-        }
-      });
+    // Cookie banner (FIX: reliable display via localStorage)
+    const cookieBanner = document.getElementById("cookieBanner");
+    const cookieAcceptBtn = document.getElementById("cookieAcceptBtn");
+    const cookieResetLink = document.getElementById("cookieResetLink");
+
+    function showCookieBannerIfNeeded(){
+      const ack = localStorage.getItem("ts_cookie_ack");
+      if (ack !== "1") cookieBanner.style.display = "block";
+    }
+
+    cookieAcceptBtn.addEventListener("click", () => {
+      localStorage.setItem("ts_cookie_ack", "1");
+      cookieBanner.style.display = "none";
     });
+
+    cookieResetLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem("ts_cookie_ack");
+      cookieBanner.style.display = "block";
+    });
+
+    // show after DOM is ready (fixes "never shows" cases)
+    window.addEventListener("load", showCookieBannerIfNeeded);
+
+    // Reviews (localStorage)
+    const REVIEWS_KEY = "ts_reviews_v1";
+    const reviewsList = document.getElementById("reviewsList");
+    const ratingBadge = document.getElementById("ratingBadge");
+    const reviewName = document.getElementById("reviewName");
+    const reviewRating = document.getElementById("reviewRating");
+    const reviewText = document.getElementById("reviewText");
+    const submitReviewBtn = document.getElementById("submitReviewBtn");
+    const reviewMsg = document.getElementById("reviewMsg");
+    const resetReviewsBtn = document.getElementById("resetReviewsBtn");
+
+    function loadReviews(){
+      try{
+        return JSON.parse(localStorage.getItem(REVIEWS_KEY) || "[]");
+      }catch{
+        return [];
+      }
+    }
+
+    function saveReviews(items){
+      localStorage.setItem(REVIEWS_KEY, JSON.stringify(items));
+    }
+
+    function stars(n){
+      const full = "★★★★★".slice(0, n);
+      const empty = "☆☆☆☆☆".slice(0, 5-n);
+      return full + empty;
+    }
+
+    function renderReviews(){
+      const items = loadReviews();
+      reviewsList.innerHTML = "";
+
+      // placeholders if empty
+      const list = items.length ? items : [
+        { name: "Platzhalter", rating: 5, text: "Hier erscheint später eine echte Bewertung.", ts: Date.now() },
+        { name: "Platzhalter", rating: 4, text: "Bewertungen können direkt auf der Website erstellt werden.", ts: Date.now()-1000 }
+      ];
+
+      list.slice().reverse().forEach(r => {
+        const el = document.createElement("div");
+        el.className = "review";
+        const nm = (r.name && r.name.trim()) ? r.name.trim() : "Anonym";
+        const dt = new Date(r.ts || Date.now());
+        el.innerHTML = `
+          <div class="name">${escapeHtml(nm)}</div>
+          <div class="stars">${stars(Number(r.rating || 5))}</div>
+          <div class="text">${escapeHtml(r.text || "")}</div>
+          <div class="meta">${dt.toLocaleDateString("de-DE")} • ${dt.toLocaleTimeString("de-DE", {hour:"2-digit", minute:"2-digit"})}</div>
+        `;
+        reviewsList.appendChild(el);
+      });
+
+      // rating badge based on real stored reviews only
+      if (items.length === 0) {
+        ratingBadge.textContent = "⭐ 0.0 / 5 (0 Bewertungen)";
+      } else {
+        const avg = items.reduce((a,b)=>a+(Number(b.rating)||0),0) / items.length;
+        ratingBadge.textContent = `⭐ ${avg.toFixed(1)} / 5 (${items.length} Bewertungen)`;
+      }
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, m => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+      }[m]));
+    }
+
+    submitReviewBtn.addEventListener("click", () => {
+      const name = (reviewName.value || "").trim();
+      const rating = Number(reviewRating.value || 5);
+      const text = (reviewText.value || "").trim();
+
+      if (!text || text.length < 5) {
+        reviewMsg.textContent = "Bitte schreibe mindestens 5 Zeichen.";
+        return;
+      }
+
+      const items = loadReviews();
+      items.push({ name, rating, text, ts: Date.now() });
+      saveReviews(items);
+
+      reviewName.value = "";
+      reviewRating.value = "5";
+      reviewText.value = "";
+      reviewMsg.textContent = "Danke! Deine Bewertung wurde gespeichert.";
+      renderReviews();
+    });
+
+    resetReviewsBtn.addEventListener("click", () => {
+      localStorage.removeItem(REVIEWS_KEY);
+      reviewMsg.textContent = "Bewertungen zurückgesetzt.";
+      renderReviews();
+    });
+
+    renderReviews();
+    /* =======================
+   Slider + Video Gallery
+   ======================= */
+
+// 1) HIER pflegst du später deine Produktbilder ein:
+const PRODUCT_IMAGES = [
+  // Beispiele (lege die Dateien in /assets ab):
+  // "assets/product_01.jpg",
+  // "assets/product_02.jpg",
+  // "assets/product_03.jpg"
+];
+
+// 2) HIER pflegst du später deine Videos ein:
+const VIDEO_ITEMS = [
+  // MP4 Beispiel:
+  // { type: "mp4", title: "Demo", desc: "Kurzer Überblick", src: "assets/demo.mp4", poster: "assets/product_01.jpg" },
+
+  // YouTube Beispiel (nur ID!):
+  // { type: "youtube", title: "YouTube Demo", desc: "Feature Walkthrough", id: "dQw4w9WgXcQ" }
+];
+
+function placeholderSvgData(text){
+  const bg = document.body.classList.contains("light") ? "#f2f2f2" : "#2b2c32";
+  const fg = document.body.classList.contains("light") ? "#1b1b1b" : "#ffffff";
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">
+    <rect width="100%" height="100%" fill="${bg}"/>
+    <text x="50%" y="50%" font-family="system-ui, -apple-system, Segoe UI, Roboto" font-size="44"
+          fill="${fg}" text-anchor="middle" dominant-baseline="middle" opacity="0.65">
+      ${text}
+    </text>
+  </svg>`;
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.trim());
+}
+
+/* ---------- Slider ---------- */
+const sliderTrack = document.getElementById("sliderTrack");
+const sliderDots  = document.getElementById("sliderDots");
+const prevSlideBtn = document.getElementById("prevSlide");
+const nextSlideBtn = document.getElementById("nextSlide");
+let sliderIndex = 0;
+let slidesCount = 0;
+
+function buildSlides(){
+  sliderTrack.innerHTML = "";
+  sliderDots.innerHTML = "";
+
+  const images = (PRODUCT_IMAGES && PRODUCT_IMAGES.length)
+    ? PRODUCT_IMAGES
+    : [placeholderSvgData("Produktbild 1"), placeholderSvgData("Produktbild 2"), placeholderSvgData("Produktbild 3")];
+
+  slidesCount = images.length;
+
+  images.forEach((src, i) => {
+    const slide = document.createElement("div");
+    slide.className = "slide";
+    slide.innerHTML = `<img src="${src}" alt="Produktbild ${i+1}" loading="lazy">`;
+    sliderTrack.appendChild(slide);
+
+    const dot = document.createElement("button");
+    dot.className = "slider-dot" + (i === 0 ? " active" : "");
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Gehe zu Slide ${i+1}`);
+    dot.addEventListener("click", () => goToSlide(i));
+    sliderDots.appendChild(dot);
+  });
+
+  sliderIndex = 0;
+  updateSlider();
+}
+
+function updateSlider(){
+  const x = -sliderIndex * 100;
+  sliderTrack.style.transform = `translateX(${x}%)`;
+  [...sliderDots.children].forEach((d, idx) => d.classList.toggle("active", idx === sliderIndex));
+}
+
+function goToSlide(i){
+  sliderIndex = (i + slidesCount) % slidesCount;
+  updateSlider();
+}
+
+prevSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex - 1));
+nextSlideBtn?.addEventListener("click", () => goToSlide(sliderIndex + 1));
+
+/* Swipe support */
+let startX = null;
+sliderTrack.addEventListener("pointerdown", (e) => {
+  startX = e.clientX;
+  sliderTrack.setPointerCapture(e.pointerId);
+});
+sliderTrack.addEventListener("pointerup", (e) => {
+  if (startX === null) return;
+  const dx = e.clientX - startX;
+  startX = null;
+  if (Math.abs(dx) < 40) return;
+  if (dx < 0) goToSlide(sliderIndex + 1);
+  else goToSlide(sliderIndex - 1);
+});
+
+/* ---------- Video Gallery ---------- */
+const videoGrid = document.getElementById("videoGrid");
+const videoModal = document.getElementById("videoModal");
+const videoModalTitle = document.getElementById("videoModalTitle");
+const videoFrameWrap = document.getElementById("videoFrameWrap");
+const closeVideoBtn = document.getElementById("closeVideo");
+
+function buildVideoGallery(){
+  videoGrid.innerHTML = "";
+
+  const items = (VIDEO_ITEMS && VIDEO_ITEMS.length)
+    ? VIDEO_ITEMS
+    : [
+        { type:"placeholder", title:"Demo Video", desc:"Füge später ein MP4 oder YouTube Video hinzu" },
+        { type:"placeholder", title:"Feature Walkthrough", desc:"Platzhalter" },
+        { type:"placeholder", title:"Short Clip", desc:"Platzhalter" }
+      ];
+
+  items.forEach((it) => {
+    const card = document.createElement("div");
+    card.className = "video-card";
+
+    const thumbLabel = it.type === "youtube" ? "YouTube" : (it.type === "mp4" ? "MP4" : "Video");
+    const poster = it.poster || placeholderSvgData(`${thumbLabel} Thumbnail`);
+
+    card.innerHTML = `
+      <div class="video-thumb" style="background-image:url('${poster}'); background-size:cover; background-position:center;">
+        <div class="video-play">▶</div>
+      </div>
+      <div class="video-meta">
+        <b>${it.title || "Video"}</b>
+        <span>${it.desc || ""}</span>
+      </div>
+    `;
+
+    card.addEventListener("click", () => {
+      if (it.type === "placeholder") return;
+      openVideo(it);
+    });
+
+    videoGrid.appendChild(card);
+  });
+}
+
+function openVideo(it){
+  videoFrameWrap.innerHTML = "";
+  videoModalTitle.textContent = it.title || "Video";
+
+  if (it.type === "mp4") {
+    const v = document.createElement("video");
+    v.controls = true;
+    v.src = it.src;
+    if (it.poster) v.poster = it.poster;
+    v.playsInline = true;
+    v.autoplay = true;
+    videoFrameWrap.appendChild(v);
+  } else if (it.type === "youtube") {
+    const iframe = document.createElement("iframe");
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    iframe.src = `https://www.youtube.com/embed/${it.id}?autoplay=1&rel=0`;
+    videoFrameWrap.appendChild(iframe);
+  }
+
+  videoModal.style.display = "block";
+  document.body.style.overflow = "hidden";
+}
+
+function closeVideo(){
+  videoModal.style.display = "none";
+  document.body.style.overflow = "";
+  videoFrameWrap.innerHTML = "";
+}
+
+closeVideoBtn?.addEventListener("click", closeVideo);
+videoModal?.addEventListener("click", (e) => { if (e.target === videoModal) closeVideo(); });
+
+/* Init */
+buildSlides();
+buildVideoGallery();
+
+/* If you toggle theme, rebuild placeholders so they match background */
+const _origApplyTheme = window.applyTheme;
+if (typeof _origApplyTheme === "function") {
+  window.applyTheme = function(mode){
+    _origApplyTheme(mode);
+    buildSlides();
+    buildVideoGallery();
+  };
+}
   </script>
-  <div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie Hinweis">
-  <div class="cookie-row">
-    <div class="cookie-text">
-      Wir verwenden keine Tracking-Cookies. Nur technisch notwendige Speicherung (z. B. Dark/Light-Modus via localStorage).
-      Mehr dazu unter <a href="#" onclick="openModal('cookies'); return false;" style="text-decoration:underline;">Cookies</a>.
-    </div>
-    <div class="cookie-actions">
-      <button class="btn" type="button" onclick="openModal('cookies')">Details</button>
-      <button class="btn btn-primary" type="button" id="cookieAcceptBtn">OK</button>
-    </div>
-  </div>
-</div>
 </body>
 </html>
