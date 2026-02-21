@@ -3,13 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>true-shuffel — True Shuffle for every playlist</title>
+  <title>true-shuffle — True Shuffle for every playlist</title>
   <meta name="description" content="True shuffle for every playlist: every song exactly once per run—no repeats, no skipped tracks. Join the beta waitlist." />
   <meta name="theme-color" content="#24252a" />
-  <meta property="og:title" content="true-shuffel — true shuffle for every playlist" />
+  <meta property="og:title" content="true-shuffle — true shuffle for every playlist" />
   <meta property="og:description" content="Every song exactly once—no repeats, no skipped tracks." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/logo_dark.png" />
+  <meta property="og:image" content="https://mikamcflurry.github.io/true-shuffle-site/assets/og_true_shuffle_1200x630.png" />
+  <meta property="og:url" content="https://mikamcflurry.github.io/true-shuffle-site/en.html" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:image" content="https://mikamcflurry.github.io/true-shuffle-site/assets/og_true_shuffle_1200x630.png" />
+  <link rel="canonical" href="https://mikamcflurry.github.io/true-shuffle-site/en.html" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="alternate" hreflang="de" href="index.html" />
@@ -475,9 +480,9 @@
     <div class="container">
       <div class="nav">
         <a class="brand" href="#top">
-          <img id="brandLogo" src="assets/logo_dark.png" alt="true-shuffel logo" />
+          <img id="brandLogo" src="assets/logo_dark.png" alt="true-shuffle logo" />
           <div>
-            <strong>true-shuffel</strong>
+            <strong>true-shuffle</strong>
             <span>True shuffle for every playlist</span>
           </div>
         </a>
@@ -486,6 +491,8 @@
           <a href="#impressions">Impressions</a>
           <a href="#beta">Beta</a>
           <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+            <a href="#contact">Contact</a>
           <a href="#faq">FAQ</a>
         </nav>
 
@@ -523,7 +530,7 @@
       <div class="hero">
         <div>
           <h1>True shuffle for every playlist.<br/>Every song—no annoying repeats.</h1>
-          <p class="lead">true-shuffel makes sure your playlist actually plays through: <b>no skipped tracks</b> and <b>no repeats</b>—like the good old MP3 player shuffle, but with your streaming service.</p>
+          <p class="lead">true-shuffle makes sure your playlist actually plays through: <b>no skipped tracks</b> and <b>no repeats</b>—like the good old MP3 player shuffle, but with your streaming service.</p>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#beta">▶ Join the waitlist</a>
@@ -533,7 +540,7 @@
         </div>
 
         <aside class="panel" aria-label="Preview">
-          <img id="heroMedia" class="hero-media" src="assets/brand_logo_loop.gif" alt="true-shuffel preview" />
+          <img id="heroMedia" class="hero-media" src="assets/brand_logo_loop.gif" alt="true-shuffle preview" />
 
           <div class="two-col">
             <div class="mock">
@@ -563,7 +570,7 @@
 <span class="badge">SoundCloud</span>
 <span class="badge">Qobuz</span>
               </div>
-              <div class="subnote" style="margin-top:10px;">Stay with your service. true-shuffel takes care of true randomness.</div>
+              <div class="subnote" style="margin-top:10px;">Stay with your service. true-shuffle takes care of true randomness.</div>
             </div>
           </div>
         </aside>
@@ -600,12 +607,18 @@
         <div class="cta">
           <div>
             <h2 style="margin:0 0 8px; font-size:24px;">Beta: save your spot</h2>
-            <p style="margin:0; color:var(--muted); line-height:1.55;">Sign up and we’ll notify you when true-shuffel is ready.</p>
+            <p style="margin:0; color:var(--muted); line-height:1.55;">Sign up and we’ll notify you when true-shuffle is ready.</p>
             <div class="subnote">No spam—only launch updates. Details in <a href="#" onclick="openLegal('privacy');return false;" style="text-decoration:underline;">Privacy</a>.</div>
           </div>
 
           <form class="form" id="betaForm" method="POST" target="beta_iframe" autocomplete="on">
             <input type="hidden" name="action" value="beta" />
+            <input type="hidden" name="privacyVersion" value="2026-02-21" />
+            <input type="hidden" id="betaRef" name="referrer" value="" />
+            <input type="hidden" id="betaLocale" name="locale" value="" />
+            <div style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+              <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+            </div>
             <input class="input" type="text" id="betaName" name="name" placeholder="Name" required />
             <input class="input" type="email" id="betaEmail" name="email" placeholder="Email" required />
             <input type="hidden" name="source" value="website" />
@@ -613,7 +626,7 @@
             <button class="btn btn-primary" id="betaSubmit" type="submit">Sign up</button>
 
             <div class="consent">
-              <input type="checkbox" id="betaConsent" required />
+              <input type="checkbox" id="betaConsent" name="consent" value="1" required />
               <label for="betaConsent">I consent to my data being processed for the waitlist. (<a href="#" onclick="openLegal('privacy');return false;" style="text-decoration:underline;">Privacy</a>)</label>
             </div>
             <div class="subnote" id="betaMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
@@ -644,6 +657,10 @@
 
           <form class="form" id="reviewForm" method="POST" target="review_iframe">
             <input type="hidden" name="action" value="review" />
+            <input type="hidden" name="privacyVersion" value="2026-02-21" />
+            <div style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+              <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+            </div>
             <input class="input" type="text" id="reviewName" name="name" placeholder="Name (optional)" />
             <select class="input" id="reviewRating" name="rating" style="flex:0 0 180px;">
               <option value="5">★★★★★ (5)</option>
@@ -656,6 +673,14 @@
             <input type="hidden" name="source" value="website" />
             <input type="hidden" id="reviewUA" name="userAgent" value="" />
             <button class="btn btn-primary" id="reviewSubmit" type="submit">Send review</button>
+            <div class="consent">
+              <input type="checkbox" id="reviewConsent" name="consent" value="1" required />
+              <label for="reviewConsent">I agree that my review data will be processed. (<a href="#" onclick="openLegal(\'privacy\');return false;" style="text-decoration:underline;">Privacy</a>)</label>
+            </div>
+            <div class="consent">
+              <input type="checkbox" id="reviewPublishName" name="publishName" value="1" />
+              <label for="reviewPublishName">Show my name (optional)</label>
+            </div>
             <div class="subnote" id="reviewMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
           </form>
 
@@ -680,8 +705,8 @@
           </details>
 
           <details>
-            <summary>What does true-shuffel do differently? <span class="chev" aria-hidden="true"></span></summary>
-            <p>true-shuffel generates a no-repeat order: every track exactly once per run. We’re also planning personalization options like priorities and shuffle profiles.</p>
+            <summary>What does true-shuffle do differently? <span class="chev" aria-hidden="true"></span></summary>
+            <p>true-shuffle generates a no-repeat order: every track exactly once per run. We’re also planning personalization options like priorities and shuffle profiles.</p>
           </details>
 
           <details>
@@ -691,7 +716,7 @@
 
           <details>
             <summary>Do I have to leave my streaming service? <span class="chev" aria-hidden="true"></span></summary>
-            <p>No. You stay with your service. Later, true-shuffel connects via app login and controls shuffle/playback via the service API.</p>
+            <p>No. You stay with your service. Later, true-shuffle connects via app login and controls shuffle/playback via the service API.</p>
           </details>
 
           <details>
@@ -708,13 +733,53 @@
   </section>
 </main>
 
+
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Contact</h2>
+      <p>Questions, feedback, or partnerships? Message us.</p>
+    </div>
+
+    <div class="panel">
+      <form class="form" id="contactForm" method="POST" target="contact_iframe" autocomplete="on">
+        <input type="hidden" name="action" value="contact" />
+        <input type="hidden" name="privacyVersion" value="2026-02-21" />
+        <div style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+          <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <input class="input" type="text" id="contactName" name="name" placeholder="Name (optional)" />
+        <input class="input" type="email" id="contactEmail" name="email" placeholder="Email" required />
+        <textarea class="input" id="contactMessage" name="message" placeholder="Your message…" maxlength="1200" style="flex:1 1 100%; min-height:120px;" required></textarea>
+
+        <input type="hidden" name="source" value="website" />
+        <input type="hidden" id="contactUA" name="userAgent" value="" />
+        <input type="hidden" id="contactRef" name="referrer" value="" />
+        <input type="hidden" id="contactLocale" name="locale" value="" />
+
+        <button class="btn btn-primary" id="contactSubmit" type="submit">Send message</button>
+
+        <div class="consent">
+          <input type="checkbox" id="contactConsent" name="consent" value="1" required />
+          <label for="contactConsent">I consent to the processing of my contact details. (<a href="#" onclick="openLegal('privacy');return false;" style="text-decoration:underline;">Privacy</a>)</label>
+        </div>
+
+        <div class="subnote" id="contactMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
+      </form>
+
+      <iframe id="contact_iframe" name="contact_iframe" style="display:none;"></iframe>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="container">
       <div class="foot">
         <div style="display:flex; align-items:center; gap:10px;">
           <img id="footerLogo" src="assets/logo_dark.png" alt="" style="width:20px; height:20px; border-radius:8px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02);" />
-          <span>© <span id="year"></span> true-shuffel.com</span>
+          <span>© <span id="year"></span> true-shuffle.com</span>
         </div>
         <div style="display:flex; gap:4px; flex-wrap:wrap;">
           
@@ -722,6 +787,7 @@
             <a href="#impressions">Impressions</a>
             <a href="#beta">Beta</a>
             <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
             <a href="#" onclick="openLegal('impressum');return false;">Imprint</a>
             <a href="#" onclick="openLegal('privacy');return false;">Privacy</a>
             <a href="#" onclick="openLegal('cookies');return false;">Cookies</a>
@@ -757,6 +823,7 @@
 
 <script>
   const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz6YNaWP-8nd2GODDv9ngn_3uP35EIG9gCxrPQjeuLuJqWXFkK6EN_ExwwUHyQxYKHt/exec";
+  const PRIVACY_VERSION = "2026-02-21";
   const LOGO_DARK = "assets/logo_dark.png";
   const LOGO_LIGHT = "assets/logo_light.png";
   const HERO_GIF_DARK = "assets/brand_logo_loop.gif";
@@ -768,6 +835,7 @@
   // actions
   $("betaForm").action = WEBAPP_URL;
   $("reviewForm").action = WEBAPP_URL;
+  $("contactForm").action = WEBAPP_URL;
 
   // mobile menu
   const menuBtn = $("menuBtn");
@@ -788,7 +856,7 @@
     $("themeLabel").textContent = isLight ? "Dark" : "Light";
   }
   (function initTheme(){
-    const saved = localStorage.getItem("true_shuffel_theme");
+    const saved = localStorage.getItem("true_shuffle_theme");
     if (saved === "light" || saved === "dark") return applyTheme(saved);
     const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
     applyTheme(prefersLight ? "light" : "dark");
@@ -796,7 +864,7 @@
   $("themeToggle").addEventListener("click", () => {
     const next = document.body.classList.contains("light") ? "dark" : "light";
     applyTheme(next);
-    localStorage.setItem("true_shuffel_theme", next);
+    localStorage.setItem("true_shuffle_theme", next);
   });
 
   // cookie banner
@@ -876,59 +944,171 @@
   });
   buildSlides();
 
-  // forms feedback
+  // forms feedback (uses postMessage from Apps Script response)
+  const WEBAPP_ORIGIN = (function(){ try { return new URL(WEBAPP_URL).origin; } catch(e){ return ""; } })();
+
   const betaMsg = $("betaMsg");
   const betaSubmit = $("betaSubmit");
-  const betaIframe = $("beta_iframe");
   let betaSubmitting = false;
-
-  $("betaForm").addEventListener("submit", (e) => {
-    if (!$("betaConsent").checked) {
-      e.preventDefault();
-      betaMsg.textContent = "Please confirm consent.";
-      return;
-    }
-    $("betaUA").value = navigator.userAgent || "";
-    betaSubmitting = true;
-    betaSubmit.disabled = true;
-    betaMsg.textContent = "Sending…";
-  });
-  betaIframe.addEventListener("load", () => {
-    if (!betaSubmitting) return;
-    betaSubmitting = false;
-    betaSubmit.disabled = false;
-    betaMsg.textContent = "You’re on the waitlist. We’ll reach out!";
-    $("betaName").value = "";
-    $("betaEmail").value = "";
-    $("betaConsent").checked = false;
-  });
 
   const reviewMsg = $("reviewMsg");
   const reviewSubmit = $("reviewSubmit");
-  const reviewIframe = $("review_iframe");
   let reviewSubmitting = false;
+
+  const contactMsg = $("contactMsg");
+  const contactSubmit = $("contactSubmit");
+  let contactSubmitting = false;
+
+  function setMsg(el, text, isError){
+    el.textContent = text || "";
+    el.style.color = isError ? "var(--danger)" : "var(--muted)";
+  }
+
+  function betaHumanMessage(code){
+    switch(code){
+      case "pending": return "Thanks! Please confirm your email using the link in your inbox.";
+      case "pending_already": return "Please check your inbox — the confirmation email was already sent.";
+      case "already_confirmed": return "You’re already confirmed. Thank you!";
+      case "invalid_email": return "Please enter a valid email.";
+      case "missing_email": return "Please enter your email.";
+      case "missing_consent": return "Please confirm consent.";
+      case "rate_limited": return "Too many attempts. Please try again later.";
+      default: return "Something went wrong. Please try again.";
+    }
+  }
+
+  function reviewHumanMessage(code){
+    switch(code){
+      case "ok": return "Thanks! Your review was submitted (will appear after approval).";
+      case "invalid_text": return "Please write at least 5 characters.";
+      case "text_too_long": return "Please keep it under 400 characters.";
+      case "missing_consent": return "Please confirm consent.";
+      case "rate_limited": return "Too many reviews in a short time. Please try later.";
+      default: return "Something went wrong. Please try again.";
+    }
+  }
+
+
+  function contactHumanMessage(code){
+    switch(code){
+      case "ok": return "Thanks! Message received.";
+      case "invalid_email": return "Please enter a valid email.";
+      case "missing_email": return "Please enter your email.";
+      case "invalid_message": return "Please write a message (min. 10 characters).";
+      case "message_too_long": return "Please keep it under 1200 characters.";
+      case "missing_consent": return "Please confirm consent.";
+      case "rate_limited": return "Too many messages in a short time. Please try again later.";
+      default: return "Something went wrong. Please try again.";
+    }
+  }
+
+  $("betaForm").addEventListener("submit", (e) => {
+    $("betaUA").value = navigator.userAgent || "";
+    $("betaRef").value = document.referrer || "";
+    $("betaLocale").value = (navigator.language || "en").toLowerCase();
+
+    if (!$("betaConsent").checked) {
+      e.preventDefault();
+      setMsg(betaMsg, betaHumanMessage("missing_consent"), true);
+      return;
+    }
+
+    betaSubmitting = true;
+    betaSubmit.disabled = true;
+    setMsg(betaMsg, "Sending…", false);
+  });
 
   $("reviewForm").addEventListener("submit", (e) => {
     const txt = ($("reviewText").value || "").trim();
     if (txt.length < 5) {
       e.preventDefault();
-      reviewMsg.textContent = "Please write at least 5 characters.";
+      setMsg(reviewMsg, reviewHumanMessage("invalid_text"), true);
+      return;
+    }
+    if (!$("reviewConsent").checked) {
+      e.preventDefault();
+      setMsg(reviewMsg, reviewHumanMessage("missing_consent"), true);
       return;
     }
     $("reviewUA").value = navigator.userAgent || "";
     reviewSubmitting = true;
     reviewSubmit.disabled = true;
-    reviewMsg.textContent = "Sending…";
+    setMsg(reviewMsg, "Sending…", false);
   });
-  reviewIframe.addEventListener("load", () => {
-    if (!reviewSubmitting) return;
-    reviewSubmitting = false;
-    reviewSubmit.disabled = false;
-    reviewMsg.textContent = "Thanks! Your review was received (will appear after review).";
-    $("reviewName").value = "";
-    $("reviewRating").value = "5";
-    $("reviewText").value = "";
-    setTimeout(loadReviews, 700);
+
+  const TRUSTED_ORIGINS = new Set([WEBAPP_ORIGIN, "https://script.googleusercontent.com"]); 
+
+  
+  $("contactForm").addEventListener("submit", (e) => {
+    $("contactUA").value = navigator.userAgent || "";
+    $("contactRef").value = document.referrer || "";
+    $("contactLocale").value = (navigator.language || "en").slice(0, 10);
+
+    if (contactSubmitting) { e.preventDefault(); return; }
+    contactSubmitting = true;
+    contactSubmit.disabled = true;
+    setMsg(contactMsg, "Sending…", false);
+
+    setTimeout(() => {
+      if (contactSubmitting) {
+        contactSubmitting = false;
+        contactSubmit.disabled = false;
+        setMsg(contactMsg, "No response from server. Please try again.", true);
+      }
+    }, 8000);
+  });
+
+window.addEventListener("message", (ev) => {
+    if (WEBAPP_ORIGIN && !TRUSTED_ORIGINS.has(ev.origin)) return;
+    const d = ev.data || {};
+    if (!d || d.ts !== true) return;
+
+    if (d.action === "beta" && betaSubmitting) {
+      betaSubmitting = false;
+      betaSubmit.disabled = false;
+
+      const ok = !!d.ok;
+      setMsg(betaMsg, betaHumanMessage(String(d.code || "")), !ok);
+
+      if (ok) {
+        $("betaName").value = "";
+        $("betaEmail").value = "";
+        $("betaConsent").checked = false;
+      }
+    }
+
+    if (d.action === "review" && reviewSubmitting) {
+      reviewSubmitting = false;
+      reviewSubmit.disabled = false;
+
+      const ok = !!d.ok;
+      setMsg(reviewMsg, reviewHumanMessage(String(d.code || "")), !ok);
+
+      if (ok) {
+        $("reviewName").value = "";
+        $("reviewRating").value = "5";
+        $("reviewText").value = "";
+        $("reviewConsent").checked = false;
+        $("reviewPublishName").checked = false;
+        setTimeout(loadReviews, 700);
+      }
+    }
+
+    if (d.action === "contact" && contactSubmitting) {
+      contactSubmitting = false;
+      contactSubmit.disabled = false;
+
+      const ok = !!d.ok;
+      setMsg(contactMsg, contactHumanMessage(String(d.code || "")), !ok);
+
+      if (ok) {
+        $("contactName").value = "";
+        $("contactEmail").value = "";
+        $("contactMessage").value = "";
+        $("contactConsent").checked = false;
+      }
+    }
+
   });
 
   // reviews JSONP
@@ -939,6 +1119,15 @@
   function stars(n){
     n = Math.max(1, Math.min(5, Number(n || 5)));
     return "★★★★★".slice(0,n) + "☆☆☆☆☆".slice(0, 5-n);
+  }
+
+  function escapeHTML(s){
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   }
 
   function renderReviews(items){
@@ -959,13 +1148,15 @@
     ratingBadge.innerHTML = `<span class="dot"></span><span>⭐ ${avg.toFixed(1)} / 5 (${items.length})</span>`;
     items.slice().reverse().forEach(r => {
       const dt = r.timestamp ? new Date(r.timestamp) : new Date();
-      const name = (r.name && String(r.name).trim()) ? String(r.name).trim() : "Anonymous";
+            const name = (r.name && String(r.name).trim()) ? String(r.name).trim() : "Anonymous";
+      const safeName = escapeHTML(name);
+      const safeText = escapeHTML(String(r.text || ""));
       const el = document.createElement("div");
       el.className = "review";
       el.innerHTML = `
-        <div class="name">${name}</div>
+        <div class="name">${safeName}</div>
         <div class="stars">${stars(r.rating)}</div>
-        <div class="text">${String(r.text || "")}</div>
+        <div class="text">${safeText}</div>
         <div class="meta">${isNaN(dt.getTime()) ? "" : dt.toLocaleDateString("en-US")}</div>
       `;
       reviewsList.appendChild(el);
@@ -988,7 +1179,7 @@
     }, 2500);
 
     const s = document.createElement("script");
-    s.src = `${WEBAPP_URL}?action=reviews&callback=tsReviewsCb&t=${Date.now()}`;
+    s.src = `${WEBAPP_URL}?action=reviews&callback=tsReviewsCb&lang=en&t=${Date.now()}`;
     s.async = true;
     s.onerror = () => {
       reviewsStatus.textContent = "Error loading reviews.";
@@ -1007,31 +1198,77 @@
   function openLegal(type){
     legalModal.style.display = "block";
     document.body.style.overflow = "hidden";
+
     if (type === "impressum") {
-      legalTitle.textContent = "Imprint";
-      legalBody.innerHTML = `<p><b>Imprint (Germany)</b></p>
-        <p><b>true-shuffel</b><br/>
-        Owners: Mika Hertler &amp; Moritz Hertler<br/>
+      legalTitle.textContent = "Legal notice (Impressum)";
+      legalBody.innerHTML = `        <p><b>Information pursuant to § 5 DDG (Germany)</b></p>
+        <p><b>true-shuffle GmbH</b><br/>
         Am Schwarzen Steg 5a<br/>
         95448 Bayreuth<br/>
         Germany</p>
-        <p><b>Contact</b><br/>Email: hello@true-shuffel.com</p>`;
-    } else if (type === "cookies") {
-      legalTitle.textContent = "Cookies";
-      legalBody.innerHTML = `<p>We do not use tracking cookies.</p>
-        <p><b>Necessary storage</b><br/>
-        We store your theme preference and the cookie notice acknowledgement locally (localStorage).</p>`;
-    } else {
-      legalTitle.textContent = "Privacy";
-      legalBody.innerHTML = `<p><b>1. Controller</b><br/>
-        Mika Hertler &amp; Moritz Hertler, Am Schwarzen Steg 5a, 95448 Bayreuth, Germany<br/>
-        Contact: hello@true-shuffel.com</p>
-        <p><b>2. Waitlist (Beta)</b><br/>
-        We process name and email to manage the waitlist and notify you.
-        Legal basis: consent (Art. 6(1)(a) GDPR).</p>
-        <p><b>3. Reviews</b><br/>
-        Reviews are stored and briefly checked before display.</p>`;
+
+        <p><b>Contact</b><br/>
+        Phone: +49 176 6447 2296<br/>
+        Email: hello@true-shuffle.com<br/>
+        Contact form: see “Contact” section</p>
+
+        <p><b>Register</b><br/>
+        Commercial register: to be provided<br/>
+        VAT ID: to be provided</p>
+
+        <p><b>Responsible for content (§ 18 Abs. 2 MStV)</b><br/>
+        true-shuffle GmbH<br/>
+        Am Schwarzen Steg 5a, 95448 Bayreuth</p>`;
+      return;
     }
+
+    if (type === "cookies") {
+      legalTitle.textContent = "Cookies &amp; local storage";
+      legalBody.innerHTML = `
+        <p>We use <b>no tracking</b> and do not set marketing/analytics cookies.</p>
+        <p><b>Technically necessary storage</b><br/>
+        We store a few settings locally in your browser (localStorage), e.g. theme preference and whether you already dismissed the cookie notice.</p>
+        <p>You can delete this storage using the “Reset cookie notice” link in the footer.</p>`;
+      return;
+    }
+
+    // privacy
+    legalTitle.textContent = "Privacy";
+    legalBody.innerHTML = `      <p><b>1. Controller</b><br/>
+      true-shuffle GmbH<br/>
+      Am Schwarzen Steg 5a, 95448 Bayreuth, Germany<br/>
+      Phone: +49 176 6447 2296<br/>
+      Email: hello@true-shuffle.com</p>
+
+      <p><b>2. Purposes &amp; legal bases</b></p>
+      <ul>
+        <li><b>Beta waitlist (double opt-in):</b> processing name (optional) and email to manage the waitlist, send a confirmation email, and confirm your signup. <i>Legal basis:</i> consent (Art. 6(1)(a) GDPR).</li>
+        <li><b>Reviews:</b> processing review text, star rating, and optionally your name (only if “Show my name” is enabled). Reviews are shown after moderation. <i>Legal basis:</i> consent (Art. 6(1)(a) GDPR).</li>
+        <li><b>Contact form:</b> handling your inquiry (name optional, email, message). <i>Legal basis:</i> Art. 6(1)(b) GDPR (pre-contract) or Art. 6(1)(f) GDPR (legitimate interest in responding).</li>
+        <li><b>Hosting/logs:</b> technical delivery, stability and security. <i>Legal basis:</i> Art. 6(1)(f) GDPR.</li>
+      </ul>
+
+      <p><b>3. Hosting &amp; recipients</b><br/>
+      This website is hosted via GitHub Pages. Forms are handled via Google Apps Script &amp; Google Sheets (storage of form data) and Google services to send the confirmation email.</p>
+
+      <p><b>4. Retention</b></p>
+      <ul>
+        <li><b>Waitlist:</b> until launch + 6 months, then deletion/anonymization unless further consent exists.</li>
+        <li><b>Reviews:</b> until deletion request or as long as the review should be displayed.</li>
+        <li><b>Contact requests:</b> until resolved; typically max. 12 months.</li>
+      </ul>
+
+      <p><b>5. Publishing names in reviews</b><br/>
+      Your name is only displayed if you enable “Show my name”. Otherwise we display “Anonymous”.</p>
+
+      <p><b>6. Automatic translation of reviews</b><br/>
+      For display, reviews may be automatically translated into German or English depending on the page language (Google Language/Translate in Apps Script). We still store the original text.</p>
+
+      <p><b>7. Your rights</b><br/>
+      You have the right of access, rectification, erasure, restriction, data portability, and objection. You can withdraw consent at any time with effect for the future. You also have the right to lodge a complaint with a supervisory authority.</p>
+
+      <p><b>8. Privacy contact</b><br/>
+      For privacy requests: hello@true-shuffle.com</p>`;
   }
   function closeLegal(){
     legalModal.style.display = "none";
