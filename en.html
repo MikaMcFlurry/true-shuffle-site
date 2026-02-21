@@ -179,23 +179,22 @@
     .hero-media{
       display:block;
       width:100%;
-      max-height: 240px;
+      max-height: 380px;
       object-fit: contain;
-      margin: 2px auto 12px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.02);
-    }
-    /* Light mode: avoid “boxy” look */
-    body.light .hero-media{
-      width:auto;
-      max-height: 160px;
-      margin: 8px auto 14px;
+      margin: 6px auto 14px;
+      border-radius: 22px;
       border: none;
       background: transparent;
+      box-shadow: 0 16px 50px rgba(0,0,0,.25);
+    }
+    body.light .hero-media{
+      box-shadow: 0 14px 38px rgba(0,0,0,.12);
+    }
+    @media (max-width: 520px){
+      .hero-media{ max-height: 320px; }
     }
 
-    .mock{
+.mock{
       border-radius: 18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.28);
@@ -578,7 +577,7 @@
         </div>
 
         <aside class="panel" aria-label="Preview">
-          <img id="heroMedia" class="hero-media" src="assets/brand_logo_loop.gif" alt="true-shuffle preview" />
+          <img id="heroMedia" class="hero-media" src="assets/hero_phone_dark.png" alt="true-shuffle preview" />
 
           <div class="two-col">
             <div class="mock">
@@ -888,7 +887,8 @@
   const PRIVACY_VERSION = "2026-02-21";
   const LOGO_DARK = "assets/logo_dark.png";
   const LOGO_LIGHT = "assets/logo_light.png";
-  const HERO_GIF_DARK = "assets/brand_logo_loop.gif";
+  const HERO_MEDIA_DARK = "assets/hero_phone_dark.png";
+  const HERO_MEDIA_LIGHT = "assets/hero_phone_light.png";
   const PRODUCT_IMAGES = ["assets/product_01_one-tap.PNG", "assets/product_02_features-card.PNG", "assets/product_03_comparison.PNG", "assets/product_04_10000-tracks.PNG"];
 
   const $ = (id) => document.getElementById(id);
@@ -913,7 +913,7 @@
     document.body.classList.toggle("light", isLight);
     $("brandLogo").src = isLight ? LOGO_LIGHT : LOGO_DARK;
     $("footerLogo").src = isLight ? LOGO_LIGHT : LOGO_DARK;
-    $("heroMedia").src = isLight ? LOGO_LIGHT : HERO_GIF_DARK;
+    $("heroMedia").src = isLight ? HERO_MEDIA_LIGHT : HERO_MEDIA_DARK;
     $("themeIcon").textContent = isLight ? "☀" : "☾";
     $("themeLabel").textContent = isLight ? "Dark" : "Light";
   }
@@ -1021,6 +1021,10 @@
   const contactSubmit = $("contactSubmit");
   let contactSubmitting = false;
 
+  let betaFallbackTimer = null;
+  let reviewFallbackTimer = null;
+  let contactFallbackTimer = null;
+
   function setMsg(el, text, isError){
     el.textContent = text || "";
     el.style.color = isError ? "var(--danger)" : "var(--muted)";
@@ -1100,6 +1104,44 @@
 
   const TRUSTED_ORIGINS = new Set([WEBAPP_ORIGIN, "https://script.googleusercontent.com"]); 
 
+  // Fallback: Apps Script responses can be blocked inside iframes in some browsers.
+  // In that case postMessage never arrives, but the POST still succeeds. Mark success on iframe load.
+  document.getElementById("beta_iframe").addEventListener("load", () => {
+    if (!betaSubmitting) return;
+    if (betaFallbackTimer) clearTimeout(betaFallbackTimer);
+    betaSubmitting = false;
+    betaSubmit.disabled = false;
+    setMsg(betaMsg, betaHumanMessage("pending"), false);
+    document.getElementById("betaName").value = "";
+    document.getElementById("betaEmail").value = "";
+    document.getElementById("betaConsent").checked = false;
+  });
+  document.getElementById("review_iframe").addEventListener("load", () => {
+    if (!reviewSubmitting) return;
+    if (reviewFallbackTimer) clearTimeout(reviewFallbackTimer);
+    reviewSubmitting = false;
+    reviewSubmit.disabled = false;
+    setMsg(reviewMsg, reviewHumanMessage("ok"), false);
+    document.getElementById("reviewName").value = "";
+    document.getElementById("reviewRating").value = "5";
+    document.getElementById("reviewText").value = "";
+    document.getElementById("reviewConsent").checked = false;
+    document.getElementById("reviewPublishName").checked = false;
+    setTimeout(loadReviews, 700);
+  });
+  document.getElementById("contact_iframe").addEventListener("load", () => {
+    if (!contactSubmitting) return;
+    if (contactFallbackTimer) clearTimeout(contactFallbackTimer);
+    contactSubmitting = false;
+    contactSubmit.disabled = false;
+    setMsg(contactMsg, contactHumanMessage("ok"), false);
+    document.getElementById("contactName").value = "";
+    document.getElementById("contactEmail").value = "";
+    document.getElementById("contactMessage").value = "";
+    document.getElementById("contactConsent").checked = false;
+  });
+
+
   
   $("contactForm").addEventListener("submit", (e) => {
     $("contactUA").value = navigator.userAgent || "";
@@ -1126,6 +1168,7 @@ window.addEventListener("message", (ev) => {
     if (!d || d.ts !== true) return;
 
     if (d.action === "beta" && betaSubmitting) {
+      if (betaFallbackTimer) { clearTimeout(betaFallbackTimer); betaFallbackTimer = null; }
       betaSubmitting = false;
       betaSubmit.disabled = false;
 
@@ -1140,6 +1183,7 @@ window.addEventListener("message", (ev) => {
     }
 
     if (d.action === "review" && reviewSubmitting) {
+      if (reviewFallbackTimer) { clearTimeout(reviewFallbackTimer); reviewFallbackTimer = null; }
       reviewSubmitting = false;
       reviewSubmit.disabled = false;
 
@@ -1157,6 +1201,7 @@ window.addEventListener("message", (ev) => {
     }
 
     if (d.action === "contact" && contactSubmitting) {
+      if (contactFallbackTimer) { clearTimeout(contactFallbackTimer); contactFallbackTimer = null; }
       contactSubmitting = false;
       contactSubmit.disabled = false;
 
