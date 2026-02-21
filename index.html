@@ -359,6 +359,22 @@
       border-color: rgba(0,0,0,.10);
       background: rgba(0,0,0,.02);
     }
+    
+    .brand-loop{
+  display:block;
+  width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  margin: 2px auto 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.02);
+}
+
+body.light .brand-loop{
+  border-color: rgba(0,0,0,.10);
+  background: rgba(0,0,0,.02);
+}
 
     .mock{
       border-radius: 18px;
@@ -885,7 +901,12 @@
           </div>
 
           <aside class="panel" aria-label="Vorschau">
-            <img id="heroLogo" class="hero-logo" src="assets/logo_dark.png" alt="true-shuffel Logo" />
+            <img
+  id="brandLoop"
+  class="brand-loop"
+  src="assets/brand_logo_loop.gif"
+  alt="true-shuffel Logo Animation (Loop)"
+/>
 
             <div class="mock" aria-label="Feature Vorschau">
               <div class="mock-row">
@@ -1179,16 +1200,25 @@
 
     // Product Images (add later)
     const PRODUCT_IMAGES = [
-      // "assets/product_01.jpg",
-      // "assets/product_02.jpg",
-      // "assets/product_03.jpg"
-    ];
+  "assets/product_01_one-tap.png",
+  "assets/product_02_features-card.png",
+  "assets/product_03_comparison.png",
+  "assets/product_04_10000-tracks.png"
+];
 
     // Videos (add later)
     const VIDEO_ITEMS = [
-      // { type:"mp4", title:"Demo", desc:"Kurzer Überblick", src:"assets/demo.mp4", poster:"assets/product_01.jpg" },
-      // { type:"youtube", title:"Walkthrough", desc:"Feature Tour", id:"dQw4w9WgXcQ", poster:"assets/product_02.jpg" }
-    ];
+  {
+    type: "gif",
+    title: "Logo Loop",
+    desc: "Kurzer Brand-Clip (Loop)",
+    src: "assets/brand_logo_loop.gif"
+  },
+
+  // Platzhalter bis App-Videos fertig sind
+  { type: "placeholder", title: "App Demo (coming soon)", desc: "Bedienung & Features folgen" },
+  { type: "placeholder", title: "Playlist Walkthrough (coming soon)", desc: "Kurze Erklärung folgt" }
+];
 
     // ====== Helpers ======
     const $ = (id) => document.getElementById(id);
@@ -1243,11 +1273,14 @@
     const LOGO_LIGHT = "assets/logo_light.png";
 
     function setLogos(isLight){
-      const src = isLight ? LOGO_LIGHT : LOGO_DARK;
-      $("brandLogo").src = src;
-      $("heroLogo").src = src;
-      $("footerLogo").src = src;
-    }
+  const src = isLight ? LOGO_LIGHT : LOGO_DARK;
+
+  brandLogo.src = src;
+  footerLogo.src = src;
+
+  // Hero: dark = GIF, light = PNG
+  heroLogo.src = isLight ? "assets/logo_light.png" : "assets/brand_logo_loop.gif";
+}
 
     function applyTheme(mode){
       const isLight = mode === "light";
@@ -1399,38 +1432,58 @@
     const closeVideoBtn = $("closeVideoBtn");
 
     function buildVideoGallery(){
-      if (!videoGrid) return;
-      videoGrid.innerHTML = "";
+  if (!videoGrid) return;
+  videoGrid.innerHTML = "";
 
-      const items = (VIDEO_ITEMS && VIDEO_ITEMS.length) ? VIDEO_ITEMS : [
-        { type:"placeholder", title:"Demo Video", desc:"Füge später ein MP4 oder YouTube Video hinzu" },
-        { type:"placeholder", title:"Feature Walkthrough", desc:"Platzhalter" },
-        { type:"placeholder", title:"Kurzclip", desc:"Platzhalter" }
-      ];
+  const items = (VIDEO_ITEMS && VIDEO_ITEMS.length) ? VIDEO_ITEMS : [
+    { type:"placeholder", title:"Demo Video", desc:"Füge später ein MP4 oder YouTube Video hinzu" },
+    { type:"placeholder", title:"Feature Walkthrough", desc:"Platzhalter" },
+    { type:"placeholder", title:"Kurzclip", desc:"Platzhalter" }
+  ];
 
-      items.forEach((it) => {
-        const card = document.createElement("div");
-        card.className = "video-card";
+  items.forEach((it) => {
+    const card = document.createElement("div");
+    card.className = "video-card";
 
-        const poster = it.poster || placeholderSvg("Video");
-        card.innerHTML = `
-          <div class="video-thumb" style="background-image:url('${poster}'); background-size:cover; background-position:center;">
-            <div class="video-play">▶</div>
-          </div>
-          <div class="video-meta">
-            <b>${escapeHtml(it.title || "Video")}</b>
-            <span>${escapeHtml(it.desc || "")}</span>
-          </div>
-        `;
-
-        card.addEventListener("click", () => {
-          if (it.type === "placeholder") return;
-          openVideo(it);
-        });
-
-        videoGrid.appendChild(card);
-      });
+    // GIF: direkt als animiertes Thumbnail anzeigen (loop ist automatisch bei GIF)
+    if (it.type === "gif") {
+      card.innerHTML = `
+        <div class="video-thumb" style="padding:0; background:transparent; border-bottom:1px solid rgba(255,255,255,.10);">
+          <img src="${it.src}" alt="${escapeHtml(it.title || "GIF")}"
+               style="width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:16/9;" />
+        </div>
+        <div class="video-meta">
+          <b>${escapeHtml(it.title || "Logo Loop")}</b>
+          <span>${escapeHtml(it.desc || "")}</span>
+        </div>
+      `;
+      // Kein Modal nötig
+      videoGrid.appendChild(card);
+      return;
     }
+
+    // Placeholder / MP4 / YouTube normal
+    const thumbLabel = it.type === "youtube" ? "YouTube" : (it.type === "mp4" ? "MP4" : "Video");
+    const poster = it.poster || placeholderSvgData(`${thumbLabel} Thumbnail`);
+
+    card.innerHTML = `
+      <div class="video-thumb" style="background-image:url('${poster}'); background-size:cover; background-position:center;">
+        <div class="video-play">▶</div>
+      </div>
+      <div class="video-meta">
+        <b>${escapeHtml(it.title || "Video")}</b>
+        <span>${escapeHtml(it.desc || "")}</span>
+      </div>
+    `;
+
+    card.addEventListener("click", () => {
+      if (it.type === "placeholder") return;
+      openVideo(it);
+    });
+
+    videoGrid.appendChild(card);
+  });
+}
 
     function openVideo(it){
       videoFrameWrap.innerHTML = "";
@@ -1782,6 +1835,10 @@
 
       let sliderIndex = 0;
       let slidesCount = 0;
+      
+      function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m]));
+}
 
       function placeholderSvg(text){
         const isLight = document.body.classList.contains("light");
