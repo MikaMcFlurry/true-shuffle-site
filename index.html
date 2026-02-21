@@ -2,27 +2,124 @@
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="description" content="true-shuffel spielt deine komplette Playlist wirklich zufällig – ohne Wiederholungen, ohne Auslassungen. Wie ein MP3-Player, nur mit deinem Streamingdienst." />
-  <meta name="theme-color" content="#0b0d10" />
+  <meta name="theme-color" content="#121418" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="true-shuffel — echtes Shuffle für Streaming" />
-  <meta property="og:description" content="Spielt den kompletten Inhalt deiner Playlist ab – ohne Songs auszulassen oder zu wiederholen." />
+  <meta property="og:title" content="true-shuffel — True Shuffle für Streaming-Playlists (Beta)</title>
+<meta name="description" content="Echter Shuffle für große Streaming-Playlists: jeder Song genau einmal pro Durchlauf – keine Wiederholungen, keine ausgelassenen Tracks. Jetzt für den Beta-Test anmelden." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/logo_dark.png" />
+<link rel="canonical" href="https://true-shuffel.com/" />
+<meta name="robots" content="index,follow" />
 
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="true-shuffel" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="true-shuffel — True Shuffle für Streaming-Playlists" />
+<meta name="twitter:description" content="Jeder Song. Genau einmal. Kein Repeat, kein Skip. Beta-Test jetzt offen." />
+<meta name="twitter:image" content="assets/logo_dark.png" />
   <title>true-shuffel.com — echtes Shuffle für Streaming</title>
 
-  <!-- Favicon (dark PNG) -->
   <link rel="icon" type="image/png" href="assets/logo_dark.png" />
   <link rel="apple-touch-icon" href="assets/logo_dark.png" />
-
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "name":"true-shuffel",
+      "url":"https://true-shuffel.com/",
+      "email":"hello@true-shuffel.com",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"Am Schwarzen Steg 5a",
+        "postalCode":"95448",
+        "addressLocality":"Bayreuth",
+        "addressCountry":"DE"
+      },
+      "founder":[
+        {"@type":"Person","name":"Mika Hertler"},
+        {"@type":"Person","name":"Moritz Hertler"}
+      ]
+    },
+    {
+      "@type":"WebSite",
+      "name":"true-shuffel",
+      "url":"https://true-shuffel.com/"
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"Warum ist Shuffle bei Streamingdiensten oft schlecht?",
+          "acceptedAnswer":{"@type":"Answer","text":"Viele Dienste nutzen Smart-Shuffle-Heuristiken. Dadurch werden große Playlists nicht vollständig durchlaufen oder Reihenfolgen wiederholen sich."}
+        },
+        {
+          "@type":"Question",
+          "name":"Was macht true-shuffel anders?",
+          "acceptedAnswer":{"@type":"Answer","text":"true-shuffel erzeugt eine echte Zufallsreihenfolge ohne Wiederholungen und stellt sicher, dass jeder Titel genau einmal pro Durchlauf abgespielt wird."}
+        },
+        {
+          "@type":"Question",
+          "name":"Was passiert mit meinen Daten beim Beta-Test?",
+          "acceptedAnswer":{"@type":"Answer","text":"Für die Beta-Test-Anmeldung speichern wir Name und E-Mail, um dich zu kontaktieren. Details findest du in der Datenschutzerklärung."}
+        }
+      ]
+    }
+  ]
+}
+</script>
   <style>
+  /* Cookie banner */
+#cookieBanner{
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 200;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(10,10,10,.86);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  padding: 14px;
+  display: none;
+}
+
+body.light #cookieBanner{
+  border-color: rgba(0,0,0,.12);
+  background: rgba(246,246,246,.92);
+}
+
+.cookie-row{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cookie-text{
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  flex: 1 1 320px;
+}
+
+.cookie-actions{
+  display: flex;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
     :root{
-      /* Dark mode (default) – premium-dark */
-      --bg: #0b0d10;
-      --bg2: #0f1217;
+      /* Dark mode – an dein Dark-Logo angelehnt (charcoal statt hartes schwarz) */
+      --bg: #121418;
+      --bg2:#0b0d10;
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.09);
       --stroke: rgba(255,255,255,.12);
@@ -37,7 +134,6 @@
       --ring: 0 0 0 6px rgba(255,255,255,.10);
     }
 
-    /* Light mode overrides */
     body.light{
       --bg: #f6f6f6;
       --bg2: #ffffff;
@@ -59,7 +155,7 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color: var(--text);
       background:
-        radial-gradient(900px 380px at 18% -5%, rgba(255,255,255,.08), transparent 65%),
+        radial-gradient(900px 380px at 18% -5%, rgba(255,255,255,.07), transparent 65%),
         radial-gradient(900px 380px at 85% 10%, rgba(255,255,255,.05), transparent 60%),
         radial-gradient(700px 300px at 60% 85%, rgba(255,255,255,.04), transparent 60%),
         linear-gradient(180deg, var(--bg), var(--bg2));
@@ -80,17 +176,16 @@
     .wrap{ width: 100%; display:flex; justify-content:center; }
     .container{ width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
 
-    /* Top nav */
     header{
       position: sticky;
       top: 0;
       z-index: 50;
       backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(11,13,16,.78), rgba(11,13,16,.55));
+      background: linear-gradient(to bottom, rgba(18,20,24,.82), rgba(18,20,24,.58));
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     body.light header{
-      background: linear-gradient(to bottom, rgba(246,246,246,.88), rgba(246,246,246,.62));
+      background: linear-gradient(to bottom, rgba(246,246,246,.92), rgba(246,246,246,.70));
       border-bottom: 1px solid rgba(0,0,0,.08);
     }
 
@@ -99,7 +194,7 @@
       align-items:center;
       justify-content:space-between;
       padding: 14px 0;
-      gap: 14px;
+      gap: 12px;
     }
 
     .brand{
@@ -148,7 +243,7 @@
       justify-content:center;
       gap: 10px;
       padding: 10px 14px;
-      border-radius: 14px;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       color: var(--text);
@@ -173,15 +268,11 @@
     .btn:active{ transform: translateY(0px); }
 
     .btn-primary{
-      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.75));
-      color: #0b0d10;
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+      color: #121418;
       border-color: rgba(255,255,255,.25);
       box-shadow: 0 10px 30px rgba(255,255,255,.08);
       font-weight: 800;
-    }
-    .btn-primary:hover{
-      background: linear-gradient(180deg, rgba(255,255,255,.97), rgba(255,255,255,.82));
-      border-color: rgba(255,255,255,.30);
     }
 
     .pill{
@@ -207,8 +298,8 @@
     }
     body.light .dot{ box-shadow: 0 0 0 4px rgba(0,0,0,.10); }
 
-    /* Hero */
     main{ padding: 44px 0 70px; }
+
     .hero{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
@@ -260,7 +351,6 @@
       border-color: rgba(0,0,0,.12);
       background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
     }
-
     .hero-card-inner{ position:relative; padding: 18px; }
 
     .hero-logo{
@@ -329,39 +419,26 @@
     .metric b{ display:block; font-size: 18px; }
     .metric span{ color: var(--muted2); font-size: 13px; }
 
-    /* Sections */
     section{ padding: 70px 0; }
     .section-title{
       display:flex; align-items:end; justify-content:space-between; gap: 16px;
       margin-bottom: 22px;
     }
-    .section-title h2{
-      margin:0;
-      font-size: 26px;
-      letter-spacing: -0.01em;
-    }
-    .section-title p{
-      margin:0;
-      color: var(--muted);
-      max-width: 64ch;
-      line-height: 1.5;
-    }
+    .section-title h2{ margin:0; font-size: 26px; letter-spacing: -0.01em; }
+    .section-title p{ margin:0; color: var(--muted); max-width: 64ch; line-height: 1.5; }
 
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } }
+
     .card{
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
       padding: 18px;
-      position:relative;
-      overflow:hidden;
     }
     body.light .card{
       border-color: rgba(0,0,0,.12);
@@ -429,10 +506,7 @@
       background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02));
     }
 
-    .badges{
-      display:flex; flex-wrap:wrap; gap: 10px;
-      margin-top: 12px;
-    }
+    .badges{ display:flex; flex-wrap:wrap; gap: 10px; margin-top: 12px; }
     .badge{
       padding: 8px 12px;
       border-radius: 999px;
@@ -446,12 +520,11 @@
       background: rgba(0,0,0,.03);
     }
 
-    /* CTA */
     .cta{
       border-radius: 34px;
       border: 1px solid rgba(255,255,255,.12);
       background:
-        radial-gradient(700px 250px at 20% 0%, rgba(255,255,255,.12), transparent 55%),
+        radial-gradient(700px 250px at 20% 0%, rgba(255,255,255,.10), transparent 55%),
         linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
       padding: 22px;
       box-shadow: var(--shadow);
@@ -474,16 +547,16 @@
     .cta-form{
       display:flex;
       gap: 10px;
-      justify-content:flex-end;
       flex-wrap:wrap;
+      justify-content:flex-end;
     }
     .input{
       flex: 1 1 220px;
-      min-width: 220px;
+      min-width: 0;
       padding: 11px 12px;
-      border-radius: 14px;
+      border-radius: 16px;
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.30);
+      background: rgba(0,0,0,.28);
       color: var(--text);
       outline:none;
       transition: box-shadow .12s ease, border-color .12s ease;
@@ -492,10 +565,7 @@
       border-color: rgba(0,0,0,.12);
       background: rgba(0,0,0,.03);
     }
-    .input:focus{
-      border-color: rgba(255,255,255,.26);
-      box-shadow: var(--ring);
-    }
+    .input:focus{ border-color: rgba(255,255,255,.26); box-shadow: var(--ring); }
 
     .consent{
       width: 100%;
@@ -509,7 +579,6 @@
     }
     .consent input{ margin-top: 3px; }
 
-    /* FAQ */
     details{
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.12);
@@ -546,22 +615,15 @@
       background: rgba(0,0,0,.03);
     }
     details[open] .chev{ transform: rotate(180deg); }
-    details p{
-      margin: 10px 0 0;
-      color: var(--muted);
-      line-height: 1.6;
-    }
+    details p{ margin: 10px 0 0; color: var(--muted); line-height: 1.6; }
 
-    /* Footer */
     footer{
       border-top: 1px solid rgba(255,255,255,.10);
       padding: 26px 0 40px;
       color: var(--muted2);
       font-size: 13px;
     }
-    body.light footer{
-      border-top: 1px solid rgba(0,0,0,.10);
-    }
+    body.light footer{ border-top: 1px solid rgba(0,0,0,.10); }
     .foot{
       display:flex;
       align-items:center;
@@ -569,11 +631,7 @@
       gap: 12px;
       flex-wrap:wrap;
     }
-    .foot a{
-      color: var(--muted);
-      padding: 8px 10px;
-      border-radius: 12px;
-    }
+    .foot a{ color: var(--muted); padding: 8px 10px; border-radius: 12px; }
     .foot a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
     body.light .foot a:hover{ background: rgba(0,0,0,.05); }
 
@@ -581,11 +639,7 @@
     .menu-btn{ display:none; }
     @media (max-width: 980px){
       .menu-btn{ display:inline-flex; }
-      .navcta .btn{ padding: 10px 12px; }
-      .drawer{
-        display:none;
-        padding: 10px 0 16px;
-      }
+      .drawer{ display:none; padding: 10px 0 16px; }
       .drawer.open{ display:block; }
       .drawer a{
         display:block;
@@ -604,7 +658,63 @@
       body.light .drawer a:hover{ background: rgba(0,0,0,.05); }
     }
 
-    /* Subtle entrance */
+    /* FIX mobile width: wrap header and prevent horizontal overflow */
+    @media (max-width: 520px){
+      .nav{ flex-wrap: wrap; }
+      .brand{ flex: 1 1 100%; }
+      .navcta{
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 8px;
+      }
+      .btn{ padding: 10px 12px; }
+    }
+
+    /* Legal modal – FIX scroll */
+    #modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.72);
+      z-index:100;
+      padding:16px;
+    }
+    #modalPanel{
+      max-width: 920px;
+      margin: 60px auto;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(10,10,10,.92);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      max-height: 85vh;
+    }
+    body.light #modalPanel{
+      background: rgba(246,246,246,.96);
+      border-color: rgba(0,0,0,.12);
+    }
+    #modalHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      flex: 0 0 auto;
+    }
+    body.light #modalHeader{ border-bottom:1px solid rgba(0,0,0,.10); }
+
+    #modalContent{
+      padding:16px;
+      color: var(--muted);
+      line-height:1.65;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      flex: 1 1 auto;
+    }
+
     @media (prefers-reduced-motion: no-preference){
       .fade-in{
         opacity: 0;
@@ -614,9 +724,7 @@
       .d2{ animation-delay: .08s; }
       .d3{ animation-delay: .16s; }
       .d4{ animation-delay: .24s; }
-      @keyframes in{
-        to{ opacity: 1; transform: translateY(0); }
-      }
+      @keyframes in{ to{ opacity: 1; transform: translateY(0); } }
     }
   </style>
 </head>
@@ -647,11 +755,11 @@
             </button>
 
             <button class="btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">
-              Menü
-              <span aria-hidden="true">☰</span>
+              Menü <span aria-hidden="true">≡</span>
             </button>
+
             <a class="btn" href="#how">Mehr erfahren</a>
-            <a class="btn btn-primary" href="#cta">Zum Betatest</a>
+            <a class="btn btn-primary" href="#cta">Zum Beta-Test</a>
           </div>
         </div>
 
@@ -659,7 +767,7 @@
           <a href="#features">Features</a>
           <a href="#how">So funktioniert’s</a>
           <a href="#faq">FAQ</a>
-          <a href="#cta">Zum Betatest</a>
+          <a href="#cta">Zum Beta-Test</a>
         </div>
       </div>
     </div>
@@ -675,16 +783,15 @@
 
         <div class="hero">
           <div class="fade-in d2">
-            <h1>Echtes Shuffle.<br/>Jeder Song. Genau einmal.</h1>
-            <p class="lead">
-              true-shuffel spielt <b>deine komplette Playlist</b> ab – <b>ohne Songs auszulassen</b> und
-              <b>ohne sich zu wiederholen</b>. Wie die geliebten MP3-Player früher: <b>true Shuffle</b>.
-              Und das Beste: Du bleibst bei deinem Streamingdienst.
-            </p>
+            <h1>True Shuffle für Streaming-Playlists.<br/>Jeder Song. Genau einmal.</h1>
+           <p class="lead">
+  Streaming-Shuffle wiederholt sich oft oder lässt Tracks aus – besonders bei großen Playlists.
+  true-shuffel erstellt eine echte Zufallsreihenfolge und spielt <b>alle Songs</b> <b>genau einmal pro Durchlauf</b>.
+</p>
 
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#cta" aria-label="Zum Betatest">
-                <span aria-hidden="true">▶</span> Zum Betatest
+              <a class="btn btn-primary" href="#cta" aria-label="Zum Beta-Test">
+                <span aria-hidden="true">▶</span> Zum Beta-Test
               </a>
               <a class="btn" href="#features" aria-label="Features ansehen">
                 <span aria-hidden="true">✦</span> Warum true-shuffel?
@@ -701,39 +808,26 @@
 
               <div class="mock" role="img" aria-label="Mock UI: Playlist Shuffle ohne Wiederholung">
                 <div class="mock-row">
-                  <div class="mock-title">
-                    <div class="mini">✓</div>
-                    Vollständige Playlist
-                  </div>
+                  <div class="mock-title"><div class="mini">✓</div>Vollständige Playlist</div>
                   <div class="mock-meta">100–10.000+ Songs</div>
                 </div>
                 <div class="mock-row">
-                  <div class="mock-title">
-                    <div class="mini">∞</div>
-                    Keine Wiederholung
-                  </div>
+                  <div class="mock-title"><div class="mini">∞</div>Keine Wiederholung</div>
                   <div class="mock-meta">bis alles lief</div>
                 </div>
                 <div class="mock-row">
-                  <div class="mock-title">
-                    <div class="mini">⟲</div>
-                    Echter Zufall
-                  </div>
+                  <div class="mock-title"><div class="mini">⟲</div>Echter Zufall</div>
                   <div class="mock-meta">keine Muster</div>
                 </div>
 
                 <div class="metric-grid" aria-label="Kennzahlen">
-                  <div class="metric">
-                    <b>0</b><span>ausgelassene Songs</span>
-                  </div>
-                  <div class="metric">
-                    <b>1×</b><span>pro Song (pro Durchlauf)</span>
-                  </div>
+                  <div class="metric"><b>0</b><span>ausgelassene Songs</span></div>
+                  <div class="metric"><b>1×</b><span>pro Song (pro Durchlauf)</span></div>
                 </div>
               </div>
 
               <div class="subnote" style="margin-top:12px">
-                Hinweis: true-shuffel befindet sich in der Beta. Du kannst dich unten für den Betatest anmelden.
+                Hinweis: true-shuffel befindet sich in der Beta. Du kannst dich unten für den Beta-Test anmelden.
               </div>
             </div>
           </aside>
@@ -741,7 +835,6 @@
       </div>
     </div>
 
-    <!-- Features -->
     <section id="features">
       <div class="wrap">
         <div class="container">
@@ -756,103 +849,37 @@
           </div>
 
           <div class="grid">
-            <div class="card fade-in">
-              <div class="icon" aria-hidden="true">✓</div>
-              <h3>Komplett abspielen</h3>
-              <p>
-                true-shuffel spielt den <b>gesamten Inhalt</b> deiner Playlist – egal ob 100 Songs oder 10.000+.
-              </p>
-            </div>
-
-            <div class="card fade-in d2">
-              <div class="icon" aria-hidden="true">∞</div>
-              <h3>Ohne Wiederholungen</h3>
-              <p>
-                Jeder Song kommt <b>genau einmal</b>, bis die ganze Playlist durchgelaufen ist.
-              </p>
-            </div>
-
-            <div class="card fade-in d3">
-              <div class="icon" aria-hidden="true">⟲</div>
-              <h3>Echter Zufall</h3>
-              <p>
-                Keine regelmäßig wiederkehrenden Reihenfolgen. Shuffle, wie es sein sollte.
-              </p>
-            </div>
-
-            <div class="card fade-in d2">
-              <div class="icon" aria-hidden="true">⚡</div>
-              <h3>Du bleibst beim Dienst</h3>
-              <p>
-                Login mit deinem Streaming-Account und Zugriff auf deine Playlists über APIs – ohne Plattformwechsel.
-              </p>
-            </div>
-
-            <div class="card fade-in d3">
-              <div class="icon" aria-hidden="true">🔒</div>
-              <h3>Datensparsam</h3>
-              <p>
-                Wir nutzen deine Daten nur für Betatest & Updates. Details findest du in der Datenschutzerklärung.
-              </p>
-            </div>
-
-            <div class="card fade-in d4">
-              <div class="icon" aria-hidden="true">🎧</div>
-              <h3>MP3-Player Gefühl</h3>
-              <p>
-                Eine Playlist, echtes Shuffle, keine Überraschungen außer der Musik.
-              </p>
-            </div>
+            <div class="card fade-in"><div class="icon" aria-hidden="true">✓</div><h3>Komplett abspielen</h3><p>true-shuffel spielt den <b>gesamten Inhalt</b> deiner Playlist – egal ob 100 Songs oder 10.000+.</p></div>
+            <div class="card fade-in d2"><div class="icon" aria-hidden="true">∞</div><h3>Ohne Wiederholungen</h3><p>Jeder Song kommt <b>genau einmal</b>, bis die ganze Playlist durchgelaufen ist.</p></div>
+            <div class="card fade-in d3"><div class="icon" aria-hidden="true">⟲</div><h3>Echter Zufall</h3><p>Keine regelmäßig wiederkehrenden Reihenfolgen. Shuffle, wie es sein sollte.</p></div>
+            <div class="card fade-in d2"><div class="icon" aria-hidden="true">⚡</div><h3>Du bleibst beim Dienst</h3><p>Login mit deinem Streaming-Account und Zugriff auf deine Playlists über APIs – ohne Plattformwechsel.</p></div>
+            <div class="card fade-in d3"><div class="icon" aria-hidden="true">🔒</div><h3>Datensparsam</h3><p>Wir nutzen deine Daten nur für Beta-Test & Updates. Details findest du in der Datenschutzerklärung.</p></div>
+            <div class="card fade-in d4"><div class="icon" aria-hidden="true">🎧</div><h3>MP3-Player Gefühl</h3><p>Eine Playlist, echtes Shuffle, keine Überraschungen außer der Musik.</p></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- How it works -->
     <section id="how">
       <div class="wrap">
         <div class="container">
           <div class="section-title">
             <div>
               <h2>So funktioniert’s</h2>
-              <p>
-                In drei Schritten zu echtem Shuffle – ohne deinen Lieblingsdienst zu verlassen.
-              </p>
+              <p>In drei Schritten zu echtem Shuffle – ohne deinen Lieblingsdienst zu verlassen.</p>
             </div>
           </div>
 
           <div class="how">
             <div class="steps">
-              <div class="step fade-in">
-                <div class="num">1</div>
-                <div>
-                  <b>Mit Streamingdienst anmelden</b>
-                  <span>Wähle Spotify, Apple Music, YouTube Music, Tidal, Deezer usw. und logge dich ein.</span>
-                </div>
-              </div>
-
-              <div class="step fade-in d2">
-                <div class="num">2</div>
-                <div>
-                  <b>Playlist auswählen</b>
-                  <span>Du erhältst direkten Zugriff auf deine Playlists (über die jeweilige API).</span>
-                </div>
-              </div>
-
-              <div class="step fade-in d3">
-                <div class="num">3</div>
-                <div>
-                  <b>Shuffle drücken & genießen</b>
-                  <span>true-shuffel erstellt eine echte Zufallsreihenfolge – ohne Auslassungen und ohne Wiederholung.</span>
-                </div>
-              </div>
+              <div class="step fade-in"><div class="num">1</div><div><b>Mit Streamingdienst anmelden</b><span>Wähle Spotify, Apple Music, YouTube Music, Tidal, Deezer usw. und logge dich ein.</span></div></div>
+              <div class="step fade-in d2"><div class="num">2</div><div><b>Playlist auswählen</b><span>Du erhältst direkten Zugriff auf deine Playlists (über die jeweilige API).</span></div></div>
+              <div class="step fade-in d3"><div class="num">3</div><div><b>Shuffle drücken & genießen</b><span>true-shuffel erstellt eine echte Zufallsreihenfolge – ohne Auslassungen und ohne Wiederholung.</span></div></div>
             </div>
 
             <div class="panel fade-in d2">
               <h3 style="margin:0 0 10px;">Unterstützte Dienste</h3>
-              <p style="margin:0; color: var(--muted); line-height:1.55;">
-                Diese Liste wird in der Beta schrittweise erweitert.
-              </p>
+              <p style="margin:0; color: var(--muted); line-height:1.55;">Diese Liste wird in der Beta schrittweise erweitert.</p>
               <div class="badges" aria-label="Streamingdienste">
                 <span class="badge">Spotify</span>
                 <span class="badge">Apple Music</span>
@@ -875,15 +902,15 @@
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- CTA (iframe submit – no redirect / no CORS issues) -->
     <section id="cta">
       <div class="wrap">
         <div class="container">
           <div class="cta fade-in">
             <div>
-              <h3>Betatest: sichere dir einen Platz</h3>
+              <h3>Beta-Test: sichere dir einen Platz</h3>
               <p>
-                true-shuffel ist aktuell in der <b>Beta</b>. Melde dich für den Betatest an und bekomme als Erste:r Zugriff,
+                true-shuffel ist aktuell in der <b>Beta</b>. Melde dich für den Beta-Test an und bekomme als Erste:r Zugriff,
                 sobald dein Streamingdienst freigeschaltet ist.
               </p>
               <div class="subnote">
@@ -892,69 +919,56 @@
               </div>
             </div>
 
-            <form class="cta-form" id="betaForm" autocomplete="on">
+            <form class="cta-form" id="betaForm"
+                  action="https://script.google.com/macros/s/AKfycby3YzfoHaTvwOFfjgeAMP4e1H2627TN-dy_Hb3aRIDgts14psMeqAH6SemCskOw6Ycw/exec"
+                  method="POST"
+                  target="beta_iframe"
+                  autocomplete="on">
               <input class="input" type="text" id="betaName" name="name" placeholder="Name" aria-label="Name" required />
-              <input class="input" type="email" id="betaEmail" name="email" placeholder="E-Mail für Betatest" aria-label="E-Mail für Betatest" required />
+              <input class="input" type="email" id="betaEmail" name="email" placeholder="E-Mail für Beta-Test" aria-label="E-Mail für Beta-Test" required />
 
-              <button class="btn btn-primary" type="submit">Für Betatest anmelden</button>
+              <input type="hidden" name="source" value="true-shuffel-site" />
+              <input type="hidden" id="betaUA" name="userAgent" value="" />
+
+              <button class="btn btn-primary" type="submit">Für Beta-Test anmelden</button>
 
               <div class="consent">
                 <input type="checkbox" id="betaConsent" required aria-label="Einwilligung Datenschutz" />
                 <label for="betaConsent">
-                  Ich willige ein, dass meine Angaben (Name, E-Mail) zum Zweck der Betatest-Organisation verarbeitet werden.
+                  Ich willige ein, dass meine Angaben (Name, E-Mail) zum Zweck der Beta-Test-Organisation verarbeitet werden.
                   Die Einwilligung kann ich jederzeit widerrufen. (<a href="#" onclick="openModal('privacy'); return false;" style="text-decoration:underline;">Datenschutz</a>)
                 </label>
               </div>
 
               <div class="subnote" id="betaMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
             </form>
+
+            <iframe id="beta_iframe" name="beta_iframe" style="display:none;"></iframe>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
     <section id="faq">
       <div class="wrap">
         <div class="container">
           <div class="section-title">
-            <div>
-              <h2>FAQ</h2>
-              <p>Die häufigsten Fragen – kurz und klar.</p>
-            </div>
+            <div><h2>FAQ</h2><p>Die häufigsten Fragen – kurz und klar.</p></div>
           </div>
 
           <details class="fade-in">
-            <summary>
-              Warum ist Shuffle bei Streamingdiensten oft “schlecht”?
-              <span class="chev" aria-hidden="true">⌄</span>
-            </summary>
-            <p>
-              Viele Dienste nutzen Heuristiken oder “Smart Shuffle”-Logiken. Das kann dazu führen, dass große Playlists nicht vollständig
-              durchlaufen oder sich Reihenfolgen wiederholen.
-            </p>
+            <summary>Warum ist Shuffle bei Streamingdiensten oft “schlecht”? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <p>Viele Dienste nutzen Heuristiken oder “Smart Shuffle”-Logiken. Das kann dazu führen, dass große Playlists nicht vollständig durchlaufen oder sich Reihenfolgen wiederholen.</p>
           </details>
 
           <details class="fade-in d2">
-            <summary>
-              Was macht true-shuffel anders?
-              <span class="chev" aria-hidden="true">⌄</span>
-            </summary>
-            <p>
-              true-shuffel erstellt eine echte Zufallsreihenfolge für alle Songs einer Playlist und stellt sicher,
-              dass jeder Titel genau einmal gespielt wird, bevor ein neuer Durchlauf beginnt.
-            </p>
+            <summary>Was macht true-shuffel anders? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <p>true-shuffel erstellt eine echte Zufallsreihenfolge für alle Songs einer Playlist und stellt sicher, dass jeder Titel genau einmal gespielt wird, bevor ein neuer Durchlauf beginnt.</p>
           </details>
 
           <details class="fade-in d3">
-            <summary>
-              Was passiert mit meinen Daten?
-              <span class="chev" aria-hidden="true">⌄</span>
-            </summary>
-            <p>
-              Für die Betatest-Anmeldung speichern wir Name und E-Mail, um dich zum Betatest zu kontaktieren.
-              Details findest du in der Datenschutzerklärung.
-            </p>
+            <summary>Was passiert mit meinen Daten? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <p>Für die Beta-Test-Anmeldung speichern wir Name und E-Mail, um dich zum Beta-Test zu kontaktieren. Details findest du in der Datenschutzerklärung.</p>
           </details>
         </div>
       </div>
@@ -983,25 +997,52 @@
     </div>
   </footer>
 
-  <!-- Legal modal -->
-  <div id="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:100; padding:20px;">
-    <div id="modalPanel" style="max-width:900px; margin: 60px auto; border-radius:24px; border:1px solid rgba(255,255,255,.12); background:rgba(10,10,10,.92); box-shadow: var(--shadow); overflow:hidden;">
-      <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.10);">
+  <div id="modal">
+    <div id="modalPanel">
+      <div id="modalHeader">
         <b id="modalTitle">Hinweis</b>
         <button class="btn" onclick="closeModal()">Schließen</button>
       </div>
-      <div style="padding:16px; color: var(--muted); line-height:1.65;">
+      <div id="modalContent">
         <div id="modalBody"></div>
       </div>
     </div>
   </div>
 
   <script>
-    // ======= Assets =======
+  
+  // Cookie banner (informational, since no tracking cookies are used)
+function setCookie(name, value, days){
+  const maxAge = days ? `; max-age=${days*24*60*60}` : "";
+  const secure = location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = `${name}=${encodeURIComponent(value)}${maxAge}; Path=/; SameSite=Lax${secure}`;
+}
+function getCookie(name){
+  return document.cookie.split("; ").reduce((acc, part) => {
+    const [k, ...v] = part.split("=");
+    if (k === name) acc = decodeURIComponent(v.join("="));
+    return acc;
+  }, "");
+}
+
+(function initCookieBanner(){
+  const banner = document.getElementById("cookieBanner");
+  const btn = document.getElementById("cookieAcceptBtn");
+  if (!banner || !btn) return;
+
+  const ack = getCookie("ts_cookie_ack");
+  if (!ack) banner.style.display = "block";
+
+  btn.addEventListener("click", () => {
+    setCookie("ts_cookie_ack", "1", 365);
+    banner.style.display = "none";
+  });
+})();
+    // Assets
     const LOGO_DARK  = "assets/logo_dark.png";
     const LOGO_LIGHT = "assets/logo_light.png";
 
-    // ======= Mobile nav =======
+    // Mobile nav
     const menuBtn = document.getElementById('menuBtn');
     const drawer = document.getElementById('drawer');
     if (menuBtn) {
@@ -1014,7 +1055,7 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ======= Theme toggle + logo switch =======
+    // Theme toggle + logo switch (device default when no saved)
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
@@ -1033,7 +1074,6 @@
     function applyTheme(mode){
       const isLight = mode === "light";
       document.body.classList.toggle("light", isLight);
-
       setLogos(isLight);
 
       if (isLight) {
@@ -1049,8 +1089,12 @@
 
     (function initTheme(){
       const saved = localStorage.getItem("true_shuffel_theme");
-      if (saved === "light" || saved === "dark") applyTheme(saved);
-      else applyTheme("dark");
+      if (saved === "light" || saved === "dark") {
+        applyTheme(saved);
+        return;
+      }
+      const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      applyTheme(prefersLight ? "light" : "dark");
     })();
 
     themeToggle.addEventListener("click", () => {
@@ -1060,77 +1104,49 @@
       localStorage.setItem("true_shuffel_theme", next);
     });
 
-    // ======= Beta signup -> Google Sheets (Apps Script Web App) =======
+    // Beta form submit (iframe) – success on iframe load
     const betaForm = document.getElementById('betaForm');
     const betaName = document.getElementById('betaName');
     const betaEmail = document.getElementById('betaEmail');
     const betaConsent = document.getElementById('betaConsent');
     const betaMsg = document.getElementById('betaMsg');
+    const betaUA = document.getElementById('betaUA');
+    const betaIframe = document.getElementById('beta_iframe');
 
-    const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwptrfkXnh3ZQ9TYc8dLzo3ePXdkrtlKyo2DrOLRLEk03YLR36EH66oDVc4kSl5IPZJ7g/exec";
+    let betaSubmitting = false;
 
-    betaForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
+    betaForm.addEventListener('submit', (e) => {
       const name = (betaName.value || "").trim();
       const email = (betaEmail.value || "").trim();
 
-      if (!name) { betaMsg.textContent = "Bitte Name eingeben."; return; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        betaMsg.textContent = "Bitte eine gültige E-Mail eingeben.";
-        return;
-      }
-      if (!betaConsent.checked) {
-        betaMsg.textContent = "Bitte Einwilligung bestätigen.";
-        return;
-      }
+      if (!name) { e.preventDefault(); betaMsg.textContent = "Bitte Name eingeben."; return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { e.preventDefault(); betaMsg.textContent = "Bitte eine gültige E-Mail eingeben."; return; }
+      if (!betaConsent.checked) { e.preventDefault(); betaMsg.textContent = "Bitte Einwilligung bestätigen."; return; }
 
+      betaUA.value = navigator.userAgent || "";
+      betaSubmitting = true;
       betaMsg.textContent = "Wird gespeichert…";
-
-      try {
-        const res = await fetch(SHEETS_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({
-            name,
-            email,
-            source: "true-shuffel-site",
-            userAgent: navigator.userAgent,
-            consent: true
-          })
-        });
-
-        const data = await res.json().catch(() => ({}));
-        if (data && data.ok) {
-          betaMsg.textContent = "Danke! Du bist für den Betatest registriert.";
-          betaName.value = "";
-          betaEmail.value = "";
-          betaConsent.checked = false;
-        } else {
-          betaMsg.textContent = "Fehler beim Speichern. Bitte später erneut versuchen.";
-        }
-      } catch (err) {
-        betaMsg.textContent = "Netzwerkfehler. Bitte später erneut versuchen.";
-      }
     });
 
-    // ======= Legal modal =======
+    // iframe load fires when request finishes
+    betaIframe.addEventListener('load', () => {
+      if (!betaSubmitting) return;
+      betaSubmitting = false;
+
+      betaMsg.textContent = "Danke! Du bist für den Beta-Test registriert.";
+      betaName.value = "";
+      betaEmail.value = "";
+      betaConsent.checked = false;
+    });
+
+    // Legal modal
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
-    const modalPanel = document.getElementById('modalPanel');
 
     function openModal(type){
       modal.style.display = "block";
       document.body.style.overflow = "hidden";
-
-      if (document.body.classList.contains("light")) {
-        modalPanel.style.background = "rgba(246,246,246,.96)";
-        modalPanel.style.borderColor = "rgba(0,0,0,.12)";
-      } else {
-        modalPanel.style.background = "rgba(10,10,10,.92)";
-        modalPanel.style.borderColor = "rgba(255,255,255,.12)";
-      }
 
       if(type === "impressum"){
         modalTitle.textContent = "Impressum";
@@ -1149,18 +1165,15 @@
             Mika Hertler & Moritz Hertler<br/>
             Am Schwarzen Steg 5a, 95448 Bayreuth
           </p>
-          <p>
-            <b>Haftung für Inhalte</b><br/>
+          <p><b>Haftung für Inhalte</b><br/>
             Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
             Wir übernehmen jedoch keine Gewähr für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte.
           </p>
-          <p>
-            <b>Haftung für Links</b><br/>
+          <p><b>Haftung für Links</b><br/>
             Unsere Website enthält ggf. Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
             Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
           </p>
-          <p>
-            <b>Urheberrecht</b><br/>
+          <p><b>Urheberrecht</b><br/>
             Die durch die Seitenbetreiber erstellten Inhalte und Werke auf dieser Website unterliegen dem deutschen Urheberrecht.
           </p>
         `;
@@ -1168,8 +1181,7 @@
         modalTitle.textContent = "Cookies & lokale Speicherung";
         modalBody.innerHTML = `
           <p>Diese Website setzt aktuell <b>keine Tracking- oder Marketing-Cookies</b> ein.</p>
-          <p>
-            <b>Technisch notwendige Speicherung</b><br/>
+          <p><b>Technisch notwendige Speicherung</b><br/>
             Für die Funktion „Dark/Light Mode“ speichern wir deine Auswahl lokal in deinem Browser (localStorage).
           </p>
           <p>
@@ -1184,48 +1196,32 @@
             Wir nehmen den Schutz deiner personenbezogenen Daten ernst. Personenbezogene Daten werden auf dieser Website nur verarbeitet,
             soweit dies zur Bereitstellung der Funktionen erforderlich ist oder du eingewilligt hast.
           </p>
-
           <p><b>1. Verantwortliche</b><br/>
             Mika Hertler & Moritz Hertler, Am Schwarzen Steg 5a, 95448 Bayreuth, Deutschland<br/>
             Kontakt: hello@true-shuffel.com
           </p>
-
-          <p><b>2. Betatest-Anmeldung (Name & E-Mail)</b><br/>
-            Wenn du dich für den Betatest anmeldest, verarbeiten wir deinen Namen und deine E-Mail-Adresse, um den Betatest zu organisieren,
+          <p><b>2. Beta-Test-Anmeldung (Name & E-Mail)</b><br/>
+            Wenn du dich für den Beta-Test anmeldest, verarbeiten wir deinen Namen und deine E-Mail-Adresse, um den Beta-Test zu organisieren,
             dich zu kontaktieren und dir ggf. Zugriff/Updates zu senden.
           </p>
-
           <p><b>Rechtsgrundlage</b><br/>
             Die Verarbeitung erfolgt auf Grundlage deiner <b>Einwilligung</b> (Art. 6 Abs. 1 lit. a DSGVO).
             Du kannst die Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen (per E-Mail an hello@true-shuffel.com).
           </p>
-
           <p><b>3. Speicherung in Google Sheets / Google Apps Script</b><br/>
-            Zur Speicherung der Betatest-Anmeldungen nutzen wir Google Sheets und Google Apps Script, bereitgestellt von
+            Zur Speicherung der Beta-Test-Anmeldungen nutzen wir Google Sheets und Google Apps Script, bereitgestellt von
             <b>Google Ireland Limited</b>, Gordon House, Barrow Street, Dublin 4, Irland.
-            Dabei können technische Daten (z. B. IP-Adresse, User-Agent) verarbeitet werden.
           </p>
-
-          <p>Weitere Informationen: Google Datenschutzerklärung (policies.google.com/privacy)</p>
-
           <p><b>4. Speicherdauer</b><br/>
-            Wir speichern die Betatest-Daten, solange dies für die Durchführung des Betatests erforderlich ist oder bis du die Löschung verlangst
+            Wir speichern die Beta-Test-Daten, solange dies für die Durchführung des Beta-Tests erforderlich ist oder bis du die Löschung verlangst
             bzw. deine Einwilligung widerrufst.
           </p>
-
           <p><b>5. Deine Rechte</b><br/>
             Du hast insbesondere das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie das Recht,
             dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.
           </p>
-
           <p><b>6. Server-Logfiles</b><br/>
-            Beim Aufruf der Website können durch den Hosting-Provider technisch notwendige Logdaten (z. B. IP-Adresse, Zeitpunkt, abgerufene Seite)
-            verarbeitet werden, um den Betrieb und die Sicherheit der Website zu gewährleisten.
-          </p>
-
-          <p><b>7. Keine Analyse-/Tracking-Tools</b><br/>
-            Aktuell verwenden wir keine Analyse- oder Marketing-Tracker. Falls wir dies ändern, passen wir diese Datenschutzerklärung an und holen,
-            soweit erforderlich, Einwilligungen ein.
+            Beim Aufruf der Website können durch den Hosting-Provider technisch notwendige Logdaten verarbeitet werden, um Betrieb und Sicherheit zu gewährleisten.
           </p>
         `;
       }
@@ -1258,5 +1254,17 @@
       });
     });
   </script>
+  <div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie Hinweis">
+  <div class="cookie-row">
+    <div class="cookie-text">
+      Wir verwenden keine Tracking-Cookies. Nur technisch notwendige Speicherung (z. B. Dark/Light-Modus via localStorage).
+      Mehr dazu unter <a href="#" onclick="openModal('cookies'); return false;" style="text-decoration:underline;">Cookies</a>.
+    </div>
+    <div class="cookie-actions">
+      <button class="btn" type="button" onclick="openModal('cookies')">Details</button>
+      <button class="btn btn-primary" type="button" id="cookieAcceptBtn">OK</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
