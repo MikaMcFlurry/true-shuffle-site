@@ -190,19 +190,6 @@
     body.light .hero-media{
       box-shadow: 0 14px 38px rgba(0,0,0,.12);
     }
-    
-    .phone-preview{ margin: 10px 0 18px; display:flex; justify-content:center; }
-    .phone-preview-img{
-      width: min(520px, 100%);
-      border-radius: 28px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.22);
-      border: 1px solid rgba(120,120,120,.18);
-      background: rgba(255,255,255,.02);
-    }
-    body.light .phone-preview-img{
-      box-shadow: 0 12px 40px rgba(0,0,0,.10);
-      background: rgba(255,255,255,.6);
-    }
 @media (max-width: 520px){
       .hero-media{ max-height: 320px; }
     }
@@ -637,11 +624,6 @@
             <p>Promo images & app impressions (real demos coming soon). Swipe on mobile, arrows on desktop.</p>
           </div>
         </div>
-
-        <div class="phone-preview" aria-label="Phone preview">
-          <img id="phonePreview" class="phone-preview-img" src="assets/hero_phone_dark.png" alt="true-shuffle phone preview" loading="lazy" />
-        </div>
-
         <div class="slider" aria-label="Image slider">
           <div class="slider-track" id="sliderTrack"></div>
           <div class="slider-nav">
@@ -906,9 +888,7 @@
   const LOGO_LIGHT = "assets/logo_light.png";
   const HERO_MEDIA_DARK = "assets/brand_logo_loop.gif";
   const HERO_MEDIA_LIGHT = "assets/brand_logo_loop_light.gif";
-  const PHONE_MEDIA_DARK = "assets/hero_phone_dark.png";
-  const PHONE_MEDIA_LIGHT = "assets/hero_phone_light.png";
-  const PRODUCT_IMAGES = ["assets/product_01_one-tap.PNG", "assets/product_02_features-card.PNG", "assets/product_03_comparison.PNG", "assets/product_04_10000-tracks.PNG"];
+const PRODUCT_IMAGES = ["assets/product_01_one-tap.PNG", "assets/product_02_features-card.PNG", "assets/product_03_comparison.PNG", "assets/product_04_10000-tracks.PNG"];
 
   const $ = (id) => document.getElementById(id);
   $("year").textContent = new Date().getFullYear();
@@ -933,9 +913,7 @@
     $("brandLogo").src = isLight ? LOGO_LIGHT : LOGO_DARK;
     $("footerLogo").src = isLight ? LOGO_LIGHT : LOGO_DARK;
     $("heroMedia").src = isLight ? HERO_MEDIA_LIGHT : HERO_MEDIA_DARK;
-    const pp = $("phonePreview");
-    if (pp) pp.src = isLight ? PHONE_MEDIA_LIGHT : PHONE_MEDIA_DARK;
-    $("themeIcon").textContent = isLight ? "☀" : "☾";
+$("themeIcon").textContent = isLight ? "☀" : "☾";
     $("themeLabel").textContent = isLight ? "Dark" : "Light";
   }
   (function initTheme(){
@@ -1034,15 +1012,18 @@
   const betaSubmit = $("betaSubmit");
   let betaSubmitting = false;
 
-  const reviewMsg = $("reviewMsg");
+    let betaAllowLateMessage = false;
+const reviewMsg = $("reviewMsg");
   const reviewSubmit = $("reviewSubmit");
   let reviewSubmitting = false;
 
-  const contactMsg = $("contactMsg");
+    let reviewAllowLateMessage = false;
+const contactMsg = $("contactMsg");
   const contactSubmit = $("contactSubmit");
   let contactSubmitting = false;
 
-  let betaFallbackTimer = null;
+    let contactAllowLateMessage = false;
+let betaFallbackTimer = null;
   let reviewFallbackTimer = null;
   let contactFallbackTimer = null;
 
@@ -1129,19 +1110,27 @@
   // In that case postMessage never arrives, but the POST still succeeds. Mark success on iframe load.
   document.getElementById("beta_iframe").addEventListener("load", () => {
     if (!betaSubmitting) return;
-    if (betaFallbackTimer) clearTimeout(betaFallbackTimer);
+    if (betaFallbackTimer) { clearTimeout(betaFallbackTimer); betaFallbackTimer = null; }
     betaSubmitting = false;
     betaSubmit.disabled = false;
+    
+      betaAllowLateMessage = false;
+// iframe fallback can fire before postMessage. Allow late postMessage to override this message.
+    betaAllowLateMessage = true;
     setMsg(betaMsg, betaHumanMessage("pending"), false);
     document.getElementById("betaName").value = "";
     document.getElementById("betaEmail").value = "";
     document.getElementById("betaConsent").checked = false;
+    setTimeout(() => { betaAllowLateMessage = false; }, 4000);
   });
   document.getElementById("review_iframe").addEventListener("load", () => {
     if (!reviewSubmitting) return;
-    if (reviewFallbackTimer) clearTimeout(reviewFallbackTimer);
+    if (reviewFallbackTimer) { clearTimeout(reviewFallbackTimer); reviewFallbackTimer = null; }
     reviewSubmitting = false;
     reviewSubmit.disabled = false;
+    
+      reviewAllowLateMessage = false;
+reviewAllowLateMessage = true;
     setMsg(reviewMsg, reviewHumanMessage("ok"), false);
     document.getElementById("reviewName").value = "";
     document.getElementById("reviewRating").value = "5";
@@ -1149,17 +1138,22 @@
     document.getElementById("reviewConsent").checked = false;
     document.getElementById("reviewPublishName").checked = false;
     setTimeout(loadReviews, 700);
+    setTimeout(() => { reviewAllowLateMessage = false; }, 4000);
   });
   document.getElementById("contact_iframe").addEventListener("load", () => {
     if (!contactSubmitting) return;
-    if (contactFallbackTimer) clearTimeout(contactFallbackTimer);
+    if (contactFallbackTimer) { clearTimeout(contactFallbackTimer); contactFallbackTimer = null; }
     contactSubmitting = false;
     contactSubmit.disabled = false;
+    
+      contactAllowLateMessage = false;
+contactAllowLateMessage = true;
     setMsg(contactMsg, contactHumanMessage("ok"), false);
     document.getElementById("contactName").value = "";
     document.getElementById("contactEmail").value = "";
     document.getElementById("contactMessage").value = "";
     document.getElementById("contactConsent").checked = false;
+    setTimeout(() => { contactAllowLateMessage = false; }, 4000);
   });
 
 
@@ -1178,7 +1172,9 @@
       if (contactSubmitting) {
         contactSubmitting = false;
         contactSubmit.disabled = false;
-        setMsg(contactMsg, "No response from server. Please try again.", true);
+        
+      contactAllowLateMessage = false;
+setMsg(contactMsg, "No response from server. Please try again.", true);
       }
     }, 8000);
   });
@@ -1188,12 +1184,14 @@ window.addEventListener("message", (ev) => {
     const d = ev.data || {};
     if (!d || d.ts !== true) return;
 
-    if (d.action === "beta" && betaSubmitting) {
+    if (d.action === "beta" && (betaSubmitting || betaAllowLateMessage)) {
       if (betaFallbackTimer) { clearTimeout(betaFallbackTimer); betaFallbackTimer = null; }
       betaSubmitting = false;
       betaSubmit.disabled = false;
 
-      const ok = !!d.ok;
+      
+      betaAllowLateMessage = false;
+const ok = !!d.ok;
       setMsg(betaMsg, betaHumanMessage(String(d.code || "")), !ok);
 
       if (ok) {
@@ -1203,12 +1201,14 @@ window.addEventListener("message", (ev) => {
       }
     }
 
-    if (d.action === "review" && reviewSubmitting) {
+    if (d.action === "review" && (reviewSubmitting || reviewAllowLateMessage)) {
       if (reviewFallbackTimer) { clearTimeout(reviewFallbackTimer); reviewFallbackTimer = null; }
       reviewSubmitting = false;
       reviewSubmit.disabled = false;
 
-      const ok = !!d.ok;
+      
+      reviewAllowLateMessage = false;
+const ok = !!d.ok;
       setMsg(reviewMsg, reviewHumanMessage(String(d.code || "")), !ok);
 
       if (ok) {
@@ -1221,12 +1221,14 @@ window.addEventListener("message", (ev) => {
       }
     }
 
-    if (d.action === "contact" && contactSubmitting) {
+    if (d.action === "contact" && (contactSubmitting || contactAllowLateMessage)) {
       if (contactFallbackTimer) { clearTimeout(contactFallbackTimer); contactFallbackTimer = null; }
       contactSubmitting = false;
       contactSubmit.disabled = false;
 
-      const ok = !!d.ok;
+      
+      contactAllowLateMessage = false;
+const ok = !!d.ok;
       setMsg(contactMsg, contactHumanMessage(String(d.code || "")), !ok);
 
       if (ok) {
