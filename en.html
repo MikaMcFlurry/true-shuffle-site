@@ -268,6 +268,7 @@
       background: rgba(255,255,255,.04);
       overflow:hidden;
       box-shadow: var(--shadow);
+      min-height: 340px;
     }
     body.light .slider{ border-color: rgba(0,0,0,.12); background: #ffffff; }
     .slider-track{ display:flex; transition: transform .35s ease; will-change: transform; align-items: center; }
@@ -374,7 +375,8 @@
         linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02));
     }
     @media (max-width:980px){ .cta{ grid-template-columns: 1fr; } }
-    .form{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:flex-start; }
+    .form{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:flex-start; position:relative; }
+    input[type="hidden"]{ display:none !important; }
     .input{
       flex:1 1 220px; min-width:0;
       padding:11px 12px;
@@ -1152,7 +1154,7 @@ $("themeIcon").textContent = isLight ? "☀" : "☾";
       const img = document.createElement("img");
       img.src = src;
       img.alt = "Impression " + (i+1);
-      img.loading = "lazy";
+      img.loading = "eager";
       img.onerror = () => {
         sliderNote.textContent = "An image could not be found. Check filenames in /assets.";
       };
@@ -1615,32 +1617,27 @@ const ok = !!d.ok;
   window.closeLegal = closeLegal;
   legalModal.addEventListener("click", (e) => { if (e.target === legalModal) closeLegal(); });
 
-  // Evidence section: load shuffle study data
-  (function loadEvidence(){
+  // Evidence section: inline study data (no fetch needed)
+  (function(){
     const container = document.getElementById("studyStats");
     const note = document.getElementById("studyNote");
     if (!container) return;
-
-    fetch("assets/shuffle-study.json")
-      .then(r => r.ok ? r.json() : Promise.reject())
-      .then(data => {
-        if (!Array.isArray(data.stats) || !data.stats.length) return;
-        container.innerHTML = data.stats.map(s =>
-          `<div class="stat-card">
-            <span class="stat-value">${s.value_en}<span class="stat-unit">${s.unit}</span></span>
-            <span class="stat-label">${s.label_en}</span>
-          </div>`
-        ).join("");
-        if (note && data.meta) {
-          note.textContent = "Source: Analysis of a personal Spotify Extended Streaming History, 11 years (2014–2026), n=100,022 plays. Method: session S30 (30-min gap), rolling window K=50. Pilot study — not claimed to be representative.";
-          note.style.display = "block";
-        }
-      })
-      .catch(() => {
-        if (container) container.innerHTML = "";
-        const section = document.getElementById("evidence");
-        if (section) section.style.display = "none";
-      });
+    const stats = [
+      { v: "8.0",  u: "%", l: "songs repeat within 50&nbsp;shuffle plays" },
+      { v: "18.9", u: "%", l: "artist repetitions within 50&nbsp;shuffle plays" },
+      { v: "86.7", u: "%", l: "of all plays ran with shuffle active" },
+      { v: "9.4",  u: "%", l: "Top-100 songs account for ~10&nbsp;% of all shuffle plays" }
+    ];
+    container.innerHTML = stats.map(s =>
+      `<div class="stat-card">
+        <span class="stat-value">${s.v}<span class="stat-unit">${s.u}</span></span>
+        <span class="stat-label">${s.l}</span>
+      </div>`
+    ).join("");
+    if (note) {
+      note.textContent = "Source: Personal Spotify Extended Streaming History, 11 years (2014\u20132026), n\u2009=\u2009100,022 plays. Method: session S30 (30-min gap), rolling window K=50. Pilot study \u2014 not claimed to be representative.";
+      note.style.display = "block";
+    }
   })();
 </script>
 </body>
