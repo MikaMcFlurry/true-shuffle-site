@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "source": "Spotify Extended Streaming History",
+    "description_de": "Persönliche Streaming-History, 11 Jahre (2014–2026), n=100.022 Plays",
+    "description_en": "Personal streaming history, 11 years (2014–2026), n=100,022 plays",
+    "n_shuffle_events": 86708,
+    "n_total_events": 100022,
+    "method": "Session S30 (30-Minuten-Gap), Rolling Window K=50",
+    "generated": "2026-03-06"
+  },
+  "stats": [
+    {
+      "key": "repeat_track_50",
+      "value_de": "8,0",
+      "value_en": "8.0",
+      "unit": "%",
+      "label_de": "Songs wiederholen sich innerhalb von 50 Plays",
+      "label_en": "songs repeat within 50 plays"
+    },
+    {
+      "key": "repeat_artist_50",
+      "value_de": "18,9",
+      "value_en": "18.9",
+      "unit": "%",
+      "label_de": "Künstler wiederholen sich innerhalb von 50 Plays",
+      "label_en": "artists repeat within 50 plays"
+    },
+    {
+      "key": "shuffle_share",
+      "value_de": "86,7",
+      "value_en": "86.7",
+      "unit": "%",
+      "label_de": "aller Plays nutzen Shuffle",
+      "label_en": "of all plays use shuffle"
+    },
+    {
+      "key": "top100_concentration",
+      "value_de": "9,4",
+      "value_en": "9.4",
+      "unit": "%",
+      "label_de": "Top-100-Songs machen ~10 % aller Shuffle-Plays aus",
+      "label_en": "Top-100 songs account for ~10% of all shuffle plays"
+    }
+  ]
+}
