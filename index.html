@@ -22,9 +22,6 @@
   <meta name="twitter:url" content="https://mikamcflurry.github.io/true-shuffle-site/index.html" /><link rel="canonical" href="https://mikamcflurry.github.io/true-shuffle-site/index.html" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="alternate" hreflang="de" href="index.html" />
   <link rel="alternate" hreflang="en" href="en.html" />
   
@@ -49,7 +46,6 @@
       --max: 1120px;
       --ring: 0 0 0 6px rgba(255,255,255,.10);
       --btnh: 44px;
-      --danger: #ff5252;
     }
     body.light{
       --bg:#f7f7f7; --bg2:#ffffff;
@@ -60,13 +56,12 @@
       --muted2: rgba(0,0,0,.55);
       --shadow: 0 18px 55px rgba(0,0,0,.14);
       --ring: 0 0 0 6px rgba(0,0,0,.10);
-      --danger: #d32f2f;
     }
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
-      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--text);
       background:
         radial-gradient(900px 380px at 18% -5%, rgba(255,255,255,.06), transparent 65%),
@@ -140,12 +135,6 @@
       border-color: rgba(255,255,255,.25);
       box-shadow: 0 10px 30px rgba(255,255,255,.08);
       font-weight: 900;
-    }
-    body.light .btn-primary{
-      background: linear-gradient(180deg, #1a1b1f, #2a2b30);
-      color: #f7f7f7;
-      border-color: rgba(0,0,0,.20);
-      box-shadow: 0 10px 30px rgba(0,0,0,.14);
     }
 
     .menu-btn{ display:none; }
@@ -274,7 +263,6 @@
       background: rgba(255,255,255,.04);
       overflow:hidden;
       box-shadow: var(--shadow);
-      min-height: 340px;
     }
     body.light .slider{ border-color: rgba(0,0,0,.12); background: #ffffff; }
     .slider-track{ display:flex; transition: transform .35s ease; will-change: transform; align-items: center; }
@@ -381,8 +369,7 @@
         linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02));
     }
     @media (max-width:980px){ .cta{ grid-template-columns: 1fr; } }
-    .form{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:flex-start; position:relative; }
-    input[type="hidden"]{ display:none !important; }
+    .form{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:flex-start; }
     .input{
       flex:1 1 220px; min-width:0;
       padding:11px 12px;
@@ -534,65 +521,7 @@
     .slider-btn svg{ width:18px; height:18px; }
     body.light .slider-btn svg path{ fill:#111; }
     body:not(.light) .slider-btn svg path{ fill:#fff; }
-
-    /* Focus ring for keyboard navigation */
-    :focus-visible{ outline: 2px solid var(--text); outline-offset: 3px; border-radius: 4px; }
-
-    /* Section eyebrow */
-    .eyebrow{
-      display:block; font-size:11px; font-weight:700;
-      letter-spacing:0.10em; text-transform:uppercase;
-      color:var(--muted2); margin-bottom:8px;
-    }
-
-    /* Feature cards */
-    .features-grid{
-      display:grid; grid-template-columns: repeat(3,1fr); gap:14px; margin-top:16px;
-    }
-    @media (max-width:980px){ .features-grid{ grid-template-columns: 1fr 1fr; } }
-    @media (max-width:520px){ .features-grid{ grid-template-columns: 1fr; } }
-    .feature-card{
-      border-radius: var(--radius); border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04); padding:22px 20px;
-    }
-    body.light .feature-card{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
-    .feature-icon{ font-size:22px; margin-bottom:12px; display:block; }
-    .feature-card h3{ margin:0 0 6px; font-size:17px; font-weight:800; letter-spacing:-0.01em; }
-    .feature-card p{ margin:0; color:var(--muted); font-size:14px; line-height:1.6; }
-    .feature-badge{
-      display:inline-block; margin-top:10px; padding:3px 8px;
-      border-radius:999px; background: rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12); color:var(--muted2);
-      font-size:11px; font-weight:700; letter-spacing:0.04em;
-    }
-    body.light .feature-badge{ background: rgba(0,0,0,.05); border-color: rgba(0,0,0,.12); }
-
-    /* Stat cards (Evidence section) */
-    .stat-cards{
-      display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin-top:16px;
-    }
-    @media (max-width:980px){ .stat-cards{ grid-template-columns: 1fr 1fr; } }
-    @media (max-width:520px){ .stat-cards{ grid-template-columns: 1fr 1fr; } }
-    .stat-card{
-      border-radius: var(--radius); border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04); padding:22px 16px; text-align:center;
-    }
-    body.light .stat-card{ border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
-    .stat-value{
-      display:block; font-size:clamp(28px,4vw,42px); font-weight:900;
-      letter-spacing:-0.03em; line-height:1; margin-bottom:8px;
-    }
-    .stat-unit{ font-size:0.55em; font-weight:700; opacity:.75; }
-    .stat-label{ display:block; color:var(--muted); font-size:13px; line-height:1.45; }
-
-    /* Evidence footnote */
-    .evidence-note{
-      margin-top:16px; padding:12px 14px; border-radius:14px;
-      border:1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
-      color:var(--muted2); font-size:12px; line-height:1.55;
-    }
-    body.light .evidence-note{ border-color: rgba(0,0,0,.08); background: rgba(0,0,0,.02); }
-
+    
   </style>
 </head>
 <body>
@@ -609,12 +538,11 @@
         </a>
 
         <nav class="navlinks" aria-label="Navigation">
-          <a href="#features">Features</a>
-          <a href="#app-preview">App</a>
+          <a href="#impressions">Impressionen</a>
           <a href="#beta">Beta</a>
-          <a href="#faq">FAQ</a>
           <a href="#reviews">Bewertungen</a>
-          <a href="#contact">Kontakt</a>
+            <a href="#contact">Kontakt</a>
+          <a href="#faq">FAQ</a>
         </nav>
 
         <div class="navcta">
@@ -626,16 +554,14 @@
           <button class="btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">
             Menü <span aria-hidden="true">≡</span>
           </button>
-          <a class="btn btn-primary" href="#beta">Zur Warteliste</a>
+          <a class="btn btn-primary" href="#beta">Zum Beta-Test</a>
         </div>
 
         <div class="drawer" id="drawer">
-          <a href="#features">Features</a>
-          <a href="#app-preview">App</a>
+          <a href="#impressions">Impressionen</a>
           <a href="#beta">Beta</a>
-          <a href="#faq">FAQ</a>
           <a href="#reviews">Bewertungen</a>
-          <a href="#contact">Kontakt</a>
+          <a href="#faq">FAQ</a>
         </div>
       </div>
     </div>
@@ -645,22 +571,21 @@
 <main id="top">
   <div class="wrap">
     <div class="container">
-      <div class=”pill”>
-        <span class=”dot” aria-hidden=”true”></span>
-        <span>Streaming-Apps wiederholen Songs – und spielen nie deine ganze Playlist durch.</span>
+      <div class="pill">
+        <span class="dot" aria-hidden="true"></span>
+        <span><b>Problem:</b> Viele Streaming-„Shuffle“ spielen nur einen Teil deiner Playlist – und oft wiederholt sich die Reihenfolge.</span>
       </div>
 
-      <div class=”hero”>
+      <div class="hero">
         <div>
-          <span class=”eyebrow”>Echter Shuffle. Endlich.</span>
-          <h1>Jeder Song genau einmal.<br/>Kein Song zweimal.</h1>
-          <p class=”lead”>Streaming-Apps wiederholen Songs und überspringen Tracks – sie spielen nie deine ganze Playlist. true-shuffle behebt das: jeder Track einmal pro Durchlauf, kein Skip, kein Repeat – mit deinem bestehenden Streamingdienst.</p>
+          <h1>Echter Shuffle für jede Playlist.<br/>Jeder Song – ohne nervige Wiederholung.</h1>
+          <p class="lead">true-shuffle sorgt dafür, dass deine Playlist wirklich komplett läuft: <b>kein Song wird ausgelassen</b> und <b>keiner doppelt gespielt</b> – wie beim klassischen MP3-Player, nur mit deinem Streamingdienst.</p>
 
-          <div class=”hero-actions”>
-            <a class=”btn btn-primary” href=”#beta”>Zur Warteliste →</a>
-            <a class=”btn” href=”#app-preview”>App ansehen</a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#beta">▶ Auf die Warteliste</a>
+            <a class="btn" href="#impressions">Impressionen ansehen</a>
           </div>
-          <div class=”subnote”>Playlist wählen → Shuffle → fertig. Kein Wechsel des Streamingdienstes nötig.</div>
+          <div class="subnote">Kinderleicht: Playlist wählen → Shuffle drücken → genießen.</div>
         </div>
 
         <aside class="panel" aria-label="Preview">
@@ -702,64 +627,13 @@
     </div>
   </div>
 
-  <section id="features">
+  <section id="impressions">
     <div class="wrap">
       <div class="container">
         <div class="section-title">
           <div>
-            <span class="eyebrow">Wie es funktioniert</span>
-            <h2>Was true-shuffle anders macht</h2>
-            <p>Drei Kernfeatures, die das Shuffle-Problem ein für alle Mal lösen.</p>
-          </div>
-        </div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <span class="feature-icon">🃏</span>
-            <h3>Deck-of-Cards-Prinzip</h3>
-            <p>Wie beim echten Kartenmischen: jeder Song exakt einmal pro Durchlauf, dann neu mischen. Fisher–Yates Algorithmus – echte Zufälligkeit, kein Clustering, kein Repeat.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">⏯</span>
-            <h3>Resume</h3>
-            <p>Playlist unterbrochen? true-shuffle merkt, wo du warst. Die nächste Session macht genau da weiter – auch nach normaler App-Nutzung dazwischen.</p>
-            <span class="feature-badge">Ab Beta</span>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">🚗</span>
-            <h3>Drive Mode</h3>
-            <p>Ein Tap, los fahren. Kein Scrollen, kein Suchen. Playlist starten und die Musik läuft durch – ideal für unterwegs.</p>
-            <span class="feature-badge">Ab Beta</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="evidence">
-    <div class="wrap">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <span class="eyebrow">Warum es wichtig ist</span>
-            <h2>Dein Shuffle ist kaputt – das sind die Daten.</h2>
-            <p>Eine Analyse von 11 Jahren persönlicher Streaming-History zeigt: Spotify Shuffle wiederholt Songs häufiger als man denkt.</p>
-          </div>
-        </div>
-        <div class="stat-cards" id="studyStats">
-          <div class="stat-card"><span class="stat-value">—</span><span class="stat-label">Lade Studiendaten…</span></div>
-        </div>
-        <div class="evidence-note" id="studyNote" style="display:none;"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="app-preview">
-    <div class="wrap">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>App-Vorschau</h2>
-            <p>Erste Einblicke in die App. Swipe am Handy, Pfeile am Desktop.</p>
+            <h2>Impressionen</h2>
+            <p>Werbebilder & App-Impressionen (echte App-Demos folgen). Swipe am Handy, Pfeile am Desktop.</p>
           </div>
         </div>
         <div class="slider" aria-label="Image slider">
@@ -780,8 +654,8 @@
       <div class="container">
         <div class="cta">
           <div>
-            <h2 style="margin:0 0 8px; font-size:24px;">Beta-Warteliste: sichere dir deinen Platz</h2>
-            <p style="margin:0; color:var(--muted); line-height:1.55;">Melde dich an – wir benachrichtigen dich, sobald der Beta-Zugang startet.</p>
+            <h2 style="margin:0 0 8px; font-size:24px;">Beta-Test: sichere dir einen Platz</h2>
+            <p style="margin:0; color:var(--muted); line-height:1.55;">Melde dich an und wir informieren dich, sobald true-shuffle startklar ist.</p>
             <div class="subnote">Kein Spam. Nur Updates zum Start. Details in <a href="#" onclick="openLegal('privacy');return false;" style="text-decoration:underline;">Datenschutz</a>.</div>
           </div>
 
@@ -836,146 +710,140 @@
     </div>
   </section>
 
-  <section id=”faq”>
-    <div class=”wrap”>
-      <div class=”container”>
-        <div class=”section-title”>
-          <div>
-            <span class=”eyebrow”>Häufige Fragen</span>
-            <h2>FAQ</h2>
-          </div>
-        </div>
-
-          <details>
-            <summary>Wiederholt Spotify Shuffle wirklich Songs? <span class=”chev” aria-hidden=”true”></span></summary>
-            <p>Ja – und die Daten belegen es: in einer Analyse von 11 Jahren persönlicher Streaming-History (n=100.022 Plays, Spotify) wiederholen sich Songs in 8,0 % der Fälle innerhalb von 50 Plays mit aktivem Shuffle. Künstler sogar in 18,9 %. Dazu kommt, dass Top-100-Songs etwa 9,4 % aller Shuffle-Plays ausmachen – Shuffle bevorzugt also populäre Tracks. Mehr unter <a href=”#evidence” style=”text-decoration:underline;”>Daten & Studie</a>.</p>
-          </details>
-
-          <details>
-            <summary>Was macht true-shuffle anders? <span class=”chev” aria-hidden=”true”></span></summary>
-            <p>true-shuffle wendet den Fisher–Yates Algorithmus an: jeder Song genau einmal pro Durchlauf, dann neu mischen – wie beim Kartendeck. Kein Clustering, kein Wiederholen, kein Überspringen. Zusätzlich planen wir Resume (Weiterhören) und Drive Mode (Ein-Tap-Start).</p>
-          </details>
-
-          <details>
-            <summary>Funktioniert das auch bei sehr großen Playlists? <span class=”chev” aria-hidden=”true”></span></summary>
-            <p>Ja. Das Ziel ist, auch sehr große Playlists effizient zu laden (Paging) und vollständig durchzuspielen – ohne Skip, ohne Repeat.</p>
-          </details>
-
-          <details>
-            <summary>Muss ich meinen Streamingdienst wechseln? <span class=”chev” aria-hidden=”true”></span></summary>
-            <p>Nein. Du bleibst bei Spotify, Apple Music, YouTube Music oder einem anderen unterstützten Dienst. true-shuffle verbindet sich per App-Login und steuert Wiedergabe über die jeweilige API.</p>
-          </details>
-
-          <details>
-            <summary>Was passiert mit meinen Daten? <span class=”chev” aria-hidden=”true”></span></summary>
-            <p>Für die Warteliste speichern wir Name (optional) und E-Mail. Bewertungen werden vor Anzeige kurz geprüft. Details in der <a href=”#” onclick=”openLegal('privacy');return false;” style=”text-decoration:underline;”>Datenschutzerklärung</a>.</p>
-          </details>
-
-          <details>
-            <summary>Kann ich Songs priorisieren oder überspringen? <span class=”chev” aria-hidden=”true”></span></summary>
-            <p>Geplant für Beta: Shuffle-Anpassungen (Prioritäten, Stimmungen, „Heute mehr davon”). Im Beta-Test sammeln wir Feedback, was zuerst kommt.</p>
-          </details>
-      </div>
-    </div>
-  </section>
-
-  <section id=”reviews”>
-    <div class=”wrap”>
-      <div class=”container”>
-        <div class=”section-title”>
+  <section id="reviews">
+    <div class="wrap">
+      <div class="container">
+        <div class="section-title">
           <div>
             <h2>Bewertungen</h2>
-            <p>Freigegebene Bewertungen. Neue erscheinen nach kurzer Prüfung.</p>
+            <p>Hier siehst du freigegebene Bewertungen. Neue Bewertungen erscheinen nach kurzer Prüfung.</p>
           </div>
-          <div class=”pill” id=”ratingBadge”><span class=”dot”></span><span>⭐ …</span></div>
+          <div class="pill" id="ratingBadge"><span class="dot"></span><span>⭐ …</span></div>
         </div>
 
-        <div class=”subnote” id=”reviewsStatus” style=”margin-top:0; margin-bottom:12px;”></div>
-        <div class=”reviews-grid” id=”reviewsList”></div>
+        <div class="subnote" id="reviewsStatus" style="margin-top:0; margin-bottom:12px;"></div>
+        <div class="reviews-grid" id="reviewsList"></div>
 
-        <div class=”panel” style=”margin-top:14px;”>
-          <h3 style=”margin:0 0 10px;”>Bewertung schreiben</h3>
+        <div class="panel" style="margin-top:14px;">
+          <h3 style="margin:0 0 10px;">Bewertung schreiben</h3>
 
-          <form class=”form” id=”reviewForm” method=”POST” target=”review_iframe”>
-            <input type=”hidden” name=”action” value=”review” />
-            <input type=”hidden” name=”privacyVersion” value=”2026-02-21” />
-            <div style=”position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;” aria-hidden=”true”>
-              <label>Website <input type=”text” name=”website” tabindex=”-1” autocomplete=”off” /></label>
+          <form class="form" id="reviewForm" method="POST" target="review_iframe">
+            <input type="hidden" name="action" value="review" />
+            <input type="hidden" name="privacyVersion" value="2026-02-21" />
+            <div style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+              <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
             </div>
-            <input class=”input” type=”text” id=”reviewName” name=”name” placeholder=”Name (optional)” />
-            <select class=”input” id=”reviewRating” name=”rating” style=”flex:0 0 180px;”>
-              <option value=”5”>★★★★★ (5)</option>
-              <option value=”4”>★★★★☆ (4)</option>
-              <option value=”3”>★★★☆☆ (3)</option>
-              <option value=”2”>★★☆☆☆ (2)</option>
-              <option value=”1”>★☆☆☆☆ (1)</option>
+            <input class="input" type="text" id="reviewName" name="name" placeholder="Name (optional)" />
+            <select class="input" id="reviewRating" name="rating" style="flex:0 0 180px;">
+              <option value="5">★★★★★ (5)</option>
+              <option value="4">★★★★☆ (4)</option>
+              <option value="3">★★★☆☆ (3)</option>
+              <option value="2">★★☆☆☆ (2)</option>
+              <option value="1">★☆☆☆☆ (1)</option>
             </select>
-            <textarea class=”input” id=”reviewText” name=”text” placeholder=”Deine Bewertung…” maxlength=”400” style=”flex:1 1 100%; min-height:92px;”></textarea>
-            <input type=”hidden” name=”source” value=”website” />
-            <input type=”hidden” id=”reviewUA” name=”userAgent” value=”” />
-            <button class=”btn btn-primary” id=”reviewSubmit” type=”submit”>Bewertung senden</button>
-            <div class=”consent”>
-              <input type=”checkbox” id=”reviewConsent” name=”consent” value=”1” required />
-              <label for=”reviewConsent”>Ich willige ein, dass meine Angaben zur Bewertung verarbeitet werden. (<a href=”#” onclick=”openLegal('privacy');return false;” style=”text-decoration:underline;”>Datenschutz</a>)</label>
+            <textarea class="input" id="reviewText" name="text" placeholder="Deine Bewertung…" maxlength="400" style="flex:1 1 100%; min-height:92px;"></textarea>
+            <input type="hidden" name="source" value="website" />
+            <input type="hidden" id="reviewUA" name="userAgent" value="" />
+            <button class="btn btn-primary" id="reviewSubmit" type="submit">Bewertung senden</button>
+            <div class="consent">
+              <input type="checkbox" id="reviewConsent" name="consent" value="1" required />
+              <label for="reviewConsent">Ich willige ein, dass meine Angaben zur Bewertung verarbeitet werden. (<a href="#" onclick="openLegal(\'privacy\');return false;" style="text-decoration:underline;">Datenschutz</a>)</label>
             </div>
-            <div class=”consent”>
-              <input type=”checkbox” id=”reviewPublishName” name=”publishName” value=”1” />
-              <label for=”reviewPublishName”>Meinen Namen anzeigen (optional)</label>
+            <div class="consent">
+              <input type="checkbox" id="reviewPublishName" name="publishName" value="1" />
+              <label for="reviewPublishName">Meinen Namen anzeigen (optional)</label>
             </div>
-            <div class=”subnote” id=”reviewMsg” aria-live=”polite” style=”width:100%; text-align:right;”></div>
+            <div class="subnote" id="reviewMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
           </form>
 
-          <iframe id=”review_iframe” name=”review_iframe” style=”display:none;”></iframe>
+          <iframe id="review_iframe" name="review_iframe" style="display:none;"></iframe>
 
-          <div class=”subnote”>Hinweis: Bewertungen werden vor Anzeige kurz geprüft.</div>
+          <div class="subnote">Hinweis: Bewertungen werden vor Anzeige kurz geprüft.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id=”contact”>
-    <div class=”wrap”>
-      <div class=”container”>
-        <div class=”section-title”>
-          <div>
-            <h2>Kontakt</h2>
-            <p>Fragen, Feedback oder Kooperation? Schreib uns.</p>
-          </div>
+  <section id="faq">
+    <div class="wrap">
+      <div class="container">
+        <div class="section-title">
+          <div><h2>FAQ</h2><p>Kurz & verständlich.</p></div>
         </div>
+        
+          <details>
+            <summary>Warum wirkt Shuffle oft „schlecht“? <span class="chev" aria-hidden="true"></span></summary>
+            <p>Ein Grund ist, dass viele Dienste Shuffle an dein Hörverhalten anpassen (z. B. „Smart Shuffle“ oder „Fewer Repeats“). Außerdem fühlt sich echte Zufälligkeit für Menschen oft „falsch“ an, weil Zufall auch Clustering erzeugt. Weiterlesen: <a href="https://support.spotify.com/de-en/article/shuffle-play/" target="_blank" rel="noopener">Spotify: Shuffle/Smart Shuffle</a>, <a href="https://newsroom.spotify.com/2023-03-08/smart-shuffle-new-life-spotify-playlists/" target="_blank" rel="noopener">Spotify: Smart Shuffle</a>.</p>
+          </details>
 
-        <div class=”panel”>
-          <form class=”form” id=”contactForm” method=”POST” target=”contact_iframe” autocomplete=”on”>
-            <input type=”hidden” name=”action” value=”contact” />
-            <input type=”hidden” name=”privacyVersion” value=”2026-02-21” />
-            <div style=”position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;” aria-hidden=”true”>
-              <label>Website <input type=”text” name=”website” tabindex=”-1” autocomplete=”off” /></label>
-            </div>
+          <details>
+            <summary>Was macht true-shuffle anders? <span class="chev" aria-hidden="true"></span></summary>
+            <p>true-shuffle erstellt eine echte Reihenfolge ohne Wiederholung: jeder Song genau einmal pro Durchlauf. Zusätzlich planen wir Optionen wie Prioritäten (z. B. Lieblingssongs früher) und personalisierte Shuffle-Profile.</p>
+          </details>
 
-            <input class=”input” type=”text” id=”contactName” name=”name” placeholder=”Name (optional)” />
-            <input class=”input” type=”email” id=”contactEmail” name=”email” placeholder=”E-Mail” required />
-            <textarea class=”input” id=”contactMessage” name=”message” placeholder=”Nachricht…” maxlength=”1200” style=”flex:1 1 100%; min-height:120px;” required></textarea>
+          <details>
+            <summary>Funktioniert das auch bei sehr großen Playlists? <span class="chev" aria-hidden="true"></span></summary>
+            <p>Ja. Das Ziel ist, auch sehr große Playlists sauber zu laden (Paging) und komplett durchzuspielen – ohne Skip/Repeat.</p>
+          </details>
 
-            <input type=”hidden” name=”source” value=”website” />
-            <input type=”hidden” id=”contactUA” name=”userAgent” value=”” />
-            <input type=”hidden” id=”contactRef” name=”referrer” value=”” />
-            <input type=”hidden” id=”contactLocale” name=”locale” value=”” />
+          <details>
+            <summary>Muss ich meinen Streamingdienst verlassen? <span class="chev" aria-hidden="true"></span></summary>
+            <p>Nein. Du bleibst bei deinem Dienst. true-shuffle verbindet sich später per Login (App) und steuert Shuffle/Playback über die jeweilige API.</p>
+          </details>
 
-            <button class=”btn btn-primary” id=”contactSubmit” type=”submit”>Nachricht senden</button>
+          <details>
+            <summary>Was passiert mit meinen Daten? <span class="chev" aria-hidden="true"></span></summary>
+            <p>Für die Warteliste speichern wir Name und E-Mail, um dich zu informieren. Bewertungen werden gespeichert und vor Anzeige kurz geprüft. Details stehen in der Datenschutzerklärung.</p>
+          </details>
 
-            <div class=”consent”>
-              <input type=”checkbox” id=”contactConsent” name=”consent” value=”1” required />
-              <label for=”contactConsent”>Ich willige ein, dass meine Angaben zur Kontaktaufnahme verarbeitet werden. (<a href=”#” onclick=”openLegal('privacy');return false;” style=”text-decoration:underline;”>Datenschutz</a>)</label>
-            </div>
-
-            <div class=”subnote” id=”contactMsg” aria-live=”polite” style=”width:100%; text-align:right;”></div>
-          </form>
-
-          <iframe id=”contact_iframe” name=”contact_iframe” style=”display:none;”></iframe>
-        </div>
+          <details>
+            <summary>Kann ich Songs priorisieren oder überspringen? <span class="chev" aria-hidden="true"></span></summary>
+            <p>Geplant: Du kannst Shuffle anpassen (Prioritäten, Stimmungen, „Heute bitte mehr davon“). Im Beta-Test sammeln wir Feedback, was am wichtigsten ist.</p>
+          </details>
       </div>
     </div>
   </section>
 </main>
+
+
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Kontakt</h2>
+      <p>Fragen, Feedback oder Kooperation? Schreib uns.</p>
+    </div>
+
+    <div class="panel">
+      <form class="form" id="contactForm" method="POST" target="contact_iframe" autocomplete="on">
+        <input type="hidden" name="action" value="contact" />
+        <input type="hidden" name="privacyVersion" value="2026-02-21" />
+        <div style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+          <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <input class="input" type="text" id="contactName" name="name" placeholder="Name (optional)" />
+        <input class="input" type="email" id="contactEmail" name="email" placeholder="E-Mail" required />
+        <textarea class="input" id="contactMessage" name="message" placeholder="Nachricht…" maxlength="1200" style="flex:1 1 100%; min-height:120px;" required></textarea>
+
+        <input type="hidden" name="source" value="website" />
+        <input type="hidden" id="contactUA" name="userAgent" value="" />
+        <input type="hidden" id="contactRef" name="referrer" value="" />
+        <input type="hidden" id="contactLocale" name="locale" value="" />
+
+        <button class="btn btn-primary" id="contactSubmit" type="submit">Nachricht senden</button>
+
+        <div class="consent">
+          <input type="checkbox" id="contactConsent" name="consent" value="1" required />
+          <label for="contactConsent">Ich willige ein, dass meine Angaben zur Kontaktaufnahme verarbeitet werden. (<a href="#" onclick="openLegal('privacy');return false;" style="text-decoration:underline;">Datenschutz</a>)</label>
+        </div>
+
+        <div class="subnote" id="contactMsg" aria-live="polite" style="width:100%; text-align:right;"></div>
+      </form>
+
+      <iframe id="contact_iframe" name="contact_iframe" style="display:none;"></iframe>
+    </div>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">
@@ -988,11 +856,9 @@
         <div style="display:flex; gap:4px; flex-wrap:wrap;">
           
             <a href="#top">Start</a>
-            <a href="#features">Features</a>
+            <a href="#impressions">Impressionen</a>
             <a href="#beta">Beta</a>
-            <a href="#faq">FAQ</a>
             <a href="#reviews">Bewertungen</a>
-            <a href="#contact">Kontakt</a>
             <a href="#" onclick="openLegal('impressum');return false;">Impressum</a>
             <a href="#" onclick="openLegal('privacy');return false;">Datenschutz</a>
             <a href="#" onclick="openLegal('cookies');return false;">Cookies</a>
@@ -1165,7 +1031,7 @@ $("themeIcon").textContent = isLight ? "☀" : "☾";
       const img = document.createElement("img");
       img.src = src;
       img.alt = "Impression " + (i+1);
-      img.loading = "eager";
+      img.loading = "lazy";
       img.decoding = "async";
       img.onerror = () => {
         sliderNote.textContent = "Ein Bild wurde nicht gefunden. Prüfe Dateinamen im assets-Ordner.";
@@ -1205,7 +1071,7 @@ $("themeIcon").textContent = isLight ? "☀" : "☾";
 
   // Track impressions section view once
   (function(){
-    const el = document.getElementById("app-preview");
+    const el = document.getElementById("impressions");
     if (!el || typeof IntersectionObserver === "undefined") return;
     let fired = false;
     const io = new IntersectionObserver((entries) => {
@@ -1667,29 +1533,6 @@ const ok = !!d.ok;
   window.openLegal = openLegal;
   window.closeLegal = closeLegal;
   legalModal.addEventListener("click", (e) => { if (e.target === legalModal) closeLegal(); });
-
-  // Evidence section: inline study data (no fetch needed)
-  (function(){
-    const container = document.getElementById("studyStats");
-    const note = document.getElementById("studyNote");
-    if (!container) return;
-    const stats = [
-      { v: "8,0",  u: "%", l: "Songs wiederholen sich innerhalb von 50&nbsp;Plays im Shuffle" },
-      { v: "18,9", u: "%", l: "Künstler-Wiederholungen innerhalb von 50&nbsp;Plays" },
-      { v: "86,7", u: "%", l: "aller Plays liefen mit aktivem Shuffle" },
-      { v: "9,4",  u: "%", l: "Top-100-Songs machen ~10&nbsp;% aller Shuffle-Plays aus" }
-    ];
-    container.innerHTML = stats.map(s =>
-      `<div class="stat-card">
-        <span class="stat-value">${s.v}<span class="stat-unit">${s.u}</span></span>
-        <span class="stat-label">${s.l}</span>
-      </div>`
-    ).join("");
-    if (note) {
-      note.textContent = "Quelle: Persönliche Spotify Extended Streaming History, 11 Jahre (2014–2026), n\u2009=\u2009100.022 Plays. Methodik: Session S30 (30-Min.-Gap), Rolling Window K=50. Pilotstudie – kein Anspruch auf Repräsentativität.";
-      note.style.display = "block";
-    }
-  })();
 </script>
 </body>
 </html>
