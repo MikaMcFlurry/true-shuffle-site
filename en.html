@@ -278,27 +278,43 @@
       padding:28px 28px 22px;
       margin-bottom:14px;
     }
-    .data-chart-title{ font-size:15px; font-weight:600; margin-bottom:26px; }
+    .data-chart-title{ font-size:15px; font-weight:600; margin-bottom:12px; }
     .data-chart-title span{ color:var(--muted2); font-weight:400; }
-    .chart-group{ display:grid; grid-template-columns:56px 1fr; gap:0 14px; align-items:center; margin-bottom:20px; }
+    .chart-axis-row{ display:grid; grid-template-columns:80px 1fr; gap:0 14px; margin-bottom:14px; }
+    .chart-axis-scale{ display:flex; justify-content:space-between; font-size:11px; color:var(--muted2); padding-bottom:8px; border-bottom:1px solid var(--stroke); }
+    .chart-group{ display:grid; grid-template-columns:80px 1fr; gap:0 14px; align-items:center; margin-bottom:18px; }
     .chart-group:last-of-type{ margin-bottom:0; }
-    .chart-label{ font-size:13px; color:var(--muted); text-align:right; font-weight:600; line-height:1; }
+    .chart-label{ font-size:12px; color:var(--muted); text-align:right; font-weight:600; line-height:1.3; }
     .chart-label-sub{ font-size:11px; color:var(--muted2); font-weight:400; }
     .chart-bars{ display:flex; flex-direction:column; gap:6px; }
     .chart-bar-row{ display:flex; align-items:center; gap:9px; }
-    .chart-bar-track{ flex:1; height:11px; border-radius:999px; background:rgba(255,255,255,.07); overflow:hidden; }
-    body.light .chart-bar-track{ background:rgba(0,0,0,.07); }
+    .chart-bar-track{
+      flex:1; height:11px; border-radius:999px; overflow:hidden;
+      background:
+        linear-gradient(to right, transparent 24.9%, rgba(255,255,255,.14) 24.9% 25.1%, transparent 25.1% 49.9%, rgba(255,255,255,.14) 49.9% 50.1%, transparent 50.1% 74.9%, rgba(255,255,255,.14) 74.9% 75.1%, transparent 75.1%),
+        rgba(255,255,255,.07);
+    }
+    body.light .chart-bar-track{
+      background:
+        linear-gradient(to right, transparent 24.9%, rgba(0,0,0,.12) 24.9% 25.1%, transparent 25.1% 49.9%, rgba(0,0,0,.12) 49.9% 50.1%, transparent 50.1% 74.9%, rgba(0,0,0,.12) 74.9% 75.1%, transparent 75.1%),
+        rgba(0,0,0,.07);
+    }
     .chart-bar-fill{ height:100%; border-radius:999px; width:0; transition:width 1.1s cubic-bezier(.22,1,.36,1); }
     .chart-bar-fill.bad{ background:rgba(255,100,50,.65); }
     .chart-bar-fill.good{ background:rgba(255,255,255,.82); }
     body.light .chart-bar-fill.good{ background:rgba(30,30,30,.70); }
-    .chart-bar-val{ font-size:12px; color:var(--muted2); min-width:32px; text-align:right; }
+    .chart-bar-val{ font-size:12px; font-weight:600; color:var(--muted); min-width:44px; text-align:right; }
+    .chart-val-abs{ display:block; font-size:10px; color:var(--muted2); font-weight:400; }
     .data-chart-legend{ display:flex; gap:20px; margin-top:20px; font-size:13px; color:var(--muted); align-items:center; flex-wrap:wrap; }
     .legend-dot{ width:10px; height:10px; border-radius:999px; display:inline-block; margin-right:5px; }
     .legend-dot.bad{ background:rgba(255,100,50,.65); }
     .legend-dot.good{ background:rgba(255,255,255,.82); }
     body.light .legend-dot.good{ background:rgba(30,30,30,.70); }
-    .data-source{ font-size:12px; color:var(--muted2); line-height:1.55; }
+    .data-source{
+      font-size:12px; color:var(--muted2); line-height:1.6;
+      padding:12px 14px; border-radius:var(--radius);
+      border:1px solid var(--stroke); background:var(--panel);
+    }
 
     /* Forms */
     .cta{
@@ -571,62 +587,67 @@
 
         <div class="data-stats">
           <div class="data-stat">
-            <div class="data-stat-value">≈37<span class="data-stat-unit">%</span></div>
-            <div class="data-stat-label">of songs <strong>never get played</strong> in a single session</div>
-            <div class="data-stat-sub">With 100 songs and 100 plays using standard shuffle (random with replacement)</div>
+            <div class="data-stat-value">552</div>
+            <div class="data-stat-label">songs you <strong>never hear</strong> in a 1,500-song playlist</div>
+            <div class="data-stat-sub">After a full session with standard shuffle (1,500 plays), statistically only 948 of 1,500 songs are played — 552 remain unheard.</div>
           </div>
           <div class="data-stat">
-            <div class="data-stat-value">≈12</div>
+            <div class="data-stat-value">≈46</div>
             <div class="data-stat-label">plays until the <strong>first repeat</strong></div>
-            <div class="data-stat-sub">Statistical expectation for a 100-song playlist (birthday paradox, 50% probability)</div>
+            <div class="data-stat-sub">Statistical expectation for a 1,500-song playlist (birthday paradox, 50% probability) — after that, a song repeats before all others have played once.</div>
           </div>
           <div class="data-stat data-stat-hl">
             <div class="data-stat-value">0</div>
             <div class="data-stat-label"><strong>repeats</strong> — every song plays exactly once</div>
-            <div class="data-stat-sub">true-shuffle uses the Fisher-Yates algorithm: mathematically guaranteed full coverage</div>
+            <div class="data-stat-sub">true-shuffle uses the Fisher-Yates algorithm: mathematically guaranteed full coverage, no matter how large the playlist.</div>
           </div>
         </div>
 
         <div class="data-chart-wrap" id="dataChart">
-          <div class="data-chart-title">Unique songs after N plays <span>(from a 100-song playlist)</span></div>
+          <div class="data-chart-title">Share of songs heard per listening session <span>— 1,500-song playlist</span></div>
+
+          <div class="chart-axis-row">
+            <div></div>
+            <div class="chart-axis-scale"><span>0 %</span><span>25 %</span><span>50 %</span><span>75 %</span><span>100 %</span></div>
+          </div>
 
           <div class="chart-group">
-            <div class="chart-label">10<br/><span class="chart-label-sub">plays</span></div>
+            <div class="chart-label">after 300<br/><span class="chart-label-sub">plays</span></div>
             <div class="chart-bars">
-              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill bad" data-w="9.6"></div></div><div class="chart-bar-val">9.6</div></div>
-              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill good" data-w="10"></div></div><div class="chart-bar-val">10</div></div>
+              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill bad" data-w="18.1"></div></div><div class="chart-bar-val">18 %<span class="chart-val-abs">272 songs</span></div></div>
+              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill good" data-w="20"></div></div><div class="chart-bar-val">20 %<span class="chart-val-abs">300 songs</span></div></div>
             </div>
           </div>
 
           <div class="chart-group">
-            <div class="chart-label">25<br/><span class="chart-label-sub">plays</span></div>
+            <div class="chart-label">after 500<br/><span class="chart-label-sub">plays</span></div>
             <div class="chart-bars">
-              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill bad" data-w="22.2"></div></div><div class="chart-bar-val">22</div></div>
-              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill good" data-w="25"></div></div><div class="chart-bar-val">25</div></div>
+              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill bad" data-w="28.3"></div></div><div class="chart-bar-val">28 %<span class="chart-val-abs">425 songs</span></div></div>
+              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill good" data-w="33.3"></div></div><div class="chart-bar-val">33 %<span class="chart-val-abs">500 songs</span></div></div>
             </div>
           </div>
 
           <div class="chart-group">
-            <div class="chart-label">50<br/><span class="chart-label-sub">plays</span></div>
+            <div class="chart-label">after 750<br/><span class="chart-label-sub">plays</span></div>
             <div class="chart-bars">
-              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill bad" data-w="39.5"></div></div><div class="chart-bar-val">39</div></div>
-              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill good" data-w="50"></div></div><div class="chart-bar-val">50</div></div>
+              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill bad" data-w="39.4"></div></div><div class="chart-bar-val">39 %<span class="chart-val-abs">590 songs</span></div></div>
+              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill good" data-w="50"></div></div><div class="chart-bar-val">50 %<span class="chart-val-abs">750 songs</span></div></div>
             </div>
           </div>
 
           <div class="chart-group">
-            <div class="chart-label">75<br/><span class="chart-label-sub">plays</span></div>
+            <div class="chart-label">after 1,000<br/><span class="chart-label-sub">plays</span></div>
             <div class="chart-bars">
-              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill bad" data-w="52.8"></div></div><div class="chart-bar-val">52</div></div>
-              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill good" data-w="75"></div></div><div class="chart-bar-val">75</div></div>
+              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill bad" data-w="48.7"></div></div><div class="chart-bar-val">49 %<span class="chart-val-abs">730 songs</span></div></div>
+              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill good" data-w="66.7"></div></div><div class="chart-bar-val">67 %<span class="chart-val-abs">1,000 songs</span></div></div>
             </div>
           </div>
 
           <div class="chart-group">
-            <div class="chart-label">100<br/><span class="chart-label-sub">plays</span></div>
+            <div class="chart-label">after 1,500<br/><span class="chart-label-sub">plays</span></div>
             <div class="chart-bars">
-              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill bad" data-w="63.2"></div></div><div class="chart-bar-val">63</div></div>
-              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill good" data-w="100"></div></div><div class="chart-bar-val">100</div></div>
+              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill bad" data-w="63.2"></div></div><div class="chart-bar-val">63 %<span class="chart-val-abs">948 songs</span></div></div>
+              <div class="chart-bar-row"><div class="chart-bar-track"><div class="chart-bar-fill good" data-w="100"></div></div><div class="chart-bar-val">100 %<span class="chart-val-abs">1,500 songs</span></div></div>
             </div>
           </div>
 
@@ -636,7 +657,7 @@
           </div>
         </div>
 
-        <div class="data-source">Calculated using the birthday paradox: E[unique songs] = N·(1−((N−1)/N)^k), N=100. Real platform algorithms can perform even worse due to weighting of popular tracks.</div>
+        <div class="data-source"><strong>Data basis:</strong> Coupon collector's problem (probability theory). Formula: E[unique songs] = N·(1−((N−1)/N)^k), N=1,500. Spotify publicly confirmed in their 2014 Engineering Blog that the original shuffle algorithm was replaced by a weighted approach designed to feel "more random" to users — which in practice skips even more songs than the theoretical baseline shown above. Source: Spotify Engineering Blog (2014), "How to shuffle songs".</div>
       </div>
     </div>
   </section>
