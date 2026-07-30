@@ -1,156 +1,124 @@
-# true-shuffel.com
+# true-shuffle-site
 
-Landing page for **true-shuffel** — a service that brings *real shuffle* back to music streaming.
+Landing page for **true-shuffle** — shuffle that plays your playlist like a deck
+of cards: every playable, unique track exactly once per run, no repeats until
+the deck is done.
 
-Most streaming platforms do not truly randomize playlists. Instead, they repeat patterns or only play a small subset of tracks.  
-**true-shuffel fixes this** by playing every song exactly once in a truly random order — just like classic MP3 players.
+- German: <https://mikamcflurry.github.io/true-shuffle-site/index.html>
+- English: <https://mikamcflurry.github.io/true-shuffle-site/en.html>
 
-This repository contains the official dark-mode landing page and beta signup.
-
----
-
-## 🎧 What is true-shuffel?
-
-true-shuffel solves a common frustration for music lovers:
-
-- Shuffle repeats the same songs
-- Large playlists never play fully
-- Track order patterns repeat
-
-### ✅ true-shuffel ensures:
-
-✔ Every track is played  
-✔ No song repeats until all have played  
-✔ True random order  
-✔ Works with playlists of any size  
-✔ Stay inside your favorite streaming service  
+> **Spelling:** the product is `true-shuffle`. `true-shuffel` was an early
+> misspelling and survives only in legacy asset filenames, which are kept so
+> existing references do not break. Never use it in new content or filenames.
 
 ---
 
-## 🚧 Beta Status
+## What this repository is
 
-true-shuffel is currently in **beta**.
+A zero-dependency static site: two HTML files with inline CSS and JavaScript, an
+`assets/` folder, and nothing else. No npm, no build step, no framework.
 
-The landing page allows users to:
+```
+index.html        German landing page (lang="de")
+en.html           English landing page (lang="en")
+index beta.html   Staging scratch copy, not deployed
+robots.txt        Allows all crawlers, points at the sitemap
+sitemap.xml       Both page URLs
+assets/           Logos, hero media, Open Graph image, shuffle-study.json
+CLAUDE.md         Working notes for AI assistants
+```
 
-- join the beta waitlist
-- receive updates
-- learn how true-shuffel works
-
----
-
-## 🔌 Planned Streaming Integrations
-
-true-shuffel connects via API login to:
-
-- Spotify  
-- Apple Music  
-- YouTube Music  
-- Tidal  
-- Deezer  
-- and more
+`index.html` and `en.html` are structurally identical. **Every content or bug
+fix must be applied to both** — only the human-readable text differs.
 
 ---
 
-## 🖥 Website Features
+## Page structure
 
-- Dark mode UI
-- Responsive & mobile friendly
-- Beta signup form
-- Smooth scrolling navigation
-- SEO & social sharing meta tags
-- Zero dependencies (pure HTML/CSS/JS)
-- Easy deployment
-
----
-
-## 📂 Project Structure
-
-true-shuffel-site/
-├─ index.html
-└─ assets/
-├─ true-shuffel_dark.svg
-├─ true-shuffel_dark_1024.png
-├─ true-shuffel_icon_dark_512.png
-└─ true-shuffel_icon_dark.svg
+1. Sticky header — logo, DE/EN switch, dark/light toggle, mobile menu, CTA
+2. Hero — animated logo, headline, sub-headline, CTA
+3. Features
+4. `#data` — "Zahlen lügen nicht" / "Numbers don't lie" comparison section
+5. `#beta` — waitlist form
+6. `#reviews` — rating form plus reviews loaded from the backend
+7. `#faq`
+8. `#contact` — contact form
+9. Footer — nav, legal links, cookie reset
+10. Legal modal (Impressum / Datenschutz / Cookies) and cookie banner
 
 ---
 
-## 🚀 Deployment
+## Forms and backend
 
-This is a static site and can be deployed anywhere.
+All three forms POST to a **Google Apps Script Web App** (`WEBAPP_URL`, defined
+in both HTML files). The script is not in this repository — it lives in Google
+Drive.
 
-### GitHub Pages
-1. Upload files to repository
-2. Go to **Settings → Pages**
-3. Select branch → `/root`
-4. Save
+Submissions are sent through a hidden iframe, and the script replies via
+`postMessage`. Reviews are read back over JSONP and are only shown after
+approval.
 
-### Netlify / Vercel
-- Import repository
-- Deploy as static site
-
-### Web Hosting
-Upload files to your web root.
+Nothing is stored in the browser except the theme preference and the cookie
+acknowledgement — **no email addresses or names in localStorage, ever.**
 
 ---
 
-## 🧪 Beta Signup Storage
+## Analytics
 
-Currently the beta signup stores emails locally in the browser (localStorage).
+Cookie-less, and suppressed entirely when the browser sends Do Not Track.
 
-For production you may want to connect:
+| Event | Fired when |
+|---|---|
+| `cta_join_beta_click` | A "join the beta" CTA is clicked |
+| `data_section_view` | The data section reaches 35% visibility, once per page load |
+| `waitlist_submit_success` | The backend confirms a waitlist signup |
+| `waitlist_submit_pending` | The iframe loaded but no confirmation arrived yet — **not** a success |
+| `review_submit_success` | The backend confirms a review |
+| `contact_submit_success` | The backend confirms a contact message |
 
-- Netlify Forms
-- Supabase / Firebase
-- Serverless function
-- custom backend endpoint
-
----
-
-## 🧠 How true shuffle works
-
-true-shuffel uses a **non-repeating random permutation** algorithm (e.g. Fisher–Yates shuffle) to ensure:
-
-1. every song appears exactly once  
-2. order is truly random  
-3. playback state is preserved  
+The three form events used to share one `signup_success` name, which made
+waitlist conversion impossible to measure — a review or contact message counted
+as a signup. Keep them distinct.
 
 ---
 
-## 📌 Roadmap
+## Local preview
 
-- OAuth login with streaming providers
-- playlist import & selection
-- playback control
-- cross-device sync
-- advanced shuffle modes
-- mobile app
+```bash
+python3 -m http.server 8080     # then open http://localhost:8080
+```
 
 ---
 
-## 🤝 Contributing
+## Deployment
 
-Suggestions and improvements are welcome.
-
-Feel free to open an issue or submit a pull request.
-
----
-
-## 📜 License
-
-To be defined.
+GitHub Pages, from the root of `main`. Pushing to `main` deploys. Update
+`lastmod` in `sitemap.xml` when the content changes meaningfully.
 
 ---
 
-## 🌐 Website
+## Conventions
 
-👉 https://true-shuffel.com
+1. **No external dependencies.** No npm, bundlers, CSS frameworks or JS libraries.
+2. **Inline everything.** CSS in `<style>`, JS in `<script>` at the end of `<body>`.
+3. **Bilingual parity.** Keep IDs, classes and JS logic identical across both
+   files; translate only visible text.
+4. **CSS variables for theming.** Never hardcode colours; dark/light both matter.
+5. **Privacy-first analytics.** Always respect `navigator.doNotTrack`. Never add
+   a third-party tracking script.
+6. **Escape user content.** Anything from a form that is rendered back goes
+   through `escapeHTML()`.
+7. **Never hardcode the year.** The footer year is set from `new Date()`.
+8. **Claims need evidence.** The data section is a probability model, and is
+   labelled as one. Do not present it as a measurement of any streaming
+   service's real behaviour.
 
 ---
 
-**true-shuffel — real shuffle, finally.**
-© 2026 true-shuffel. All rights reserved.
+## Related
 
-This code may not be copied, modified, distributed, or used without explicit permission.
-
+The product itself lives in
+[true-shuffle-PoC](https://github.com/MikaMcFlurry/true-shuffle-PoC) — connectors
+for Spotify, Apple Music and YouTube Music, the shuffle engine and the run
+state machine. Check that repository's `STATUS.md` before making any public
+claim about which services are supported.

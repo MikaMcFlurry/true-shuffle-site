@@ -869,7 +869,7 @@
         <div style="display:flex; gap:4px; flex-wrap:wrap;">
           
             <a href="#top">Home</a>
-            <a href="#impressions">Impressions</a>
+            <a href="#data">Data</a>
             <a href="#beta">Beta</a>
             <a href="#reviews">Reviews</a>
             <a href="#contact">Contact</a>
@@ -1150,7 +1150,7 @@ let betaFallbackTimer = null;
 // iframe fallback can fire before postMessage. Allow late postMessage to override this message.
     betaAllowLateMessage = true;
     setMsg(betaMsg, betaHumanMessage("pending"), false);
-    trackEvent("signup_success", { method: "iframe_fallback", code: "pending" });
+    trackEvent("waitlist_submit_pending", { method: "iframe_fallback", code: "pending" });
     document.getElementById("betaName").value = "";
     document.getElementById("betaEmail").value = "";
     document.getElementById("betaConsent").checked = false;
@@ -1228,7 +1228,7 @@ const ok = !!d.ok;
       setMsg(betaMsg, betaHumanMessage(String(d.code || "")), !ok);
 
       if (ok) {
-        trackEvent("signup_success", { method: "postMessage", code: String(d.code || "") });
+        trackEvent("waitlist_submit_success", { method: "postMessage", code: String(d.code || "") });
         $("betaName").value = "";
         $("betaEmail").value = "";
         $("betaConsent").checked = false;
@@ -1246,7 +1246,7 @@ const ok = !!d.ok;
       setMsg(reviewMsg, reviewHumanMessage(String(d.code || "")), !ok);
 
       if (ok) {
-        trackEvent("signup_success", { method: "postMessage", code: String(d.code || "") });
+        trackEvent("review_submit_success", { method: "postMessage", code: String(d.code || "") });
         $("reviewName").value = "";
         $("reviewRating").value = "5";
         $("reviewText").value = "";
@@ -1267,7 +1267,7 @@ const ok = !!d.ok;
       setMsg(contactMsg, contactHumanMessage(String(d.code || "")), !ok);
 
       if (ok) {
-        trackEvent("signup_success", { method: "postMessage", code: String(d.code || "") });
+        trackEvent("contact_submit_success", { method: "postMessage", code: String(d.code || "") });
         $("contactName").value = "";
         $("contactEmail").value = "";
         $("contactMessage").value = "";

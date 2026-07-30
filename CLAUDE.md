@@ -44,10 +44,11 @@ true-shuffle-site/
     ├── hero_phone_dark.png     # Hero phone mockup (dark mode)
     ├── hero_phone_light.png    # Hero phone mockup (light mode)
     ├── og_true_shuffle_1200x630.png  # Open Graph / Twitter Card image
-    ├── product_01_one-tap.PNG  # Product screenshot slider image 1
-    ├── product_02_features-card.PNG  # Product screenshot slider image 2
-    ├── product_03_comparison.PNG     # Product screenshot slider image 3
-    ├── product_04_10000-tracks.PNG   # Product screenshot slider image 4
+    ├── shuffle-study.json       # Real-usage figures from a Spotify export
+    ├── product_01_one-tap.PNG   # Unused — belonged to the removed slider
+    ├── product_02_features-card.PNG  # Unused
+    ├── product_03_comparison.PNG     # Unused (also contains the old misspelling)
+    ├── product_04_10000-tracks.PNG   # Unused
     ├── true-shuffel_dark.svg         # Legacy SVG logo (dark)
     ├── true-shuffel_dark_1024.png    # Legacy PNG logo (dark, 1024px)
     ├── true-shuffel_icon_dark.svg    # Legacy icon SVG (dark)
@@ -67,13 +68,17 @@ Both `index.html` (DE) and `en.html` (EN) share the same layout and JavaScript l
 3. **`#drawer`** — Mobile slide-in navigation menu
 4. **Hero section** — Animated logo GIF + headline + sub-headline + CTA button
 5. **Features section** — Feature cards (no-repeat shuffle, play all tracks, streaming service compatibility)
-6. **`#impressions`** — Product screenshot slider (swipeable, dot navigation, arrow buttons)
+6. **`#data`** — "Zahlen lügen nicht" / "Numbers don't lie": a coupon-collector
+   probability model for a 1,500-track playlist, with a coverage chart. This is
+   a **model**, not a measurement of any streaming service — keep it labelled
+   that way. It replaced an earlier `#impressions` screenshot slider.
 7. **`#beta`** — Beta waitlist signup form (name, email, GDPR consent checkbox)
-8. **Reviews section** — Star-rating form + dynamically loaded reviews list
-9. **Contact section** — Contact form (name, email, message, GDPR consent)
-10. **`<footer>`** — Logo, nav links, legal links (Impressum, Datenschutz, Cookies), copyright, cookie reset link
-11. **Legal modal (`#legalModal`)** — Overlay for Impressum, Datenschutz, Cookies content (rendered inline)
-12. **Cookie banner (`#cookieBanner`)** — Shown on first visit, acknowledged via localStorage
+8. **`#reviews`** — Star-rating form + dynamically loaded reviews list
+9. **`#faq`** — Frequently asked questions
+10. **`#contact`** — Contact form (name, email, message, GDPR consent)
+11. **`<footer>`** — Logo, nav links, legal links (Impressum, Datenschutz, Cookies), copyright, cookie reset link
+12. **Legal modal (`#legalModal`)** — Overlay for Impressum, Datenschutz, Cookies content (rendered inline)
+13. **Cookie banner (`#cookieBanner`)** — Shown on first visit, acknowledged via localStorage
 
 ---
 
@@ -105,7 +110,6 @@ All CSS is inlined in `<style>` blocks in each HTML file (no external stylesheet
 - `.container` — `min(1120px, 100% - 40px)` with auto margins
 - `.btn` — Base button style
 - `.btn-primary` — Accent button (white background with dark text in dark mode)
-- `.slide`, `.slide-media` — Product image slider cells
 - `.review` — Individual review card
 - `.modal`, `.modal-panel` — Legal information overlay
 
@@ -124,8 +128,10 @@ const LOGO_DARK = "assets/logo_dark.png";
 const LOGO_LIGHT = "assets/logo_light.png";
 const HERO_MEDIA_DARK = "assets/brand_logo_loop.gif";
 const HERO_MEDIA_LIGHT = "assets/brand_logo_loop_light.gif";
-const PRODUCT_IMAGES = ["assets/product_01_one-tap.PNG", ...]; // slider images
 ```
+
+The `product_*.PNG` assets belong to the removed `#impressions` slider. They are
+still in `assets/` but nothing references them.
 
 ### Features Implemented in JS
 
@@ -133,15 +139,29 @@ const PRODUCT_IMAGES = ["assets/product_01_one-tap.PNG", ...]; // slider images
 |---|---|
 | **Theme toggle** | Dark/light mode via `body.classList.toggle("light")`. Preference stored in `localStorage` key `true_shuffle_theme`. Respects `prefers-color-scheme` on first visit. Swaps logo and hero GIF src. |
 | **Mobile menu** | `#menuBtn` toggles `#drawer` open/close, sets `aria-expanded`. |
-| **Product slider** | `buildSlides()` creates slide elements from `PRODUCT_IMAGES`. Arrow buttons (`#prevSlide`, `#nextSlide`) and dot navigation. Swipe/drag supported via `pointerdown`/`pointerup` events (threshold: 40px). |
 | **Beta signup form** | Posts to `WEBAPP_URL` via iframe trick (form `target` attribute). Handles response via `postMessage`. 12-second fallback timer for slow connections. |
 | **Review form** | Same pattern as beta form. On success, calls `loadReviews()` after 700ms delay. |
 | **Contact form** | Same pattern as beta/review forms. |
 | **Review loading** | JSONP via dynamically injected `<script>` tag. Calls `WEBAPP_URL?action=reviews&callback=tsReviewsCb`. 2.5-second timeout for load failure detection. |
-| **Analytics / event tracking** | `trackEvent(name, props)` — privacy-friendly, no cookies. Respects `Do Not Track` header. Uses `navigator.sendBeacon` with fetch fallback. Session ID generated once per page load (`Math.random() + Date.now()`). Tracked events: `cta_join_beta_click`, `impressions_view`, `signup_success`. |
+| **Analytics / event tracking** | `trackEvent(name, props)` — privacy-friendly, no cookies. Respects `Do Not Track` header. Uses `navigator.sendBeacon` with fetch fallback. Session ID generated once per page load (`Math.random() + Date.now()`). See the event table below. |
 | **Cookie banner** | Shown when `localStorage.getItem("ts_cookie_ack_public") !== "1"`. Dismissed by clicking OK. Reset via footer link. |
 | **Legal modal** | `openLegal(type)` renders Impressum / Datenschutz / Cookies content inline into `#legalBody`. Closes with `closeLegal()`. Body scroll locked while open. |
-| **IntersectionObserver** | Fires `impressions_view` analytics event once when `#impressions` section reaches 35% viewport visibility. |
+| **IntersectionObserver** | Fires `data_section_view` once when `#data` reaches 35% viewport visibility. |
+
+### Analytics events
+
+| Event | Fired when |
+|---|---|
+| `cta_join_beta_click` | A "join the beta" CTA is clicked |
+| `data_section_view` | `#data` reaches 35% visibility, once per page load |
+| `waitlist_submit_success` | The backend confirms a waitlist signup |
+| `waitlist_submit_pending` | The iframe loaded but no confirmation arrived — **not** a success |
+| `review_submit_success` | The backend confirms a review |
+| `contact_submit_success` | The backend confirms a contact message |
+
+All three forms previously fired the same `signup_success`, so a review or a
+contact message counted as a waitlist signup and conversion could not be
+measured. Keep these names distinct.
 
 ### DOM Helper
 
@@ -224,18 +244,6 @@ npx serve .
 
 Then open `http://localhost:8080`.
 
-### Adding Product Screenshots
-
-Add images to `assets/` and update the `PRODUCT_IMAGES` array in both `index.html` and `en.html`:
-
-```js
-const PRODUCT_IMAGES = [
-  "assets/product_01_one-tap.PNG",
-  "assets/product_02_features-card.PNG",
-  // add new entries here
-];
-```
-
 ### Changing the Backend URL
 
 If the Google Apps Script is redeployed, update `WEBAPP_URL` in both HTML files:
@@ -278,6 +286,15 @@ Pushing to `main` triggers an automatic deploy (no CI/CD pipeline needed). The `
 9. **Form security** — All user-submitted text displayed back to the user must be passed through the `escapeHTML()` helper to prevent XSS.
 
 10. **Year in footer** — The copyright year is set dynamically: `$("year").textContent = new Date().getFullYear()`. Never hardcode the year.
+
+11. **Claims need evidence** — The `#data` section is a probability model and is
+    labelled as one. Never present it as a measurement of a real streaming
+    service's behaviour, and never state that a service is "supported" before
+    the PoC repository's `STATUS.md` says it has been verified with live
+    credentials.
+
+12. **Spelling** — The product is `true-shuffle`. `true-shuffel` survives only
+    in legacy asset filenames; never use it in new content or filenames.
 
 ---
 
